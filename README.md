@@ -1,7 +1,5 @@
 # Engineering Architecture Review
 
-MIT License • Zed • Claude Code • Architecture Review • AI Skill
-
 Stop getting architecture reviews that recommend:
 
 - microservices for everything
@@ -164,7 +162,7 @@ In Zed, use `agent: create skill from url` and provide a GitHub Markdown URL to 
 Latest:
 
 ```text
-https://raw.githubusercontent.com/0x12th/engineering-architecture-review/main/SKILL.md
+https://raw.githubusercontent.com/0x12th/engineering-architecture-review/master/SKILL.md
 ```
 
 Pinned version:
@@ -279,7 +277,3 @@ This skill was prepared for use with:
 - Claude Opus
 
 Gemini has not been verified in this repository yet. Add Gemini to this list after testing the skill with representative quick scan, focused review, design challenge, and implementation-mode prompts.
-
-## License
-
-MIT. See `LICENSE`.
