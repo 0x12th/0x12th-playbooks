@@ -1,6 +1,35 @@
 # Changelog
 
-All notable changes to this skill are documented in this file.
+All notable changes to this repository are documented in this file.
+
+## 0.3.0 - 2026-06-03
+
+### Added
+
+- Added `engineering-delivery` skill for implementation, bug fixes, tests, CI fixes, validation, PR preparation, and local refactoring.
+- Added skill-level docs for language rules, selected-context priority, communication discipline, validation, implementation workflow, code-change rules, code review rules, and testing rules.
+- Added delivery code review mode for reviewing selected code, diffs, and PRs without turning them into architecture audits.
+- Added architecture decision support mode.
+- Added explicit architecture exploration budgets.
+- Added dedicated anti-overengineering rules.
+- Added `manifests/skills.json` as machine-readable skill metadata.
+- Added automatic selection guidance and `docs/agent-bootstrap.md` for project-level agent instructions.
+- Added repository docs for installation, skill selection, repository structure, and authoring guidelines.
+
+### Changed
+
+- Renamed and repositioned the repository as `0x12th-playbooks`.
+- Decomposed the monolithic architecture skill into a compact `SKILL.md` plus supporting docs.
+- Clarified architecture and delivery skill boundaries.
+- Improved automatic skill selection through stronger frontmatter descriptions and intent examples.
+- Clarified that install paths are examples and should match each agent setup.
+- Reduced default repository-wide exploration.
+- Moved implementation work out of `engineering-architecture-review` and into `engineering-delivery`.
+
+### Removed
+
+- Removed architecture implementation mode.
+- Removed planned platform-specific manifests for Zed, Claude Code, and Codex until a real automated consumption scenario exists.
 
 ## 0.2.0 - 2026-06-01
 
@@ -29,7 +58,7 @@ All notable changes to this skill are documented in this file.
 - Architecture review workflow for quick scans, focused reviews, full reviews, implementation mode, and design challenge mode.
 - Severity model: Critical, High, Medium, Low.
 - Finding format covering problem, impact, root cause, proposed solution, complexity, risk, expected benefit, and evolution cost.
-- Evolution-cost guidance covering operational cost, team cognitive load, migration cost, 1–3 year maintenance cost, and complexity delta.
+- Evolution-cost guidance covering operational cost, team cognitive load, migration cost, 1-3 year maintenance cost, and complexity delta.
 - Organizational review guidance for ownership clarity, team autonomy, cross-team dependencies, and process problems disguised as architecture problems.
 - Performance review guidance for CPU, memory, queues, network, database contention, resource utilization, and capacity limits.
 - Migration review guidance for incremental rollout, old/new path coexistence, rollback, correctness validation, and observability.

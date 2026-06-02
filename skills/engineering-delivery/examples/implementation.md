@@ -1,9 +1,11 @@
-# Example: Implementation Mode
+# Example: Implementation
 
 Prompt:
 
 ```text
-Use implementation mode. Make the smallest safe change to improve observability for the schema migration path, then run relevant tests.
+Use engineering-delivery.
+
+Make the smallest safe change to improve observability for the schema migration path, then run relevant tests.
 ```
 
 Example output:
@@ -22,10 +24,10 @@ What changed:
 
 Validation:
 
-- Ran `pytest tests/test_migration_logging.py` — passed.
+- `pytest tests/test_migration_logging.py` passed.
 
-Notes:
+Residual risk:
 
 - This does not prove migration correctness in production.
-- Recommended next step: add a post-deploy verification query or reconciliation check for the migrated table.
+- A post-deploy verification query or reconciliation check is still needed for the migrated table.
 ```

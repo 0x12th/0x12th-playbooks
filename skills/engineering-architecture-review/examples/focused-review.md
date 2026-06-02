@@ -15,7 +15,7 @@ Reviewed the worker queue path: producers, worker loop, retry handling, queue co
 
 ## Local architecture model
 
-Requests enqueue jobs through the API layer. Workers consume jobs in batches, call an external provider, update local state, and retry failed jobs. Queue ownership appears to sit with the service team, but operational ownership is not documented.
+Requests enqueue jobs through the API layer. Workers consume jobs in batches, call an external dependency, update local state, and retry failed jobs. Queue ownership appears to sit with the service team, but operational ownership is not documented.
 
 ## Findings
 
@@ -25,7 +25,7 @@ Severity: High
 
 Problem: Failed jobs can be retried without a visible max-attempt policy or dead-letter handling.
 
-Impact: A persistent provider failure can create retry storms, queue growth, and delayed processing for healthy jobs.
+Impact: A persistent dependency failure can create retry storms, queue growth, and delayed processing for healthy jobs.
 
 Root cause: Retry behavior is embedded in worker control flow rather than defined as an explicit reliability policy.
 
@@ -33,16 +33,16 @@ Proposed solution: Add max attempts, exponential backoff with jitter, dead-lette
 
 Complexity: Medium
 Risk: Medium
-Expected benefit: Lower blast radius during provider incidents and faster diagnosis.
+Expected benefit: Lower blast radius during dependency incidents and faster diagnosis.
 Evolution cost: Small operational increase for new metrics and alerts; lower long-term maintenance cost because failure behavior becomes explicit.
 
 ### 2. Queue capacity limits are not documented
 
 Severity: Medium
 
-Problem: Worker concurrency, queue depth limits, and provider rate limits are not tied together.
+Problem: Worker concurrency, queue depth limits, and dependency rate limits are not tied together.
 
-Impact: Scaling workers may increase external-provider failures or database contention instead of improving throughput.
+Impact: Scaling workers may increase dependency failures or database contention instead of improving throughput.
 
 Root cause: Capacity planning is implicit in configuration rather than modeled as part of the queue architecture.
 

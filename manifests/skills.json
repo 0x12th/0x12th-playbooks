@@ -1,0 +1,185 @@
+{
+  "repository": {
+    "name": "0x12th-playbooks",
+    "url": "https://github.com/0x12th/0x12th-playbooks",
+    "description": "Practical engineering playbooks and agent skills for architecture, delivery, migration planning, technical decision-making, and software evolution.",
+    "version": "0.3.0"
+  },
+  "auto_selection": {
+    "primary_signals": [
+      "SKILL.md frontmatter name",
+      "SKILL.md frontmatter description"
+    ],
+    "manifest_role": "This manifest is an index and documentation aid for available skills, use cases, non-use cases, installation hints, and selection examples.",
+    "limitations": [
+      "Different AI coding agents may not read this manifest automatically.",
+      "This manifest does not define an official cross-agent standard.",
+      "Skill auto-selection should not depend on this manifest being loaded."
+    ],
+    "recommended_installation": "Install complete skill folders so agents can access SKILL.md plus supporting docs, templates, and examples after selection."
+  },
+  "installation": {
+    "all_skills": [
+      "git clone https://github.com/0x12th/0x12th-playbooks.git",
+      "mkdir -p ~/.agents/skills",
+      "cp -R 0x12th-playbooks/skills/* ~/.agents/skills/"
+    ],
+    "all_skills_pinned": [
+      "git clone --branch v0.3.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "mkdir -p ~/.agents/skills",
+      "cp -R 0x12th-playbooks/skills/* ~/.agents/skills/"
+    ],
+    "notes": [
+      "Replace ~/.agents/skills with the skills directory used by your agent setup.",
+      "Clone-based installation is recommended because skills include supporting docs, templates, and examples.",
+      "Raw SKILL.md URL imports may omit supporting files depending on the host agent."
+    ]
+  },
+  "skills": [
+    {
+      "name": "engineering-architecture-review",
+      "path": "skills/engineering-architecture-review/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/main/skills/engineering-architecture-review/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.3.0/skills/engineering-architecture-review/SKILL.md",
+      "purpose": "Answer how the system should be designed.",
+      "use_cases": [
+        "architecture review",
+        "architecture decisions",
+        "system design",
+        "migrations",
+        "migration planning",
+        "service boundaries",
+        "domain boundaries",
+        "ownership",
+        "data ownership",
+        "architecture debt",
+        "reliability strategy",
+        "observability architecture",
+        "deployment architecture",
+        "system evolution",
+        "design challenge",
+        "tradeoff analysis",
+        "decision support",
+        "implementation planning before coding"
+      ],
+      "non_use_cases": [
+        "bug fixes",
+        "tests",
+        "CI fixes",
+        "code review of diffs or PRs",
+        "local refactoring",
+        "routine coding tasks",
+        "direct implementation work",
+        "PR preparation"
+      ],
+      "modes": [
+        "quick scan",
+        "focused review",
+        "full review",
+        "design challenge",
+        "decision support",
+        "migration review"
+      ],
+      "selection_hints": [
+        "Use when the request asks whether, why, where, or how the system should evolve.",
+        "Use when the user asks for architecture assessment, decision support, or migration review.",
+        "Do not use when the user asks to implement code directly."
+      ]
+    },
+    {
+      "name": "engineering-delivery",
+      "path": "skills/engineering-delivery/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/main/skills/engineering-delivery/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.3.0/skills/engineering-delivery/SKILL.md",
+      "purpose": "Answer how a change should be implemented safely.",
+      "use_cases": [
+        "implementation",
+        "coding",
+        "tests",
+        "bug fixes",
+        "CI fixes",
+        "code review",
+        "diff review",
+        "patch review",
+        "change review",
+        "commit review",
+        "PR review",
+        "local refactoring",
+        "validation",
+        "PR preparation",
+        "incremental improvements"
+      ],
+      "non_use_cases": [
+        "architecture decisions",
+        "service extraction strategy",
+        "migration strategy",
+        "platform evolution",
+        "long-term tradeoff analysis",
+        "broad architecture assessment"
+      ],
+      "modes": [
+        "implementation",
+        "bug fix",
+        "test work",
+        "CI fix",
+        "code review",
+        "local refactor",
+        "validation",
+        "PR preparation"
+      ],
+      "selection_hints": [
+        "Use when the user asks to fix, implement, test, validate, review code, review a diff, review a patch, review a commit, review a PR, refactor, or prepare a PR.",
+        "If architecture decisions are required, recommend engineering-architecture-review first.",
+        "Stay close to selected code or explicitly named files."
+      ]
+    }
+  ],
+  "selection_examples": [
+    {
+      "request": "Стоит ли объединять два сильно связанных модуля?",
+      "skill": "engineering-architecture-review"
+    },
+    {
+      "request": "Как по шагам начать объединение?",
+      "skill": "engineering-architecture-review"
+    },
+    {
+      "request": "Реализуй первый шаг объединения.",
+      "skill": "engineering-delivery"
+    },
+    {
+      "request": "Посмотри архитектуру сервиса.",
+      "skill": "engineering-architecture-review"
+    },
+    {
+      "request": "Напиши тесты.",
+      "skill": "engineering-delivery"
+    },
+    {
+      "request": "Почему падает CI?",
+      "skill": "engineering-delivery"
+    },
+    {
+      "request": "Стоит ли переносить фоновые задачи на другой runtime очередей?",
+      "skill": "engineering-architecture-review"
+    },
+    {
+      "request": "Переведи обработчик задачи на уже выбранный runtime очередей.",
+      "skill": "engineering-delivery"
+    },
+    {
+      "request": "Проверь PR на баги и пропущенные тесты.",
+      "skill": "engineering-delivery"
+    }
+  ],
+  "global_principles": [
+    "answer in the user's language",
+    "selected context has priority",
+    "minimize context consumption",
+    "load detailed instructions on demand",
+    "use explicit scope and stop conditions",
+    "prefer evidence-first reasoning",
+    "decide before implementation",
+    "avoid overengineering"
+  ]
+}
