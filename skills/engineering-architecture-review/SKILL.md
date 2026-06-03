@@ -50,6 +50,8 @@ When the user asks to implement, fix, test, validate, refactor locally, or prepa
 
 Choose this skill when the request is about whether, why, where, or how the system should evolve.
 
+Generic project review prompts such as "look at this project", "what would you improve?", "посмотри проект", and "что бы ты улучшил?" should use quick scan unless the user asks for a full review or implementation.
+
 Architecture-review examples:
 
 - "Should we merge these two tightly coupled modules?"

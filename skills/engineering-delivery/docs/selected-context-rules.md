@@ -2,6 +2,8 @@
 
 Selected code, selected files, pasted snippets, or explicitly named files take precedence over repository-wide exploration.
 
+A dirty worktree is not selected context. Only selected code, named files, pasted snippets, or explicit diff, PR, or commit review requests should trigger code review mode.
+
 When selected context is provided:
 
 1. Start with the selected context.

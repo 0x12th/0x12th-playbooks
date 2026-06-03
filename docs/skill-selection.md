@@ -63,6 +63,21 @@ Do not use for architecture decisions. If implementation requires an architectur
 | `Переведи обработчик задачи на уже выбранный runtime очередей.` | `engineering-delivery` |
 | `Проверь PR на баги и пропущенные тесты.` | `engineering-delivery` |
 
+## Generic Project Prompts
+
+Generic project-level prompts should normally use `engineering-architecture-review` in quick scan mode, unless the user explicitly asks to implement, test, fix, or review a diff.
+
+Examples:
+
+| User request | Skill | Mode |
+|---|---|---|
+| `Посмотри проект.` | `engineering-architecture-review` | Quick scan |
+| `Что бы ты улучшил?` | `engineering-architecture-review` | Quick scan |
+| `Прожарь архитектуру.` | `engineering-architecture-review` | Quick scan or focused architecture critique |
+| `Look at this project.` | `engineering-architecture-review` | Quick scan |
+| `What would you improve?` | `engineering-architecture-review` | Quick scan |
+| `Critique the architecture.` | `engineering-architecture-review` | Quick scan or focused architecture critique |
+
 ## Selected Context
 
 Selected code, selected files, pasted snippets, or explicitly named files take precedence over repository-wide exploration.

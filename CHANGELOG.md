@@ -2,6 +2,17 @@
 
 All notable changes to this repository are documented in this file.
 
+## 0.3.1 - 2026-06-03
+
+### Added
+
+- Added generic project prompt selection guidance for short requests such as "Look at this project" and "What would you improve?"
+
+### Improved
+
+- Clarified that generic project-level prompts should use `engineering-architecture-review` in quick scan mode unless the user explicitly asks for implementation, tests, fixes, or diff review.
+- Clarified that a dirty worktree is not selected context for delivery code review mode.
+
 ## 0.3.0 - 2026-06-03
 
 ### Added
