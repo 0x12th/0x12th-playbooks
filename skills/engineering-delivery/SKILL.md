@@ -1,6 +1,13 @@
 ---
 name: engineering-delivery
-description: Use for safe engineering execution: implementation, coding, bug fixes, tests, CI fixes, validation, code review, diff review, patch review, review this change, review this commit, review this PR, local refactoring, PR preparation, and incremental improvements. Do not use for architecture decisions, service extraction strategy, migration strategy, platform evolution, or long-term tradeoff analysis; recommend engineering-architecture-review first when those decisions are required.
+description: >-
+  Use for safe engineering execution: implementation, coding, bug fixes, tests,
+  CI fixes, validation, code review, diff review, patch review, review this change,
+  review this commit, review this PR, local refactoring, PR preparation, and
+  incremental improvements. Do not use for architecture decisions, service
+  extraction strategy, migration strategy, platform evolution, or long-term
+  tradeoff analysis; recommend engineering-architecture-review first when those
+  decisions are required.
 ---
 
 # Engineering Delivery

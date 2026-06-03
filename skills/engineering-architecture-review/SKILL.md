@@ -1,6 +1,12 @@
 ---
 name: engineering-architecture-review
-description: Use for architecture review and system design questions: architecture decisions, migration planning, service boundaries, domain boundaries, ownership, data ownership, architecture debt, reliability strategy, observability architecture, deployment architecture, system evolution, design challenge, tradeoff analysis, and technical decision support. Do not use for implementation, bug fixes, tests, CI fixes, code review, or local refactoring; use engineering-delivery for those.
+description: >-
+  Use for architecture review and system design questions: architecture decisions,
+  migration planning, service boundaries, domain boundaries, ownership, data
+  ownership, architecture debt, reliability strategy, observability architecture,
+  deployment architecture, system evolution, design challenge, tradeoff analysis,
+  and technical decision support. Do not use for implementation, bug fixes, tests,
+  CI fixes, code review, or local refactoring; use engineering-delivery for those.
 ---
 
 # Engineering Architecture Review

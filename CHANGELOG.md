@@ -2,6 +2,12 @@
 
 All notable changes to this repository are documented in this file.
 
+## 0.3.3 - 2026-06-04
+
+### Fixed
+
+- Reformatted skill frontmatter descriptions as YAML folded scalars for better parser compatibility and readability.
+
 ## 0.3.2 - 2026-06-03
 
 ### Improved
