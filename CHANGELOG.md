@@ -2,6 +2,14 @@
 
 All notable changes to this repository are documented in this file.
 
+## 0.3.2 - 2026-06-03
+
+### Improved
+
+- Tightened communication rules to suppress implementation planning notes, internal comparison notes, and reasoning about what should be copied, reused, adapted, or investigated.
+- Added stricter single-language response guidance and explicit mixed-language failure criteria.
+- Updated README, installation docs, and manifest links to the current `v0.3.2` release and `master` branch.
+
 ## 0.3.1 - 2026-06-03
 
 ### Added

@@ -53,7 +53,7 @@ cp -R 0x12th-playbooks/skills/* ~/.agents/skills/
 ## Install Pinned Version
 
 ```bash
-git clone --branch v0.3.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.3.2 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 cp -R 0x12th-playbooks/skills/* ~/.agents/skills/
 ```
@@ -63,7 +63,7 @@ cp -R 0x12th-playbooks/skills/* ~/.agents/skills/
 Architecture review:
 
 ```bash
-git clone --branch v0.3.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.3.2 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 cp -R 0x12th-playbooks/skills/engineering-architecture-review ~/.agents/skills/
 ```
@@ -71,7 +71,7 @@ cp -R 0x12th-playbooks/skills/engineering-architecture-review ~/.agents/skills/
 Engineering delivery:
 
 ```bash
-git clone --branch v0.3.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.3.2 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 cp -R 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
 ```
@@ -81,14 +81,14 @@ cp -R 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
 Raw skill URLs:
 
 ```text
-https://raw.githubusercontent.com/0x12th/0x12th-playbooks/main/skills/engineering-architecture-review/SKILL.md
-https://raw.githubusercontent.com/0x12th/0x12th-playbooks/main/skills/engineering-delivery/SKILL.md
+https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture-review/SKILL.md
+https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-delivery/SKILL.md
 ```
 
 Pinned raw URL example:
 
 ```text
-https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.3.0/skills/engineering-architecture-review/SKILL.md
+https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.3.2/skills/engineering-architecture-review/SKILL.md
 ```
 
 ### Zed
@@ -106,7 +106,7 @@ For a single `SKILL.md` import, use Zed's skill-from-URL flow with one of the ra
 Install into the skills directory used by your Claude Code setup. Example:
 
 ```bash
-git clone --branch v0.3.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.3.2 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.claude/skills
 cp -R 0x12th-playbooks/skills/* ~/.claude/skills/
 ```
@@ -118,7 +118,7 @@ If Claude Code does not auto-load a skill, reference the relevant `SKILL.md` fro
 Install into the skills directory used by your Codex setup. Example:
 
 ```bash
-git clone --branch v0.3.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.3.2 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.codex/skills
 cp -R 0x12th-playbooks/skills/* ~/.codex/skills/
 ```

@@ -3,7 +3,7 @@
     "name": "0x12th-playbooks",
     "url": "https://github.com/0x12th/0x12th-playbooks",
     "description": "Practical engineering playbooks and agent skills for architecture, delivery, migration planning, technical decision-making, and software evolution.",
-    "version": "0.3.0"
+    "version": "0.3.2"
   },
   "auto_selection": {
     "primary_signals": [
@@ -25,7 +25,7 @@
       "cp -R 0x12th-playbooks/skills/* ~/.agents/skills/"
     ],
     "all_skills_pinned": [
-      "git clone --branch v0.3.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.3.2 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "cp -R 0x12th-playbooks/skills/* ~/.agents/skills/"
     ],
@@ -39,8 +39,8 @@
     {
       "name": "engineering-architecture-review",
       "path": "skills/engineering-architecture-review/SKILL.md",
-      "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/main/skills/engineering-architecture-review/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.3.0/skills/engineering-architecture-review/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture-review/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.3.2/skills/engineering-architecture-review/SKILL.md",
       "purpose": "Answer how the system should be designed.",
       "use_cases": [
         "architecture review",
@@ -89,8 +89,8 @@
     {
       "name": "engineering-delivery",
       "path": "skills/engineering-delivery/SKILL.md",
-      "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/main/skills/engineering-delivery/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.3.0/skills/engineering-delivery/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-delivery/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.3.2/skills/engineering-delivery/SKILL.md",
       "purpose": "Answer how a change should be implemented safely.",
       "use_cases": [
         "implementation",

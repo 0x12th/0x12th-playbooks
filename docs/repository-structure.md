@@ -43,4 +43,4 @@ Keep `SKILL.md` small. Move detailed rules into docs and link them directly from
 
 `manifests/skills.json` is machine-readable metadata for available skills, locations, use cases, non-use cases, installation, and selection hints.
 
-Platform-specific manifests are intentionally not included in `v0.3.0` because Zed, Claude Code, and Codex do not read them automatically.
+Platform-specific manifests are intentionally not included because Zed, Claude Code, and Codex do not read them automatically.

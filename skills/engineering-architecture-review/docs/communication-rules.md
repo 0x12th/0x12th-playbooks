@@ -19,8 +19,17 @@ Never expose:
 - Search traces
 - Investigation logs
 - Internal reasoning
+- Implementation planning notes
+- Internal comparison notes
+- Reasoning about what should be copied, reused, adapted, or investigated
 - File-opening narration
 - Repository traversal narration
+
+Return conclusions, decisions, recommendations, and findings only.
+
+Internal reasoning must never appear in the output.
+
+Maintain a single language throughout the response. Mixed-language sentences are considered a communication failure.
 
 Use concise, direct language. Prefer evidence, decision, tradeoff, uncertainty, and next action over process commentary.
 
