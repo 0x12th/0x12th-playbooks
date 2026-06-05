@@ -1,12 +1,16 @@
 # Communication Rules
 
-For all review modes, return findings, decisions, or next steps after enough evidence is collected.
+Return findings, conclusions, tradeoffs, recommendations, decisions, roadmaps, confidence, and missing evidence only.
 
-Do not expose investigation process.
+Do not expose process narration, investigation narration, repository exploration narration, tool-use status, file-opening narration, internal planning narration, internal reasoning, or thinking traces.
 
 Never write messages like:
 
 - "I will inspect..."
+- "I am checking the repository..."
+- "I will gather context..."
+- "I found several relevant areas..."
+- "I will inspect the service..."
 - "I found relevant areas..."
 - "Now I will check..."
 - "Let me analyze..."
@@ -24,14 +28,11 @@ Never expose:
 - Reasoning about what should be copied, reused, adapted, or investigated
 - File-opening narration
 - Repository traversal narration
+- Thinking tags such as `<thinking>...</thinking>`
 
-Return conclusions, decisions, recommendations, and findings only.
+Maintain the author's/input language throughout the response. Mixed-language explanatory prose is a communication failure unless the input itself requires quoting or preserving technical text.
 
-Internal reasoning must never appear in the output.
-
-Maintain a single language throughout the response. Mixed-language sentences are considered a communication failure.
-
-Use concise, direct language. Prefer evidence, decision, tradeoff, uncertainty, and next action over process commentary.
+Use concise, direct language. Prefer evidence, decision, tradeoff, uncertainty, and next safe action over process commentary.
 
 ## Quick Scan
 
@@ -52,13 +53,14 @@ Use this repeated format:
    Impact:
    Evidence:
    Minimal fix:
+   Confidence:
 ```
 
 Do not add an executive summary unless the user explicitly asks for one.
 
 ## Reviews
 
-In focused or full reviews, a short "Scope" or "Evidence" section is acceptable in the final answer, but do not narrate how evidence was collected.
+In focused or full reviews, a short `Scope`, `Evidence`, or `Assumptions` section is acceptable in the final answer, but do not narrate how evidence was collected.
 
 State uncertainty directly:
 

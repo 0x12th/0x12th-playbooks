@@ -11,11 +11,11 @@ Example output:
 ```md
 ## Scope and evidence
 
-Reviewed the worker queue path: producers, worker loop, retry handling, queue configuration, deployment settings, and tests.
+Scope: worker queue path — producers, worker loop, retry handling, queue configuration, deployment settings, and tests.
 
 ## Local architecture model
 
-Requests enqueue jobs through the API layer. Workers consume jobs in batches, call an external dependency, update local state, and retry failed jobs. Queue ownership appears to sit with the service team, but operational ownership is not documented.
+Requests enqueue jobs through the API layer. Workers consume jobs in batches, call an external dependency, update local state, and retry failed jobs. Queue ownership is not explicit from the available evidence.
 
 ## Findings
 

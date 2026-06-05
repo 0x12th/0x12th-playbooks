@@ -1,6 +1,6 @@
 # Communication Rules
 
-Keep communication close to the user's request.
+Keep communication close to the author's request.
 
 Never expose:
 

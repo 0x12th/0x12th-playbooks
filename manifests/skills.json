@@ -3,7 +3,7 @@
     "name": "0x12th-playbooks",
     "url": "https://github.com/0x12th/0x12th-playbooks",
     "description": "Practical engineering playbooks and agent skills for architecture, delivery, migration planning, technical decision-making, and software evolution.",
-    "version": "0.3.3"
+    "version": "0.4.0"
   },
   "auto_selection": {
     "primary_signals": [
@@ -25,7 +25,7 @@
       "cp -R 0x12th-playbooks/skills/* ~/.agents/skills/"
     ],
     "all_skills_pinned": [
-      "git clone --branch v0.3.3 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.4.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "cp -R 0x12th-playbooks/skills/* ~/.agents/skills/"
     ],
@@ -40,8 +40,8 @@
       "name": "engineering-architecture-review",
       "path": "skills/engineering-architecture-review/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture-review/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.3.3/skills/engineering-architecture-review/SKILL.md",
-      "purpose": "Answer how the system should be designed.",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.4.0/skills/engineering-architecture-review/SKILL.md",
+      "purpose": "Answer how the system should evolve safely.",
       "use_cases": [
         "architecture review",
         "architecture decisions",
@@ -90,7 +90,7 @@
       "name": "engineering-delivery",
       "path": "skills/engineering-delivery/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-delivery/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.3.3/skills/engineering-delivery/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.4.0/skills/engineering-delivery/SKILL.md",
       "purpose": "Answer how a change should be implemented safely.",
       "use_cases": [
         "implementation",
@@ -136,44 +136,44 @@
   ],
   "selection_examples": [
     {
-      "request": "Стоит ли объединять два сильно связанных модуля?",
+      "request": "Should we merge two tightly coupled modules?",
       "skill": "engineering-architecture-review"
     },
     {
-      "request": "Как по шагам начать объединение?",
+      "request": "How should we start the merge step by step?",
       "skill": "engineering-architecture-review"
     },
     {
-      "request": "Реализуй первый шаг объединения.",
+      "request": "Implement the first merge step.",
       "skill": "engineering-delivery"
     },
     {
-      "request": "Посмотри архитектуру сервиса.",
+      "request": "Review the service architecture.",
       "skill": "engineering-architecture-review"
     },
     {
-      "request": "Напиши тесты.",
+      "request": "Write tests.",
       "skill": "engineering-delivery"
     },
     {
-      "request": "Почему падает CI?",
+      "request": "Why is CI failing?",
       "skill": "engineering-delivery"
     },
     {
-      "request": "Стоит ли переносить фоновые задачи на другой runtime очередей?",
+      "request": "Should background jobs move to a different queue runtime?",
       "skill": "engineering-architecture-review"
     },
     {
-      "request": "Переведи обработчик задачи на уже выбранный runtime очередей.",
+      "request": "Move the task handler to the already approved queue runtime.",
       "skill": "engineering-delivery"
     },
     {
-      "request": "Проверь PR на баги и пропущенные тесты.",
+      "request": "Review this PR for bugs and missing tests.",
       "skill": "engineering-delivery"
     }
   ],
   "global_principles": [
-    "answer in the user's language",
+    "answer in the author's/input language",
     "selected context has priority",
     "minimize context consumption",
     "load detailed instructions on demand",

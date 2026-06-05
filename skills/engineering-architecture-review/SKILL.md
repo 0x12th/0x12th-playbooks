@@ -5,26 +5,21 @@ description: >-
   migration planning, service boundaries, domain boundaries, ownership, data
   ownership, architecture debt, reliability strategy, observability architecture,
   deployment architecture, system evolution, design challenge, tradeoff analysis,
-  and technical decision support. Do not use for implementation, bug fixes, tests,
-  CI fixes, code review, or local refactoring; use engineering-delivery for those.
+  and technical decision support. Also use for architecture review, architecture assessment,
+  migration planning, service boundary review, system evolution,
+  tradeoff analysis, and technical decision support requests. Do not use for
+  implementation, bug fixes, tests, CI fixes, code review, or local refactoring;
+  use engineering-delivery for those.
 ---
-
 # Engineering Architecture Review
-
 Use this skill to answer:
-
 ```text
-How should the system be designed?
+How should the system evolve safely?
 ```
-
-The goal is practical architecture decision-making: reduce long-term maintenance cost, operational risk, migration risk, and cognitive load without defaulting to rewrites, microservices, or fashionable abstractions.
-
+The goal is practical architecture decision-making: reduce long-term maintenance cost, operational risk, migration risk, and cognitive load without defaulting to rewrites, microservices, fashionable abstractions, or new platform components.
 This is a review and decision-support skill. It does not implement code changes.
-
 ## Boundaries
-
 Use this skill for:
-
 - Architecture decisions
 - Migration planning and migration review
 - Service boundaries
@@ -38,9 +33,7 @@ Use this skill for:
 - Design challenge
 - Decision support
 - Implementation planning before code changes
-
 Do not use this skill for:
-
 - Bug fixes
 - Writing tests
 - CI fixes
@@ -49,38 +42,64 @@ Do not use this skill for:
 - Routine coding tasks
 - PR preparation
 - Direct implementation work
-
-When the user asks to implement, fix, test, validate, refactor locally, or prepare a PR, use `engineering-delivery`. If that work requires an architecture decision first, recommend `engineering-architecture-review` before implementation.
-
+When the user asks to implement, fix, test, validate, refactor locally, or prepare a PR, use `engineering-delivery`. If that work requires an architecture decision first, recommend architecture review before implementation.
 ## Intent Detection
-
 Choose this skill when the request is about whether, why, where, or how the system should evolve.
-
-Generic project review prompts such as "look at this project", "what would you improve?", "посмотри проект", and "что бы ты улучшил?" should use quick scan unless the user asks for a full review or implementation.
-
+Generic project review prompts such as "look at this project", "what would you improve?", "review this project", and "critique the architecture" should use quick scan unless the user asks for a full review or implementation.
 Architecture-review examples:
-
 - "Should we merge these two tightly coupled modules?"
 - "How should we start merging these services step by step?"
 - "Review the service architecture."
 - "Should background jobs move to a different queue runtime?"
+- "How would you migrate this messaging architecture?"
 - "Challenge this design."
 - "What are the risks in this migration plan?"
 - "Where should this ownership boundary live?"
-
+- "What should improve first?"
 Do not select this skill for execution examples:
-
 - "Implement the first merge step."
 - "Write tests."
 - "Why is CI failing?"
 - "Move this job to the approved queue runtime."
 - "Fix this bug."
-
 Use `engineering-delivery` for those.
-
+## Loading Policy
+Start with `SKILL.md` only.
+Typical architecture requests should use either:
+```text
+SKILL.md
+```
+or:
+```text
+SKILL.md + 1 directly relevant document
+```
+Do not read supporting documents just because they exist. Load extra documents only when they materially improve the answer.
+Default loading by task type:
+- Quick scan: `SKILL.md` only.
+- Focused review: `SKILL.md` only, or `SKILL.md` + `docs/review-rules.md` for non-trivial subsystem analysis.
+- Decision support: `SKILL.md` only, or `SKILL.md` + `docs/decision-support.md` when options must be formally compared.
+- Design challenge: `SKILL.md` only, or `SKILL.md` + `docs/design-challenge.md` when pressure-testing a concrete proposal.
+- Migration review: `SKILL.md` only, or `SKILL.md` + `docs/migration-review.md` for complex migrations, extractions, replacements, coexistence, rollback, or staged evolution.
+- Full review: `SKILL.md` + `docs/review-rules.md`; load templates only if the user asks for a formal report.
+Reference-only documents. Do not load for routine work because the source of truth is this file:
+- `docs/language-rules.md`
+- `docs/communication-rules.md`
+- `docs/selected-context-rules.md`
+- `docs/exploration-budget.md`
+- `docs/anti-overengineering.md`
+- `docs/economics.md`
+Rare documents. Load only when explicitly requested or when output format is unclear:
+- `templates/checklists.md`
+- `templates/architecture-review-report.md`
+- `templates/improvement-roadmap.md`
+- `templates/task-breakdown.md`
+- `templates/adr-draft.md`
+- `examples/*.md`
+If the task can proceed safely from `SKILL.md`, do not load extra documents.
 ## Mode Selection
-
 Use one mode per response unless the user explicitly asks for multiple outputs.
+
+Choose mode by question type, selected scope, decision risk, and migration complexity.
 
 - **Quick scan**: 3-5 highest-impact findings only. Use for fast assessment, second opinion, or prioritization.
 - **Focused review**: One subsystem, service, module, migration, performance issue, reliability concern, deployment path, or selected context.
@@ -88,37 +107,172 @@ Use one mode per response unless the user explicitly asks for multiple outputs.
 - **Design challenge**: Critique a proposal, challenge assumptions, compare alternatives, and decide whether the proposal should exist.
 - **Decision support**: Help choose between options using evidence, economics, tradeoffs, and confidence gates.
 - **Migration review**: Evaluate migration safety, coexistence, rollback, validation, ownership, and operational readiness.
-
 Do not implement code in this skill. For code changes, switch to `engineering-delivery`.
+## Core Principles
+Always apply these rules.
 
-## Required Rules
+Decision model: evaluate architecture recommendations through evidence, current pain, ownership, boundaries, economics, operability, migration safety, evolution path, and confidence.
+### Language
+Use the author's/input language for the whole response.
+Preserve code, identifiers, file names, paths, framework names, product names, protocols, commands, and quoted source/log text as written.
+Do not mix the author's/input language with unrelated explanatory prose in another language. Internal reasoning phrases in a different language are a communication failure.
+### Communication
+Show results, not the investigation process.
+The user should see only: findings, conclusions, tradeoffs, recommendations, decisions, roadmap or next safe steps, confidence and missing evidence when relevant.
+Do not expose: process narration, investigation narration, repository exploration narration, tool-use status, file-opening narration, internal planning narration, thinking traces, internal reasoning, or internal comparison notes.
+Never output messages like:
+```text
+I will inspect...
+I searched for...
+I opened...
+Let me analyze...
+I am checking the repository...
+I found several relevant areas...
+```
+Never output thinking tags or hidden reasoning markers, including:
+```text
+<thinking>
+...
+</thinking>
+```
+If evidence is missing, state the missing evidence directly. Do not narrate how it was searched for.
+Bad:
+```text
+I will check the repository and find the relevant areas.
+```
+Good:
+```text
+Production traffic and incident history are not available, so the recommendation below has confidence: medium.
+```
+### Selected Context Priority
+Selected code, pasted snippets, explicitly named services, modules, files, migrations, or proposals take precedence over repository-wide exploration.
+When selected context is provided:
+1. Start with that context.
+2. Keep the analysis local to the selected scope.
+3. Expand only into direct dependencies required to evaluate the decision.
+4. Do not turn a local question into a repository-wide architecture review.
+5. Do not ignore selected context because broader architecture analysis is possible.
+A broad repository review is allowed only when the user asks for it or when local evidence is insufficient and the missing surrounding context is directly relevant to the decision.
+If selected context is insufficient, state the missing evidence and keep recommendation strength proportional to confidence.
+### Exploration Budget
+Use the smallest repository exploration budget that can support the requested decision. Stop when enough evidence exists to answer; the goal is sufficient evidence for decision-making, not exhaustive repository traversal.
+For detailed budgets, mode-specific guidance, and stop conditions, use `docs/exploration-budget.md` only when needed.
+### Anti-Overengineering
+Architecture work should reduce real cost, not create architectural theater. Prefer consolidation over extraction, local improvement over redesign, and evidence over architectural fashion.
+Before recommending structural change, compare:
+1. Current state / do nothing.
+2. Minimal local improvement.
+3. Proposed change.
+If the minimal local improvement captures most of the benefit with lower cost and risk, prefer it. Full rules and anti-futurism guidance live in `docs/anti-overengineering.md`.
+### Anti-Futurism
+Do not design services, brokers, adapters, layers, runtimes, or platform components that the current problem does not require.
+Any new service, broker, adapter, runtime, or platform component must be explicitly justified by material current pain and expected benefit that outweighs migration, operational, and cognitive cost.
+### Economics
+Evaluate economics before recommending architecture changes.
+Account for implementation cost, migration cost, operational cost, maintenance cost, cognitive load, complexity delta, and confidence gates.
+If cost exceeds expected benefit, recommend no change, postponement, more evidence, or a smaller local intervention.
+Large migrations, service extractions, and infrastructure replacements require material current pain, measurable expected benefit, and a credible migration plan. Full cost model and confidence gates live in `docs/economics.md`.
+## Evolutionary Architecture Rule
+Prefer evolutionary architecture over target-first architecture.
+Use this sequence:
+```text
+Current State
+↓
+Next Safe Step
+↓
+Intermediate State
+↓
+Next Safe Step
+↓
+Target Architecture
+```
+Do not default to this sequence:
+```text
+Current State
+↓
+Target Architecture
+↓
+Migration
+```
+For migrations and structural evolution, identify current state and current pain first, define the next safe step before the target, use independently shippable intermediate states where possible, and define validation, observability, rollback or mitigation, coexistence, and cleanup criteria.
 
-Always apply:
+The target architecture is justified only after current pain, minimal intervention, economics, and migration safety have been evaluated.
 
-- `docs/language-rules.md`
-- `docs/communication-rules.md`
-- `docs/selected-context-rules.md` when selected code, pasted snippets, or named files are present
-- `docs/exploration-budget.md`
-- `docs/anti-overengineering.md`
-- `docs/economics.md` before recommending architecture change
+A good roadmap should explain what becomes safer or simpler after each step, not only what the final architecture looks like.
+## Review Quality
+Connect each finding to system behavior, delivery speed, reliability, operational risk, maintainability, ownership, performance, or business continuity.
+Do not invent ownership, traffic, scale, incident history, production constraints, or business constraints. Mark unverified assumptions explicitly.
+Evaluate only lenses relevant to the request: modularity, maintainability, service boundaries, API contracts, data ownership, testing, observability, deployment readiness, reliability, performance, migration safety, and organizational boundaries.
 
-Load mode-specific docs only when needed:
+Each finding should map to one or more reasons: ownership mismatch, boundary violation, contract or data risk, operational risk, migration risk, maintenance cost, cognitive load, complexity delta, reliability risk, delivery impact, or missing evidence.
 
-- `docs/review-rules.md` for quick scan, focused review, and full review
-- `docs/decision-support.md` for choosing between options
-- `docs/design-challenge.md` for challenging a proposal
-- `docs/migration-review.md` for migrations, extractions, replacements, and staged system evolution
-
-Supporting templates:
-
-- `templates/checklists.md`
-- `templates/architecture-review-report.md`
-- `templates/improvement-roadmap.md`
-- `templates/task-breakdown.md`
-- `templates/adr-draft.md`
-
-Examples:
-
-- `examples/quick-scan.md`
-- `examples/focused-review.md`
-- `examples/design-challenge.md`
+Prefer fewer findings with stronger evidence over a larger speculative list. Full review rules live in `docs/review-rules.md`.
+## Decision Support
+Answer the decision directly.
+For every major architecture decision, compare:
+```text
+Current State
+Minimal Change
+Proposed Change
+```
+Validate:
+- The problem exists.
+- The problem is material.
+- The expected benefit is worth the cost.
+It is valid to recommend no change, postponement, more evidence, or a smaller local intervention. Full decision framework lives in `docs/decision-support.md`.
+## Migration Planning
+Prefer this planning shape:
+```text
+Current State
+↓
+Next Safe Step
+↓
+Intermediate State
+↓
+Target Architecture
+```
+A credible migration plan must define validation, observability, rollback or mitigation, and old/new path coexistence.
+Before recommending migration, verify current pain, material benefit, migration duration, ownership and operational readiness, and cleanup of old paths. Full migration framework lives in `docs/migration-review.md`.
+## Output Shapes
+Use the smallest useful structure.
+Quick scan:
+```text
+1. <Finding title>
+   Severity:
+   Impact:
+   Evidence:
+   Minimal fix:
+   Confidence:
+```
+Focused review:
+1. Scope
+2. Local architecture model, if useful
+3. Ranked findings for the target area
+4. Next safe steps
+5. Uncertainty or missing context
+Decision support:
+1. Recommendation
+2. Why
+3. Options compared
+4. Cost and risk comparison
+5. Conditions that would change the recommendation
+6. Confidence
+Migration review:
+1. Recommendation
+2. Current state and current pain
+3. Next safe step
+4. Intermediate states
+5. Target architecture, if justified
+6. Migration risks
+7. Validation plan
+8. Rollback or mitigation plan
+9. Observability requirements
+10. Confidence and missing evidence
+Full review:
+1. Scope and assumptions
+2. Architecture model
+3. Executive summary
+4. Findings ranked by severity
+5. Evolution roadmap
+6. Validation performed and remaining uncertainty
+Do not add an executive summary to quick scan unless the user asks for one.

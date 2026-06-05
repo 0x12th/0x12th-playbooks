@@ -2,6 +2,30 @@
 
 Use migration review mode for service extraction, service consolidation, framework replacement, database migration, runtime migration, sync-to-async changes, event-driven migration, and large staged refactors.
 
+Prefer evolutionary architecture over target-first architecture:
+
+```text
+Current State
+↓
+Next Safe Step
+↓
+Intermediate State
+↓
+Next Safe Step
+↓
+Target Architecture
+```
+
+Do not default to:
+
+```text
+Current State
+↓
+Target Architecture
+↓
+Migration
+```
+
 ## Migration Questions
 
 Before recommending migration, evaluate:
@@ -22,7 +46,9 @@ If current pain is not demonstrated, recommend against migration, postponement, 
 
 A credible migration plan should define:
 
-- Incremental phases
+- Current state and constraints
+- Next safe step
+- Intermediate states
 - Old/new path coexistence
 - Backward-compatible contracts
 - Data correctness validation
@@ -52,10 +78,12 @@ Use validation methods appropriate to the migration:
 Use this structure when the user asks for migration review:
 
 1. Recommendation
-2. Current pain and expected benefit
-3. Migration risks
-4. Required phases
-5. Validation plan
-6. Rollback or mitigation plan
-7. Observability requirements
-8. Confidence and missing evidence
+2. Current state and current pain
+3. Next safe step
+4. Intermediate states
+5. Target architecture, if justified
+6. Migration risks
+7. Validation plan
+8. Rollback or mitigation plan
+9. Observability requirements
+10. Confidence and missing evidence

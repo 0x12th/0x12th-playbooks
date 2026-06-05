@@ -1,6 +1,6 @@
 # Selected Context Rules
 
-Selected code, selected files, pasted snippets, or explicitly named files take precedence over repository-wide exploration.
+Selected code, selected files, pasted snippets, explicitly named services, modules, files, migrations, or proposals take precedence over repository-wide exploration.
 
 When selected context is provided:
 

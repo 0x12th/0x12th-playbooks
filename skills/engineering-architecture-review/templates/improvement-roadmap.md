@@ -1,6 +1,6 @@
 # Improvement Roadmap Template
 
-Use this template to turn architecture findings into an incremental plan. Favor sequencing that reduces risk before larger structural changes.
+Use this template to turn architecture findings into an incremental plan. Favor Current State → Next Safe Step → Intermediate State → Next Safe Step → Target Architecture sequencing over target-first plans.
 
 ## Roadmap Principles
 

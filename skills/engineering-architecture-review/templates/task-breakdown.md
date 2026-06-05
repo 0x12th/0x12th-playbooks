@@ -36,7 +36,7 @@ Out of scope:
 
 - 
 
-**Implementation steps:**
+**Next safe steps:**
 
 1. 
 2. 

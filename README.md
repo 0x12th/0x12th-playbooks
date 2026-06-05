@@ -19,7 +19,7 @@ The skills are designed to reduce context consumption, prioritize selected conte
 
 | Skill | Answers | Use when |
 |---|---|---|
-| `engineering-architecture-review` | How should the system be designed? | Architecture review, system design, architecture decisions, migration planning, service boundaries, domain/data ownership, architecture debt, reliability strategy, observability architecture, deployment architecture, design challenge, decision support |
+| `engineering-architecture-review` | How should the system evolve safely? | Architecture review, system design, architecture decisions, migration planning, service boundaries, domain/data ownership, architecture debt, reliability strategy, observability architecture, deployment architecture, design challenge, decision support |
 | `engineering-delivery` | How should this change be implemented safely? | Implementation, bug fixes, tests, CI fixes, code review, diff review, patch review, commit review, PR review, local refactoring, validation, PR preparation, incremental improvements |
 
 Use `engineering-architecture-review` before `engineering-delivery` when a coding task requires a design or migration decision first.
@@ -32,7 +32,7 @@ Use `engineering-delivery` when the request is to implement, fix, test, validate
 
 ## Automatic Selection
 
-Most AI coding agents select skills primarily from the skill `name` and frontmatter `description` in each `SKILL.md`. The descriptions in this repository are written to expose common trigger phrases such as architecture review, migration planning, service boundaries, implementation, bug fixes, tests, CI fixes, code review, diff review, and PR review.
+Most AI coding agents select skills primarily from the skill `name` and frontmatter `description` in each `SKILL.md`. The descriptions in this repository are written to expose common trigger phrases such as architecture review, migration planning, service boundaries, implementation, bug fixes, tests, CI fixes, code review, diff review, PR review.
 
 `manifests/skills.json` is an index and documentation aid. Some agents may use it, but it is not an official cross-agent standard and should not be required for skill loading.
 
@@ -53,7 +53,7 @@ cp -R 0x12th-playbooks/skills/* ~/.agents/skills/
 ## Install Pinned Version
 
 ```bash
-git clone --branch v0.3.3 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.4.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 cp -R 0x12th-playbooks/skills/* ~/.agents/skills/
 ```
@@ -63,7 +63,7 @@ cp -R 0x12th-playbooks/skills/* ~/.agents/skills/
 Architecture review:
 
 ```bash
-git clone --branch v0.3.3 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.4.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 cp -R 0x12th-playbooks/skills/engineering-architecture-review ~/.agents/skills/
 ```
@@ -71,7 +71,7 @@ cp -R 0x12th-playbooks/skills/engineering-architecture-review ~/.agents/skills/
 Engineering delivery:
 
 ```bash
-git clone --branch v0.3.3 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.4.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 cp -R 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
 ```
@@ -88,7 +88,7 @@ https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineer
 Pinned raw URL example:
 
 ```text
-https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.3.3/skills/engineering-architecture-review/SKILL.md
+https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.4.0/skills/engineering-architecture-review/SKILL.md
 ```
 
 ### Zed
@@ -106,7 +106,7 @@ For a single `SKILL.md` import, use Zed's skill-from-URL flow with one of the ra
 Install into the skills directory used by your Claude Code setup. Example:
 
 ```bash
-git clone --branch v0.3.3 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.4.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.claude/skills
 cp -R 0x12th-playbooks/skills/* ~/.claude/skills/
 ```
@@ -118,7 +118,7 @@ If Claude Code does not auto-load a skill, reference the relevant `SKILL.md` fro
 Install into the skills directory used by your Codex setup. Example:
 
 ```bash
-git clone --branch v0.3.3 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.4.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.codex/skills
 cp -R 0x12th-playbooks/skills/* ~/.codex/skills/
 ```
@@ -135,20 +135,16 @@ cp -R 0x12th-playbooks/skills/* .agents/skills/
 Architecture review:
 
 ```text
-Use engineering-architecture-review.
-
 Run a quick architecture scan of this repository. Return only the top 5 findings.
 ```
 
 ```text
-Use engineering-architecture-review.
-
 Challenge this proposal: split one shared backend into separate deployables for three business capabilities.
 Focus on operational cost, migration risk, ownership, and long-term maintenance.
 ```
 
 ```text
-Стоит ли переносить фоновые задачи на другой runtime очередей?
+Should background jobs move to a different queue runtime?
 ```
 
 Engineering delivery:
@@ -166,7 +162,7 @@ Implement the first approved migration step without changing public behavior.
 ```
 
 ```text
-Напиши тесты для выбранного кода.
+Write tests for the selected code.
 ```
 
 ```text

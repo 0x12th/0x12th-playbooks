@@ -3,7 +3,7 @@
 Prompt:
 
 ```text
-Use the engineering-architecture-review skill. Do a quick scan of this repository and return only the top 3–5 architecture findings.
+Do a quick scan of this repository and return only the top 3–5 architecture findings.
 ```
 
 Example output:

@@ -53,15 +53,15 @@ Do not use for architecture decisions. If implementation requires an architectur
 
 | User request | Skill |
 |---|---|
-| `Стоит ли объединять два сильно связанных модуля?` | `engineering-architecture-review` |
-| `Как по шагам начать объединение?` | `engineering-architecture-review` |
-| `Реализуй первый шаг объединения.` | `engineering-delivery` |
-| `Посмотри архитектуру сервиса.` | `engineering-architecture-review` |
-| `Напиши тесты.` | `engineering-delivery` |
-| `Почему падает CI?` | `engineering-delivery` |
-| `Стоит ли переносить фоновые задачи на другой runtime очередей?` | `engineering-architecture-review` |
-| `Переведи обработчик задачи на уже выбранный runtime очередей.` | `engineering-delivery` |
-| `Проверь PR на баги и пропущенные тесты.` | `engineering-delivery` |
+| `Should we merge two tightly coupled modules?` | `engineering-architecture-review` |
+| `How should we start the merge step by step?` | `engineering-architecture-review` |
+| `Implement the first merge step.` | `engineering-delivery` |
+| `Review the service architecture.` | `engineering-architecture-review` |
+| `Write tests.` | `engineering-delivery` |
+| `Why is CI failing?` | `engineering-delivery` |
+| `Should background jobs move to a different queue runtime?` | `engineering-architecture-review` |
+| `Move the task handler to the already approved queue runtime.` | `engineering-delivery` |
+| `Review this PR for bugs and missing tests.` | `engineering-delivery` |
 
 ## Generic Project Prompts
 
@@ -71,9 +71,6 @@ Examples:
 
 | User request | Skill | Mode |
 |---|---|---|
-| `Посмотри проект.` | `engineering-architecture-review` | Quick scan |
-| `Что бы ты улучшил?` | `engineering-architecture-review` | Quick scan |
-| `Прожарь архитектуру.` | `engineering-architecture-review` | Quick scan or focused architecture critique |
 | `Look at this project.` | `engineering-architecture-review` | Quick scan |
 | `What would you improve?` | `engineering-architecture-review` | Quick scan |
 | `Critique the architecture.` | `engineering-architecture-review` | Quick scan or focused architecture critique |

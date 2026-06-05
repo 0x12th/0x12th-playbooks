@@ -2,6 +2,28 @@
 
 All notable changes to this repository are documented in this file.
 
+## 0.4.0 - 2026-06-05
+
+### Added
+
+- Added evolutionary architecture guidance: Current State → Next Safe Step → Intermediate State → Next Safe Step → Target Architecture.
+- Added anti-futurism rules that require explicit justification before proposing new services, brokers, adapters, runtimes, or platform components.
+- Added stricter selected-context priority for named services, modules, migrations, proposals, and selected code.
+
+### Changed
+
+- Moved always-used language, communication, selected-context, exploration-budget, anti-overengineering, and economics rules into `engineering-architecture-review/SKILL.md`.
+- Reduced routine loading policy to `SKILL.md` only, or `SKILL.md` plus one directly relevant supporting document.
+- Reframed migration output around next safe steps and intermediate states rather than target-first planning.
+- Updated examples and templates to avoid explicit skill invocation and process narration.
+- Compacted `engineering-architecture-review/SKILL.md` while preserving selection, loading policy, and behavior.
+- Replaced language-specific examples with author/input-language guidance and English selection examples.
+- Made the architecture review decision model explicit without changing skill responsibilities.
+
+### Fixed
+
+- Hardened communication rules against process narration, investigation narration, repository traversal narration, thinking traces, and mixed-language explanatory prose.
+
 ## 0.3.3 - 2026-06-04
 
 ### Fixed
