@@ -2,6 +2,19 @@
 
 All notable changes to this repository are documented in this file.
 
+## 0.5.1 - 2026-06-05
+
+### Improved
+
+- Strengthened `engineering-delivery` entrypoint guidance with an explicit inspect-change-validate-report execution loop.
+- Added delivery risk control guidance for local, reversible changes and high-risk edits to shared contracts, public APIs, migrations, deployment configuration, CI pipelines, dependency versions, and generated files.
+- Added a manifest principle that optional memory never replaces current evidence.
+
+### Fixed
+
+- Normalized README references to supporting `docs/`, `templates/`, and `examples/` directories.
+- Updated installation examples and manifest metadata for the `v0.5.1` release.
+
 ## 0.5.0 - 2026-06-05
 
 ### Added

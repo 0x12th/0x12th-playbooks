@@ -45,7 +45,7 @@ cp -R 0x12th-playbooks/skills/* ~/.agents/skills/
 Pinned version:
 
 ```bash
-git clone --branch v0.5.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.5.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 cp -R 0x12th-playbooks/skills/* ~/.agents/skills/
 ```
@@ -55,7 +55,7 @@ cp -R 0x12th-playbooks/skills/* ~/.agents/skills/
 Architecture review:
 
 ```bash
-git clone --branch v0.5.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.5.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 cp -R 0x12th-playbooks/skills/engineering-architecture-review ~/.agents/skills/
 ```
@@ -63,7 +63,7 @@ cp -R 0x12th-playbooks/skills/engineering-architecture-review ~/.agents/skills/
 Engineering delivery:
 
 ```bash
-git clone --branch v0.5.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.5.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 cp -R 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
 ```
