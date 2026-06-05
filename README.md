@@ -4,8 +4,6 @@
 
 It is not a prompt collection. It is a structured library of reusable skills for AI coding agents that need to review real systems, make technical decisions, implement changes safely, and avoid unnecessary architecture work.
 
-## Why This Exists
-
 AI coding agents are useful when they stay inside the right scope. They become risky when every local change turns into a broad architecture audit, or every architecture question turns into premature implementation.
 
 This repository separates two common engineering intents:
@@ -15,69 +13,28 @@ This repository separates two common engineering intents:
 
 The skills are designed to reduce context consumption, prioritize selected context, apply clear stop conditions, and avoid over-engineered recommendations.
 
-## Included Skills
+## Skills
 
 | Skill | Answers | Use when |
 |---|---|---|
 | `engineering-architecture-review` | How should the system evolve safely? | Architecture review, system design, architecture decisions, migration planning, service boundaries, domain/data ownership, architecture debt, reliability strategy, observability architecture, deployment architecture, design challenge, decision support |
 | `engineering-delivery` | How should this change be implemented safely? | Implementation, bug fixes, tests, CI fixes, code review, diff review, patch review, commit review, PR review, local refactoring, validation, PR preparation, incremental improvements |
 
-Use `engineering-architecture-review` before `engineering-delivery` when a coding task requires a design or migration decision first.
-
-## When To Use Each Skill
-
 Use `engineering-architecture-review` when the question is about design, tradeoffs, service boundaries, ownership, migrations, deployment architecture, reliability strategy, or whether a proposed change should exist.
 
 Use `engineering-delivery` when the request is to implement, fix, test, validate, review code, review a diff, review a patch, review a commit, review a PR, refactor locally, prepare a PR, or make the next approved incremental change.
 
-## Automatic Selection
+Use `engineering-architecture-review` before `engineering-delivery` when a coding task requires a design or migration decision first.
 
-Most AI coding agents select skills primarily from the skill `name` and frontmatter `description` in each `SKILL.md`. The descriptions in this repository are written to expose common trigger phrases such as architecture review, migration planning, service boundaries, implementation, bug fixes, tests, CI fixes, code review, diff review, PR review.
+## Installation
 
-`manifests/skills.json` is an index and documentation aid. Some agents may use it, but it is not an official cross-agent standard and should not be required for skill loading.
-
-Install the full skill folders when possible, not only `SKILL.md`. The supporting `docs/`, `templates`, and `examples/` are intentionally loaded on demand and improve behavior after the skill is selected.
-
-For project-level agent instructions, see `docs/agent-bootstrap.md`. Use it in `AGENTS.md`, `CLAUDE.md`, or similar files when an agent does not reliably discover installed skills by itself.
-
-## Optional Memory Backends
-
-`0x12th-playbooks` works without any memory system.
-
-The skills are designed to operate from selected context, repository files, code, tests, logs, diffs, and user-provided information.
-
-When an optional memory backend is available through the agent runtime, it may be used as supplemental context.
-
-Memory can help explain:
-
-- Previous architecture decisions
-- Migration history
-- ADRs and design notes
-- Incident investigations
-- Project conventions
-- Unresolved follow-ups
-
-Memory must not replace current repository evidence.
-
-Current code, configuration, tests, logs, validation results, and selected context always take precedence over remembered information.
-
-### GBrain
-
-One supported optional approach is [GBrain](https://github.com/garrytan/gbrain).
-
-GBrain can provide project memory, historical context, notes, and cross-session knowledge for compatible agents through MCP or another runtime integration.
-
-GBrain is optional and is not required for any skill in this repository.
-
-This repository does not install, configure, or require GBrain. Agents should use it only when it is already available through their runtime.
-
-If unavailable, all skills continue to operate normally.
-
-See `docs/optional-context-sources.md` for the trust and usage rules.
-
-## Quick Install
+Install the full skill folders when possible, not only `SKILL.md`. The supporting `docs/`, `templates/`, and `examples/` are intentionally loaded on demand and improve behavior after the skill is selected.
 
 The commands below use `~/.agents/skills` as a common example. Replace it with the skills directory used by your agent setup.
+
+### Install All Skills
+
+Latest:
 
 ```bash
 git clone https://github.com/0x12th/0x12th-playbooks.git
@@ -85,7 +42,7 @@ mkdir -p ~/.agents/skills
 cp -R 0x12th-playbooks/skills/* ~/.agents/skills/
 ```
 
-## Install Pinned Version
+Pinned version:
 
 ```bash
 git clone --branch v0.4.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
@@ -93,7 +50,7 @@ mkdir -p ~/.agents/skills
 cp -R 0x12th-playbooks/skills/* ~/.agents/skills/
 ```
 
-## Install One Skill
+### Install One Skill
 
 Architecture review:
 
@@ -111,61 +68,33 @@ mkdir -p ~/.agents/skills
 cp -R 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
 ```
 
-## Usage
+### Agent Paths
 
-Raw skill URLs:
+Common destinations:
+
+- Zed: `~/.agents/skills`
+- Claude Code: `~/.claude/skills`
+- Codex: `~/.codex/skills`
+- Project-local skills: `.agents/skills`
+
+Raw `SKILL.md` URLs are useful for agents that support URL imports, but they do not include supporting docs, templates, or examples:
 
 ```text
 https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture-review/SKILL.md
 https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-delivery/SKILL.md
 ```
 
-Pinned raw URL example:
+See `docs/installation.md` for more installation details.
 
-```text
-https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.4.0/skills/engineering-architecture-review/SKILL.md
-```
+## Automatic Selection
 
-### Zed
+Most AI coding agents select skills primarily from the skill `name` and frontmatter `description` in each `SKILL.md`. The descriptions in this repository expose common trigger phrases such as architecture review, migration planning, service boundaries, implementation, bug fixes, tests, CI fixes, code review, diff review, and PR review.
 
-For full skill folders with docs, templates, and examples, use the clone-based installation above and copy skills into the skills directory used by your Zed setup. Example:
+`manifests/skills.json` is an index and documentation aid. Some agents may use it, but it is not an official cross-agent standard and should not be required for skill loading.
 
-```text
-~/.agents/skills
-```
+For project-level agent instructions, see `docs/agent-bootstrap.md`. Use it in `AGENTS.md`, `CLAUDE.md`, or similar files when an agent does not reliably discover installed skills by itself.
 
-For a single `SKILL.md` import, use Zed's skill-from-URL flow with one of the raw skill URLs. URL import only imports the root `SKILL.md`; clone-based installation is recommended for this repository because the skills intentionally use supporting docs.
-
-### Claude Code
-
-Install into the skills directory used by your Claude Code setup. Example:
-
-```bash
-git clone --branch v0.4.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
-mkdir -p ~/.claude/skills
-cp -R 0x12th-playbooks/skills/* ~/.claude/skills/
-```
-
-If Claude Code does not auto-load a skill, reference the relevant `SKILL.md` from `CLAUDE.md`, project instructions, or your prompt.
-
-### Codex
-
-Install into the skills directory used by your Codex setup. Example:
-
-```bash
-git clone --branch v0.4.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
-mkdir -p ~/.codex/skills
-cp -R 0x12th-playbooks/skills/* ~/.codex/skills/
-```
-
-Project-local installation also works when your agent supports project-local skills:
-
-```bash
-mkdir -p .agents/skills
-cp -R 0x12th-playbooks/skills/* .agents/skills/
-```
-
-## Example Prompts
+## Usage
 
 Architecture review:
 
@@ -206,17 +135,21 @@ Use engineering-delivery.
 Review this PR for bugs, regressions, and missing tests.
 ```
 
-## Repository Structure
+## Optional Memory Backends
 
-```text
-0x12th-playbooks/
-├── skills/
-│   ├── engineering-architecture-review/
-│   └── engineering-delivery/
-├── docs/
-├── manifests/
-└── CHANGELOG.md
-```
+`0x12th-playbooks` works without any memory system.
+
+The skills are designed to operate from selected context, repository files, code, tests, logs, diffs, and user-provided information.
+
+When an optional memory backend is available through the agent runtime, it may be used as supplemental context for previous architecture decisions, migration history, ADRs, design notes, incident investigations, project conventions, and unresolved follow-ups.
+
+Memory must not replace current repository evidence. Current code, configuration, tests, logs, validation results, and selected context always take precedence over remembered information.
+
+One supported optional approach is [GBrain](https://github.com/garrytan/gbrain). GBrain can provide project memory, historical context, notes, and cross-session knowledge for compatible agents through MCP or another runtime integration.
+
+GBrain is optional and is not required for any skill in this repository. This repository does not install, configure, or require GBrain. Agents should use it only when it is already available through their runtime.
+
+If unavailable, all skills continue to operate normally. See `docs/optional-context-sources.md` for the trust and usage rules.
 
 ## Design Principles
 
@@ -242,6 +175,18 @@ See:
 - `docs/repository-structure.md`
 - `docs/authoring-guidelines.md`
 - `manifests/skills.json`
+
+## Repository Structure
+
+```text
+0x12th-playbooks/
+├── skills/
+│   ├── engineering-architecture-review/
+│   └── engineering-delivery/
+├── docs/
+├── manifests/
+└── CHANGELOG.md
+```
 
 ## Development And Contribution
 
