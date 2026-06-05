@@ -36,9 +36,42 @@ Most AI coding agents select skills primarily from the skill `name` and frontmat
 
 `manifests/skills.json` is an index and documentation aid. Some agents may use it, but it is not an official cross-agent standard and should not be required for skill loading.
 
-Install the full skill folders when possible, not only `SKILL.md`. The supporting `docs/`, `templates/`, and `examples/` are intentionally loaded on demand and improve behavior after the skill is selected.
+Install the full skill folders when possible, not only `SKILL.md`. The supporting `docs/`, `templates`, and `examples/` are intentionally loaded on demand and improve behavior after the skill is selected.
 
 For project-level agent instructions, see `docs/agent-bootstrap.md`. Use it in `AGENTS.md`, `CLAUDE.md`, or similar files when an agent does not reliably discover installed skills by itself.
+
+## Optional Memory Backends
+
+`0x12th-playbooks` works without any memory system.
+
+The skills are designed to operate from selected context, repository files, code, tests, logs, diffs, and user-provided information.
+
+When an optional memory backend is available through the agent runtime, it may be used as supplemental context.
+
+Memory can help explain:
+
+- Previous architecture decisions
+- Migration history
+- ADRs and design notes
+- Incident investigations
+- Project conventions
+- Unresolved follow-ups
+
+Memory must not replace current repository evidence.
+
+Current code, configuration, tests, logs, validation results, and selected context always take precedence over remembered information.
+
+### GBrain
+
+One supported optional approach is [GBrain](https://github.com/garrytan/gbrain).
+
+GBrain can provide project memory, historical context, notes, and cross-session knowledge for compatible agents through MCP.
+
+GBrain is optional and is not required for any skill in this repository.
+
+If unavailable, all skills continue to operate normally.
+
+See `docs/optional-context-sources.md` for the trust and usage rules.
 
 ## Quick Install
 
