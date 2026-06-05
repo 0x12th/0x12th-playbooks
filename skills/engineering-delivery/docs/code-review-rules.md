@@ -21,6 +21,16 @@ Review the selected code or changed files first.
 
 Expand only to direct callers, callees, tests, contracts, or configuration needed to verify the risk.
 
+Stop expanding when the finding is supported, when additional exploration is unlikely to change severity or recommendation, or when the remaining uncertainty can be stated directly.
+
+## Finding Discipline
+
+- Findings must be grounded in changed code, selected code, tests, logs, configuration, or direct dependencies.
+- Prefer one well-supported root-cause finding over several symptoms of the same defect.
+- If a repeated defect pattern appears, recommend a shared test, lint rule, validator, or helper only when it would prevent recurrence with modest complexity.
+- Do not assert production impact, scale, ownership, or user behavior that is not visible from the evidence.
+- Keep confidence proportional to evidence. Mark uncertain findings as questions or missing evidence rather than defects.
+
 ## Output
 
 Lead with findings ordered by severity.

@@ -17,6 +17,13 @@ Let test coverage scale with risk and blast radius.
 - Use integration or contract tests when boundaries are involved.
 - Avoid broad end-to-end tests for narrow fixes unless the repository already uses them for that workflow.
 
+## Regression Prevention
+
+- A reproduced bug should usually leave behind a test, fixture, validator, or documented manual check.
+- Repeated CI failures should be converted into a clearer test failure, better assertion, deterministic fixture, or validation script when practical.
+- Tests should prove the externally relevant behavior, boundary, contract, or failure mode, not merely restate the implementation.
+- If adding a test would require disproportionate scaffolding, explain the next best protection used instead.
+
 ## Test Repair
 
 When fixing failing tests:
@@ -25,6 +32,7 @@ When fixing failing tests:
 - Do not weaken assertions to make tests pass.
 - Preserve meaningful coverage.
 - Update snapshots only when the behavior change is intentional.
+- Do not delete, skip, or loosen tests unless the tested behavior is intentionally obsolete and the replacement coverage is clear.
 
 ## Missing Test Infrastructure
 

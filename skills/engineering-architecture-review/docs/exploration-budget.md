@@ -13,7 +13,7 @@ Stop when enough evidence exists to answer the user. The goal is sufficient evid
 | Design challenge | Only modules directly involved in the proposal |
 | Decision support | Only evidence needed to compare options |
 | Migration review | Migration path, affected contracts, data ownership, rollout, rollback, validation, observability |
-| Full review | No fixed file limit |
+| Full review | Start with a bounded hotspot pass; expand only while new evidence changes findings or roadmap |
 
 ## Quick Scan
 
@@ -57,5 +57,7 @@ Stop gathering evidence when:
 - Additional evidence is unlikely to change the recommendation.
 - Confidence is high enough for the requested decision.
 - The remaining uncertainty can be stated explicitly.
+- Further exploration would only add examples of an already-supported pattern.
+- The next useful evidence would require production data, stakeholder input, or implementation validation not available in the repository.
 
 If confidence is low and more evidence is required, say what evidence is missing instead of continuing speculative exploration.

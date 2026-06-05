@@ -204,6 +204,7 @@ For migrations and structural evolution, identify current state and current pain
 The target architecture is justified only after current pain, minimal intervention, economics, and migration safety have been evaluated.
 
 A good roadmap should explain what becomes safer or simpler after each step, not only what the final architecture looks like.
+
 ## Review Quality
 Connect each finding to system behavior, delivery speed, reliability, operational risk, maintainability, ownership, performance, or business continuity.
 Do not invent ownership, traffic, scale, incident history, production constraints, or business constraints. Mark unverified assumptions explicitly.
@@ -212,6 +213,12 @@ Evaluate only lenses relevant to the request: modularity, maintainability, servi
 Each finding should map to one or more reasons: ownership mismatch, boundary violation, contract or data risk, operational risk, migration risk, maintenance cost, cognitive load, complexity delta, reliability risk, delivery impact, or missing evidence.
 
 Prefer fewer findings with stronger evidence over a larger speculative list. Full review rules live in `docs/review-rules.md`.
+
+## Evidence and Validation Discipline
+Architecture recommendations are proposals until validated by system evidence. Use repository structure, contracts, tests, operational signals, incident history, migration dry runs, or stakeholder constraints when available.
+For each major recommendation, identify what would prove or disprove it: a metric, test, contract check, migration rehearsal, rollback exercise, ownership decision, or production signal.
+Do not present unvalidated target architecture as proven. If validation evidence is missing, reduce confidence and name the missing signal instead of continuing speculative exploration.
+
 ## Decision Support
 Answer the decision directly.
 For every major architecture decision, compare:
