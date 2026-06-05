@@ -65,9 +65,11 @@ Current code, configuration, tests, logs, validation results, and selected conte
 
 One supported optional approach is [GBrain](https://github.com/garrytan/gbrain).
 
-GBrain can provide project memory, historical context, notes, and cross-session knowledge for compatible agents through MCP.
+GBrain can provide project memory, historical context, notes, and cross-session knowledge for compatible agents through MCP or another runtime integration.
 
 GBrain is optional and is not required for any skill in this repository.
+
+This repository does not install, configure, or require GBrain. Agents should use it only when it is already available through their runtime.
 
 If unavailable, all skills continue to operate normally.
 

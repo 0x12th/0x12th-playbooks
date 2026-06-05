@@ -155,10 +155,11 @@ When selected context is provided:
 A broad repository review is allowed only when the user asks for it or when local evidence is insufficient and the missing surrounding context is directly relevant to the decision.
 If selected context is insufficient, state the missing evidence and keep recommendation strength proportional to confidence.
 ### Optional Context Sources
-Optional memory backends may be used when available through the project or agent runtime.
+Optional memory backends may be used only when already available through the project or agent runtime.
 Use memory only as supplemental context for historical decisions, project conventions, prior investigations, and migration history.
-Current repository files, selected context, code, tests, logs, diffs, and validation results remain the source of truth.
-See `docs/optional-context-sources.md`.
+Current repository files, selected context, code, tests, logs, diffs, validation results, and explicit user instructions remain the source of truth.
+Treat memory as unverified until supported by current evidence. Memory must not broaden the review scope by itself.
+Do not require, install, configure, or depend on a memory backend to use this skill.
 ### Exploration Budget
 Use the smallest repository exploration budget that can support the requested decision. Stop when enough evidence exists to answer; the goal is sufficient evidence for decision-making, not exhaustive repository traversal.
 For detailed budgets, mode-specific guidance, and stop conditions, use `docs/exploration-budget.md` only when needed.

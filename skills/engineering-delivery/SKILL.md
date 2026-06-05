@@ -81,6 +81,13 @@ Choose the smallest useful mode:
 - **Validation**: run checks, explain failures, and identify the next safe action.
 - **PR preparation**: summarize changes, validation, risks, and follow-ups.
 
+## Optional Context Sources
+
+Optional memory backends may be used only when already available through the project or agent runtime.
+Use memory only as supplemental context for prior decisions, project conventions, or investigation history. Current selected context, repository files, code, tests, logs, diffs, validation results, and explicit user instructions remain the source of truth.
+Treat memory as unverified until supported by current evidence. Memory must not replace reproduction, inspection, tests, or validation, and must not broaden the change scope by itself.
+Do not require, install, configure, or depend on a memory backend to use this skill.
+
 ## Required Rules
 
 Always apply:
