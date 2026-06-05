@@ -2,6 +2,26 @@
 
 All notable changes to this repository are documented in this file.
 
+## 0.5.0 - 2026-06-05
+
+### Added
+
+- Added optional memory context guidance, including optional GBrain support, while keeping memory supplemental and non-required.
+- Added `docs/optional-context-sources.md` with trust-order rules for optional context sources.
+- Added optional memory safeguards to both engineering skills so current repository evidence, selected context, tests, logs, diffs, validation results, and explicit user instructions remain the source of truth.
+- Added risk-based delivery safeguards for execution loops, validation confidence, regression prevention, code review evidence, and high-risk code changes.
+
+### Changed
+
+- Reorganized the README around repository purpose, skill responsibilities, installation, automatic selection, usage, optional memory, and supporting docs.
+- Updated installation examples and manifest metadata for the `v0.5.0` release.
+- Tightened architecture exploration guidance so full reviews start with a bounded hotspot pass and stop when additional evidence no longer changes the recommendation.
+
+### Fixed
+
+- Removed skill-level dependency on repository-level optional memory docs so standalone skill-folder installs still have the required memory safeguards.
+- Clarified that GBrain is optional and should be used only when already available through the project or agent runtime.
+
 ## 0.4.0 - 2026-06-05
 
 ### Added
