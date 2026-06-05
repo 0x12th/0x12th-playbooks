@@ -179,6 +179,7 @@
     "load detailed instructions on demand",
     "use explicit scope and stop conditions",
     "prefer evidence-first reasoning",
+    "optional memory never replaces current evidence",
     "decide before implementation",
     "avoid overengineering"
   ]

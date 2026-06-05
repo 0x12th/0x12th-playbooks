@@ -77,7 +77,7 @@ Common destinations:
 - Codex: `~/.codex/skills`
 - Project-local skills: `.agents/skills`
 
-Raw `SKILL.md` URLs are useful for agents that support URL imports, but they do not include supporting docs, templates, or examples:
+Raw `SKILL.md` URLs are useful for agents that support URL imports, but they do not include supporting `docs/`, `templates/`, or `examples/`:
 
 ```text
 https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture-review/SKILL.md

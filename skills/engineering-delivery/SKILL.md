@@ -81,6 +81,32 @@ Choose the smallest useful mode:
 - **Validation**: run checks, explain failures, and identify the next safe action.
 - **PR preparation**: summarize changes, validation, risks, and follow-ups.
 
+## Execution Discipline
+
+Use the smallest safe execution loop:
+
+1. Identify the requested change or failure.
+2. Inspect only the selected or directly relevant files first.
+3. Make the smallest behavior-preserving or behavior-targeted change.
+4. Run the most relevant validation available.
+5. Report changed files, validation result, remaining risk, and next safe step.
+
+Do not broaden the task unless current evidence shows the selected scope is insufficient.
+
+Do not fix unrelated issues discovered during the task. Mention them as follow-ups only when they materially affect the requested change.
+
+Do not treat a change as complete without either validation or a clear explanation of why validation could not be run.
+
+## Risk Control
+
+Prefer local, reversible changes.
+
+Before editing shared contracts, public APIs, migrations, deployment configuration, CI pipelines, dependency versions, or generated files, verify that the change is required for the requested task.
+
+For destructive, broad, or hard-to-revert changes, explain the risk and choose a smaller step when possible.
+
+Preserve user work. Do not overwrite unrelated changes.
+
 ## Optional Context Sources
 
 Optional memory backends may be used only when already available through the project or agent runtime.
