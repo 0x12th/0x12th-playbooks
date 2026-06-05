@@ -2,15 +2,18 @@
 
 Use this workflow for bounded delivery work. Treat implementation ideas as hypotheses; repository behavior, tests, commands, logs, and diffs provide the evidence.
 
-1. Confirm the requested outcome, selected scope, and acceptance criteria.
-2. Inspect the smallest relevant code path and existing validation tooling.
-3. Identify the minimal safe change and the evidence that would prove it.
-4. For bugs and CI failures, reproduce the failure or identify a concrete observable failure signal before patching when practical.
-5. Edit only files required for the change.
-6. Add or update focused tests when risk justifies it.
-7. Run the most relevant validation available.
-8. If validation fails, use the result to refine the hypothesis and retry only while each attempt produces new evidence.
-9. Summarize changed files, validation, and residual risk.
+Implementation is not the default mode. Start read-only unless the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.
+
+1. Classify the requested mode: diagnosis, investigation, implementation, validation, or review.
+2. Confirm the selected scope and question being answered.
+3. Inspect the strongest local evidence first.
+4. For bugs, CI failures, and runtime failures, identify a concrete observable failure signal before patching when practical.
+5. In read-only modes, answer the question once evidence is sufficient.
+6. In implementation mode, edit only files required for the change.
+7. Add or update focused tests when risk justifies it.
+8. Run the most relevant validation available.
+9. If validation fails, use the result to refine the hypothesis and retry only while each attempt produces new evidence.
+10. Summarize findings, changed files when applicable, validation, and residual risk.
 
 ## Execution Discipline
 
@@ -22,11 +25,25 @@ Use this workflow for bounded delivery work. Treat implementation ideas as hypot
 
 ## Mode-Specific Loops
 
+- **Diagnosis:** inspect provided evidence, identify the most likely cause, state confidence and missing evidence, and do not edit files.
+- **Investigation:** expand only when selected evidence is insufficient; stop when the answer is supported.
 - **Implementation:** define acceptance criteria, make the narrow change, validate the new behavior.
-- **Bug fix:** reproduce or inspect the failure, identify root cause, patch root cause, add regression coverage where practical, rerun the failing path.
-- **CI fix:** start from the failing log or command, reproduce locally when feasible, fix the cause without weakening useful checks, rerun the closest CI-equivalent validation.
 - **Validation:** find the repository-supported command, run the narrowest meaningful check, classify failures as change-related, pre-existing, or inconclusive.
-- **Test work:** protect behavior or contracts; do not add tests that only mirror implementation details.
+- **Review:** evaluate selected code or changes for bugs, regressions, missing tests, and delivery risk.
+
+## Traceback-First Debugging
+
+Traceback beats repository exploration.
+
+For runtime failures:
+
+1. Follow the traceback before searching broadly.
+2. Identify the first failing application frame.
+3. Validate the inputs and state at the failing line.
+4. Form the simplest hypothesis that explains the observed failure.
+5. Expand investigation only if the traceback path is insufficient.
+
+Do not start with repository-wide exploration when a stack trace, exception, failing test, or log already identifies a path.
 
 ## Scope Control
 
@@ -39,8 +56,8 @@ Use this workflow for bounded delivery work. Treat implementation ideas as hypot
 
 ## Exploration Budget
 
-- Start with selected or named files.
-- Expand only to direct callers, callees, tests, schemas, configuration, or CI definitions needed to make and validate the change.
+- Start with selected context, stack traces, logs, failing tests, provided files, provided diffs, then named files.
+- Expand only to direct callers, callees, tests, schemas, configuration, or CI definitions needed to answer the question or validate the change.
 - Stop exploring when the failure, change point, and validation path are known.
 - If a bounded pass cannot identify a safe change point, state the missing evidence instead of continuing repository-wide exploration.
 
@@ -56,4 +73,4 @@ Stop and ask or hand back a decision when:
 - The failure cannot be reproduced and no other trustworthy validation signal exists for a risky behavior change.
 - Requirements conflict.
 
-For architecture decisions, recommend `engineering-architecture-review`.
+For architecture decisions, state the missing decision instead of continuing delivery work.

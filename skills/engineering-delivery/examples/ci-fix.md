@@ -3,9 +3,7 @@
 Prompt:
 
 ```text
-Use engineering-delivery.
-
-Why is CI failing, and fix it if the failure is in this repository.
+Fix the failing CI test and run the relevant validation.
 ```
 
 Example output:

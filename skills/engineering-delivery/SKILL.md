@@ -1,29 +1,32 @@
 ---
 name: engineering-delivery
 description: >-
-  Use for safe engineering execution: implementation, coding, bug fixes, tests,
-  CI fixes, validation, code review, diff review, patch review, review this change,
+  Use for safe engineering delivery work: diagnosis, investigation,
+  implementation, coding, bug fixes, tests, CI failures, runtime failures,
+  validation, code review, diff review, patch review, review this change,
   review this commit, review this PR, local refactoring, PR preparation, and
-  incremental improvements. Do not use for architecture decisions, service
-  extraction strategy, migration strategy, platform evolution, or long-term
-  tradeoff analysis; recommend engineering-architecture-review first when those
-  decisions are required.
+  incremental improvements. Default to read-only diagnosis unless the user
+  explicitly asks to implement, fix, patch, modify, update, refactor, or apply
+  changes. Do not use for architecture decisions, service extraction strategy,
+  migration strategy, platform evolution, or long-term tradeoff analysis.
 ---
 
 # Engineering Delivery
 
-Use this skill to answer:
+Answer:
 
 ```text
-How should this change be implemented safely?
+What is the safest next delivery action?
 ```
 
-This is an execution skill for making bounded, validated code changes while preserving user work and minimizing regression risk.
+This is a delivery playbook for diagnosing, investigating, reviewing, validating, and only when explicitly requested, making bounded code changes while preserving user work and minimizing regression risk.
 
 ## Boundaries
 
-Use this skill for:
+Applies to:
 
+- Diagnosis
+- Investigation
 - Implementation
 - Coding tasks
 - Bug fixes
@@ -35,7 +38,7 @@ Use this skill for:
 - PR preparation
 - Incremental improvements
 
-Do not use this skill for:
+Does not apply to:
 
 - Architecture decisions
 - Service extraction strategy
@@ -44,23 +47,38 @@ Do not use this skill for:
 - Long-term tradeoff analysis
 - Broad architecture assessment
 
-When architecture decisions are required, recommend `engineering-architecture-review` first. After the decision is made, use `engineering-delivery` to implement the next safe step.
+When an architecture decision is required before delivery work can continue, stop and state the decision that is missing. Do not route, announce, or explain skill selection.
 
 ## Intent Detection
 
-Delivery examples:
+Default to read-only diagnosis unless the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.
+
+Read-only diagnosis, investigation, validation, or review examples:
+
+- "Why is CI failing?"
+- "Analyze this error."
+- "Look at this."
+- "Check this."
+- "Where is the problem?"
+- "Is this related?"
+- "What changed?"
+- "Investigate this runtime exception."
+- "Review this PR."
+- "Review this PR for bugs and missing tests."
+- "Validate this change."
+
+Implementation examples:
 
 - "Implement the first merge step."
 - "Write tests."
-- "Why is CI failing?"
 - "Move this job to the approved queue runtime."
 - "Fix this bug."
+- "Fix the failing CI test."
+- "Patch this failure."
 - "Refactor this function."
-- "Review this PR for bugs and missing tests."
-- "Validate this change."
 - "Prepare the PR summary."
 
-Architecture examples that should use `engineering-architecture-review` first:
+Architecture examples that require a decision before delivery work:
 
 - "Should we merge these services?"
 - "Should background jobs move to a different queue runtime?"
@@ -72,24 +90,22 @@ Architecture examples that should use `engineering-architecture-review` first:
 
 Choose the smallest useful mode:
 
-- **Implementation**: make a bounded code or config change and validate it.
-- **Bug fix**: reproduce or inspect the failure, patch root cause, add regression coverage where practical.
-- **Test work**: add or repair tests that protect behavior, contracts, or regressions.
-- **CI fix**: diagnose CI failure from logs or commands, fix the cause, rerun relevant validation.
-- **Code review**: review selected code, diff, or PR for bugs, regressions, missing tests, and delivery risk.
-- **Local refactor**: improve local clarity or maintainability without changing behavior.
-- **Validation**: run checks, explain failures, and identify the next safe action.
-- **PR preparation**: summarize changes, validation, risks, and follow-ups.
+- **Diagnosis**: explain the failure, likely cause, and next safe action without editing files.
+- **Investigation**: gather only the evidence needed to answer when selected context is insufficient.
+- **Implementation**: make a bounded code or config change only after an explicit edit request.
+- **Validation**: run checks, explain pass/fail results, and classify failures.
+- **Review**: assess selected code, diffs, commits, or PRs for bugs, regressions, missing tests, and delivery risk.
 
 ## Execution Discipline
 
 Use the smallest safe execution loop:
 
-1. Identify the requested change or failure.
-2. Inspect only the selected or directly relevant files first.
-3. Make the smallest behavior-preserving or behavior-targeted change.
-4. Run the most relevant validation available.
-5. Report changed files, validation result, remaining risk, and next safe step.
+1. Classify the mode: diagnosis, investigation, implementation, validation, or review.
+2. Start from the strongest local evidence: selected context, stack traces, logs, failing tests, provided files, provided diffs, then named repository files.
+3. For runtime failures, follow the traceback before exploring the repository. Traceback beats repository exploration.
+4. In read-only modes, answer the question and stop when the evidence is sufficient.
+5. In implementation mode, make the smallest behavior-preserving or behavior-targeted change and validate it.
+6. Report only findings, changed files when applicable, validation result, remaining risk, and next safe step.
 
 Do not broaden the task unless current evidence shows the selected scope is insufficient.
 
@@ -110,9 +126,9 @@ Preserve user work. Do not overwrite unrelated changes.
 ## Optional Context Sources
 
 Optional memory backends may be used only when already available through the project or agent runtime.
-Use memory only as supplemental context for prior decisions, project conventions, or investigation history. Current selected context, repository files, code, tests, logs, diffs, validation results, and explicit user instructions remain the source of truth.
-Treat memory as unverified until supported by current evidence. Memory must not replace reproduction, inspection, tests, or validation, and must not broaden the change scope by itself.
-Do not require, install, configure, or depend on a memory backend to use this skill.
+Do not consult memory before current local evidence. Use memory only as supplemental context for prior decisions, project conventions, or investigation history after selected context, repository files, code, tests, logs, diffs, validation results, and explicit user instructions have been checked.
+Treat memory as unverified until supported by current evidence. Memory must not replace reproduction, inspection, tests, or validation, and must not broaden the investigation or change scope by itself.
+Do not require, install, configure, or depend on a memory backend.
 
 ## Required Rules
 
@@ -120,7 +136,7 @@ Always apply:
 
 - `docs/language-rules.md`
 - `docs/communication-rules.md`
-- `docs/selected-context-rules.md` when selected code, pasted snippets, or named files are present
+- `docs/selected-context-rules.md` for evidence priority and scope control
 - `docs/implementation-workflow.md`
 - `docs/code-change-rules.md`
 - `docs/validation-rules.md`

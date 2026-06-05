@@ -3,8 +3,6 @@
 Prompt:
 
 ```text
-Use engineering-delivery.
-
 Write tests for the request validation behavior in the selected file.
 ```
 

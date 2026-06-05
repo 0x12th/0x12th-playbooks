@@ -3,9 +3,7 @@
 Prompt:
 
 ```text
-Use engineering-delivery.
-
-Review this PR for bugs, regressions, and missing tests.
+Review this PR.
 ```
 
 Example output:

@@ -3,8 +3,6 @@
 Prompt:
 
 ```text
-Use engineering-delivery.
-
 Fix the bug where retryable external dependency errors are treated as permanent failures.
 ```
 

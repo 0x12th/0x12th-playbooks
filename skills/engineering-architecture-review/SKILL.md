@@ -8,18 +8,17 @@ description: >-
   and technical decision support. Also use for architecture review, architecture assessment,
   migration planning, service boundary review, system evolution,
   tradeoff analysis, and technical decision support requests. Do not use for
-  implementation, bug fixes, tests, CI fixes, code review, or local refactoring;
-  use engineering-delivery for those.
+  implementation, bug fixes, tests, CI fixes, code review, or local refactoring.
 ---
 # Engineering Architecture Review
-Use this skill to answer:
+Answer:
 ```text
 How should the system evolve safely?
 ```
 The goal is practical architecture decision-making: reduce long-term maintenance cost, operational risk, migration risk, and cognitive load without defaulting to rewrites, microservices, fashionable abstractions, or new platform components.
-This is a review and decision-support skill. It does not implement code changes.
+This is a review and decision-support playbook. It does not implement code changes.
 ## Boundaries
-Use this skill for:
+Applies to:
 - Architecture decisions
 - Migration planning and migration review
 - Service boundaries
@@ -33,7 +32,7 @@ Use this skill for:
 - Design challenge
 - Decision support
 - Implementation planning before code changes
-Do not use this skill for:
+Does not apply to:
 - Bug fixes
 - Writing tests
 - CI fixes
@@ -42,9 +41,9 @@ Do not use this skill for:
 - Routine coding tasks
 - PR preparation
 - Direct implementation work
-When the user asks to implement, fix, test, validate, refactor locally, or prepare a PR, use `engineering-delivery`. If that work requires an architecture decision first, recommend architecture review before implementation.
+When the user asks to implement, fix, test, validate, refactor locally, or prepare a PR, do not proceed with architecture review unless an architecture decision is required first. State the missing decision instead of explaining skill routing.
 ## Intent Detection
-Choose this skill when the request is about whether, why, where, or how the system should evolve.
+Choose architecture review when the request is about whether, why, where, or how the system should evolve.
 Generic project review prompts such as "look at this project", "what would you improve?", "review this project", and "critique the architecture" should use quick scan unless the user asks for a full review or implementation.
 Architecture-review examples:
 - "Should we merge these two tightly coupled modules?"
@@ -56,13 +55,12 @@ Architecture-review examples:
 - "What are the risks in this migration plan?"
 - "Where should this ownership boundary live?"
 - "What should improve first?"
-Do not select this skill for execution examples:
+Non-architecture examples:
 - "Implement the first merge step."
 - "Write tests."
 - "Why is CI failing?"
 - "Move this job to the approved queue runtime."
 - "Fix this bug."
-Use `engineering-delivery` for those.
 ## Loading Policy
 Start with `SKILL.md` only.
 Typical architecture requests should use either:
@@ -107,7 +105,7 @@ Choose mode by question type, selected scope, decision risk, and migration compl
 - **Design challenge**: Critique a proposal, challenge assumptions, compare alternatives, and decide whether the proposal should exist.
 - **Decision support**: Help choose between options using evidence, economics, tradeoffs, and confidence gates.
 - **Migration review**: Evaluate migration safety, coexistence, rollback, validation, ownership, and operational readiness.
-Do not implement code in this skill. For code changes, switch to `engineering-delivery`.
+Do not implement code. For code change requests, answer only any architecture decision needed before implementation and do not edit files.
 ## Core Principles
 Always apply these rules.
 
@@ -119,7 +117,7 @@ Do not mix the author's/input language with unrelated explanatory prose in anoth
 ### Communication
 Show results, not the investigation process.
 The user should see only: findings, conclusions, tradeoffs, recommendations, decisions, roadmap or next safe steps, confidence and missing evidence when relevant.
-Do not expose: process narration, investigation narration, repository exploration narration, tool-use status, file-opening narration, internal planning narration, thinking traces, internal reasoning, or internal comparison notes.
+Do not expose: process narration, investigation narration, repository exploration narration, tool-use status, file-opening narration, skill selection, skill execution, skill routing, internal planning narration, thinking traces, internal reasoning, or internal comparison notes.
 Never output messages like:
 ```text
 I will inspect...
@@ -159,7 +157,7 @@ Optional memory backends may be used only when already available through the pro
 Use memory only as supplemental context for historical decisions, project conventions, prior investigations, and migration history.
 Current repository files, selected context, code, tests, logs, diffs, validation results, and explicit user instructions remain the source of truth.
 Treat memory as unverified until supported by current evidence. Memory must not broaden the review scope by itself.
-Do not require, install, configure, or depend on a memory backend to use this skill.
+Do not require, install, configure, or depend on a memory backend to proceed.
 ### Exploration Budget
 Use the smallest repository exploration budget that can support the requested decision. Stop when enough evidence exists to answer; the goal is sufficient evidence for decision-making, not exhaustive repository traversal.
 For detailed budgets, mode-specific guidance, and stop conditions, use `docs/exploration-budget.md` only when needed.

@@ -47,4 +47,4 @@ Do not change behavior during refactoring unless the behavior change is explicit
 
 Before changing APIs, schemas, contracts, CLI behavior, or deployment configuration, verify that the requested task actually requires it.
 
-If compatibility impact is unclear, stop and recommend architecture review or ask for confirmation.
+If compatibility impact is unclear, stop and ask for the required architecture decision or confirmation.

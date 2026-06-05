@@ -2,6 +2,8 @@
 
 Use code review mode when the user asks to review selected code, a diff, a commit, or a PR.
 
+Code review is read-only unless the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.
+
 Focus on delivery risk:
 
 - Bugs
@@ -13,7 +15,7 @@ Focus on delivery risk:
 - CI or validation gaps
 - Security concerns when visible in the changed code
 
-Do not turn code review into a broad architecture audit. If the review reveals a major architecture decision, flag it as a blocking design question and recommend `engineering-architecture-review`.
+Do not turn code review into a broad architecture audit. If the review reveals a major architecture decision, flag it as a blocking design question.
 
 ## Scope
 
@@ -22,6 +24,17 @@ Review the selected code or changed files first.
 Expand only to direct callers, callees, tests, contracts, or configuration needed to verify the risk.
 
 Stop expanding when the finding is supported, when additional exploration is unlikely to change severity or recommendation, or when the remaining uncertainty can be stated directly.
+
+## Diff Handling
+
+Do not dump raw git diffs by default.
+
+When reviewing changes:
+
+- Summarize behavioral impact.
+- Explain only changes relevant to findings, validation gaps, or user questions.
+- Quote specific lines only when necessary as evidence.
+- Require an explicit user request before returning a large raw diff.
 
 ## Finding Discipline
 

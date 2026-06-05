@@ -3,8 +3,6 @@
 Prompt:
 
 ```text
-Use engineering-delivery.
-
 Make the smallest safe change to improve observability for the schema migration path, then run relevant tests.
 ```
 
