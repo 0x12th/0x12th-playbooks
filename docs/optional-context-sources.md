@@ -2,11 +2,13 @@
 
 Use optional context sources only when they are already available through the project or agent runtime.
 
-This repository must not require GBrain, MCP memory, external knowledge stores, or any other memory backend for skill execution.
+This repository must not require GBrain, MCP memory, external knowledge stores, or any other memory backend.
 
 Skills must continue to work from selected context, repository files, user-provided context, logs, diffs, and normal exploration rules.
 
 Do not install, configure, or require an optional memory backend unless the user explicitly asks for that integration work.
+
+Do not consult memory before local evidence. Use memory only after selected context, repository evidence, logs, diffs, tests, or validation results leave a specific gap that historical context may fill.
 
 ## Trust Order
 
@@ -18,6 +20,18 @@ Use this order when sources conflict:
 4. Optional memory or historical context.
 
 Memory is not proof of current behavior. Treat remembered information as a lead to verify against current evidence.
+
+Memory must not broaden investigation scope. If current evidence is sufficient, stop without consulting memory.
+
+## Memory Query Policy
+
+- Use optional memory only after a concrete evidence gap remains.
+- Use at most 1-3 targeted memory queries per task.
+- Query only for prior decisions, migration history, project conventions, incidents, or unresolved follow-ups.
+- Treat memory results as unverified until checked against current repository files, code, tests, logs, diffs, or validation results.
+- If memory conflicts with current evidence, current evidence wins.
+- Mark stale or contradictory memory explicitly.
+- Memory must not broaden scope by itself.
 
 ## GBrain
 

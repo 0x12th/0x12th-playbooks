@@ -3,7 +3,7 @@
     "name": "0x12th-playbooks",
     "url": "https://github.com/0x12th/0x12th-playbooks",
     "description": "Practical engineering playbooks and agent skills for architecture, delivery, migration planning, technical decision-making, and software evolution.",
-    "version": "0.5.1"
+    "version": "0.6.0"
   },
   "auto_selection": {
     "primary_signals": [
@@ -22,12 +22,22 @@
     "all_skills": [
       "git clone https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
-      "cp -R 0x12th-playbooks/skills/* ~/.agents/skills/"
+      "rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/ ~/.agents/skills/"
     ],
     "all_skills_pinned": [
-      "git clone --branch v0.5.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.6.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
-      "cp -R 0x12th-playbooks/skills/* ~/.agents/skills/"
+      "rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/ ~/.agents/skills/"
+    ],
+    "architecture_review_skill_pinned": [
+      "git clone --branch v0.6.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "mkdir -p ~/.agents/skills",
+      "rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/engineering-architecture-review ~/.agents/skills/"
+    ],
+    "engineering_delivery_skill_pinned": [
+      "git clone --branch v0.6.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "mkdir -p ~/.agents/skills",
+      "rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/"
     ],
     "notes": [
       "Replace ~/.agents/skills with the skills directory used by your agent setup.",
@@ -40,16 +50,18 @@
       "name": "engineering-architecture-review",
       "path": "skills/engineering-architecture-review/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture-review/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.5.1/skills/engineering-architecture-review/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.6.0/skills/engineering-architecture-review/SKILL.md",
       "purpose": "Answer how the system should evolve safely.",
       "use_cases": [
         "architecture review",
         "architecture decisions",
         "system design",
         "migrations",
+        "migration planning and migration review",
         "migration planning",
         "service boundaries",
         "domain boundaries",
+        "ownership and data ownership",
         "ownership",
         "data ownership",
         "architecture debt",
@@ -60,6 +72,7 @@
         "design challenge",
         "tradeoff analysis",
         "decision support",
+        "implementation planning before code changes",
         "implementation planning before coding"
       ],
       "non_use_cases": [
@@ -90,14 +103,18 @@
       "name": "engineering-delivery",
       "path": "skills/engineering-delivery/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-delivery/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.5.1/skills/engineering-delivery/SKILL.md",
-      "purpose": "Answer how a change should be implemented safely.",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.6.0/skills/engineering-delivery/SKILL.md",
+      "purpose": "Answer the safest next delivery action, defaulting to read-only diagnosis unless changes are explicitly requested.",
       "use_cases": [
+        "diagnosis",
+        "investigation",
         "implementation",
         "coding",
+        "coding tasks",
         "tests",
         "bug fixes",
         "CI fixes",
+        "runtime failures",
         "code review",
         "diff review",
         "patch review",
@@ -118,18 +135,17 @@
         "broad architecture assessment"
       ],
       "modes": [
+        "diagnosis",
+        "investigation",
         "implementation",
-        "bug fix",
-        "test work",
-        "CI fix",
-        "code review",
-        "local refactor",
         "validation",
-        "PR preparation"
+        "review"
       ],
       "selection_hints": [
-        "Use when the user asks to fix, implement, test, validate, review code, review a diff, review a patch, review a commit, review a PR, refactor, or prepare a PR.",
-        "If architecture decisions are required, recommend engineering-architecture-review first.",
+        "Use read-only diagnosis for prompts like why is this happening, where is the problem, analyze this error, what changed, or review this.",
+        "Edit only when the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.",
+        "For runtime failures, follow the traceback before repository exploration.",
+        "If architecture decisions are required, state the missing decision before delivery work continues.",
         "Stay close to selected code or explicitly named files."
       ]
     }
@@ -160,11 +176,23 @@
       "skill": "engineering-delivery"
     },
     {
+      "request": "Investigate this runtime exception.",
+      "skill": "engineering-delivery"
+    },
+    {
       "request": "Should background jobs move to a different queue runtime?",
       "skill": "engineering-architecture-review"
     },
     {
       "request": "Move the task handler to the already approved queue runtime.",
+      "skill": "engineering-delivery"
+    },
+    {
+      "request": "Fix the failing CI test.",
+      "skill": "engineering-delivery"
+    },
+    {
+      "request": "Review this PR.",
       "skill": "engineering-delivery"
     },
     {
@@ -180,6 +208,8 @@
     "use explicit scope and stop conditions",
     "prefer evidence-first reasoning",
     "optional memory never replaces current evidence",
+    "diagnosis before implementation",
+    "traceback beats repository exploration",
     "decide before implementation",
     "avoid overengineering"
   ]

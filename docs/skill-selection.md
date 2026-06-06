@@ -33,11 +33,13 @@ Do not use for direct code changes.
 Use `engineering-delivery` when the user asks:
 
 ```text
-How should this change be implemented safely?
+What is the safest next delivery action?
 ```
 
 Use for:
 
+- Diagnosis
+- Investigation
 - Implementation
 - Bug fixes
 - Tests
@@ -47,7 +49,11 @@ Use for:
 - PR preparation
 - Incremental improvements
 
-Do not use for architecture decisions. If implementation requires an architecture decision, recommend architecture review first.
+Default to read-only diagnosis for prompts such as `why is this happening`, `where is the problem`, `analyze this error`, `what changed`, `check this`, or `review this`.
+
+Edit only when the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.
+
+Do not use for architecture decisions. If implementation requires an architecture decision, state the missing decision before delivery work continues.
 
 ## Examples
 
@@ -58,10 +64,13 @@ Do not use for architecture decisions. If implementation requires an architectur
 | `Implement the first merge step.` | `engineering-delivery` |
 | `Review the service architecture.` | `engineering-architecture-review` |
 | `Write tests.` | `engineering-delivery` |
-| `Why is CI failing?` | `engineering-delivery` |
+| `Why is CI failing?` | `engineering-delivery` in read-only diagnosis mode |
+| `Investigate this runtime exception.` | `engineering-delivery` in read-only diagnosis mode |
 | `Should background jobs move to a different queue runtime?` | `engineering-architecture-review` |
 | `Move the task handler to the already approved queue runtime.` | `engineering-delivery` |
-| `Review this PR for bugs and missing tests.` | `engineering-delivery` |
+| `Fix the failing CI test.` | `engineering-delivery` |
+| `Review this PR.` | `engineering-delivery` in read-only review mode |
+| `Review this PR for bugs and missing tests.` | `engineering-delivery` in read-only review mode |
 
 ## Generic Project Prompts
 

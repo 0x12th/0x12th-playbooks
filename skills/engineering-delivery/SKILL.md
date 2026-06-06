@@ -130,21 +130,16 @@ Do not consult memory before current local evidence. Use memory only as suppleme
 Treat memory as unverified until supported by current evidence. Memory must not replace reproduction, inspection, tests, or validation, and must not broaden the investigation or change scope by itself.
 Do not require, install, configure, or depend on a memory backend.
 
-## Required Rules
+## Supporting Docs Loading
 
-Always apply:
+The runtime core above is the default execution contract. Do not load supporting docs just because they exist.
 
-- `docs/language-rules.md`
-- `docs/communication-rules.md`
-- `docs/selected-context-rules.md` for evidence priority and scope control
-- `docs/implementation-workflow.md`
-- `docs/code-change-rules.md`
-- `docs/validation-rules.md`
+Load supporting docs only when the current task needs more detail:
 
-Load only when needed:
-
-- `docs/testing-rules.md` for tests and regression coverage
-- `docs/code-review-rules.md` for reviewing selected code, diffs, or PRs
+- `docs/language-rules.md`, `docs/communication-rules.md`, and `docs/selected-context-rules.md`: the core language, communication, and selected-evidence principles are already summarized here; use these as references for non-trivial language, output, selected-context, or scope conflicts.
+- `docs/implementation-workflow.md`, `docs/code-change-rules.md`, and `docs/validation-rules.md`: load for medium- or high-risk implementation, shared contracts, public APIs, migrations, deployment configuration, CI pipelines, dependency versions, generated files, or when this core is insufficient to choose the safe change or validation path.
+- `docs/testing-rules.md`: load for test or regression work.
+- `docs/code-review-rules.md`: load for selected code, diff, commit, or PR review.
 
 Supporting templates:
 

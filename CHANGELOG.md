@@ -2,6 +2,21 @@
 
 All notable changes to this repository are documented in this file.
 
+## 0.6.0 - 2026-06-06
+
+### Added
+
+- Added a lightweight GitHub Actions consistency check for skill metadata.
+- Added `.github/scripts/check_skills.py` to validate skill modes, raw skill URLs, README skill references, installation commands, and unregistered skill folders.
+- Added a memory query policy for optional context sources.
+
+### Changed
+
+- Updated installation examples to use `rsync -a --exclude '.DS_Store'` instead of `cp -R`.
+- Changed `engineering-delivery` supporting docs guidance so the runtime core remains in `SKILL.md` and supporting docs are loaded only when needed.
+- Synchronized `engineering-delivery` manifest modes with `SKILL.md`.
+- Updated README, installation docs, and manifest metadata for the `v0.6.0` release.
+
 ## 0.5.1 - 2026-06-05
 
 ### Improved

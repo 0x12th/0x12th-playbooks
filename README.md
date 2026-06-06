@@ -9,7 +9,7 @@ AI coding agents are useful when they stay inside the right scope. They become r
 This repository separates two common engineering intents:
 
 - **Architecture review:** deciding how the system should be designed or evolved.
-- **Engineering delivery:** implementing bounded changes safely.
+- **Engineering delivery:** diagnosing, reviewing, validating, and explicitly requested implementation of bounded changes.
 
 The skills are designed to reduce context consumption, prioritize selected context, apply clear stop conditions, and avoid over-engineered recommendations.
 
@@ -18,13 +18,15 @@ The skills are designed to reduce context consumption, prioritize selected conte
 | Skill | Answers | Use when |
 |---|---|---|
 | `engineering-architecture-review` | How should the system evolve safely? | Architecture review, system design, architecture decisions, migration planning, service boundaries, domain/data ownership, architecture debt, reliability strategy, observability architecture, deployment architecture, design challenge, decision support |
-| `engineering-delivery` | How should this change be implemented safely? | Implementation, bug fixes, tests, CI fixes, code review, diff review, patch review, commit review, PR review, local refactoring, validation, PR preparation, incremental improvements |
+| `engineering-delivery` | What is the safest next delivery action? | Diagnosis, investigation, implementation, bug fixes, tests, CI failures, runtime failures, code review, diff review, patch review, commit review, PR review, local refactoring, validation, PR preparation, incremental improvements |
 
 Use `engineering-architecture-review` when the question is about design, tradeoffs, service boundaries, ownership, migrations, deployment architecture, reliability strategy, or whether a proposed change should exist.
 
-Use `engineering-delivery` when the request is to implement, fix, test, validate, review code, review a diff, review a patch, review a commit, review a PR, refactor locally, prepare a PR, or make the next approved incremental change.
+Use `engineering-delivery` when the request is to diagnose an error, investigate a failure, implement, fix, test, validate, review code, review a diff, review a patch, review a commit, review a PR, refactor locally, prepare a PR, or make the next approved incremental change.
 
-Use `engineering-architecture-review` before `engineering-delivery` when a coding task requires a design or migration decision first.
+Engineering delivery defaults to read-only diagnosis unless the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.
+
+Resolve architecture or migration decisions before implementation when a coding task depends on them.
 
 ## Installation
 
@@ -39,15 +41,15 @@ Latest:
 ```bash
 git clone https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-cp -R 0x12th-playbooks/skills/* ~/.agents/skills/
+rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/ ~/.agents/skills/
 ```
 
 Pinned version:
 
 ```bash
-git clone --branch v0.5.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.6.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-cp -R 0x12th-playbooks/skills/* ~/.agents/skills/
+rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/ ~/.agents/skills/
 ```
 
 ### Install One Skill
@@ -55,17 +57,17 @@ cp -R 0x12th-playbooks/skills/* ~/.agents/skills/
 Architecture review:
 
 ```bash
-git clone --branch v0.5.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.6.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-cp -R 0x12th-playbooks/skills/engineering-architecture-review ~/.agents/skills/
+rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/engineering-architecture-review ~/.agents/skills/
 ```
 
 Engineering delivery:
 
 ```bash
-git clone --branch v0.5.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.6.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-cp -R 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
+rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
 ```
 
 ### Agent Paths
@@ -88,7 +90,7 @@ See `docs/installation.md` for more installation details.
 
 ## Automatic Selection
 
-Most AI coding agents select skills primarily from the skill `name` and frontmatter `description` in each `SKILL.md`. The descriptions in this repository expose common trigger phrases such as architecture review, migration planning, service boundaries, implementation, bug fixes, tests, CI fixes, code review, diff review, and PR review.
+Most AI coding agents select skills primarily from the skill `name` and frontmatter `description` in each `SKILL.md`. The descriptions in this repository expose common trigger phrases such as architecture review, migration planning, service boundaries, diagnosis, investigation, implementation, bug fixes, tests, CI failures, runtime failures, code review, diff review, and PR review.
 
 `manifests/skills.json` is an index and documentation aid. Some agents may use it, but it is not an official cross-agent standard and should not be required for skill loading.
 
@@ -114,14 +116,18 @@ Should background jobs move to a different queue runtime?
 Engineering delivery:
 
 ```text
-Use engineering-delivery.
+Why is CI failing? Identify the root cause and do not change files.
+```
 
+```text
 Fix the failing CI test and run the relevant validation.
 ```
 
 ```text
-Use engineering-delivery.
+Investigate this runtime exception.
+```
 
+```text
 Implement the first approved migration step without changing public behavior.
 ```
 
@@ -130,8 +136,10 @@ Write tests for the selected code.
 ```
 
 ```text
-Use engineering-delivery.
+Review this PR.
+```
 
+```text
 Review this PR for bugs, regressions, and missing tests.
 ```
 
@@ -144,6 +152,8 @@ The skills are designed to operate from selected context, repository files, code
 When an optional memory backend is available through the agent runtime, it may be used as supplemental context for previous architecture decisions, migration history, ADRs, design notes, incident investigations, project conventions, and unresolved follow-ups.
 
 Memory must not replace current repository evidence. Current code, configuration, tests, logs, validation results, and selected context always take precedence over remembered information.
+
+Memory should not be consulted before local evidence and must not broaden investigation scope by itself.
 
 One supported optional approach is [GBrain](https://github.com/garrytan/gbrain). GBrain can provide project memory, historical context, notes, and cross-session knowledge for compatible agents through MCP or another runtime integration.
 
@@ -184,6 +194,7 @@ See:
 │   ├── engineering-architecture-review/
 │   └── engineering-delivery/
 ├── docs/
+├── .github/
 ├── manifests/
 └── CHANGELOG.md
 ```
@@ -191,3 +202,9 @@ See:
 ## Development And Contribution
 
 Keep skill entrypoints short, move detailed behavior into directly linked docs, and avoid adding new files unless they improve agent behavior. See `docs/authoring-guidelines.md`.
+
+Run consistency checks before release:
+
+```bash
+python3 .github/scripts/check_skills.py
+```
