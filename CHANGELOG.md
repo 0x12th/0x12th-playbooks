@@ -2,6 +2,14 @@
 
 All notable changes to this repository are documented in this file.
 
+## 0.6.1 - 2026-06-06
+
+### Changed
+
+- Simplified installation examples by removing the redundant `.DS_Store` rsync exclusion.
+- Removed local `.DS_Store` artifacts from the skill tree.
+- Updated README, installation docs, and manifest metadata for the `v0.6.1` release.
+
 ## 0.6.0 - 2026-06-06
 
 ### Added
@@ -12,7 +20,7 @@ All notable changes to this repository are documented in this file.
 
 ### Changed
 
-- Updated installation examples to use `rsync -a --exclude '.DS_Store'` instead of `cp -R`.
+- Updated installation examples to use `rsync` instead of `cp -R`.
 - Changed `engineering-delivery` supporting docs guidance so the runtime core remains in `SKILL.md` and supporting docs are loaded only when needed.
 - Synchronized `engineering-delivery` manifest modes with `SKILL.md`.
 - Updated README, installation docs, and manifest metadata for the `v0.6.0` release.

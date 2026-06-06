@@ -3,7 +3,7 @@
     "name": "0x12th-playbooks",
     "url": "https://github.com/0x12th/0x12th-playbooks",
     "description": "Practical engineering playbooks and agent skills for architecture, delivery, migration planning, technical decision-making, and software evolution.",
-    "version": "0.6.0"
+    "version": "0.6.1"
   },
   "auto_selection": {
     "primary_signals": [
@@ -22,22 +22,22 @@
     "all_skills": [
       "git clone https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
-      "rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/ ~/.agents/skills/"
+      "rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/"
     ],
     "all_skills_pinned": [
-      "git clone --branch v0.6.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.6.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
-      "rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/ ~/.agents/skills/"
+      "rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/"
     ],
     "architecture_review_skill_pinned": [
-      "git clone --branch v0.6.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.6.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
-      "rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/engineering-architecture-review ~/.agents/skills/"
+      "rsync -a 0x12th-playbooks/skills/engineering-architecture-review ~/.agents/skills/"
     ],
     "engineering_delivery_skill_pinned": [
-      "git clone --branch v0.6.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.6.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
-      "rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/"
+      "rsync -a 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/"
     ],
     "notes": [
       "Replace ~/.agents/skills with the skills directory used by your agent setup.",
@@ -50,7 +50,7 @@
       "name": "engineering-architecture-review",
       "path": "skills/engineering-architecture-review/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture-review/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.6.0/skills/engineering-architecture-review/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.6.1/skills/engineering-architecture-review/SKILL.md",
       "purpose": "Answer how the system should evolve safely.",
       "use_cases": [
         "architecture review",
@@ -103,7 +103,7 @@
       "name": "engineering-delivery",
       "path": "skills/engineering-delivery/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-delivery/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.6.0/skills/engineering-delivery/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.6.1/skills/engineering-delivery/SKILL.md",
       "purpose": "Answer the safest next delivery action, defaulting to read-only diagnosis unless changes are explicitly requested.",
       "use_cases": [
         "diagnosis",

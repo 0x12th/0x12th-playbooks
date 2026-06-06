@@ -11,15 +11,15 @@ Latest:
 ```bash
 git clone https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/ ~/.agents/skills/
+rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 ```
 
 Pinned version:
 
 ```bash
-git clone --branch v0.6.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.6.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/ ~/.agents/skills/
+rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 ```
 
 ## Install One Skill
@@ -27,17 +27,17 @@ rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/ ~/.agents/skills/
 Architecture review:
 
 ```bash
-git clone --branch v0.6.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.6.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/engineering-architecture-review ~/.agents/skills/
+rsync -a 0x12th-playbooks/skills/engineering-architecture-review ~/.agents/skills/
 ```
 
 Engineering delivery:
 
 ```bash
-git clone --branch v0.6.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.6.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
+rsync -a 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
 ```
 
 ## Zed
@@ -62,9 +62,9 @@ https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineer
 Install into the skills directory used by your Claude Code setup. Example:
 
 ```bash
-git clone --branch v0.6.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.6.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.claude/skills
-rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/ ~/.claude/skills/
+rsync -a 0x12th-playbooks/skills/ ~/.claude/skills/
 ```
 
 If Claude Code does not auto-load a skill, reference its `SKILL.md` from `CLAUDE.md`, project instructions, or from the prompt.
@@ -74,14 +74,14 @@ If Claude Code does not auto-load a skill, reference its `SKILL.md` from `CLAUDE
 Install into the skills directory used by your Codex setup. Example:
 
 ```bash
-git clone --branch v0.6.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.6.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.codex/skills
-rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/ ~/.codex/skills/
+rsync -a 0x12th-playbooks/skills/ ~/.codex/skills/
 ```
 
 Project-local installation:
 
 ```bash
 mkdir -p .agents/skills
-rsync -a --exclude '.DS_Store' 0x12th-playbooks/skills/ .agents/skills/
+rsync -a 0x12th-playbooks/skills/ .agents/skills/
 ```
