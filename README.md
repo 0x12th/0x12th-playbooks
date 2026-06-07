@@ -17,10 +17,10 @@ The skills are designed to reduce context consumption, prioritize selected conte
 
 | Skill | Answers | Use when |
 |---|---|---|
-| `engineering-architecture-review` | How should the system evolve safely? | Architecture review, system design, architecture decisions, migration planning, service boundaries, domain/data ownership, architecture debt, reliability strategy, observability architecture, deployment architecture, design challenge, decision support |
+| `engineering-architecture` | How should the system evolve safely? | Architecture review, system design, architecture decisions, migration planning, service boundaries, domain/data ownership, architecture debt, reliability strategy, observability architecture, deployment architecture, product evolution, roadmap planning, design challenge, decision support |
 | `engineering-delivery` | What is the safest next delivery action? | Diagnosis, investigation, implementation, bug fixes, tests, CI failures, runtime failures, code review, diff review, patch review, commit review, PR review, local refactoring, validation, PR preparation, incremental improvements |
 
-Use `engineering-architecture-review` when the question is about design, tradeoffs, service boundaries, ownership, migrations, deployment architecture, reliability strategy, or whether a proposed change should exist.
+Use `engineering-architecture` when the question is about design, tradeoffs, service boundaries, ownership, migrations, deployment architecture, reliability strategy, product evolution, roadmap planning, or whether a proposed change should exist.
 
 Use `engineering-delivery` when the request is to diagnose an error, investigate a failure, implement, fix, test, validate, review code, review a diff, review a patch, review a commit, review a PR, refactor locally, prepare a PR, or make the next approved incremental change.
 
@@ -47,7 +47,7 @@ rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 Pinned version:
 
 ```bash
-git clone --branch v0.6.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.7.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 ```
@@ -57,15 +57,15 @@ rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 Architecture review:
 
 ```bash
-git clone --branch v0.6.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.7.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-rsync -a 0x12th-playbooks/skills/engineering-architecture-review ~/.agents/skills/
+rsync -a 0x12th-playbooks/skills/engineering-architecture ~/.agents/skills/
 ```
 
 Engineering delivery:
 
 ```bash
-git clone --branch v0.6.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.7.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
 ```
@@ -82,7 +82,7 @@ Common destinations:
 Raw `SKILL.md` URLs are useful for agents that support URL imports, but they do not include supporting `docs/`, `templates/`, or `examples/`:
 
 ```text
-https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture-review/SKILL.md
+https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture/SKILL.md
 https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-delivery/SKILL.md
 ```
 
@@ -191,7 +191,7 @@ See:
 ```text
 0x12th-playbooks/
 ├── skills/
-│   ├── engineering-architecture-review/
+│   ├── engineering-architecture/
 │   └── engineering-delivery/
 ├── docs/
 ├── .github/

@@ -113,6 +113,29 @@ Do not fix unrelated issues discovered during the task. Mention them as follow-u
 
 Do not treat a change as complete without either validation or a clear explanation of why validation could not be run.
 
+## Diff Output Policy
+
+Do not paste raw git diffs, patches, or large changed-code blocks by default.
+
+When reviewing or reporting changes:
+- summarize behavioral impact;
+- list changed files only when useful;
+- mention exact functions or paths when needed;
+- quote only small snippets that are necessary as evidence;
+- provide a patch or diff only when the user explicitly asks for raw diff, patch, or exact code changes.
+
+Bad:
+```diff
+- old code
++ new code
+```
+
+Good:
+```text
+Changed `DownloadManager.try_acquire()` to release the global slot if the per-user slot is rejected.
+Validation: `uv run pytest` passed.
+```
+
 ## Risk Control
 
 Prefer local, reversible changes.
@@ -153,3 +176,15 @@ Examples:
 - `examples/code-review.md`
 - `examples/tests.md`
 - `examples/ci-fix.md`
+
+## Output / Final Response
+
+For implementation work, report:
+- what changed;
+- changed files;
+- validation result;
+- remaining risk.
+
+Do not include raw diffs unless explicitly requested.
+
+Even after editing files, the final answer is not a patch report. It is a change summary.

@@ -13,7 +13,7 @@ The repository is organized as a multi-skill library.
 │   └── workflows/
 │       └── check-skills.yml
 ├── skills/
-│   ├── engineering-architecture-review/
+│   ├── engineering-architecture/
 │   │   ├── SKILL.md
 │   │   ├── docs/
 │   │   ├── templates/

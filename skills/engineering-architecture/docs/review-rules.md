@@ -6,6 +6,7 @@ Use these rules for quick scan, focused review, and full review.
 
 - Understand the system before recommending changes.
 - Build a concise architecture model from evidence when the mode requires it.
+- When Product Evolution is selected, include current capabilities, adjacent use cases, expansion opportunities, evolution constraints, and a recommended next slice.
 - Separate important problems from cosmetic issues.
 - Connect every finding to system behavior, delivery speed, reliability, operational risk, maintainability, ownership, or business continuity.
 - Do not comment on formatting unless it affects maintainability, correctness, ownership, or delivery risk.
@@ -84,9 +85,10 @@ Focused review:
 
 Full review:
 
-1. Scope and assumptions
-2. Architecture model
-3. Executive summary
-4. Findings ranked by severity
-5. Roadmap or task breakdown
-6. Validation performed and remaining uncertainty
+1. Scope, selected repository, assumptions, and evidence inspected
+2. Current architecture model: major components, responsibilities, key dependencies, runtime/deployment shape, and critical flows
+3. Strengths and constraints
+4. Findings ranked by severity and practical priority
+5. Product/evolution analysis when relevant: adjacent use cases, opportunities, target architecture or explicit "no target change needed"
+6. Roadmap or next safe steps with validation signals
+7. Remaining uncertainty and missing evidence

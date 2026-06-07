@@ -3,7 +3,7 @@
     "name": "0x12th-playbooks",
     "url": "https://github.com/0x12th/0x12th-playbooks",
     "description": "Practical engineering playbooks and agent skills for architecture, delivery, migration planning, technical decision-making, and software evolution.",
-    "version": "0.6.1"
+    "version": "0.7.0"
   },
   "auto_selection": {
     "primary_signals": [
@@ -25,17 +25,17 @@
       "rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/"
     ],
     "all_skills_pinned": [
-      "git clone --branch v0.6.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.7.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/"
     ],
-    "architecture_review_skill_pinned": [
-      "git clone --branch v0.6.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+    "architecture_skill_pinned": [
+      "git clone --branch v0.7.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
-      "rsync -a 0x12th-playbooks/skills/engineering-architecture-review ~/.agents/skills/"
+      "rsync -a 0x12th-playbooks/skills/engineering-architecture ~/.agents/skills/"
     ],
     "engineering_delivery_skill_pinned": [
-      "git clone --branch v0.6.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.7.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "rsync -a 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/"
     ],
@@ -47,10 +47,10 @@
   },
   "skills": [
     {
-      "name": "engineering-architecture-review",
-      "path": "skills/engineering-architecture-review/SKILL.md",
-      "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture-review/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.6.1/skills/engineering-architecture-review/SKILL.md",
+      "name": "engineering-architecture",
+      "path": "skills/engineering-architecture/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.7.0/skills/engineering-architecture/SKILL.md",
       "purpose": "Answer how the system should evolve safely.",
       "use_cases": [
         "architecture review",
@@ -69,6 +69,12 @@
         "observability architecture",
         "deployment architecture",
         "system evolution",
+        "product architecture review",
+        "product evolution",
+        "product expansion",
+        "roadmap planning",
+        "broader usage",
+        "scaling",
         "design challenge",
         "tradeoff analysis",
         "decision support",
@@ -93,9 +99,12 @@
         "decision support",
         "migration review"
       ],
+      "review_perspectives": ["architecture quality", "product evolution"],
       "selection_hints": [
         "Use when the request asks whether, why, where, or how the system should evolve.",
         "Use when the user asks for architecture assessment, decision support, or migration review.",
+        "Use Full Review + Product Evolution by default when a repository-wide or project-wide review also asks about future features, product opportunities, broader usage, roadmap, scaling, migration, or product evolution.",
+        "Do not infer Focused Review from examples of desired product growth; treat named features as evolution drivers inside Full Review unless the user asks to focus only on them.",
         "Do not use when the user asks to implement code directly."
       ]
     },
@@ -103,7 +112,7 @@
       "name": "engineering-delivery",
       "path": "skills/engineering-delivery/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-delivery/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.6.1/skills/engineering-delivery/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.7.0/skills/engineering-delivery/SKILL.md",
       "purpose": "Answer the safest next delivery action, defaulting to read-only diagnosis unless changes are explicitly requested.",
       "use_cases": [
         "diagnosis",
@@ -153,11 +162,11 @@
   "selection_examples": [
     {
       "request": "Should we merge two tightly coupled modules?",
-      "skill": "engineering-architecture-review"
+      "skill": "engineering-architecture"
     },
     {
       "request": "How should we start the merge step by step?",
-      "skill": "engineering-architecture-review"
+      "skill": "engineering-architecture"
     },
     {
       "request": "Implement the first merge step.",
@@ -165,7 +174,7 @@
     },
     {
       "request": "Review the service architecture.",
-      "skill": "engineering-architecture-review"
+      "skill": "engineering-architecture"
     },
     {
       "request": "Write tests.",
@@ -181,7 +190,15 @@
     },
     {
       "request": "Should background jobs move to a different queue runtime?",
-      "skill": "engineering-architecture-review"
+      "skill": "engineering-architecture"
+    },
+    {
+      "request": "Review this project. What can it become?",
+      "skill": "engineering-architecture"
+    },
+    {
+      "request": "Create a future roadmap.",
+      "skill": "engineering-architecture"
     },
     {
       "request": "Move the task handler to the already approved queue runtime.",

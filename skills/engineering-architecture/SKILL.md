@@ -1,16 +1,16 @@
 ---
-name: engineering-architecture-review
+name: engineering-architecture
 description: >-
   Use for architecture review and system design questions: architecture decisions,
   migration planning, service boundaries, domain boundaries, ownership, data
   ownership, architecture debt, reliability strategy, observability architecture,
-  deployment architecture, system evolution, design challenge, tradeoff analysis,
-  and technical decision support. Also use for architecture review, architecture assessment,
-  migration planning, service boundary review, system evolution,
-  tradeoff analysis, and technical decision support requests. Do not use for
-  implementation, bug fixes, tests, CI fixes, code review, or local refactoring.
+  deployment architecture, system evolution, product architecture review,
+  product evolution review, roadmap planning, design challenge, tradeoff analysis,
+  and technical decision
+  support. Do not use for implementation, bug fixes, tests, CI fixes, code
+  review, or local refactoring.
 ---
-# Engineering Architecture Review
+# Engineering Architecture
 Answer:
 ```text
 How should the system evolve safely?
@@ -29,6 +29,8 @@ Applies to:
 - Observability architecture
 - Deployment architecture
 - System evolution
+- Product architecture and evolution review
+- Product expansion and roadmap planning
 - Design challenge
 - Decision support
 - Implementation planning before code changes
@@ -44,7 +46,8 @@ Does not apply to:
 When the user asks to implement, fix, test, validate, refactor locally, or prepare a PR, do not proceed with architecture review unless an architecture decision is required first. State the missing decision instead of explaining skill routing.
 ## Intent Detection
 Choose architecture review when the request is about whether, why, where, or how the system should evolve.
-Generic project review prompts such as "look at this project", "what would you improve?", "review this project", and "critique the architecture" should use quick scan unless the user asks for a full review or implementation.
+Generic project review prompts such as "look at this project", "what would you improve?", and "critique the architecture" should use quick scan unless the user asks for a full review, implementation, or product evolution.
+When a repository-wide or project-wide review also asks about future features, product opportunities, broader usage, roadmap, scaling, migration, or product evolution, select **Full Review + Product Evolution** by default, unless the user explicitly asks for a fast scan or names a bounded subsystem as the whole scope. Do not answer this scenario as Quick Scan or Focused Review.
 Architecture-review examples:
 - "Should we merge these two tightly coupled modules?"
 - "How should we start merging these services step by step?"
@@ -55,6 +58,12 @@ Architecture-review examples:
 - "What are the risks in this migration plan?"
 - "Where should this ownership boundary live?"
 - "What should improve first?"
+Product-evolution examples:
+- "Review this project. What can it become?"
+- "How would you expand it?"
+- "What are realistic feature opportunities?"
+- "Create a future roadmap."
+- "Assess broader usage and architecture evolution."
 Non-architecture examples:
 - "Implement the first merge step."
 - "Write tests."
@@ -74,6 +83,7 @@ SKILL.md + 1 directly relevant document
 Do not read supporting documents just because they exist. Load extra documents only when they materially improve the answer.
 Default loading by task type:
 - Quick scan: `SKILL.md` only.
+- Product Evolution perspective: use the selected mode's loading policy; for repository-wide or project-wide Product Evolution, use Full Review loading.
 - Focused review: `SKILL.md` only, or `SKILL.md` + `docs/review-rules.md` for non-trivial subsystem analysis.
 - Decision support: `SKILL.md` only, or `SKILL.md` + `docs/decision-support.md` when options must be formally compared.
 - Design challenge: `SKILL.md` only, or `SKILL.md` + `docs/design-challenge.md` when pressure-testing a concrete proposal.
@@ -95,16 +105,24 @@ Rare documents. Load only when explicitly requested or when output format is unc
 - `examples/*.md`
 If the task can proceed safely from `SKILL.md`, do not load extra documents.
 ## Mode Selection
-Use one mode per response unless the user explicitly asks for multiple outputs.
+Choose one mode and one review perspective unless the user explicitly asks for multiple outputs.
 
-Choose mode by question type, selected scope, decision risk, and migration complexity.
+Modes:
+- **Quick Scan**: 3-5 highest-impact findings only. Use for fast assessment, second opinion, or prioritization. No roadmap required.
+- **Focused Review**: One subsystem, service, module, migration, performance issue, reliability concern, deployment path, or selected context.
+- **Full Review**: Broad architecture assessment with architecture model, ranked findings, roadmap only when relevant, and uncertainty.
+- **Design Challenge**: Critique a proposal, challenge assumptions, compare alternatives, and decide whether the proposal should exist.
+- **Decision Support**: Help choose between options using evidence, economics, tradeoffs, and confidence gates.
+- **Migration Review**: Evaluate migration safety, coexistence, rollback, validation, ownership, and operational readiness.
 
-- **Quick scan**: 3-5 highest-impact findings only. Use for fast assessment, second opinion, or prioritization.
-- **Focused review**: One subsystem, service, module, migration, performance issue, reliability concern, deployment path, or selected context.
-- **Full review**: Broad architecture assessment with architecture model, ranked findings, roadmap, and uncertainty.
-- **Design challenge**: Critique a proposal, challenge assumptions, compare alternatives, and decide whether the proposal should exist.
-- **Decision support**: Help choose between options using evidence, economics, tradeoffs, and confidence gates.
-- **Migration review**: Evaluate migration safety, coexistence, rollback, validation, ownership, and operational readiness.
+Use Focused Review only when the user explicitly limits the scope to one subsystem, service, module, path, migration, or proposal.
+Do not infer Focused Review from examples of desired product growth. In broad project or repository reviews, treat named features as evolution drivers inside Full Review unless the user asks to focus only on them.
+
+Review Perspectives:
+- Architecture Quality: quality, risks, boundaries, operability, reliability, maintainability, and migration safety.
+- Product Evolution: future capabilities, broader usage, product expansion, scaling, roadmap, or architecture evolution.
+
+Product Architecture Review is not a separate mode. It means applying the Product Evolution perspective to Quick Scan, Focused Review, or Full Review.
 Do not implement code. For code change requests, answer only any architecture decision needed before implementation and do not edit files.
 ## Core Principles
 Always apply these rules.
@@ -117,6 +135,7 @@ Do not mix the author's/input language with unrelated explanatory prose in anoth
 ### Communication
 Show results, not the investigation process.
 The user should see only: findings, conclusions, tradeoffs, recommendations, decisions, roadmap or next safe steps, confidence and missing evidence when relevant.
+Do not dump large code diffs or implementation patches by default. Provide findings, rationale, impact, and recommended change. Include code or diffs only when explicitly requested.
 Do not expose: process narration, investigation narration, repository exploration narration, tool-use status, file-opening narration, skill selection, skill execution, skill routing, internal planning narration, thinking traces, internal reasoning, or internal comparison notes.
 Never output messages like:
 ```text
@@ -152,6 +171,12 @@ When selected context is provided:
 5. Do not ignore selected context because broader architecture analysis is possible.
 A broad repository review is allowed only when the user asks for it or when local evidence is insufficient and the missing surrounding context is directly relevant to the decision.
 If selected context is insufficient, state the missing evidence and keep recommendation strength proportional to confidence.
+### Multi-root Workspaces
+When multiple repository roots are available:
+- determine which repository is relevant to the user request;
+- explicitly identify the selected repository before analysis;
+- do not assume the first workspace root is the target repository;
+- ask for clarification only when the target repository cannot be inferred.
 ### Optional Context Sources
 Optional memory backends may be used only when already available through the project or agent runtime.
 Use memory only as supplemental context for historical decisions, project conventions, prior investigations, and migration history.
@@ -217,6 +242,7 @@ Prefer fewer findings with stronger evidence over a larger speculative list. Ful
 Architecture recommendations are proposals until validated by system evidence. Use repository structure, contracts, tests, operational signals, incident history, migration dry runs, or stakeholder constraints when available.
 For each major recommendation, identify what would prove or disprove it: a metric, test, contract check, migration rehearsal, rollback exercise, ownership decision, or production signal.
 Do not present unvalidated target architecture as proven. If validation evidence is missing, reduce confidence and name the missing signal instead of continuing speculative exploration.
+For product evolution, keep opportunities realistic and evidence-linked. Avoid speculative product ideas that are not supported by repository capabilities, obvious user workflows, or stated goals. List at most 3 expansion opportunities, ranked by evidence and expected value.
 
 ## Decision Support
 Answer the decision directly.
@@ -255,6 +281,16 @@ Quick scan:
    Minimal fix:
    Confidence:
 ```
+Architecture Quality focuses on quality and risks. Product Evolution focuses on evolution, roadmap, and future capabilities.
+When Product Evolution is selected, include:
+1. Current capabilities: what the system can already do and what capabilities are close to working
+2. Adjacent use cases: realistic broader workflows supported by current capabilities or small extensions
+3. Expansion opportunities: at most 3, ranked by evidence and expected value
+4. Evolution constraints: architecture, operational, product, platform, or data constraints that limit expansion
+5. Recommended next slice: the smallest product/architecture step that improves the evolution path
+When evolution, broader usage, product opportunities, or roadmap is part of the request, include a roadmap or an explicit next-step evolution plan. Use 2-4 phases or steps maximum.
+Use Target Architecture only if structural change is justified; otherwise say that no target architecture change is needed yet.
+Use diagrams only when they improve understanding. For Full Review + Product Evolution, include a diagram when discussing structural evolution, architecture transitions, major dependency changes, or platform expansion. Maximum two diagrams per review, and keep them small.
 Focused review:
 1. Scope
 2. Local architecture model, if useful
@@ -280,10 +316,11 @@ Migration review:
 9. Observability requirements
 10. Confidence and missing evidence
 Full review:
-1. Scope and assumptions
-2. Architecture model
-3. Executive summary
-4. Findings ranked by severity
-5. Evolution roadmap
-6. Validation performed and remaining uncertainty
+1. Scope, selected repository, assumptions, and evidence inspected
+2. Current architecture model: major components, responsibilities, key dependencies, runtime/deployment shape, and critical flows
+3. Strengths and constraints
+4. Findings ranked by severity and practical priority
+5. Product/evolution analysis when relevant: adjacent use cases, opportunities, target architecture or explicit "no target change needed"
+6. Roadmap or next safe steps with validation signals
+7. Remaining uncertainty and missing evidence
 Do not add an executive summary to quick scan unless the user asks for one.

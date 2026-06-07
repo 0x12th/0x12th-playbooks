@@ -2,6 +2,21 @@
 
 All notable changes to this repository are documented in this file.
 
+## Unreleased
+
+## 0.7.0 - 2026-06-07
+
+### Changed
+
+- Renamed `engineering-architecture-review` to `engineering-architecture`.
+- Added Product Evolution as an architecture review perspective for future features, broader usage, roadmap, scaling, migration, and evolution requests.
+- Defaulted project-wide reviews with product evolution or roadmap requests to Full Review + Product Evolution.
+- Strengthened Full Review output to include the selected repository, evidence, current architecture model, strengths, constraints, ranked findings, product evolution analysis, roadmap or next safe steps, and uncertainty.
+- Added Product Evolution output requirements for current capabilities, adjacent use cases, expansion opportunities, evolution constraints, and the recommended next slice.
+- Added guardrails for Focused Review selection, optional roadmaps, target architecture, diagrams, expansion opportunities, multi-root workspaces, and raw diff output.
+- Added an `engineering-delivery` diff output policy so implementation and review reports summarize changes instead of dumping raw diffs by default.
+- Updated README, installation docs, and manifest metadata for the `v0.7.0` release.
+
 ## 0.6.1 - 2026-06-06
 
 ### Changed
