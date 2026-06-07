@@ -2,6 +2,39 @@
 
 Select the skill from the user's intent, not from broad repository context.
 
+Use the strict decision chain when multiple layers are needed:
+
+```text
+product-evolution
+↓
+engineering-architecture
+↓
+engineering-delivery
+```
+
+## Product Evolution
+
+Use `product-evolution` only when the user explicitly invokes it or names this skill.
+
+Use it when the user asks:
+
+```text
+What is the highest-value product investment?
+```
+
+Use for:
+
+- Product investment decisions
+- Customer request evaluation
+- MVP boundaries
+- Pilot evaluation
+- Opportunity analysis
+- Roadmap priority decisions
+- Priority arbitration
+- What not to do
+
+Do not use automatically for generic product, roadmap, feature, customer request, architecture, or delivery requests.
+
 ## Engineering Architecture
 
 Use `engineering-architecture` when the user asks:
@@ -22,13 +55,12 @@ Use for:
 - Observability architecture
 - Deployment architecture
 - System evolution
-- Product evolution
-- Roadmap planning
+- Technical evolution
 - Design challenge
 - Decision support
 - Implementation planning before coding
 
-Do not use for direct code changes.
+Do not use for product investment decisions or direct code changes.
 
 ## Engineering Delivery
 
@@ -55,12 +87,14 @@ Default to read-only diagnosis for prompts such as `why is this happening`, `whe
 
 Edit only when the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.
 
-Do not use for architecture decisions. If implementation requires an architecture decision, state the missing decision before delivery work continues.
+Do not use for product or architecture decisions. If implementation requires one of those decisions, state the missing decision before delivery work continues.
 
 ## Examples
 
 | User request | Skill |
 |---|---|
+| `Use product-evolution. Should we build this feature?` | `product-evolution` |
+| `Use product-evolution. Which should come first: mobile app or watch notifications?` | `product-evolution` |
 | `Should we merge two tightly coupled modules?` | `engineering-architecture` |
 | `How should we start the merge step by step?` | `engineering-architecture` |
 | `Implement the first merge step.` | `engineering-delivery` |
@@ -76,9 +110,7 @@ Do not use for architecture decisions. If implementation requires an architectur
 
 ## Generic Project Prompts
 
-Generic project-level prompts should normally use `engineering-architecture` in Quick Scan mode, unless the user explicitly asks to implement, test, fix, or review a diff. If the same repository-wide or project-wide review asks about future features, product opportunities, broader usage, roadmap, scaling, migration, or product evolution, select Full Review + Product Evolution by default.
-
-Do not infer Focused Review from examples of desired product growth. In broad project or repository reviews, treat named features as evolution drivers inside Full Review unless the user asks to focus only on them.
+Generic project-level prompts should normally use `engineering-architecture` in Quick Scan mode, unless the user explicitly asks to implement, test, fix, review a diff, or use `product-evolution`.
 
 Examples:
 
@@ -87,8 +119,8 @@ Examples:
 | `Look at this project.` | `engineering-architecture` | Quick Scan + Architecture Quality |
 | `What would you improve?` | `engineering-architecture` | Quick Scan + Architecture Quality |
 | `Critique the architecture.` | `engineering-architecture` | Quick Scan or Focused Review + Architecture Quality |
-| `Review this project. What can it become?` | `engineering-architecture` | Full Review + Product Evolution |
-| `Create a future roadmap.` | `engineering-architecture` | Full Review + Product Evolution |
+| `Use product-evolution. What should this product become?` | `product-evolution` | Opportunity Analysis |
+| `Use product-evolution. Create a future roadmap.` | `product-evolution` | Roadmap Planning |
 
 ## Selected Context
 

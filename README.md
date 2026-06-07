@@ -1,15 +1,16 @@
 # 0x12th-playbooks
 
-`0x12th-playbooks` is a collection of practical engineering playbooks and agent skills for architecture, delivery, migration planning, technical decision-making, and software evolution.
+`0x12th-playbooks` is a collection of practical playbooks and agent skills for product decisions, architecture, delivery, migration planning, technical decision-making, and software evolution.
 
 It is not a prompt collection. It is a structured library of reusable skills for AI coding agents that need to review real systems, make technical decisions, implement changes safely, and avoid unnecessary architecture work.
 
 AI coding agents are useful when they stay inside the right scope. They become risky when every local change turns into a broad architecture audit, or every architecture question turns into premature implementation.
 
-This repository separates two common engineering intents:
+This repository separates three common intents:
 
-- **Architecture review:** deciding how the system should be designed or evolved.
-- **Engineering delivery:** diagnosing, reviewing, validating, and explicitly requested implementation of bounded changes.
+- **Product evolution:** deciding whether, why, when, and in what scope to invest.
+- **Architecture review:** deciding how the system should be designed, migrated, or evolved technically.
+- **Engineering delivery:** diagnosing, reviewing, validating, and explicitly requested implementation.
 
 The skills are designed to reduce context consumption, prioritize selected context, apply clear stop conditions, and avoid over-engineered recommendations.
 
@@ -17,16 +18,19 @@ The skills are designed to reduce context consumption, prioritize selected conte
 
 | Skill | Answers | Use when |
 |---|---|---|
-| `engineering-architecture` | How should the system evolve safely? | Architecture review, system design, architecture decisions, migration planning, service boundaries, domain/data ownership, architecture debt, reliability strategy, observability architecture, deployment architecture, product evolution, roadmap planning, design challenge, decision support |
+| `product-evolution` | What is the highest-value product investment? | Manual-only product investment decisions, MVPs, pilots, roadmap priorities, customer requests, opportunity analysis, and priority arbitration |
+| `engineering-architecture` | How should the system evolve safely? | Architecture review, system design, architecture decisions, migration planning, service boundaries, domain/data ownership, architecture debt, reliability strategy, observability architecture, deployment architecture, technical evolution, design challenge, decision support |
 | `engineering-delivery` | What is the safest next delivery action? | Diagnosis, investigation, implementation, bug fixes, tests, CI failures, runtime failures, code review, diff review, patch review, commit review, PR review, local refactoring, validation, PR preparation, incremental improvements |
 
-Use `engineering-architecture` when the question is about design, tradeoffs, service boundaries, ownership, migrations, deployment architecture, reliability strategy, product evolution, roadmap planning, or whether a proposed change should exist.
+Use `product-evolution` only when explicitly invoked. It owns product decisions before architecture: should we do it, for whom, when, what MVP, how to validate, what should go first, and what not to do.
+
+Use `engineering-architecture` when the question is about technical design, tradeoffs, service boundaries, ownership, migrations, deployment architecture, reliability strategy, technical evolution, or architecture risk.
 
 Use `engineering-delivery` when the request is to diagnose an error, investigate a failure, implement, fix, test, validate, review code, review a diff, review a patch, review a commit, review a PR, refactor locally, prepare a PR, or make the next approved incremental change.
 
 Engineering delivery defaults to read-only diagnosis unless the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.
 
-Resolve architecture or migration decisions before implementation when a coding task depends on them.
+Use the strict chain when multiple layers are needed: `product-evolution` -> `engineering-architecture` -> `engineering-delivery`.
 
 ## Installation
 
@@ -47,7 +51,7 @@ rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 Pinned version:
 
 ```bash
-git clone --branch v0.7.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.8.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 ```
@@ -57,15 +61,23 @@ rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 Architecture review:
 
 ```bash
-git clone --branch v0.7.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.8.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/engineering-architecture ~/.agents/skills/
+```
+
+Product evolution:
+
+```bash
+git clone --branch v0.8.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+mkdir -p ~/.agents/skills
+rsync -a 0x12th-playbooks/skills/product-evolution ~/.agents/skills/
 ```
 
 Engineering delivery:
 
 ```bash
-git clone --branch v0.7.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.8.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
 ```
@@ -84,6 +96,7 @@ Raw `SKILL.md` URLs are useful for agents that support URL imports, but they do 
 ```text
 https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture/SKILL.md
 https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-delivery/SKILL.md
+https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/product-evolution/SKILL.md
 ```
 
 See `docs/installation.md` for more installation details.
@@ -91,6 +104,8 @@ See `docs/installation.md` for more installation details.
 ## Automatic Selection
 
 Most AI coding agents select skills primarily from the skill `name` and frontmatter `description` in each `SKILL.md`. The descriptions in this repository expose common trigger phrases such as architecture review, migration planning, service boundaries, diagnosis, investigation, implementation, bug fixes, tests, CI failures, runtime failures, code review, diff review, and PR review.
+
+`product-evolution` is intentionally manual-only while it is being tuned. Invoke it explicitly with `Use product-evolution`.
 
 `manifests/skills.json` is an index and documentation aid. Some agents may use it, but it is not an official cross-agent standard and should not be required for skill loading.
 
@@ -111,6 +126,16 @@ Focus on operational cost, migration risk, ownership, and long-term maintenance.
 
 ```text
 Should background jobs move to a different queue runtime?
+```
+
+Product evolution:
+
+```text
+Use product-evolution. Should this customer request become roadmap work?
+```
+
+```text
+Use product-evolution. Which should come first: mobile app or watch notifications?
 ```
 
 Engineering delivery:
@@ -192,7 +217,8 @@ See:
 0x12th-playbooks/
 ├── skills/
 │   ├── engineering-architecture/
-│   └── engineering-delivery/
+│   ├── engineering-delivery/
+│   └── product-evolution/
 ├── docs/
 ├── .github/
 ├── manifests/

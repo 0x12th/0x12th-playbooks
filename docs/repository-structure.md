@@ -18,7 +18,12 @@ The repository is organized as a multi-skill library.
 │   │   ├── docs/
 │   │   ├── templates/
 │   │   └── examples/
-│   └── engineering-delivery/
+│   ├── engineering-delivery/
+│   │   ├── SKILL.md
+│   │   ├── docs/
+│   │   ├── templates/
+│   │   └── examples/
+│   └── product-evolution/
 │       ├── SKILL.md
 │       ├── docs/
 │       ├── templates/

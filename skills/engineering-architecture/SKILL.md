@@ -4,11 +4,11 @@ description: >-
   Use for architecture review and system design questions: architecture decisions,
   migration planning, service boundaries, domain boundaries, ownership, data
   ownership, architecture debt, reliability strategy, observability architecture,
-  deployment architecture, system evolution, product architecture review,
-  product evolution review, roadmap planning, design challenge, tradeoff analysis,
-  and technical decision
-  support. Do not use for implementation, bug fixes, tests, CI fixes, code
-  review, or local refactoring.
+  deployment architecture, system evolution, technical design, migration
+  sequencing, design challenge, tradeoff analysis, and technical decision
+  support. Do not use for product investment decisions, product initiative
+  prioritization, MVP scope, customer request evaluation, pilots,
+  implementation, bug fixes, tests, CI fixes, code review, or local refactoring.
 ---
 # Engineering Architecture
 Answer:
@@ -29,12 +29,19 @@ Applies to:
 - Observability architecture
 - Deployment architecture
 - System evolution
-- Product architecture and evolution review
-- Product expansion and roadmap planning
+- Technical design
+- Migration sequencing
+- Architecture evolution for confirmed requirements
 - Design challenge
 - Decision support
 - Implementation planning before code changes
 Does not apply to:
+- Product investment decisions
+- Roadmap priority decisions
+- Product initiative prioritization
+- MVP scope decisions
+- Customer request evaluation
+- Pilot evaluation
 - Bug fixes
 - Writing tests
 - CI fixes
@@ -45,9 +52,10 @@ Does not apply to:
 - Direct implementation work
 When the user asks to implement, fix, test, validate, refactor locally, or prepare a PR, do not proceed with architecture review unless an architecture decision is required first. State the missing decision instead of explaining skill routing.
 ## Intent Detection
-Choose architecture review when the request is about whether, why, where, or how the system should evolve.
-Generic project review prompts such as "look at this project", "what would you improve?", and "critique the architecture" should use quick scan unless the user asks for a full review, implementation, or product evolution.
-When a repository-wide or project-wide review also asks about future features, product opportunities, broader usage, roadmap, scaling, migration, or product evolution, select **Full Review + Product Evolution** by default, unless the user explicitly asks for a fast scan or names a bounded subsystem as the whole scope. Do not answer this scenario as Quick Scan or Focused Review.
+Choose architecture review when the request is about whether, why, where, or how the system should evolve technically.
+Generic project review prompts such as "look at this project", "what would you improve?", and "critique the architecture" should use quick scan unless the user asks for a full review, implementation, or product investment decision.
+Do not handle product investment decisions with this skill. If the user explicitly invokes `product-evolution`, product-evolution owns questions about what to build, whether to build it, MVP scope, product priority, customer request value, pilot value, and which direction has the best value/effort tradeoff.
+When a repository-wide or project-wide review also asks about scaling, migration, technical sequencing, or architecture evolution, select **Full Review + Technical Evolution** by default, unless the user explicitly asks for a fast scan or names a bounded subsystem as the whole scope. Do not answer this scenario as Quick Scan or Focused Review.
 Architecture-review examples:
 - "Should we merge these two tightly coupled modules?"
 - "How should we start merging these services step by step?"
@@ -58,13 +66,16 @@ Architecture-review examples:
 - "What are the risks in this migration plan?"
 - "Where should this ownership boundary live?"
 - "What should improve first?"
-Product-evolution examples:
-- "Review this project. What can it become?"
-- "How would you expand it?"
-- "What are realistic feature opportunities?"
-- "Create a future roadmap."
-- "Assess broader usage and architecture evolution."
+Technical-evolution examples:
+- "Review this project. What technical constraints make change expensive?"
+- "How should architecture evolve for this confirmed requirement?"
+- "What technical sequence would reduce migration risk?"
+- "Which architecture is cheaper to maintain?"
 Non-architecture examples:
+- "Should we build this feature?"
+- "Which product initiative should come first?"
+- "What is the MVP for this customer request?"
+- "Evaluate this pilot."
 - "Implement the first merge step."
 - "Write tests."
 - "Why is CI failing?"
@@ -83,7 +94,7 @@ SKILL.md + 1 directly relevant document
 Do not read supporting documents just because they exist. Load extra documents only when they materially improve the answer.
 Default loading by task type:
 - Quick scan: `SKILL.md` only.
-- Product Evolution perspective: use the selected mode's loading policy; for repository-wide or project-wide Product Evolution, use Full Review loading.
+- Technical Evolution perspective: use the selected mode's loading policy; for repository-wide or project-wide Technical Evolution, use Full Review loading.
 - Focused review: `SKILL.md` only, or `SKILL.md` + `docs/review-rules.md` for non-trivial subsystem analysis.
 - Decision support: `SKILL.md` only, or `SKILL.md` + `docs/decision-support.md` when options must be formally compared.
 - Design challenge: `SKILL.md` only, or `SKILL.md` + `docs/design-challenge.md` when pressure-testing a concrete proposal.
@@ -120,9 +131,8 @@ Do not infer Focused Review from examples of desired product growth. In broad pr
 
 Review Perspectives:
 - Architecture Quality: quality, risks, boundaries, operability, reliability, maintainability, and migration safety.
-- Product Evolution: future capabilities, broader usage, product expansion, scaling, roadmap, or architecture evolution.
+- Technical Evolution: migration path, scaling constraints, maintainability, operational risk, technical sequencing, and architecture evolution for confirmed requirements.
 
-Product Architecture Review is not a separate mode. It means applying the Product Evolution perspective to Quick Scan, Focused Review, or Full Review.
 Do not implement code. For code change requests, answer only any architecture decision needed before implementation and do not edit files.
 ## Core Principles
 Always apply these rules.
@@ -242,7 +252,7 @@ Prefer fewer findings with stronger evidence over a larger speculative list. Ful
 Architecture recommendations are proposals until validated by system evidence. Use repository structure, contracts, tests, operational signals, incident history, migration dry runs, or stakeholder constraints when available.
 For each major recommendation, identify what would prove or disprove it: a metric, test, contract check, migration rehearsal, rollback exercise, ownership decision, or production signal.
 Do not present unvalidated target architecture as proven. If validation evidence is missing, reduce confidence and name the missing signal instead of continuing speculative exploration.
-For product evolution, keep opportunities realistic and evidence-linked. Avoid speculative product ideas that are not supported by repository capabilities, obvious user workflows, or stated goals. List at most 3 expansion opportunities, ranked by evidence and expected value.
+For technical evolution, keep recommendations tied to current architecture evidence, confirmed requirements, maintenance cost, operational risk, or migration risk. Do not invent non-technical initiatives or scope strategy.
 
 ## Decision Support
 Answer the decision directly.
@@ -281,16 +291,16 @@ Quick scan:
    Minimal fix:
    Confidence:
 ```
-Architecture Quality focuses on quality and risks. Product Evolution focuses on evolution, roadmap, and future capabilities.
-When Product Evolution is selected, include:
-1. Current capabilities: what the system can already do and what capabilities are close to working
-2. Adjacent use cases: realistic broader workflows supported by current capabilities or small extensions
-3. Expansion opportunities: at most 3, ranked by evidence and expected value
-4. Evolution constraints: architecture, operational, product, platform, or data constraints that limit expansion
-5. Recommended next slice: the smallest product/architecture step that improves the evolution path
-When evolution, broader usage, product opportunities, or roadmap is part of the request, include a roadmap or an explicit next-step evolution plan. Use 2-4 phases or steps maximum.
+Architecture Quality focuses on quality and risks. Technical Evolution focuses on migration path, maintainability, technical constraints, operational risk, and sequencing for confirmed requirements.
+When Technical Evolution is selected, include:
+1. Current architecture state: major components, dependencies, constraints, and critical flows
+2. Technical constraints: boundaries, contracts, data ownership, operability, reliability, and migration risks
+3. Options compared: current state, smallest technical change, and proposed architecture change
+4. Recommended next safe architecture step
+5. Validation, rollback or mitigation, and cleanup criteria when relevant
+When architecture evolution, scaling constraints, or technical sequencing is part of the request, include an explicit next-step technical evolution plan. Use 2-4 phases or steps maximum.
 Use Target Architecture only if structural change is justified; otherwise say that no target architecture change is needed yet.
-Use diagrams only when they improve understanding. For Full Review + Product Evolution, include a diagram when discussing structural evolution, architecture transitions, major dependency changes, or platform expansion. Maximum two diagrams per review, and keep them small.
+Use diagrams only when they improve understanding. For Full Review + Technical Evolution, include a diagram when discussing structural evolution, architecture transitions, major dependency changes, or platform changes. Maximum two diagrams per review, and keep them small.
 Focused review:
 1. Scope
 2. Local architecture model, if useful
@@ -320,7 +330,7 @@ Full review:
 2. Current architecture model: major components, responsibilities, key dependencies, runtime/deployment shape, and critical flows
 3. Strengths and constraints
 4. Findings ranked by severity and practical priority
-5. Product/evolution analysis when relevant: adjacent use cases, opportunities, target architecture or explicit "no target change needed"
-6. Roadmap or next safe steps with validation signals
+5. Technical evolution analysis when relevant: constraints, options, target architecture or explicit "no target change needed"
+6. Next safe steps with validation signals
 7. Remaining uncertainty and missing evidence
 Do not add an executive summary to quick scan unless the user asks for one.

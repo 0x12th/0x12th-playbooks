@@ -4,6 +4,20 @@ All notable changes to this repository are documented in this file.
 
 ## Unreleased
 
+## 0.8.0 - 2026-06-07
+
+### Added
+
+- Added `product-evolution` as a manual-only product decision skill.
+- Added Priority Arbitration for competing product, technical, customer, and team initiatives.
+
+### Changed
+
+- Split responsibilities into `product-evolution` -> `engineering-architecture` -> `engineering-delivery`.
+- Removed product decision ownership from `engineering-architecture`.
+- Added product and architecture decision guardrails to `engineering-delivery`.
+- Updated README, installation docs, selection docs, repository structure docs, and manifest metadata for `v0.8.0`.
+
 ## 0.7.0 - 2026-06-07
 
 ### Changed

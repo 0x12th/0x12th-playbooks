@@ -6,7 +6,7 @@ Use these rules for quick scan, focused review, and full review.
 
 - Understand the system before recommending changes.
 - Build a concise architecture model from evidence when the mode requires it.
-- When Product Evolution is selected, include current capabilities, adjacent use cases, expansion opportunities, evolution constraints, and a recommended next slice.
+- When Technical Evolution is selected, include current architecture state, technical constraints, options compared, recommended next safe architecture step, and validation or rollback requirements.
 - Separate important problems from cosmetic issues.
 - Connect every finding to system behavior, delivery speed, reliability, operational risk, maintainability, ownership, or business continuity.
 - Do not comment on formatting unless it affects maintainability, correctness, ownership, or delivery risk.
@@ -89,6 +89,6 @@ Full review:
 2. Current architecture model: major components, responsibilities, key dependencies, runtime/deployment shape, and critical flows
 3. Strengths and constraints
 4. Findings ranked by severity and practical priority
-5. Product/evolution analysis when relevant: adjacent use cases, opportunities, target architecture or explicit "no target change needed"
-6. Roadmap or next safe steps with validation signals
+5. Technical evolution analysis when relevant: constraints, options, target architecture or explicit "no target change needed"
+6. Next safe steps with validation signals
 7. Remaining uncertainty and missing evidence

@@ -8,7 +8,8 @@ description: >-
   incremental improvements. Default to read-only diagnosis unless the user
   explicitly asks to implement, fix, patch, modify, update, refactor, or apply
   changes. Do not use for architecture decisions, service extraction strategy,
-  migration strategy, platform evolution, or long-term tradeoff analysis.
+  migration strategy, platform evolution, product investment decisions, product
+  prioritization, MVP decisions, or long-term tradeoff analysis.
 ---
 
 # Engineering Delivery
@@ -40,6 +41,9 @@ Applies to:
 
 Does not apply to:
 
+- Product investment decisions
+- Product prioritization
+- MVP decisions
 - Architecture decisions
 - Service extraction strategy
 - Migration strategy
@@ -47,7 +51,7 @@ Does not apply to:
 - Long-term tradeoff analysis
 - Broad architecture assessment
 
-When an architecture decision is required before delivery work can continue, stop and state the decision that is missing. Do not route, announce, or explain skill selection.
+When a product or architecture decision is required before delivery work can continue, stop and state the decision that is missing. Do not route, announce, or explain skill selection.
 
 ## Intent Detection
 
@@ -85,6 +89,13 @@ Architecture examples that require a decision before delivery work:
 - "What should the service boundary be?"
 - "Review this migration strategy."
 - "Challenge this design."
+
+Product examples that require a decision before delivery work:
+
+- "Should we build this feature?"
+- "What is the MVP?"
+- "Which priority should come first?"
+- "Should this customer request become roadmap work?"
 
 ## Work Modes
 
