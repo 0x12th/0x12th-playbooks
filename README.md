@@ -51,7 +51,7 @@ rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 Pinned version:
 
 ```bash
-git clone --branch v0.8.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.8.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 ```
@@ -61,7 +61,7 @@ rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 Architecture review:
 
 ```bash
-git clone --branch v0.8.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.8.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/engineering-architecture ~/.agents/skills/
 ```
@@ -69,7 +69,7 @@ rsync -a 0x12th-playbooks/skills/engineering-architecture ~/.agents/skills/
 Product evolution:
 
 ```bash
-git clone --branch v0.8.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.8.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/product-evolution ~/.agents/skills/
 ```
@@ -77,7 +77,7 @@ rsync -a 0x12th-playbooks/skills/product-evolution ~/.agents/skills/
 Engineering delivery:
 
 ```bash
-git clone --branch v0.8.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.8.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
 ```
@@ -130,12 +130,34 @@ Should background jobs move to a different queue runtime?
 
 Product evolution:
 
+Manual-only: start the prompt with `Use product-evolution.`
+
+Modes:
+
+- `Quick Assessment`
+- `Opportunity Analysis`
+- `Pilot Evaluation`
+- `Priority Arbitration`
+- `Roadmap Planning`
+
 ```text
-Use product-evolution. Should this customer request become roadmap work?
+Use product-evolution. Quick Assessment: should this customer request become roadmap work?
 ```
 
 ```text
-Use product-evolution. Which should come first: mobile app or watch notifications?
+Use product-evolution. Opportunity Analysis: should we invest in a mobile app, and what is the MVP?
+```
+
+```text
+Use product-evolution. Pilot Evaluation: should we run an SSO pilot for this enterprise prospect?
+```
+
+```text
+Use product-evolution. Priority Arbitration: which should come first, mobile app or watch notifications?
+```
+
+```text
+Use product-evolution. Roadmap Planning: prioritize mobile app, watch notifications, onboarding, and API access.
 ```
 
 Engineering delivery:

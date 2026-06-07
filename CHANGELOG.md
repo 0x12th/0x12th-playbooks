@@ -4,6 +4,12 @@ All notable changes to this repository are documented in this file.
 
 ## Unreleased
 
+## 0.8.1 - 2026-06-07
+
+### Changed
+
+- Expanded README `product-evolution` usage with manual invocation, modes, and example prompts.
+
 ## 0.8.0 - 2026-06-07
 
 ### Added
