@@ -4,6 +4,18 @@ All notable changes to this repository are documented in this file.
 
 ## Unreleased
 
+## 0.10.0 - 2026-06-12
+
+### Added
+
+- Added `install.sh` for one-command skill installation from a local clone or `curl`.
+- Documented quick install, pinned install, custom target, and local clone install flows.
+
+### Changed
+
+- Updated installation metadata and pinned examples for `v0.10.0`.
+- Added Markdown block spacing in `engineering-architecture` to prevent preview list merging.
+
 ## 0.9.0 - 2026-06-12
 
 ### Changed
