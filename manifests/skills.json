@@ -3,7 +3,7 @@
     "name": "0x12th-playbooks",
     "url": "https://github.com/0x12th/0x12th-playbooks",
     "description": "Practical playbooks and agent skills for product decisions, architecture, delivery, migration planning, technical decision-making, and software evolution.",
-    "version": "0.10.0"
+    "version": "0.10.1"
   },
   "auto_selection": {
     "primary_signals": [
@@ -25,22 +25,22 @@
       "rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/"
     ],
     "all_skills_pinned": [
-      "git clone --branch v0.10.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.10.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/"
     ],
     "architecture_skill_pinned": [
-      "git clone --branch v0.10.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.10.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "rsync -a 0x12th-playbooks/skills/engineering-architecture ~/.agents/skills/"
     ],
     "product_evolution_skill_pinned": [
-      "git clone --branch v0.10.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.10.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "rsync -a 0x12th-playbooks/skills/product-evolution ~/.agents/skills/"
     ],
     "engineering_delivery_skill_pinned": [
-      "git clone --branch v0.10.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.10.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "rsync -a 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/"
     ],
@@ -55,7 +55,7 @@
       "curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/install.sh | sh"
     ],
     "quick_install_pinned": [
-      "curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.10.0/install.sh | sh -s -- ~/.agents/skills v0.10.0"
+      "curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.10.1/install.sh | sh -s -- ~/.agents/skills v0.10.1"
     ],
     "custom_target_example": [
       "curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/install.sh | sh -s -- ~/.claude/skills"
@@ -66,7 +66,7 @@
       "name": "product-evolution",
       "path": "skills/product-evolution/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/product-evolution/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.10.0/skills/product-evolution/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.10.1/skills/product-evolution/SKILL.md",
       "purpose": "Answer what the highest-value product investment is.",
       "use_cases": [
         "product investment decisions",
@@ -113,7 +113,7 @@
       "name": "engineering-architecture",
       "path": "skills/engineering-architecture/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.10.0/skills/engineering-architecture/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.10.1/skills/engineering-architecture/SKILL.md",
       "purpose": "Answer how the system should evolve safely.",
       "use_cases": [
         "architecture review",
@@ -194,7 +194,7 @@
       "name": "engineering-delivery",
       "path": "skills/engineering-delivery/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-delivery/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.10.0/skills/engineering-delivery/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.10.1/skills/engineering-delivery/SKILL.md",
       "purpose": "Answer the safest next delivery action, defaulting to read-only diagnosis unless changes are explicitly requested.",
       "use_cases": [
         "diagnosis",

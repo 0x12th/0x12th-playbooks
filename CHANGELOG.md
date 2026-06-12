@@ -4,6 +4,14 @@ All notable changes to this repository are documented in this file.
 
 ## Unreleased
 
+## 0.10.1 - 2026-06-12
+
+### Fixed
+
+- Compressed the `engineering-architecture` skill description so Zed can load it within the 1024-byte metadata limit.
+- Kept the `engineering-architecture` description as valid folded YAML frontmatter after compression.
+- Updated installation metadata and pinned examples for `v0.10.1`.
+
 ## 0.10.0 - 2026-06-12
 
 ### Added

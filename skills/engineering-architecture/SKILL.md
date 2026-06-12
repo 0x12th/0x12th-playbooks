@@ -1,21 +1,13 @@
 ---
 name: engineering-architecture
 description: >-
-  Use for architecture review, system design, and technical readiness questions:
-  architecture decisions, migration planning, service boundaries, domain
-  boundaries, ownership, data ownership, architecture debt, reliability strategy,
-  observability architecture, deployment architecture, production readiness,
-  deployment readiness, release readiness, operational readiness, runtime
-  resource review, VPS/server fit assessment, current architecture assessment,
-  target architecture assessment, capacity and scaling review, system evolution,
-  technical design, migration sequencing, design challenge, tradeoff analysis,
-  and technical decision support. Repository-wide reviews such as "review this
-  project", "is it ready for production?", "can I deploy this to a VPS?", "what
-  should I improve?", "what is the current architecture?", "what should the
-  target architecture be?", and "is it ready for an update?" belong here. Do not
-  use for product investment decisions, product initiative prioritization, MVP
-  scope, customer request evaluation, pilots, implementation, bug fixes, tests,
-  CI fixes, code review of diffs/PRs, or local refactoring.
+  Use when making architecture or technical readiness decisions: system design,
+  service/domain boundaries, ownership, migration strategy, architecture debt,
+  reliability, observability, deployment architecture, production/deployment/release
+  readiness, runtime resources, VPS/server fit, capacity/scaling, current/target
+  architecture, system evolution, tradeoffs, design challenge, or repository-wide
+  project review. Do not use for product scope, MVP/customer/pilot decisions,
+  implementation, bugs, tests, CI, PR/diff review, or refactoring.
 ---
 
 # Engineering Architecture
