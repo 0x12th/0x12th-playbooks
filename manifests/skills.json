@@ -3,7 +3,7 @@
     "name": "0x12th-playbooks",
     "url": "https://github.com/0x12th/0x12th-playbooks",
     "description": "Practical playbooks and agent skills for product decisions, architecture, delivery, migration planning, technical decision-making, and software evolution.",
-    "version": "0.8.1"
+    "version": "0.9.0"
   },
   "auto_selection": {
     "primary_signals": [
@@ -25,22 +25,22 @@
       "rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/"
     ],
     "all_skills_pinned": [
-      "git clone --branch v0.8.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.9.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/"
     ],
     "architecture_skill_pinned": [
-      "git clone --branch v0.8.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.9.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "rsync -a 0x12th-playbooks/skills/engineering-architecture ~/.agents/skills/"
     ],
     "product_evolution_skill_pinned": [
-      "git clone --branch v0.8.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.9.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "rsync -a 0x12th-playbooks/skills/product-evolution ~/.agents/skills/"
     ],
     "engineering_delivery_skill_pinned": [
-      "git clone --branch v0.8.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.9.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "rsync -a 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/"
     ],
@@ -55,26 +55,31 @@
       "name": "product-evolution",
       "path": "skills/product-evolution/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/product-evolution/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.8.1/skills/product-evolution/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.9.0/skills/product-evolution/SKILL.md",
       "purpose": "Answer what the highest-value product investment is.",
       "use_cases": [
-        "manual-only product investment decisions",
+        "product investment decisions",
         "customer request evaluation",
+        "feature scope decisions",
         "MVP boundaries",
         "pilot evaluation",
         "opportunity analysis",
         "roadmap priority decisions",
         "priority arbitration",
         "hypothesis validation",
+        "smallest useful solution",
         "what not to do"
       ],
       "non_use_cases": [
-        "automatic selection for generic product prompts",
+        "implementation",
+        "debugging",
         "architecture design",
         "service boundaries",
         "migration strategy",
-        "implementation",
-        "bug fixes",
+        "production readiness",
+        "deployment readiness",
+        "server/VPS fit",
+        "runtime resource review",
         "tests",
         "CI fixes",
         "PR preparation"
@@ -87,17 +92,17 @@
         "priority arbitration"
       ],
       "selection_hints": [
-        "Use only when the user explicitly asks to use product-evolution or names this skill.",
-        "Use before architecture when the decision is whether, why, when, for whom, or in what MVP scope to invest.",
+        "Use when the primary question is whether, why, when, for whom, or in what MVP scope to invest.",
+        "Use for obvious product prompts such as should we build this, is this worth doing, what should come first, MVP, roadmap priority, customer request, and feature scope.",
         "Use Priority Arbitration when competing initiatives cannot all receive resources now.",
-        "After the product decision is made, hand technical design questions to engineering-architecture and implementation to engineering-delivery."
+        "After the product decision is made, hand technical design and readiness questions to engineering-architecture and implementation to engineering-delivery."
       ]
     },
     {
       "name": "engineering-architecture",
       "path": "skills/engineering-architecture/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.8.1/skills/engineering-architecture/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.9.0/skills/engineering-architecture/SKILL.md",
       "purpose": "Answer how the system should evolve safely.",
       "use_cases": [
         "architecture review",
@@ -124,7 +129,18 @@
         "tradeoff analysis",
         "decision support",
         "implementation planning before code changes",
-        "implementation planning before coding"
+        "implementation planning before coding",
+        "production readiness",
+        "deployment readiness",
+        "release readiness",
+        "operational readiness",
+        "runtime resource review",
+        "VPS/server fit assessment",
+        "current architecture assessment",
+        "target architecture assessment",
+        "capacity and scaling review",
+        "repository-wide technical review",
+        "project readiness review"
       ],
       "non_use_cases": [
         "bug fixes",
@@ -147,12 +163,17 @@
         "full review",
         "design challenge",
         "decision support",
-        "migration review"
+        "migration review",
+        "deployment readiness review"
       ],
-      "review_perspectives": ["architecture quality", "technical evolution"],
+      "review_perspectives": [
+        "architecture quality",
+        "technical evolution"
+      ],
       "selection_hints": [
         "Use when the request asks whether, why, where, or how the system should evolve technically.",
-        "Use when the user asks for architecture assessment, decision support, or migration review.",
+        "Use when the user asks for architecture assessment, decision support, migration review, production readiness, deployment readiness, release readiness, operational readiness, runtime resource review, VPS/server fit, current architecture, target architecture, or capacity and scaling review.",
+        "Use Deployment Readiness Review for prompts such as is it ready for production, can I deploy this to a VPS, is it ready for an update, review deployment readiness, or will this fit on this server.",
         "Use Technical Evolution when a repository-wide or project-wide review asks about scaling, migration, technical sequencing, or architecture evolution.",
         "Do not use for product investment decisions, MVP scope, customer request value, or priority arbitration.",
         "Do not use when the user asks to implement code directly."
@@ -162,7 +183,7 @@
       "name": "engineering-delivery",
       "path": "skills/engineering-delivery/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-delivery/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.8.1/skills/engineering-delivery/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.9.0/skills/engineering-delivery/SKILL.md",
       "purpose": "Answer the safest next delivery action, defaulting to read-only diagnosis unless changes are explicitly requested.",
       "use_cases": [
         "diagnosis",
@@ -194,7 +215,17 @@
         "product prioritization",
         "MVP decisions",
         "long-term tradeoff analysis",
-        "broad architecture assessment"
+        "broad architecture assessment",
+        "production readiness",
+        "deployment readiness",
+        "release readiness",
+        "server/VPS fit assessment",
+        "runtime resource review",
+        "current architecture assessment",
+        "target architecture assessment",
+        "capacity and scaling review",
+        "repository-wide technical review",
+        "project readiness review"
       ],
       "modes": [
         "diagnosis",
@@ -204,21 +235,38 @@
         "review"
       ],
       "selection_hints": [
-        "Use read-only diagnosis for prompts like why is this happening, where is the problem, analyze this error, what changed, or review this.",
+        "Use read-only diagnosis for prompts like why is this happening, where is the problem, analyze this error, what changed, or review selected code/logs/errors/diffs/files/failures.",
         "Edit only when the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.",
         "For runtime failures, follow the traceback before repository exploration.",
         "If product or architecture decisions are required, state the missing decision before delivery work continues.",
+        "Do not begin delivery investigation for production readiness, deployment readiness, server/VPS fit, runtime resource review, current architecture, target architecture, capacity, scaling, or repository-wide technical review prompts; those require engineering-architecture first.",
         "Stay close to selected code or explicitly named files."
       ]
     }
   ],
   "selection_examples": [
     {
-      "request": "Use product-evolution. Should we build this feature?",
+      "request": "Should we build this feature?",
       "skill": "product-evolution"
     },
     {
-      "request": "Use product-evolution. Which should come first: mobile app or watch notifications?",
+      "request": "Is this worth doing?",
+      "skill": "product-evolution"
+    },
+    {
+      "request": "What is the MVP?",
+      "skill": "product-evolution"
+    },
+    {
+      "request": "What is the smallest useful solution?",
+      "skill": "product-evolution"
+    },
+    {
+      "request": "What should come first?",
+      "skill": "product-evolution"
+    },
+    {
+      "request": "A customer asked for X. Should we do it?",
       "skill": "product-evolution"
     },
     {
@@ -230,12 +278,32 @@
       "skill": "engineering-architecture"
     },
     {
-      "request": "Implement the first merge step.",
-      "skill": "engineering-delivery"
+      "request": "Review this project.",
+      "skill": "engineering-architecture"
     },
     {
-      "request": "Review the service architecture.",
+      "request": "Is it ready for production?",
       "skill": "engineering-architecture"
+    },
+    {
+      "request": "Can I deploy this to a VPS?",
+      "skill": "engineering-architecture"
+    },
+    {
+      "request": "What is the current architecture?",
+      "skill": "engineering-architecture"
+    },
+    {
+      "request": "What should the target architecture be?",
+      "skill": "engineering-architecture"
+    },
+    {
+      "request": "Review deployment readiness.",
+      "skill": "engineering-architecture"
+    },
+    {
+      "request": "Implement the first merge step.",
+      "skill": "engineering-delivery"
     },
     {
       "request": "Write tests.",
@@ -248,10 +316,6 @@
     {
       "request": "Investigate this runtime exception.",
       "skill": "engineering-delivery"
-    },
-    {
-      "request": "Should background jobs move to a different queue runtime?",
-      "skill": "engineering-architecture"
     },
     {
       "request": "Move the task handler to the already approved queue runtime.",
@@ -268,6 +332,10 @@
     {
       "request": "Review this PR for bugs and missing tests.",
       "skill": "engineering-delivery"
+    },
+    {
+      "request": "Review this selected diff.",
+      "skill": "engineering-delivery"
     }
   ],
   "global_principles": [
@@ -282,6 +350,7 @@
     "traceback beats repository exploration",
     "decide before implementation",
     "product decisions before architecture before delivery",
-    "avoid overengineering"
+    "avoid overengineering",
+    "architecture readiness before delivery investigation"
   ]
 }

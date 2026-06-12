@@ -3,7 +3,7 @@
 User request:
 
 ```text
-Use product-evolution. Which should come first: autotests or new customer pilots?
+Which should come first: autotests or new customer pilots?
 ```
 
 Output:

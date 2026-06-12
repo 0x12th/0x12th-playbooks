@@ -3,14 +3,17 @@
 Use these rules when `product-evolution`, `engineering-architecture`, and
 `engineering-delivery` could all appear relevant.
 
-`product-evolution` is manual-only during early tuning. Do not route to it
-automatically unless the user explicitly asks to use `product-evolution` or
-names this skill.
+`product-evolution` supports soft automatic activation. Route to it when the
+primary question is product value, product scope, priority, MVP, customer
+request evaluation, roadmap sequencing, or whether something should be built.
+
+Do not route to it for implementation, debugging, CI, tests, coding tasks,
+architecture design, migration strategy, production readiness, deployment
+readiness, server/VPS fit, or runtime resource review.
 
 ## Primary Question
 
-When explicit invocation allows product-evolution, choose the perspective by the
-primary question:
+Choose the perspective by the primary question:
 
 | Primary question | Skill |
 |---|---|
@@ -77,35 +80,38 @@ delivery artifacts.
 Roadmap:
 
 - Product initiatives, customer value, adoption, monetization, retention,
-  support load, sales friction: `product-evolution` only after explicit
-  invocation.
-- Platform migration, architecture debt, service extraction, reliability
-  roadmap: `engineering-architecture`.
+  support load, sales friction, MVP, and priority tradeoffs:
+  `product-evolution`.
+- Platform migration, architecture debt, service extraction, reliability,
+  capacity, deployment readiness, production readiness, or technical roadmap:
+  `engineering-architecture`.
 
 Feature:
 
-- "Should we build it?" or "what is the MVP?": `product-evolution` only after
-  explicit invocation.
-- "How should we design it?": `engineering-architecture`.
-- "Build it", "fix it", "write tests": `engineering-delivery`.
+- "Should we build it?", "do we need it?", "is it worth doing?", "what is the
+  MVP?", or "what is the smallest useful solution?": `product-evolution`.
+- "How should we design it?", "what boundary should it have?", or "how should
+  the architecture evolve?": `engineering-architecture`.
+- "Build it", "fix it", "write tests", or "ship it": `engineering-delivery`.
 
 Customer request:
 
 - "Should we satisfy this request and how much should we generalize it?":
-  `product-evolution` only after explicit invocation.
+  `product-evolution`.
+- "Does this require a new system boundary, data model, deployment shape, or
+  capacity change?": `engineering-architecture`.
 - "How do we implement the agreed solution safely?": `engineering-delivery`.
-- "Does this require a new system boundary or data model?":
-  `engineering-architecture`.
 
 Pilot:
 
 - Pilot value, success gates, cohort, rollout, and investment decision:
-  `product-evolution` only after explicit invocation.
-- Pilot implementation, instrumentation, test plan, and release mechanics:
-  `engineering-delivery`.
+  `product-evolution`.
+- Pilot architecture, operational readiness, production readiness, capacity, or
+  deployment path: `engineering-architecture`.
+- Pilot implementation, instrumentation, test plan, and release mechanics after
+  the scope and architecture are settled: `engineering-delivery`.
 
 If the user asks for implementation but the product decision is unresolved,
-state the missing product decision first. If the user did not explicitly invoke
-`product-evolution`, do not switch into this skill automatically. Do not produce
-architecture or delivery work for an initiative that has not passed the value bar
-unless the user explicitly wants a speculative exercise.
+state the missing product decision first. Do not produce architecture or delivery
+work for an initiative that has not passed the value bar unless the user
+explicitly wants a speculative exercise.

@@ -8,8 +8,11 @@ description: >-
   incremental improvements. Default to read-only diagnosis unless the user
   explicitly asks to implement, fix, patch, modify, update, refactor, or apply
   changes. Do not use for architecture decisions, service extraction strategy,
-  migration strategy, platform evolution, product investment decisions, product
-  prioritization, MVP decisions, or long-term tradeoff analysis.
+  migration strategy, platform evolution, production readiness, deployment
+  readiness, release readiness, server/VPS fit, runtime resource review, current
+  architecture assessment, target architecture assessment, capacity and scaling
+  review, repository-wide technical review, product investment decisions,
+  product prioritization, MVP decisions, or long-term tradeoff analysis.
 ---
 
 # Engineering Delivery
@@ -48,6 +51,16 @@ Does not apply to:
 - Service extraction strategy
 - Migration strategy
 - Platform evolution
+- Production readiness
+- Deployment readiness
+- Release readiness
+- Server/VPS fit assessment
+- Runtime resource review
+- Current architecture assessment
+- Target architecture assessment
+- Capacity and scaling review
+- Repository-wide technical review
+- Project readiness review
 - Long-term tradeoff analysis
 - Broad architecture assessment
 
@@ -61,8 +74,8 @@ Read-only diagnosis, investigation, validation, or review examples:
 
 - "Why is CI failing?"
 - "Analyze this error."
-- "Look at this."
-- "Check this."
+- "Look at this selected code/log/error."
+- "Check this selected diff, file, failure, or validation result."
 - "Where is the problem?"
 - "Is this related?"
 - "What changed?"
@@ -84,11 +97,24 @@ Implementation examples:
 
 Architecture examples that require a decision before delivery work:
 
+- "Review this project."
+- "What should I improve?"
+- "Is this ready for production?"
+- "Can I deploy this to a VPS?"
+- "Is this ready for an update?"
+- "What is the current architecture?"
+- "What should the target architecture be?"
+- "Review deployment readiness."
+- "Review runtime resources."
+- "Will this fit on this server?"
+- "What are the scaling risks?"
 - "Should we merge these services?"
 - "Should background jobs move to a different queue runtime?"
 - "What should the service boundary be?"
 - "Review this migration strategy."
 - "Challenge this design."
+
+For these prompts, do not begin delivery investigation. State the missing architecture/readiness decision first.
 
 Product examples that require a decision before delivery work:
 

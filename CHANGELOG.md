@@ -4,6 +4,15 @@ All notable changes to this repository are documented in this file.
 
 ## Unreleased
 
+## 0.9.0 - 2026-06-12
+
+### Changed
+
+- Made `product-evolution` soft-auto for obvious product investment, MVP, roadmap priority, customer request, and feature scope prompts.
+- Expanded `engineering-architecture` routing to own production readiness, deployment readiness, release readiness, runtime resource review, VPS/server fit, operational readiness, current/target architecture assessment, and capacity/scaling review.
+- Added `Deployment Readiness Review` mode to `engineering-architecture`.
+- Strengthened `engineering-delivery` guards so readiness, resource, VPS/server fit, and current/target architecture questions require architecture assessment first.
+
 ## 0.8.1 - 2026-06-07
 
 ### Changed

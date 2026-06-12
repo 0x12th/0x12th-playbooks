@@ -14,7 +14,7 @@ engineering-delivery
 
 ## Product Evolution
 
-Use `product-evolution` only when the user explicitly invokes it or names this skill.
+Use `product-evolution` when the user's primary question is product value, scope, priority, MVP, customer request evaluation, roadmap sequencing, or whether something should be built. Explicit invocation is allowed but not required.
 
 Use it when the user asks:
 
@@ -33,7 +33,7 @@ Use for:
 - Priority arbitration
 - What not to do
 
-Do not use automatically for generic product, roadmap, feature, customer request, architecture, or delivery requests.
+Do not use for implementation, debugging, architecture design, migration strategy, CI, tests, coding tasks, production readiness, deployment readiness, server/VPS fit, or runtime resource review.
 
 ## Engineering Architecture
 
@@ -54,6 +54,16 @@ Use for:
 - Reliability strategy
 - Observability architecture
 - Deployment architecture
+- Production readiness
+- Deployment readiness
+- Release readiness
+- Operational readiness
+- Runtime resource review
+- VPS/server fit assessment
+- Current architecture assessment
+- Target architecture assessment
+- Capacity and scaling review
+- Repository-wide technical review
 - System evolution
 - Technical evolution
 - Design challenge
@@ -93,8 +103,13 @@ Do not use for product or architecture decisions. If implementation requires one
 
 | User request | Skill |
 |---|---|
-| `Use product-evolution. Should we build this feature?` | `product-evolution` |
-| `Use product-evolution. Which should come first: mobile app or watch notifications?` | `product-evolution` |
+| `Should we build this feature?` | `product-evolution` |
+| `Is this worth doing?` | `product-evolution` |
+| `Do we need this feature?` | `product-evolution` |
+| `What is the MVP?` | `product-evolution` |
+| `What is the smallest useful solution?` | `product-evolution` |
+| `What should come first?` | `product-evolution` |
+| `A customer asked for X. Should we do it?` | `product-evolution` |
 | `Should we merge two tightly coupled modules?` | `engineering-architecture` |
 | `How should we start the merge step by step?` | `engineering-architecture` |
 | `Implement the first merge step.` | `engineering-delivery` |
@@ -110,17 +125,27 @@ Do not use for product or architecture decisions. If implementation requires one
 
 ## Generic Project Prompts
 
-Generic project-level prompts should normally use `engineering-architecture` in Quick Scan mode, unless the user explicitly asks to implement, test, fix, review a diff, or use `product-evolution`.
+Generic project-level technical prompts should normally use `engineering-architecture`, not `engineering-delivery`, unless the user explicitly asks to implement, test, fix, validate a selected change, review a diff, review a PR, or diagnose a specific failure.
+
+Product-value prompts use `product-evolution`.
 
 Examples:
 
 | User request | Skill | Mode |
 |---|---|---|
 | `Look at this project.` | `engineering-architecture` | Quick Scan + Architecture Quality |
+| `Review this project.` | `engineering-architecture` | Quick Scan or Full Review + Architecture Quality |
 | `What would you improve?` | `engineering-architecture` | Quick Scan + Architecture Quality |
 | `Critique the architecture.` | `engineering-architecture` | Quick Scan or Focused Review + Architecture Quality |
-| `Use product-evolution. What should this product become?` | `product-evolution` | Opportunity Analysis |
-| `Use product-evolution. Create a future roadmap.` | `product-evolution` | Roadmap Planning |
+| `Is it ready for production?` | `engineering-architecture` | Deployment Readiness Review |
+| `Can I deploy this to a VPS?` | `engineering-architecture` | Deployment Readiness Review |
+| `Is it ready for an update?` | `engineering-architecture` | Deployment Readiness Review |
+| `What is the current architecture?` | `engineering-architecture` | Full Review + Architecture Quality |
+| `What should the target architecture be?` | `engineering-architecture` | Full Review + Technical Evolution |
+| `What should this product become?` | `product-evolution` | Opportunity Analysis |
+| `Create a future roadmap.` | `product-evolution` | Roadmap Planning |
+| `Review this PR.` | `engineering-delivery` | Review |
+| `Why is CI failing?` | `engineering-delivery` | Diagnosis |
 
 ## Selected Context
 

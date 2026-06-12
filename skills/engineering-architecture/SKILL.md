@@ -1,14 +1,21 @@
 ---
 name: engineering-architecture
 description: >-
-  Use for architecture review and system design questions: architecture decisions,
-  migration planning, service boundaries, domain boundaries, ownership, data
-  ownership, architecture debt, reliability strategy, observability architecture,
-  deployment architecture, system evolution, technical design, migration
-  sequencing, design challenge, tradeoff analysis, and technical decision
-  support. Do not use for product investment decisions, product initiative
-  prioritization, MVP scope, customer request evaluation, pilots,
-  implementation, bug fixes, tests, CI fixes, code review, or local refactoring.
+  Use for architecture review, system design, and technical readiness questions:
+  architecture decisions, migration planning, service boundaries, domain
+  boundaries, ownership, data ownership, architecture debt, reliability strategy,
+  observability architecture, deployment architecture, production readiness,
+  deployment readiness, release readiness, operational readiness, runtime
+  resource review, VPS/server fit assessment, current architecture assessment,
+  target architecture assessment, capacity and scaling review, system evolution,
+  technical design, migration sequencing, design challenge, tradeoff analysis,
+  and technical decision support. Repository-wide reviews such as "review this
+  project", "is it ready for production?", "can I deploy this to a VPS?", "what
+  should I improve?", "what is the current architecture?", "what should the
+  target architecture be?", and "is it ready for an update?" belong here. Do not
+  use for product investment decisions, product initiative prioritization, MVP
+  scope, customer request evaluation, pilots, implementation, bug fixes, tests,
+  CI fixes, code review of diffs/PRs, or local refactoring.
 ---
 # Engineering Architecture
 Answer:
@@ -28,6 +35,17 @@ Applies to:
 - Reliability strategy
 - Observability architecture
 - Deployment architecture
+- Production readiness
+- Deployment readiness
+- Release readiness
+- Operational readiness
+- Runtime resource review
+- VPS/server fit assessment
+- Current architecture assessment
+- Target architecture assessment
+- Capacity and scaling review
+- Repository-wide technical review
+- Project readiness review
 - System evolution
 - Technical design
 - Migration sequencing
@@ -53,10 +71,24 @@ Does not apply to:
 When the user asks to implement, fix, test, validate, refactor locally, or prepare a PR, do not proceed with architecture review unless an architecture decision is required first. State the missing decision instead of explaining skill routing.
 ## Intent Detection
 Choose architecture review when the request is about whether, why, where, or how the system should evolve technically.
-Generic project review prompts such as "look at this project", "what would you improve?", and "critique the architecture" should use quick scan unless the user asks for a full review, implementation, or product investment decision.
-Do not handle product investment decisions with this skill. If the user explicitly invokes `product-evolution`, product-evolution owns questions about what to build, whether to build it, MVP scope, product priority, customer request value, pilot value, and which direction has the best value/effort tradeoff.
+Generic project review prompts such as "look at this project", "review this project", "what would you improve?", and "critique the architecture" should use quick scan unless the user asks for a full review, implementation, product investment decision, or deployment readiness review.
+Do not handle product investment decisions with this skill. `product-evolution` owns questions about what to build, whether to build it, MVP scope, product priority, customer request value, pilot value, and which direction has the best value/effort tradeoff.
 When a repository-wide or project-wide review also asks about scaling, migration, technical sequencing, or architecture evolution, select **Full Review + Technical Evolution** by default, unless the user explicitly asks for a fast scan or names a bounded subsystem as the whole scope. Do not answer this scenario as Quick Scan or Focused Review.
+Repository-wide technical review prompts route here, not to `engineering-delivery`, even when phrased generally.
+
 Architecture-review examples:
+- "Review this project."
+- "What should I improve?"
+- "Is it ready for production?"
+- "Can I deploy this to a VPS?"
+- "Is it ready for an update?"
+- "What is the current architecture?"
+- "What should the target architecture be?"
+- "Review deployment readiness."
+- "Review production readiness."
+- "Review runtime resource usage."
+- "Will this fit on this server?"
+- "What capacity or scaling risks exist?"
 - "Should we merge these two tightly coupled modules?"
 - "How should we start merging these services step by step?"
 - "Review the service architecture."
@@ -99,6 +131,7 @@ Default loading by task type:
 - Decision support: `SKILL.md` only, or `SKILL.md` + `docs/decision-support.md` when options must be formally compared.
 - Design challenge: `SKILL.md` only, or `SKILL.md` + `docs/design-challenge.md` when pressure-testing a concrete proposal.
 - Migration review: `SKILL.md` only, or `SKILL.md` + `docs/migration-review.md` for complex migrations, extractions, replacements, coexistence, rollback, or staged evolution.
+- Deployment Readiness Review: `SKILL.md` + `docs/review-rules.md`; load templates only if the user asks for a formal report.
 - Full review: `SKILL.md` + `docs/review-rules.md`; load templates only if the user asks for a formal report.
 Reference-only documents. Do not load for routine work because the source of truth is this file:
 - `docs/language-rules.md`
@@ -125,6 +158,7 @@ Modes:
 - **Design Challenge**: Critique a proposal, challenge assumptions, compare alternatives, and decide whether the proposal should exist.
 - **Decision Support**: Help choose between options using evidence, economics, tradeoffs, and confidence gates.
 - **Migration Review**: Evaluate migration safety, coexistence, rollback, validation, ownership, and operational readiness.
+- **Deployment Readiness Review**: Evaluate production, release, deployment, operational, runtime resource, capacity, and server/VPS readiness. Use when the user asks whether the system can safely be deployed, updated, hosted on a specific server, or operated in production.
 
 Use Focused Review only when the user explicitly limits the scope to one subsystem, service, module, path, migration, or proposal.
 Do not infer Focused Review from examples of desired product growth. In broad project or repository reviews, treat named features as evolution drivers inside Full Review unless the user asks to focus only on them.
@@ -325,6 +359,15 @@ Migration review:
 8. Rollback or mitigation plan
 9. Observability requirements
 10. Confidence and missing evidence
+Deployment Readiness Review:
+1. Readiness verdict: ready, not ready, or conditionally ready
+2. Blockers: issues that must be fixed before production, deployment, release, or update
+3. Risks: issues that can be accepted temporarily with mitigation
+4. Current architecture: runtime shape, dependencies, data stores, deployment path, operational assumptions, and critical flows
+5. Target architecture: only if a structural change is justified; otherwise say no target architecture change is needed yet
+6. Resource concerns: CPU, memory, disk, network, database, queues, background jobs, concurrency, storage, backup, and scaling constraints relevant to the request
+7. Next safe production step: the smallest deploy, update, or operate step with validation, rollback or mitigation, and observability
+8. Missing evidence and confidence
 Full review:
 1. Scope, selected repository, assumptions, and evidence inspected
 2. Current architecture model: major components, responsibilities, key dependencies, runtime/deployment shape, and critical flows

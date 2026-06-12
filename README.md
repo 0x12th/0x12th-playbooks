@@ -18,13 +18,13 @@ The skills are designed to reduce context consumption, prioritize selected conte
 
 | Skill | Answers | Use when |
 |---|---|---|
-| `product-evolution` | What is the highest-value product investment? | Manual-only product investment decisions, MVPs, pilots, roadmap priorities, customer requests, opportunity analysis, and priority arbitration |
-| `engineering-architecture` | How should the system evolve safely? | Architecture review, system design, architecture decisions, migration planning, service boundaries, domain/data ownership, architecture debt, reliability strategy, observability architecture, deployment architecture, technical evolution, design challenge, decision support |
+| `product-evolution` | What is the highest-value product investment? | Product investment decisions, customer requests, feature scope, MVPs, pilots, roadmap priorities, opportunity analysis, priority arbitration, and smallest useful next step decisions |
+| `engineering-architecture` | How should the system evolve safely? | Architecture review, system design, architecture decisions, migration planning, service boundaries, domain/data ownership, architecture debt, reliability strategy, observability architecture, deployment architecture, production readiness, deployment readiness, release readiness, operational readiness, runtime resource review, VPS/server fit assessment, current/target architecture assessment, capacity and scaling review, technical evolution, design challenge, decision support |
 | `engineering-delivery` | What is the safest next delivery action? | Diagnosis, investigation, implementation, bug fixes, tests, CI failures, runtime failures, code review, diff review, patch review, commit review, PR review, local refactoring, validation, PR preparation, incremental improvements |
 
-Use `product-evolution` only when explicitly invoked. It owns product decisions before architecture: should we do it, for whom, when, what MVP, how to validate, what should go first, and what not to do.
+Use `product-evolution` when the question is whether, why, when, for whom, or in what MVP scope to invest. Explicit invocation is supported but not required. It owns product decisions before architecture: should we do it, for whom, when, what MVP, how to validate, what should go first, what is the smallest useful solution, and what not to do.
 
-Use `engineering-architecture` when the question is about technical design, tradeoffs, service boundaries, ownership, migrations, deployment architecture, reliability strategy, technical evolution, or architecture risk.
+Use `engineering-architecture` when the question is about technical design, tradeoffs, service boundaries, ownership, migrations, deployment architecture, production readiness, deployment readiness, release readiness, operational readiness, runtime resource review, VPS/server fit, current architecture, target architecture, capacity and scaling, technical evolution, or architecture risk.
 
 Use `engineering-delivery` when the request is to diagnose an error, investigate a failure, implement, fix, test, validate, review code, review a diff, review a patch, review a commit, review a PR, refactor locally, prepare a PR, or make the next approved incremental change.
 
@@ -51,7 +51,7 @@ rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 Pinned version:
 
 ```bash
-git clone --branch v0.8.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.9.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 ```
@@ -61,7 +61,7 @@ rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 Architecture review:
 
 ```bash
-git clone --branch v0.8.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.9.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/engineering-architecture ~/.agents/skills/
 ```
@@ -69,7 +69,7 @@ rsync -a 0x12th-playbooks/skills/engineering-architecture ~/.agents/skills/
 Product evolution:
 
 ```bash
-git clone --branch v0.8.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.9.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/product-evolution ~/.agents/skills/
 ```
@@ -77,7 +77,7 @@ rsync -a 0x12th-playbooks/skills/product-evolution ~/.agents/skills/
 Engineering delivery:
 
 ```bash
-git clone --branch v0.8.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.9.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
 ```
@@ -103,9 +103,9 @@ See `docs/installation.md` for more installation details.
 
 ## Automatic Selection
 
-Most AI coding agents select skills primarily from the skill `name` and frontmatter `description` in each `SKILL.md`. The descriptions in this repository expose common trigger phrases such as architecture review, migration planning, service boundaries, diagnosis, investigation, implementation, bug fixes, tests, CI failures, runtime failures, code review, diff review, and PR review.
+Most AI coding agents select skills primarily from the skill `name` and frontmatter `description` in each `SKILL.md`. The descriptions in this repository expose common trigger phrases such as product investment, customer requests, MVP, roadmap priority, architecture review, migration planning, service boundaries, production readiness, deployment readiness, VPS/server fit, runtime resource review, diagnosis, investigation, implementation, bug fixes, tests, CI failures, runtime failures, code review, diff review, and PR review.
 
-`product-evolution` is intentionally manual-only while it is being tuned. Invoke it explicitly with `Use product-evolution`.
+`product-evolution` supports soft automatic selection for product value, scope, MVP, roadmap, priority, customer request, feature scope, and "should we build this?" prompts. It should not be selected for implementation, debugging, architecture, migration, CI, tests, production readiness, deployment readiness, server/VPS fit, or runtime resource review.
 
 `manifests/skills.json` is an index and documentation aid. Some agents may use it, but it is not an official cross-agent standard and should not be required for skill loading.
 
@@ -128,9 +128,25 @@ Focus on operational cost, migration risk, ownership, and long-term maintenance.
 Should background jobs move to a different queue runtime?
 ```
 
+```text
+Is this ready for production?
+```
+
+```text
+Can I deploy this to a VPS?
+```
+
+```text
+Review deployment readiness and identify blockers.
+```
+
+```text
+What is the current architecture and what should the target architecture be?
+```
+
 Product evolution:
 
-Manual-only: start the prompt with `Use product-evolution.`
+You may explicitly invoke it with `Use product-evolution`, but product-value prompts should also route here automatically.
 
 Modes:
 
@@ -141,23 +157,23 @@ Modes:
 - `Roadmap Planning`
 
 ```text
-Use product-evolution. Quick Assessment: should this customer request become roadmap work?
+Quick Assessment: should this customer request become roadmap work?
 ```
 
 ```text
-Use product-evolution. Opportunity Analysis: should we invest in a mobile app, and what is the MVP?
+Opportunity Analysis: should we invest in a mobile app, and what is the MVP?
 ```
 
 ```text
-Use product-evolution. Pilot Evaluation: should we run an SSO pilot for this enterprise prospect?
+Pilot Evaluation: should we run an SSO pilot for this enterprise prospect?
 ```
 
 ```text
-Use product-evolution. Priority Arbitration: which should come first, mobile app or watch notifications?
+Priority Arbitration: which should come first, mobile app or watch notifications?
 ```
 
 ```text
-Use product-evolution. Roadmap Planning: prioritize mobile app, watch notifications, onboarding, and API access.
+Roadmap Planning: prioritize mobile app, watch notifications, onboarding, and API access.
 ```
 
 Engineering delivery:

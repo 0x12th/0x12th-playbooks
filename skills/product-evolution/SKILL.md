@@ -1,13 +1,13 @@
 ---
 name: product-evolution
 description: >-
-  Manual-only product investment decision skill. Use only when the user
-  explicitly asks to use product-evolution or names this skill. Helps evaluate
-  product initiatives, new features, customer requests, pilots, roadmap options,
-  priority conflicts, MVP scope, product strategy, opportunity sizing, and
-  whether something is worth doing at all before architecture or implementation.
-  Do not trigger automatically for general product, roadmap, feature, customer
-  request, architecture, or delivery requests.
+  Use for product investment and scope decisions: customer requests, roadmap
+  priorities, feature scope, MVP discussions, pilots, priority conflicts,
+  product strategy, opportunity sizing, whether something is worth doing, what
+  should come first, and the smallest useful solution before architecture or
+  implementation. Do not use for implementation, debugging, architecture design,
+  migration strategy, CI, tests, coding tasks, production readiness, deployment
+  readiness, server/VPS fit, or runtime resource review.
 ---
 
 # Product Evolution
@@ -82,32 +82,38 @@ next delivery action.
 
 ## Intent Detection
 
-This skill is manual-only during early tuning. Do not use it automatically based
-only on topic match. Use it only when the user explicitly invokes
-`product-evolution`, asks to use this skill, or asks to revise this skill.
-
-After explicit invocation, product evolution is appropriate when the request is
-about whether, why, when, for whom, or in what scope a product investment should
-happen.
+Use this skill automatically when the user's primary question is whether, why,
+when, for whom, or in what scope a product investment should happen.
 
 Product-evolution examples:
 
 - "Should we build this feature?"
 - "A customer asked for X. Is it worth doing?"
+- "Do we need this feature?"
 - "What is the MVP?"
+- "What is the smallest useful solution?"
+- "What is the smallest useful next step?"
 - "Which roadmap item should come first?"
+- "What should come first?"
 - "Which priority should win: mobile app or watch notifications?"
 - "Should we invest in autotests or new pilots first?"
 - "Should technical debt beat this customer request?"
+- "Should this customer request become roadmap work?"
 - "Is there a simpler way to solve this?"
 - "Evaluate this pilot."
 - "Help choose between these product directions."
 - "What should we do next to increase adoption?"
 
+Do not use this skill when the primary question is technical execution,
+architecture, deployment, debugging, CI, tests, or implementation.
+
 Non-product examples:
 
 - "Design the service boundary for this feature."
 - "How should this migration work?"
+- "Is this ready for production?"
+- "Can I deploy this to a VPS?"
+- "Review runtime resource usage."
 - "Implement this MVP."
 - "Write the tests."
 - "Fix the customer bug."
@@ -115,14 +121,16 @@ Non-product examples:
 Ambiguous roadmap rule:
 
 - Product roadmap, customer value, adoption, pricing, retention, sales,
-  support, or priority tradeoffs: in scope only after explicit invocation.
+  support, MVP, or priority tradeoffs: use `product-evolution`.
 - Technical roadmap, architecture debt, platform migration, reliability, data
-  ownership, or service evolution: use `engineering-architecture`.
+  ownership, deployment readiness, production readiness, capacity, or service
+  evolution: use `engineering-architecture`.
 
 Ambiguous feature rule:
 
-- If the feature is not yet justified, this skill can evaluate it only after
-  explicit invocation.
+- If the feature is not yet justified, or the user asks whether it is worth
+  building, what should come first, what the MVP is, or what the smallest useful
+  solution is, use `product-evolution`.
 - If the feature is justified and the system design is unclear, use
   `engineering-architecture`.
 - If the feature is justified and the user asks to build, fix, test, or ship it,
@@ -155,9 +163,8 @@ Examples are reference-only. Load them only when calibrating output shape.
 
 ## Mode Selection
 
-After the skill has been explicitly invoked, choose one mode automatically. If
-the request spans several modes, pick the smallest mode that can answer the
-decision.
+Choose one mode automatically. If the request spans several modes, pick the
+smallest mode that can answer the product decision.
 
 - **Quick Assessment**: Fast verdict on one idea, request, or initiative. Use
   when the user asks for a quick take, second opinion, "worth it?", "should we",
