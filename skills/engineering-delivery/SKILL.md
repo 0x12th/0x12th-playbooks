@@ -150,11 +150,63 @@ Do not fix unrelated issues discovered during the task. Mention them as follow-u
 
 Do not treat a change as complete without either validation or a clear explanation of why validation could not be run.
 
+## User-Visible Output Contract
+
+Show the result, not the machinery.
+
+The user should see only:
+
+- current finding, conclusion, or decision;
+- changed files, when files were changed;
+- validation result;
+- remaining risk;
+- next safe action.
+
+Do not expose:
+
+- hidden reasoning or `<thinking>...</thinking>` blocks;
+- tool calls, tool names, tool statuses, JSON payloads, command transcripts, or file-opening logs;
+- skill contents, loaded reference documents, or long copied instruction blocks;
+- repository traversal narration such as "I opened", "I searched", "I am checking", "I will inspect", or "I found these files";
+- internal planning notes, routing notes, or comparison notes;
+- raw diffs, full files, or large code blocks unless the user explicitly asks for them.
+
+Progress updates are allowed only when the task is long-running. They must be one or two short sentences and must summarize useful state, not actions of the agent.
+
+Bad progress update:
+
+```text
+I will inspect the repository, read SKILL.md, then open the docs and run validation.
+```
+
+Good progress update:
+
+```text
+The likely issue is in the delivery skill: implementation tasks still allow noisy progress narration. I am tightening that contract and keeping the change local.
+```
+
+Bad final report:
+
+```text
+Tool Call: Read file...
+Status: Completed
+<thinking>...</thinking>
+```
+
+Good final report:
+
+```text
+Changed `skills/engineering-delivery/SKILL.md`.
+Validation: not run; markdown-only instruction change.
+Remaining risk: other external skills may still print tool traces unless they have the same output contract.
+```
+
 ## Diff Output Policy
 
 Do not paste raw git diffs, patches, or large changed-code blocks by default.
 
 When reviewing or reporting changes:
+
 - summarize behavioral impact;
 - list changed files only when useful;
 - mention exact functions or paths when needed;
@@ -162,12 +214,14 @@ When reviewing or reporting changes:
 - provide a patch or diff only when the user explicitly asks for raw diff, patch, or exact code changes.
 
 Bad:
+
 ```diff
 - old code
 + new code
 ```
 
 Good:
+
 ```text
 Changed `DownloadManager.try_acquire()` to release the global slot if the per-user slot is rejected.
 Validation: `uv run pytest` passed.
@@ -186,8 +240,11 @@ Preserve user work. Do not overwrite unrelated changes.
 ## Optional Context Sources
 
 Optional memory backends may be used only when already available through the project or agent runtime.
+
 Do not consult memory before current local evidence. Use memory only as supplemental context for prior decisions, project conventions, or investigation history after selected context, repository files, code, tests, logs, diffs, validation results, and explicit user instructions have been checked.
+
 Treat memory as unverified until supported by current evidence. Memory must not replace reproduction, inspection, tests, or validation, and must not broaden the investigation or change scope by itself.
+
 Do not require, install, configure, or depend on a memory backend.
 
 ## Supporting Docs Loading
@@ -217,6 +274,7 @@ Examples:
 ## Output / Final Response
 
 For implementation work, report:
+
 - what changed;
 - changed files;
 - validation result;
