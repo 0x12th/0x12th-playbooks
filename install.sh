@@ -2,7 +2,7 @@
 set -eu
 
 REPO_URL="${REPO_URL:-https://github.com/0x12th/0x12th-playbooks.git}"
-TARGET_DIR="${1:-${SKILLS_DIR:-$HOME/.agents/skills}}"
+TARGET_DIR="${1:-${SKILLS_DIR:-}}"
 REF="${2:-${PLAYBOOKS_REF:-master}}"
 
 need() {
@@ -22,6 +22,24 @@ copy_skills() {
   else
     need tar
     (cd "$src" && tar cf - .) | (cd "$dst" && tar xf -)
+  fi
+}
+
+install_default_targets() {
+  installed=0
+
+  for agent_dir in "$HOME/.agents" "$HOME/.claude" "$HOME/.codex"; do
+    if [ -d "$agent_dir" ]; then
+      copy_skills "$SOURCE_DIR" "$agent_dir/skills"
+      echo "Installed 0x12th-playbooks skills to $agent_dir/skills"
+      installed=1
+    fi
+  done
+
+  if [ "$installed" -eq 0 ]; then
+    fallback="$HOME/.agents/skills"
+    copy_skills "$SOURCE_DIR" "$fallback"
+    echo "Installed 0x12th-playbooks skills to $fallback"
   fi
 }
 
@@ -58,6 +76,9 @@ if [ ! -d "$SOURCE_DIR" ]; then
   exit 1
 fi
 
-copy_skills "$SOURCE_DIR" "$TARGET_DIR"
-
-echo "Installed 0x12th-playbooks skills to $TARGET_DIR"
+if [ -n "$TARGET_DIR" ]; then
+  copy_skills "$SOURCE_DIR" "$TARGET_DIR"
+  echo "Installed 0x12th-playbooks skills to $TARGET_DIR"
+else
+  install_default_targets
+fi

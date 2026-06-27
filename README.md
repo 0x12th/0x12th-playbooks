@@ -36,7 +36,9 @@ Use the strict chain when multiple layers are needed: `product-evolution` -> `en
 
 Install the full skill folders when possible, not only `SKILL.md`. The supporting `docs/`, `templates/`, and `examples/` are intentionally loaded on demand and improve behavior after the skill is selected.
 
-The commands below use `~/.agents/skills` as a common example. Replace it with the skills directory used by your agent setup.
+By default, `install.sh` installs into existing agent homes: `~/.agents/skills`, `~/.claude/skills`, and `~/.codex/skills`. It skips missing agent homes so it does not create unused directories. If none exist, it falls back to `~/.agents/skills` for first-time setup.
+
+The manual commands below use `~/.agents/skills` as a common example. Replace it with the skills directory used by your agent setup.
 
 ### Quick Install
 
@@ -49,7 +51,7 @@ curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/inst
 Pinned version:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.10.1/install.sh | sh -s -- ~/.agents/skills v0.10.1
+curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.11.0/install.sh | sh -s -- ~/.agents/skills v0.11.0
 ```
 
 Custom target directory:
@@ -71,7 +73,7 @@ rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 Pinned version:
 
 ```bash
-git clone --branch v0.10.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.11.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 ```
@@ -81,7 +83,7 @@ rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 Architecture review:
 
 ```bash
-git clone --branch v0.10.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.11.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/engineering-architecture ~/.agents/skills/
 ```
@@ -89,7 +91,7 @@ rsync -a 0x12th-playbooks/skills/engineering-architecture ~/.agents/skills/
 Product evolution:
 
 ```bash
-git clone --branch v0.10.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.11.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/product-evolution ~/.agents/skills/
 ```
@@ -97,7 +99,7 @@ rsync -a 0x12th-playbooks/skills/product-evolution ~/.agents/skills/
 Engineering delivery:
 
 ```bash
-git clone --branch v0.10.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.11.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
 ```

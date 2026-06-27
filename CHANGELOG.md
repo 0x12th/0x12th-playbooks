@@ -4,6 +4,19 @@ All notable changes to this repository are documented in this file.
 
 ## Unreleased
 
+## 0.11.0 - 2026-06-27
+
+### Added
+
+- Added default installation into existing `~/.agents`, `~/.claude`, and `~/.codex` agent homes.
+- Kept first-time fallback installation into `~/.agents/skills` when no supported agent home exists.
+
+### Changed
+
+- Tightened `engineering-delivery` user-visible output rules to report results without tool traces, raw command transcripts, copied skill contents, or internal planning notes.
+- Tightened `engineering-architecture` progress and final response rules for decision-oriented output during long-running work.
+- Updated installation metadata and pinned examples for `v0.11.0`.
+
 ## 0.10.1 - 2026-06-12
 
 ### Fixed
