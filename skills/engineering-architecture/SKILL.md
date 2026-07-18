@@ -64,7 +64,7 @@ Does not apply to:
 - PR preparation
 - Direct implementation work
 
-When the user asks to implement, fix, test, validate, refactor locally, or prepare a PR, do not proceed with architecture review unless an architecture decision is required first. State the missing decision instead of explaining skill routing.
+When the user asks to implement, fix, test, validate, refactor locally, or prepare a PR, do not proceed with architecture review unless an architecture decision is required first. State the missing decision instead of explaining skill routing, unless the user asks or the host runtime requires disclosure.
 
 ## Intent Detection
 Choose architecture review when the request is about whether, why, where, or how the system should evolve technically.
@@ -187,7 +187,8 @@ Do not mix the author's/input language with unrelated explanatory prose in anoth
 Show results, not the investigation process.
 The user should see only: findings, conclusions, tradeoffs, recommendations, decisions, roadmap or next safe steps, confidence and missing evidence when relevant.
 Do not dump large code diffs or implementation patches by default. Provide findings, rationale, impact, and recommended change. Include code or diffs only when explicitly requested.
-Do not expose: process narration, investigation narration, repository exploration narration, tool-use status, file-opening narration, skill selection, skill execution, skill routing, internal planning narration, thinking traces, internal reasoning, or internal comparison notes.
+Do not expose process narration, investigation narration, repository exploration narration, tool-use status, file-opening narration, internal planning narration, thinking traces, internal reasoning, or internal comparison notes.
+Do not expose skill selection, skill execution, or skill routing unless the user asks or the host runtime requires disclosure.
 Never output messages like:
 ```text
 I will inspect...
@@ -317,6 +318,19 @@ Validate:
 - The expected benefit is worth the cost.
 It is valid to recommend no change, postponement, more evidence, or a smaller local intervention. Full decision framework lives in `docs/decision-support.md`.
 
+## Technical Disposition
+
+Begin every architecture review with a direct verdict appropriate to its mode. For example, a readiness review uses `Ready`, `Conditionally ready`, or `Not ready`; other modes state the decision directly.
+
+Assign every significant architecture recommendation one technical disposition:
+
+- **Required before implementation:** delivery cannot proceed safely until this is resolved.
+- **Next safe step:** this is the smallest justified technical action now.
+- **Defer pending evidence:** the change may become useful, but current evidence cannot justify it.
+- **Do not implement:** current cost, risk, or lack of material benefit argues against the change.
+
+Technical disposition is not a product investment decision. After assigning it, state the supporting evidence, minimum next step, validation signal, primary risk, and rollback or mitigation when relevant.
+
 ## Migration Planning
 Prefer this planning shape:
 ```text
@@ -333,8 +347,11 @@ Before recommending migration, verify current pain, material benefit, migration 
 
 ## Output Shapes
 Use the smallest useful structure.
+Begin every review with `Verdict: <direct mode-appropriate decision>`.
 Quick scan:
 ```text
+Verdict: <direct decision>
+
 1. <Finding title>
    Severity:
    Impact:
@@ -353,14 +370,15 @@ When architecture evolution, scaling constraints, or technical sequencing is par
 Use Target Architecture only if structural change is justified; otherwise say that no target architecture change is needed yet.
 Use diagrams only when they improve understanding. For Full Review + Technical Evolution, include a diagram when discussing structural evolution, architecture transitions, major dependency changes, or platform changes. Maximum two diagrams per review, and keep them small.
 Focused review:
-1. Scope
-2. Local architecture model, if useful
-3. Ranked findings for the target area
-4. Next safe steps
-5. Uncertainty or missing context
+1. Verdict
+2. Scope
+3. Local architecture model, if useful
+4. Ranked findings for the target area
+5. Next safe steps
+6. Uncertainty or missing context
 
 Decision support:
-1. Recommendation
+1. Verdict and recommendation
 2. Why
 3. Options compared
 4. Cost and risk comparison
@@ -368,7 +386,7 @@ Decision support:
 6. Confidence
 
 Migration review:
-1. Recommendation
+1. Verdict and recommendation
 2. Current state and current pain
 3. Next safe step
 4. Intermediate states
@@ -390,12 +408,13 @@ Deployment Readiness Review:
 8. Missing evidence and confidence
 
 Full review:
-1. Scope, selected repository, assumptions, and evidence inspected
-2. Current architecture model: major components, responsibilities, key dependencies, runtime/deployment shape, and critical flows
-3. Strengths and constraints
-4. Findings ranked by severity and practical priority
-5. Technical evolution analysis when relevant: constraints, options, target architecture or explicit "no target change needed"
-6. Next safe steps with validation signals
-7. Remaining uncertainty and missing evidence
+1. Verdict
+2. Scope, selected repository, assumptions, and evidence inspected
+3. Current architecture model: major components, responsibilities, key dependencies, runtime/deployment shape, and critical flows
+4. Strengths and constraints
+5. Findings ranked by severity and practical priority
+6. Technical evolution analysis when relevant: constraints, options, target architecture or explicit "no target change needed"
+7. Next safe steps with validation signals
+8. Remaining uncertainty and missing evidence
 
 Do not add an executive summary to quick scan unless the user asks for one.

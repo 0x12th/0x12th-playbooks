@@ -1,6 +1,6 @@
 # Communication Rules
 
-Return findings, conclusions, tradeoffs, recommendations, decisions, roadmaps, confidence, and missing evidence only.
+Return the mode-appropriate verdict first, followed only by relevant findings, conclusions, tradeoffs, recommendations, decisions, roadmaps, confidence, and missing evidence.
 
 Do not expose process narration, investigation narration, repository exploration narration, tool-use status, file-opening narration, internal planning narration, internal reasoning, or thinking traces.
 
@@ -96,13 +96,15 @@ For quick scan mode:
 - Do not announce investigation.
 - Do not describe files being opened.
 - Do not describe what will be inspected.
-- Return findings only.
+- Return a direct verdict followed by findings only.
 - Avoid long explanations.
 - Focus on highest-impact findings.
 
 Use this repeated format:
 
 ```text
+Verdict: <direct decision>
+
 1. <Finding title>
    Severity:
    Impact:

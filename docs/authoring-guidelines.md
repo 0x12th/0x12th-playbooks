@@ -14,6 +14,9 @@ These guidelines keep skills useful for AI coding agents without increasing cont
 - Decide before implementation.
 - Prefer evidence-first reasoning.
 - Avoid process narration in final outputs.
+- Start review contracts with a mode-appropriate verdict.
+- Omit optional output sections when they would be empty.
+- Validate behavior changes with representative agent scenarios.
 
 ## Skill Entry Points
 
@@ -41,6 +44,25 @@ Use docs for:
 - Testing rules
 - Decision frameworks
 - Economics and tradeoff models
+
+Runtime behavior belongs in the relevant skill or a supporting document linked
+directly from that skill. Authoring guidance should state the design requirement
+without copying the full runtime rule.
+
+## Behavioral Changes
+
+Before changing a behavioral rule:
+
+- identify the observed failure or ambiguity;
+- check whether the current skill already covers it;
+- avoid adding a duplicate rule when a focused clarification is sufficient;
+- define required and forbidden behavior with a representative scenario;
+- keep findings, confirmed defects, validation gaps, and optional ideas distinct;
+- account for user requests and host-runtime instructions before writing an
+  absolute rule.
+
+Use `behavior-evaluation.md` for the maintainer evaluation method and stable
+cross-agent scenarios. Do not store model run transcripts in the repository.
 
 ## Avoid Overengineering
 

@@ -9,7 +9,9 @@ Review this PR.
 Example output:
 
 ```md
-Findings:
+Verdict: Changes required
+
+Blocking findings:
 
 1. Missing validation for empty input
    Severity: High
@@ -18,14 +20,15 @@ Findings:
    Impact: Invalid requests can create failed jobs that are hard to reconcile.
    Suggested fix: Reject empty job ids before creating the job record and add a regression test.
 
-2. Test only covers the success path
-   Severity: Medium
-   File: `tests/test_run_job.py`
-   Problem: The added test verifies a valid job but not invalid input or runner failure.
-   Impact: The behavior most likely to regress is not protected.
-   Suggested fix: Add tests for invalid input and runner exceptions.
+Validation gaps:
 
-Validation gap:
+- No coverage is visible for invalid input or runner failure.
 
-- No coverage is visible for the failure path introduced by this change.
+Optional improvements:
+
+1. Rename the local runner helper
+   File: `src/commands/run_job.py`
+   Problem: The helper name is broader than its current responsibility.
+   Impact: Readability only; this does not block delivery.
+   Suggested fix: Consider a focused rename in a separate change.
 ```

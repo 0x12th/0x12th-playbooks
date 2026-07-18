@@ -46,7 +46,20 @@ When reviewing changes:
 
 ## Output
 
-Lead with findings ordered by severity.
+Begin with exactly one verdict:
+
+- **Pass:** no confirmed defect blocks delivery.
+- **Changes required:** at least one confirmed defect blocks delivery.
+- **Blocked by missing evidence:** the available evidence cannot support a safe verdict.
+
+After the verdict, include only non-empty sections that help the user act:
+
+1. Blocking findings
+2. Non-blocking findings
+3. Validation gaps
+4. Optional improvements
+
+Order findings by severity inside each findings section. Do not mix confirmed defects with optional design, naming, cleanup, or refactoring ideas. Do not print empty sections.
 
 For each finding, include:
 
@@ -58,4 +71,18 @@ For each finding, include:
 
 If there are no findings, say that clearly and mention any validation or test gaps that remain.
 
-Keep summaries secondary to findings.
+Keep summaries secondary to the verdict and findings.
+
+## External Recommendation Audit
+
+When the user provides external review comments or recommendations and asks whether they are valid, verify each premise and classify each recommendation as:
+
+- **Correct**
+- **Correct but optional**
+- **Incorrect**
+- **Already addressed**
+- **Invalid premise**
+
+Give a concise evidence-based rationale for each classification. Use missing evidence to limit confidence instead of accepting or rejecting a recommendation speculatively.
+
+This is conditional review behavior, not a separate work mode. Do not use this classification table for an ordinary code, diff, commit, or PR review.

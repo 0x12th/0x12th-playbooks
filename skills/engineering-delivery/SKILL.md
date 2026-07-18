@@ -64,7 +64,7 @@ Does not apply to:
 - Long-term tradeoff analysis
 - Broad architecture assessment
 
-When a product or architecture decision is required before delivery work can continue, stop and state the decision that is missing. Do not route, announce, or explain skill selection.
+When a product or architecture decision is required before delivery work can continue, stop and state the decision that is missing. Do not route, announce, or explain skill selection unless the user asks or the host runtime requires disclosure.
 
 ## Intent Detection
 
@@ -131,7 +131,7 @@ Choose the smallest useful mode:
 - **Investigation**: gather only the evidence needed to answer when selected context is insufficient.
 - **Implementation**: make a bounded code or config change only after an explicit edit request.
 - **Validation**: run checks, explain pass/fail results, and classify failures.
-- **Review**: assess selected code, diffs, commits, or PRs for bugs, regressions, missing tests, and delivery risk.
+- **Review**: assess selected code, diffs, commits, or PRs for bugs, regressions, missing tests, and delivery risk. Begin with `Pass`, `Changes required`, or `Blocked by missing evidence`.
 
 ## Execution Discipline
 
@@ -256,6 +256,7 @@ Load supporting docs only when the current task needs more detail:
 - `docs/language-rules.md`, `docs/communication-rules.md`, and `docs/selected-context-rules.md`: the core language, communication, and selected-evidence principles are already summarized here; use these as references for non-trivial language, output, selected-context, or scope conflicts.
 - `docs/implementation-workflow.md`, `docs/code-change-rules.md`, and `docs/validation-rules.md`: load for medium- or high-risk implementation, shared contracts, public APIs, migrations, deployment configuration, CI pipelines, dependency versions, generated files, or when this core is insufficient to choose the safe change or validation path.
 - `docs/testing-rules.md`: load for test or regression work.
+- `docs/python-testing-rules.md`: load with `docs/testing-rules.md` for Python test or regression work.
 - `docs/code-review-rules.md`: load for selected code, diff, commit, or PR review.
 
 Supporting templates:

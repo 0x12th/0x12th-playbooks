@@ -9,6 +9,10 @@ Review the worker queue architecture for reliability, observability, and perform
 Example output:
 
 ```md
+## Verdict
+
+Conditionally ready. The worker path can remain in its current architecture, but bounded retries are required before increasing load or concurrency.
+
 ## Scope and evidence
 
 Scope: worker queue path — producers, worker loop, retry handling, queue configuration, deployment settings, and tests.
@@ -31,6 +35,8 @@ Root cause: Retry behavior is embedded in worker control flow rather than define
 
 Proposed solution: Add max attempts, exponential backoff with jitter, dead-letter routing, and metrics for retry count and dead-letter volume.
 
+Disposition: Required before implementation.
+
 Complexity: Medium
 Risk: Medium
 Expected benefit: Lower blast radius during dependency incidents and faster diagnosis.
@@ -47,6 +53,8 @@ Impact: Scaling workers may increase dependency failures or database contention 
 Root cause: Capacity planning is implicit in configuration rather than modeled as part of the queue architecture.
 
 Proposed solution: Document throughput assumptions, add queue-age metrics, and run a small load test before increasing concurrency.
+
+Disposition: Next safe step.
 
 Complexity: Small
 Risk: Low

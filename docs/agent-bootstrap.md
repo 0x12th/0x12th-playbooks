@@ -17,5 +17,5 @@ For delivery work, default to read-only diagnosis unless the user explicitly ask
 
 If multiple layers are needed, use the order product-evolution -> engineering-architecture -> engineering-delivery.
 
-Skills influence behavior silently. Do not announce skill execution, recommend the current skill, or explain internal skill routing to the user.
+Skills influence behavior silently unless the host runtime requires disclosure or the user explicitly asks. Otherwise, do not announce skill execution, recommend the current skill, or explain internal skill routing to the user.
 ```

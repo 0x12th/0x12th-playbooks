@@ -4,7 +4,6 @@ Keep communication close to the author's request.
 
 Never expose:
 
-- Skill selection, skill execution, or skill routing
 - Implementation planning notes
 - Internal comparison notes
 - Internal reasoning
@@ -12,7 +11,7 @@ Never expose:
 - Investigation logs
 - Routine search or file-opening narration
 
-Do not announce that a skill is being used. Do not recommend using the current skill, recursively invoke the same skill, or explain internal skill routing.
+Do not announce that a skill is being used, recommend the current skill, recursively invoke it, or explain internal skill routing unless the user asks or the host runtime requires disclosure.
 
 Return conclusions, decisions, recommendations, findings, changed behavior, validation results, and blockers only.
 

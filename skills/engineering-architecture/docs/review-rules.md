@@ -76,6 +76,7 @@ Prefer fewer findings with stronger evidence over a larger speculative list.
 
 Quick scan:
 
+- Direct verdict first.
 - 3-5 findings only.
 - No executive summary.
 - No broad architecture model.
@@ -83,18 +84,20 @@ Quick scan:
 
 Focused review:
 
-1. Scope
-2. Concise local architecture model, if useful
-3. Ranked findings for the target area
-4. Practical next steps
-5. Uncertainty or missing context
+1. Verdict
+2. Scope
+3. Concise local architecture model, if useful
+4. Ranked findings for the target area
+5. Practical next steps
+6. Uncertainty or missing context
 
 Full review:
 
-1. Scope, selected repository, assumptions, and evidence inspected
-2. Current architecture model: major components, responsibilities, key dependencies, runtime/deployment shape, and critical flows
-3. Strengths and constraints
-4. Findings ranked by severity and practical priority
-5. Technical evolution or deployment readiness analysis when relevant: constraints, options, readiness verdict, target architecture or explicit "no target change needed"
-6. Next safe steps with validation, rollback or mitigation, and observability signals
-7. Remaining uncertainty and missing evidence
+1. Verdict
+2. Scope, selected repository, assumptions, and evidence inspected
+3. Current architecture model: major components, responsibilities, key dependencies, runtime/deployment shape, and critical flows
+4. Strengths and constraints
+5. Findings ranked by severity and practical priority
+6. Technical evolution or deployment readiness analysis when relevant: constraints, options, readiness verdict, target architecture or explicit "no target change needed"
+7. Next safe steps with validation, rollback or mitigation, and observability signals
+8. Remaining uncertainty and missing evidence
