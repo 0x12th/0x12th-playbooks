@@ -51,7 +51,7 @@ curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/inst
 Pinned version:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.11.0/install.sh | sh -s -- ~/.agents/skills v0.11.0
+curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.12.0/install.sh | sh -s -- ~/.agents/skills v0.12.0
 ```
 
 Custom target directory:
@@ -73,7 +73,7 @@ rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 Pinned version:
 
 ```bash
-git clone --branch v0.11.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 ```
@@ -83,7 +83,7 @@ rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 Architecture review:
 
 ```bash
-git clone --branch v0.11.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/engineering-architecture ~/.agents/skills/
 ```
@@ -91,7 +91,7 @@ rsync -a 0x12th-playbooks/skills/engineering-architecture ~/.agents/skills/
 Product evolution:
 
 ```bash
-git clone --branch v0.11.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/product-evolution ~/.agents/skills/
 ```
@@ -99,7 +99,7 @@ rsync -a 0x12th-playbooks/skills/product-evolution ~/.agents/skills/
 Engineering delivery:
 
 ```bash
-git clone --branch v0.11.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
 ```
@@ -294,3 +294,6 @@ Run consistency checks before release:
 ```bash
 python3 .github/scripts/check_skills.py
 ```
+
+Behavioral skill changes should also be checked against the stable Codex and
+Claude scenarios in `docs/behavior-evaluation.md`.

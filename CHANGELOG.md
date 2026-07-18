@@ -4,6 +4,22 @@ All notable changes to this repository are documented in this file.
 
 ## Unreleased
 
+## 0.12.0 - 2026-07-18
+
+### Added
+
+- Added stable cross-agent behavior evaluation scenarios for Codex and Claude.
+- Added Python-specific testing guidance for realistic fixtures, component tests, controlled external boundaries, and narrow legacy exceptions.
+
+### Changed
+
+- Made delivery reviews verdict-first and separated blocking findings, validation gaps, and optional improvements.
+- Added premise verification and explicit classification for external review recommendations.
+- Added technical dispositions to architecture recommendations so agents distinguish required work, next safe steps, deferred ideas, and changes that should not be implemented.
+- Tightened scope and exploration discipline while preserving host-runtime disclosure requirements.
+- Shifted testing guidance from mock-driven implementation checks toward observable behavior, regression confidence, and refactoring safety.
+- Updated installation metadata and pinned examples for `v0.12.0`.
+
 ## 0.11.0 - 2026-06-27
 
 ### Added
