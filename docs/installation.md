@@ -84,7 +84,7 @@ Use clone-based installation into the skills directory used by your Zed setup. E
 ~/.agents/skills
 ```
 
-Zed can import a single `SKILL.md` from a raw URL, but that does not include supporting docs, templates, or examples. Clone-based installation is recommended.
+Zed can import a single `SKILL.md` from a raw URL, but that does not include supporting references, templates, or examples. Clone-based installation is recommended.
 
 Raw URLs:
 

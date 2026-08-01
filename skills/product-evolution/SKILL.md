@@ -136,19 +136,19 @@ Ambiguous feature rule:
 - If the feature is justified and the user asks to build, fix, test, or ship it,
   use `engineering-delivery`.
 
-Full routing rules live in `docs/routing.md`.
+Full routing rules live in `references/routing.md`.
 
 ## Loading Policy
 
 Start with `SKILL.md` only.
 
-Load supporting docs only when needed:
+Load supporting references only when needed:
 
-- `docs/routing.md`: use for ambiguous skill boundaries or routing conflicts.
-- `docs/decision-model.md`: use for non-trivial prioritization, roadmap, value,
+- `references/routing.md`: use for ambiguous skill boundaries or routing conflicts.
+- `references/decision-model.md`: use for non-trivial prioritization, roadmap, value,
   effort, risk, or confidence decisions.
-- `docs/modes.md`: use when the output needs a fuller mode-specific structure.
-- `docs/evidence-rules.md`: use when assumptions, unknowns, validation, metrics,
+- `references/modes.md`: use when the output needs a fuller mode-specific structure.
+- `references/evidence-rules.md`: use when assumptions, unknowns, validation, metrics,
   or customer evidence are central.
 
 Templates are optional output aids:

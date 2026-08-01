@@ -34,7 +34,7 @@ Use the strict chain when multiple layers are needed: `product-evolution` -> `en
 
 ## Installation
 
-Install the full skill folders when possible, not only `SKILL.md`. The supporting `docs/`, `templates/`, and `examples/` are intentionally loaded on demand and improve behavior after the skill is selected.
+Install the full skill folders when possible, not only `SKILL.md`. The supporting `references/`, `templates/`, and `examples/` are intentionally loaded on demand and improve behavior after the skill is selected.
 
 By default, `install.sh` installs into existing agent homes: `~/.agents/skills`, `~/.claude/skills`, and `~/.codex/skills`. It skips missing agent homes so it does not create unused directories. If none exist, it falls back to `~/.agents/skills` for first-time setup.
 
@@ -113,7 +113,7 @@ Common destinations:
 - Codex: `~/.codex/skills`
 - Project-local skills: `.agents/skills`
 
-Raw `SKILL.md` URLs are useful for agents that support URL imports, but they do not include supporting `docs/`, `templates/`, or `examples/`:
+Raw `SKILL.md` URLs are useful for agents that support URL imports, but they do not include supporting `references/`, `templates/`, or `examples/`:
 
 ```text
 https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture/SKILL.md
@@ -287,7 +287,7 @@ See:
 
 ## Development And Contribution
 
-Keep skill entrypoints short, move detailed behavior into directly linked docs, and avoid adding new files unless they improve agent behavior. See `docs/authoring-guidelines.md`.
+Keep skill entrypoints short, move detailed behavior into directly linked references, and avoid adding new files unless they improve agent behavior. See `docs/authoring-guidelines.md`.
 
 Run consistency checks before release:
 

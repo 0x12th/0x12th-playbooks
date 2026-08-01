@@ -247,17 +247,17 @@ Treat memory as unverified until supported by current evidence. Memory must not 
 
 Do not require, install, configure, or depend on a memory backend.
 
-## Supporting Docs Loading
+## Supporting References Loading
 
-The runtime core above is the default execution contract. Do not load supporting docs just because they exist.
+The runtime core above is the default execution contract. Do not load supporting references just because they exist.
 
-Load supporting docs only when the current task needs more detail:
+Load supporting references only when the current task needs more detail:
 
-- `docs/language-rules.md`, `docs/communication-rules.md`, and `docs/selected-context-rules.md`: the core language, communication, and selected-evidence principles are already summarized here; use these as references for non-trivial language, output, selected-context, or scope conflicts.
-- `docs/implementation-workflow.md`, `docs/code-change-rules.md`, and `docs/validation-rules.md`: load for medium- or high-risk implementation, shared contracts, public APIs, migrations, deployment configuration, CI pipelines, dependency versions, generated files, or when this core is insufficient to choose the safe change or validation path.
-- `docs/testing-rules.md`: load for test or regression work.
-- `docs/python-testing-rules.md`: load with `docs/testing-rules.md` for Python test or regression work.
-- `docs/code-review-rules.md`: load for selected code, diff, commit, or PR review.
+- `references/language-rules.md`, `references/communication-rules.md`, and `references/selected-context-rules.md`: the core language, communication, and selected-evidence principles are already summarized here; use these as references for non-trivial language, output, selected-context, or scope conflicts.
+- `references/implementation-workflow.md`, `references/code-change-rules.md`, and `references/validation-rules.md`: load for medium- or high-risk implementation, shared contracts, public APIs, migrations, deployment configuration, CI pipelines, dependency versions, generated files, or when this core is insufficient to choose the safe change or validation path.
+- `references/testing-rules.md`: load for test or regression work.
+- `references/python-testing-rules.md`: load with `references/testing-rules.md` for Python test or regression work.
+- `references/code-review-rules.md`: load for selected code, diff, commit, or PR review.
 
 Supporting templates:
 

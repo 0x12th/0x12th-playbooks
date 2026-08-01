@@ -127,20 +127,20 @@ Do not read supporting documents just because they exist. Load extra documents o
 Default loading by task type:
 - Quick scan: `SKILL.md` only.
 - Technical Evolution perspective: use the selected mode's loading policy; for repository-wide or project-wide Technical Evolution, use Full Review loading.
-- Focused review: `SKILL.md` only, or `SKILL.md` + `docs/review-rules.md` for non-trivial subsystem analysis.
-- Decision support: `SKILL.md` only, or `SKILL.md` + `docs/decision-support.md` when options must be formally compared.
-- Design challenge: `SKILL.md` only, or `SKILL.md` + `docs/design-challenge.md` when pressure-testing a concrete proposal.
-- Migration review: `SKILL.md` only, or `SKILL.md` + `docs/migration-review.md` for complex migrations, extractions, replacements, coexistence, rollback, or staged evolution.
-- Deployment Readiness Review: `SKILL.md` + `docs/review-rules.md`; load templates only if the user asks for a formal report.
-- Full review: `SKILL.md` + `docs/review-rules.md`; load templates only if the user asks for a formal report.
+- Focused review: `SKILL.md` only, or `SKILL.md` + `references/review-rules.md` for non-trivial subsystem analysis.
+- Decision support: `SKILL.md` only, or `SKILL.md` + `references/decision-support.md` when options must be formally compared.
+- Design challenge: `SKILL.md` only, or `SKILL.md` + `references/design-challenge.md` when pressure-testing a concrete proposal.
+- Migration review: `SKILL.md` only, or `SKILL.md` + `references/migration-review.md` for complex migrations, extractions, replacements, coexistence, rollback, or staged evolution.
+- Deployment Readiness Review: `SKILL.md` + `references/review-rules.md`; load templates only if the user asks for a formal report.
+- Full review: `SKILL.md` + `references/review-rules.md`; load templates only if the user asks for a formal report.
 
 Reference-only documents. Do not load for routine work because the source of truth is this file:
-- `docs/language-rules.md`
-- `docs/communication-rules.md`
-- `docs/selected-context-rules.md`
-- `docs/exploration-budget.md`
-- `docs/anti-overengineering.md`
-- `docs/economics.md`
+- `references/language-rules.md`
+- `references/communication-rules.md`
+- `references/selected-context-rules.md`
+- `references/exploration-budget.md`
+- `references/anti-overengineering.md`
+- `references/economics.md`
 
 Rare documents. Load only when explicitly requested or when output format is unclear:
 - `templates/checklists.md`
@@ -241,7 +241,7 @@ Do not require, install, configure, or depend on a memory backend to proceed.
 
 ### Exploration Budget
 Use the smallest repository exploration budget that can support the requested decision. Stop when enough evidence exists to answer; the goal is sufficient evidence for decision-making, not exhaustive repository traversal.
-For detailed budgets, mode-specific guidance, and stop conditions, use `docs/exploration-budget.md` only when needed.
+For detailed budgets, mode-specific guidance, and stop conditions, use `references/exploration-budget.md` only when needed.
 
 ### Anti-Overengineering
 Architecture work should reduce real cost, not create architectural theater. Prefer consolidation over extraction, local improvement over redesign, and evidence over architectural fashion.
@@ -249,7 +249,7 @@ Before recommending structural change, compare:
 1. Current state / do nothing.
 2. Minimal local improvement.
 3. Proposed change.
-If the minimal local improvement captures most of the benefit with lower cost and risk, prefer it. Full rules and anti-futurism guidance live in `docs/anti-overengineering.md`.
+If the minimal local improvement captures most of the benefit with lower cost and risk, prefer it. Full rules and anti-futurism guidance live in `references/anti-overengineering.md`.
 
 ### Anti-Futurism
 Do not design services, brokers, adapters, layers, runtimes, or platform components that the current problem does not require.
@@ -259,7 +259,7 @@ Any new service, broker, adapter, runtime, or platform component must be explici
 Evaluate economics before recommending architecture changes.
 Account for implementation cost, migration cost, operational cost, maintenance cost, cognitive load, complexity delta, and confidence gates.
 If cost exceeds expected benefit, recommend no change, postponement, more evidence, or a smaller local intervention.
-Large migrations, service extractions, and infrastructure replacements require material current pain, measurable expected benefit, and a credible migration plan. Full cost model and confidence gates live in `docs/economics.md`.
+Large migrations, service extractions, and infrastructure replacements require material current pain, measurable expected benefit, and a credible migration plan. Full cost model and confidence gates live in `references/economics.md`.
 
 ## Evolutionary Architecture Rule
 Prefer evolutionary architecture over target-first architecture.
@@ -296,7 +296,7 @@ Evaluate only lenses relevant to the request: modularity, maintainability, servi
 
 Each finding should map to one or more reasons: ownership mismatch, boundary violation, contract or data risk, operational risk, migration risk, maintenance cost, cognitive load, complexity delta, reliability risk, delivery impact, or missing evidence.
 
-Prefer fewer findings with stronger evidence over a larger speculative list. Full review rules live in `docs/review-rules.md`.
+Prefer fewer findings with stronger evidence over a larger speculative list. Full review rules live in `references/review-rules.md`.
 
 ## Evidence and Validation Discipline
 Architecture recommendations are proposals until validated by system evidence. Use repository structure, contracts, tests, operational signals, incident history, migration dry runs, or stakeholder constraints when available.
@@ -316,7 +316,7 @@ Validate:
 - The problem exists.
 - The problem is material.
 - The expected benefit is worth the cost.
-It is valid to recommend no change, postponement, more evidence, or a smaller local intervention. Full decision framework lives in `docs/decision-support.md`.
+It is valid to recommend no change, postponement, more evidence, or a smaller local intervention. Full decision framework lives in `references/decision-support.md`.
 
 ## Technical Disposition
 
@@ -343,7 +343,7 @@ Intermediate State
 Target Architecture
 ```
 A credible migration plan must define validation, observability, rollback or mitigation, and old/new path coexistence.
-Before recommending migration, verify current pain, material benefit, migration duration, ownership and operational readiness, and cleanup of old paths. Full migration framework lives in `docs/migration-review.md`.
+Before recommending migration, verify current pain, material benefit, migration duration, ownership and operational readiness, and cleanup of old paths. Full migration framework lives in `references/migration-review.md`.
 
 ## Output Shapes
 Use the smallest useful structure.

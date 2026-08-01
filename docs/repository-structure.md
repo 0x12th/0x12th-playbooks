@@ -15,17 +15,17 @@ The repository is organized as a multi-skill library.
 ├── skills/
 │   ├── engineering-architecture/
 │   │   ├── SKILL.md
-│   │   ├── docs/
+│   │   ├── references/
 │   │   ├── templates/
 │   │   └── examples/
 │   ├── engineering-delivery/
 │   │   ├── SKILL.md
-│   │   ├── docs/
+│   │   ├── references/
 │   │   ├── templates/
 │   │   └── examples/
 │   └── product-evolution/
 │       ├── SKILL.md
-│       ├── docs/
+│       ├── references/
 │       ├── templates/
 │       └── examples/
 ├── manifests/
@@ -43,11 +43,11 @@ The repository is organized as a multi-skill library.
 Each skill has:
 
 - `SKILL.md`: concise activation, boundaries, intent detection, mode/work selection, and references.
-- `docs/`: detailed rules loaded on demand.
+- `references/`: detailed rules loaded on demand.
 - `templates/`: reusable output templates.
 - `examples/`: representative prompts and outputs.
 
-Keep `SKILL.md` small. Move detailed rules into docs and link them directly from `SKILL.md`.
+Keep `SKILL.md` small. Move detailed rules into references and link them directly from `SKILL.md`.
 
 ## Manifest
 
@@ -57,5 +57,5 @@ Platform-specific manifests are intentionally not included because Zed, Claude C
 
 ## Validation
 
-- `.github/scripts/check_skills.py`: validates skill modes, installation snippets, README skill references, and raw skill URL targets.
+- `.github/scripts/check_skills.py`: validates skill modes, bundled-resource references, installation snippets, README skill references, and raw skill URL targets.
 - `.github/workflows/check-skills.yml`: runs the same check in GitHub Actions.

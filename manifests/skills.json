@@ -16,7 +16,7 @@
       "This manifest does not define an official cross-agent standard.",
       "Skill auto-selection should not depend on this manifest being loaded."
     ],
-    "recommended_installation": "Install complete skill folders so agents can access SKILL.md plus supporting docs, templates, and examples after selection."
+    "recommended_installation": "Install complete skill folders so agents can access SKILL.md plus supporting references, templates, and examples after selection."
   },
   "installation": {
     "all_skills": [
@@ -49,7 +49,7 @@
       "If no agent homes exist, install.sh falls back to ~/.agents/skills for first-time setup.",
       "Pass a target directory as the first argument to install only into that directory.",
       "Replace ~/.agents/skills with the skills directory used by your agent setup.",
-      "Clone-based installation is recommended because skills include supporting docs, templates, and examples.",
+      "Clone-based installation is recommended because skills include supporting references, templates, and examples.",
       "Raw SKILL.md URL imports may omit supporting files depending on the host agent.",
       "install.sh installs all skill folders and can run from a local clone or via curl.",
       "install.sh accepts target directory as the first argument and git ref as the second argument."
