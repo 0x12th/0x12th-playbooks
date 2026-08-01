@@ -53,7 +53,7 @@ curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/inst
 Pinned version:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.12.0/install.sh | sh -s -- ~/.agents/skills v0.12.0
+curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.13.0/install.sh | sh -s -- ~/.agents/skills v0.13.0
 ```
 
 Custom target directory:
@@ -74,7 +74,7 @@ git clone https://github.com/0x12th/0x12th-playbooks.git
 Pinned version:
 
 ```bash
-git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.13.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 ./0x12th-playbooks/install.sh ~/.agents/skills
 ```
 
@@ -83,7 +83,7 @@ git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.
 Architecture review:
 
 ```bash
-git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.13.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a --delete 0x12th-playbooks/skills/engineering-architecture/ ~/.agents/skills/engineering-architecture/
 ```
@@ -91,7 +91,7 @@ rsync -a --delete 0x12th-playbooks/skills/engineering-architecture/ ~/.agents/sk
 Product evolution:
 
 ```bash
-git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.13.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a --delete 0x12th-playbooks/skills/product-evolution/ ~/.agents/skills/product-evolution/
 ```
@@ -99,7 +99,7 @@ rsync -a --delete 0x12th-playbooks/skills/product-evolution/ ~/.agents/skills/pr
 Engineering delivery:
 
 ```bash
-git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.13.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a --delete 0x12th-playbooks/skills/engineering-delivery/ ~/.agents/skills/engineering-delivery/
 ```

@@ -4,6 +4,25 @@ All notable changes to this repository are documented in this file.
 
 ## Unreleased
 
+## 0.13.0 - 2026-08-02
+
+### Added
+
+- Added a Current Product Assessment mode that separates product evidence from technical readiness and recommends the highest-value next investment.
+- Added cross-runtime scenarios for current-product routing, evidence discipline, and quiet authorized deletion.
+- Added installer regression coverage for explicit, default, fallback, tar-only, and piped pinned-ref installations.
+
+### Changed
+
+- Renamed bundled skill support directories from `docs/` to the conventional `references/` layout and validated referenced resources in CI.
+- Made installed copies of the three managed skill folders authoritative so updates remove stale files while preserving unrelated neighboring skills.
+- Tightened delivery output guidance so authorized deletions do not expose removed file contents.
+- Updated installation metadata and pinned examples for `v0.13.0`.
+
+### Fixed
+
+- Prevented piped installer runs from trusting a decoy `./skills` directory or bypassing the requested Git ref.
+
 ## 0.12.0 - 2026-07-18
 
 ### Added
