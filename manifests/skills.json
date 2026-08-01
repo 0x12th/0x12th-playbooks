@@ -72,6 +72,7 @@
       "purpose": "Answer what the highest-value product investment is.",
       "use_cases": [
         "product investment decisions",
+        "current product health and maturity assessment",
         "customer request evaluation",
         "feature scope decisions",
         "MVP boundaries",
@@ -99,14 +100,16 @@
       ],
       "modes": [
         "quick assessment",
+        "current product assessment",
         "opportunity analysis",
         "pilot evaluation",
         "roadmap planning",
         "priority arbitration"
       ],
       "selection_hints": [
-        "Use when the primary question is whether, why, when, for whom, or in what MVP scope to invest.",
+        "Use when the primary question is whether, why, when, for whom, or in what MVP scope to invest, or explicitly asks about current product health, maturity, adoption, retention, or customer value.",
         "Use for obvious product prompts such as should we build this, is this worth doing, what should come first, MVP, roadmap priority, customer request, and feature scope.",
+        "Use Current Product Assessment only for an explicit product lens; keep generic repository review and technical readiness with engineering-architecture.",
         "Use Priority Arbitration when competing initiatives cannot all receive resources now.",
         "After the product decision is made, hand technical design and readiness questions to engineering-architecture and implementation to engineering-delivery."
       ]
@@ -280,6 +283,10 @@
     },
     {
       "request": "A customer asked for X. Should we do it?",
+      "skill": "product-evolution"
+    },
+    {
+      "request": "Assess the current product health and recommend the highest-value next investment.",
       "skill": "product-evolution"
     },
     {

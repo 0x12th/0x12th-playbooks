@@ -2,6 +2,15 @@
 
 Use this document when `SKILL.md` is not enough to shape the output.
 
+## Contents
+
+- Quick Assessment
+- Current Product Assessment
+- Opportunity Analysis
+- Pilot Evaluation
+- Roadmap Planning
+- Priority Arbitration
+
 ## Quick Assessment
 
 Use for a fast verdict on one idea, feature, request, or initiative.
@@ -19,6 +28,34 @@ Output shape:
 9. What not to do.
 
 Keep it short. Do not build a full business case.
+
+## Current Product Assessment
+
+Use when the user explicitly asks for the current state, health, maturity, or
+product audit of an existing product rather than one proposed initiative.
+
+Output shape:
+
+1. State verdict and confidence.
+2. Product problem, target users, and current workaround.
+3. Evidence provenance: observed product or customer data, repository or
+   artifact evidence, and unknowns those artifacts cannot establish.
+4. Product health by decision-relevant dimensions such as core workflow,
+   activation, engagement, retention, quality, distribution, business model,
+   and operating constraints. Omit irrelevant dimensions.
+5. Product maturity separated from technical readiness. Passing tests,
+   architecture quality, and performance are not adoption evidence.
+6. Current course, smallest useful change, broader investment, and a manual or
+   pilot validation path.
+7. Highest-value next investment, roadmap placement, success gates, and what not
+   to do now.
+
+Keep the audit proportional to available evidence. Do not treat repository
+stars, commit volume, test count, or internal technical activity as customer
+validation. If live usage, customer interviews, retention, revenue, sales, or
+support signals are unavailable, make the verdict conditional. The next
+investment may be instrumentation, cohort review, interviews, support or sales
+analysis, or manual workflow validation rather than a feature build.
 
 ## Opportunity Analysis
 

@@ -5,7 +5,7 @@ Use this short text in `AGENTS.md`, `CLAUDE.md`, or similar project instructions
 ```text
 Use installed 0x12th-playbooks skills when relevant.
 
-Use product-evolution when the primary question is whether to do something, why, for whom, when, what MVP, how to validate, what has higher priority, whether a customer request should become product work, or what the smallest useful solution is. Explicit invocation is allowed but not required.
+Use product-evolution when the primary question is whether to do something, why, for whom, when, what MVP, how to validate, what has higher priority, whether a customer request should become product work, what the smallest useful solution is, or explicitly asks about current product health, maturity, adoption, retention, or customer value. Keep generic repository review and technical readiness with engineering-architecture. Explicit invocation is allowed but not required.
 
 Use engineering-architecture for architecture review, architecture decisions, migrations, service boundaries, domain boundaries, ownership, data ownership, system evolution, technical design, technical sequencing, production readiness, deployment readiness, release readiness, operational readiness, runtime resource review, VPS/server fit, current architecture, target architecture, capacity and scaling review, design challenge, tradeoff analysis, and technical decision support.
 

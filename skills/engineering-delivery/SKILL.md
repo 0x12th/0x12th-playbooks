@@ -205,6 +205,11 @@ Remaining risk: other external skills may still print tool traces unless they ha
 
 Do not paste raw git diffs, patches, or large changed-code blocks by default.
 
+When the host permits a choice, delete files with an operation that does not
+return their contents. Verify deletion through repository status or a path
+search. If the host requires a noisy edit primitive, do not repeat its payload
+in progress updates or the final response.
+
 When reviewing or reporting changes:
 
 - summarize behavioral impact;

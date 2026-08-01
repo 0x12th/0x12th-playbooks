@@ -3,9 +3,19 @@
 Use these rules when `product-evolution`, `engineering-architecture`, and
 `engineering-delivery` could all appear relevant.
 
+## Contents
+
+- Primary Question
+- Strict Decision Chain
+- Product Evolution Owns
+- Engineering Architecture Owns
+- Engineering Delivery Owns
+- Ambiguous Cases
+
 `product-evolution` supports soft automatic activation. Route to it when the
-primary question is product value, product scope, priority, MVP, customer
-request evaluation, roadmap sequencing, or whether something should be built.
+primary question is product value, current product health or maturity, product
+scope, priority, MVP, customer request evaluation, roadmap sequencing, or
+whether something should be built.
 
 Do not route to it for implementation, debugging, CI, tests, coding tasks,
 architecture design, migration strategy, production readiness, deployment
@@ -56,6 +66,7 @@ delivery artifacts.
 - Priority arbitration across competing initiatives
 - Opportunity cost and simpler alternatives
 - Value, confidence, effort, support, and adoption tradeoffs
+- Current product health, maturity, adoption, retention, and customer-value assessment
 
 ## Engineering Architecture Owns
 
@@ -76,6 +87,17 @@ delivery artifacts.
 - Code review, diff review, and patch review
 
 ## Ambiguous Cases
+
+Current state:
+
+- Explicit product health, maturity, adoption, retention, customer value, or
+  highest-value next-investment questions: `product-evolution`.
+- Generic project or repository review, current architecture, architecture
+  quality, production readiness, or deployment readiness:
+  `engineering-architecture`.
+- Failure diagnosis, debugging, CI, or runtime exceptions: `engineering-delivery`.
+- Repository-only product evidence may support a conditional assessment, but it
+  must not be presented as usage, retention, revenue, or customer validation.
 
 Roadmap:
 

@@ -1,13 +1,13 @@
 ---
 name: product-evolution
 description: >-
-  Use for product investment and scope decisions: customer requests, roadmap
-  priorities, feature scope, MVP discussions, pilots, priority conflicts,
-  product strategy, opportunity sizing, whether something is worth doing, what
-  should come first, and the smallest useful solution before architecture or
-  implementation. Do not use for implementation, debugging, architecture design,
-  migration strategy, CI, tests, coding tasks, production readiness, deployment
-  readiness, server/VPS fit, or runtime resource review.
+  Use for product investment, scope, and current-product assessment: product
+  health, maturity, adoption, retention, customer requests, roadmap priorities,
+  feature scope, MVP discussions, pilots, priority conflicts, product strategy,
+  opportunity sizing, what should come first, and the smallest useful solution
+  before architecture or implementation. Do not use for generic repository
+  review, implementation, debugging, architecture design, migration strategy,
+  CI, tests, production readiness, deployment readiness, or runtime resource review.
 ---
 
 # Product Evolution
@@ -22,9 +22,9 @@ This is a product decision playbook. Behave like an experienced Head of Product,
 Product Director, or founder deciding how to invest limited product and
 engineering capacity.
 
-The goal is not to generate more ideas. The goal is to decide whether an idea,
-request, feature, pilot, or roadmap direction deserves investment, and if so,
-what the smallest useful next step is.
+The goal is not to generate more ideas. The goal is to assess the current product
+or decide whether an idea, request, feature, pilot, or roadmap direction deserves
+investment, and identify the smallest useful next step.
 
 ## Boundaries
 
@@ -40,6 +40,7 @@ Pay special attention to the boundary between `product-evolution` and
 - How should priorities be set?
 - How should the hypothesis be validated?
 - How should the MVP be defined?
+- What is the current product state and the highest-value next investment?
 
 `engineering-architecture` answers:
 
@@ -62,6 +63,7 @@ Applies to:
   initiatives
 - Roadmap planning and prioritization
 - Opportunity assessment
+- Current product health and maturity assessment
 - MVP definition
 - Product strategy and product evolution
 - Tradeoffs between multiple product directions
@@ -83,7 +85,9 @@ next delivery action.
 ## Intent Detection
 
 Use this skill automatically when the user's primary question is whether, why,
-when, for whom, or in what scope a product investment should happen.
+when, for whom, or in what scope a product investment should happen, or when the
+user explicitly asks about current product health, maturity, adoption, retention,
+or customer value.
 
 Product-evolution examples:
 
@@ -103,6 +107,7 @@ Product-evolution examples:
 - "Evaluate this pilot."
 - "Help choose between these product directions."
 - "What should we do next to increase adoption?"
+- "Assess the current product and recommend the highest-value next investment."
 
 Do not use this skill when the primary question is technical execution,
 architecture, deployment, debugging, CI, tests, or implementation.
@@ -114,6 +119,7 @@ Non-product examples:
 - "Is this ready for production?"
 - "Can I deploy this to a VPS?"
 - "Review runtime resource usage."
+- "Review this repository."
 - "Implement this MVP."
 - "Write the tests."
 - "Fix the customer bug."
@@ -136,6 +142,14 @@ Ambiguous feature rule:
 - If the feature is justified and the user asks to build, fix, test, or ship it,
   use `engineering-delivery`.
 
+Ambiguous assessment rule:
+
+- Explicit product health, maturity, adoption, retention, customer value, or
+  current-product questions: use `product-evolution`.
+- Generic project or repository review, architecture quality, production
+  readiness, or deployment readiness: use `engineering-architecture`.
+- Failure diagnosis or debugging: use `engineering-delivery`.
+
 Full routing rules live in `references/routing.md`.
 
 ## Loading Policy
@@ -154,6 +168,7 @@ Load supporting references only when needed:
 Templates are optional output aids:
 
 - `templates/quick-assessment.md`
+- `templates/current-product-assessment.md`
 - `templates/opportunity-analysis.md`
 - `templates/pilot-evaluation.md`
 - `templates/roadmap-scorecard.md`
@@ -169,6 +184,10 @@ smallest mode that can answer the product decision.
 - **Quick Assessment**: Fast verdict on one idea, request, or initiative. Use
   when the user asks for a quick take, second opinion, "worth it?", "should we",
   or "what is the next step?"
+- **Current Product Assessment**: Evaluate present product health and maturity
+  before choosing the next investment. Use only for an explicit product lens,
+  distinguish product evidence from technical readiness, state what artifacts
+  cannot establish, and recommend the highest-value next investment.
 - **Opportunity Analysis**: Deeper analysis of a product opportunity, user
   problem, market segment, or alternative approaches. Use when the decision
   needs more evidence, segmentation, or tradeoff analysis.
@@ -201,12 +220,13 @@ feature".
 
 Apply this sequence in every mode:
 
-1. Restate the real problem before evaluating the proposed solution.
+1. Restate the product problem or assessment question before evaluating solutions.
 2. Identify who receives value and who pays the cost.
 3. Describe how the problem is solved today.
-4. Test whether the proposed initiative actually solves the problem.
-5. Compare at least three paths: do nothing/current workaround, smallest useful
-   change, and the proposed investment.
+4. If an initiative is proposed, test whether it solves the problem. Otherwise,
+   identify the strongest evidence-backed product constraint.
+5. Compare the current course, smallest useful change, broader or proposed
+   investment, and a validation path when evidence is weak.
 6. Estimate value, confidence, effort, support load, maintenance impact, and
    opportunity cost at the level needed for the product decision.
 7. Recommend a priority and next step.
