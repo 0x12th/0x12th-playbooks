@@ -38,6 +38,8 @@ Install the full skill folders when possible, not only `SKILL.md`. The supportin
 
 By default, `install.sh` installs into existing agent homes: `~/.agents/skills`, `~/.claude/skills`, and `~/.codex/skills`. It skips missing agent homes so it does not create unused directories. If none exist, it falls back to `~/.agents/skills` for first-time setup.
 
+The installer treats this repository's three skill folders as managed copies. Updates remove stale files inside those folders while preserving every neighboring skill. Keep custom variants in a fork or a separate project-local skill.
+
 The manual commands below use `~/.agents/skills` as a common example. Replace it with the skills directory used by your agent setup.
 
 ### Quick Install
@@ -60,22 +62,20 @@ Custom target directory:
 curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/install.sh | sh -s -- ~/.claude/skills
 ```
 
-### Install All Skills Manually
+### Install All Skills From A Clone
 
 Latest:
 
 ```bash
 git clone https://github.com/0x12th/0x12th-playbooks.git
-mkdir -p ~/.agents/skills
-rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
+./0x12th-playbooks/install.sh ~/.agents/skills
 ```
 
 Pinned version:
 
 ```bash
 git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
-mkdir -p ~/.agents/skills
-rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
+./0x12th-playbooks/install.sh ~/.agents/skills
 ```
 
 ### Install One Skill
@@ -85,7 +85,7 @@ Architecture review:
 ```bash
 git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-rsync -a 0x12th-playbooks/skills/engineering-architecture ~/.agents/skills/
+rsync -a --delete 0x12th-playbooks/skills/engineering-architecture/ ~/.agents/skills/engineering-architecture/
 ```
 
 Product evolution:
@@ -93,7 +93,7 @@ Product evolution:
 ```bash
 git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-rsync -a 0x12th-playbooks/skills/product-evolution ~/.agents/skills/
+rsync -a --delete 0x12th-playbooks/skills/product-evolution/ ~/.agents/skills/product-evolution/
 ```
 
 Engineering delivery:
@@ -101,7 +101,7 @@ Engineering delivery:
 ```bash
 git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-rsync -a 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
+rsync -a --delete 0x12th-playbooks/skills/engineering-delivery/ ~/.agents/skills/engineering-delivery/
 ```
 
 ### Agent Paths

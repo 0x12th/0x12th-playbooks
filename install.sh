@@ -17,11 +17,30 @@ copy_skills() {
   dst="$2"
   mkdir -p "$dst"
 
-  if command -v rsync >/dev/null 2>&1; then
-    rsync -a "$src"/ "$dst"/
-  else
-    need tar
-    (cd "$src" && tar cf - .) | (cd "$dst" && tar xf -)
+  found=0
+  for skill_src in "$src"/*; do
+    if [ ! -d "$skill_src" ] || [ ! -f "$skill_src/SKILL.md" ]; then
+      continue
+    fi
+
+    found=1
+    skill_name=${skill_src##*/}
+    skill_dst="$dst/$skill_name"
+
+    if command -v rsync >/dev/null 2>&1; then
+      mkdir -p "$skill_dst"
+      rsync -a --delete "$skill_src"/ "$skill_dst"/
+    else
+      need tar
+      rm -rf "$skill_dst"
+      mkdir -p "$skill_dst"
+      (cd "$skill_src" && tar cf - .) | (cd "$skill_dst" && tar xf -)
+    fi
+  done
+
+  if [ "$found" -eq 0 ]; then
+    echo "error: no skill folders found in $src" >&2
+    exit 1
   fi
 }
 
@@ -51,15 +70,16 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
+SOURCE_DIR=""
 SCRIPT_DIR="."
 case "${0:-}" in
-  */*) SCRIPT_DIR=${0%/*} ;;
+  */install.sh) SCRIPT_DIR=${0%/*} ;;
+  install.sh) ;;
+  *) SCRIPT_DIR="" ;;
 esac
 
-if [ -d "$SCRIPT_DIR/skills" ]; then
+if [ -n "$SCRIPT_DIR" ] && [ -f "$SCRIPT_DIR/install.sh" ] && [ -d "$SCRIPT_DIR/skills" ]; then
   SOURCE_DIR="$SCRIPT_DIR/skills"
-elif [ -d "./skills" ]; then
-  SOURCE_DIR="./skills"
 else
   need git
   cleanup_tmp=$(mktemp -d 2>/dev/null || mktemp -d -t 0x12th-playbooks)

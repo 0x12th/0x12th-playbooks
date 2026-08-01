@@ -4,6 +4,8 @@ Install skills by cloning the repository and syncing skill folders into the dire
 
 By default, `install.sh` installs into existing agent homes: `~/.agents/skills`, `~/.claude/skills`, and `~/.codex/skills`. It skips missing agent homes so it does not create unused directories. If none exist, it falls back to `~/.agents/skills` for first-time setup.
 
+The installer treats `engineering-architecture`, `engineering-delivery`, and `product-evolution` as managed copies. Updating removes stale files inside those three folders but leaves every neighboring skill untouched. Keep custom variants in a fork or a separate project-local skill.
+
 The manual commands below use `~/.agents/skills` as a common example. Replace it with the skills directory used by your agent setup.
 
 ## Quick Install
@@ -32,22 +34,20 @@ Local clone:
 ./install.sh ~/.agents/skills
 ```
 
-## Install All Skills Manually
+## Install All Skills From A Clone
 
 Latest:
 
 ```bash
 git clone https://github.com/0x12th/0x12th-playbooks.git
-mkdir -p ~/.agents/skills
-rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
+./0x12th-playbooks/install.sh ~/.agents/skills
 ```
 
 Pinned version:
 
 ```bash
 git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
-mkdir -p ~/.agents/skills
-rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
+./0x12th-playbooks/install.sh ~/.agents/skills
 ```
 
 ## Install One Skill
@@ -57,7 +57,7 @@ Architecture review:
 ```bash
 git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-rsync -a 0x12th-playbooks/skills/engineering-architecture ~/.agents/skills/
+rsync -a --delete 0x12th-playbooks/skills/engineering-architecture/ ~/.agents/skills/engineering-architecture/
 ```
 
 Product evolution:
@@ -65,7 +65,7 @@ Product evolution:
 ```bash
 git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-rsync -a 0x12th-playbooks/skills/product-evolution ~/.agents/skills/
+rsync -a --delete 0x12th-playbooks/skills/product-evolution/ ~/.agents/skills/product-evolution/
 ```
 
 Engineering delivery:
@@ -73,7 +73,7 @@ Engineering delivery:
 ```bash
 git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-rsync -a 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
+rsync -a --delete 0x12th-playbooks/skills/engineering-delivery/ ~/.agents/skills/engineering-delivery/
 ```
 
 ## Zed
@@ -100,8 +100,7 @@ Install into the skills directory used by your Claude Code setup. Example:
 
 ```bash
 git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
-mkdir -p ~/.claude/skills
-rsync -a 0x12th-playbooks/skills/ ~/.claude/skills/
+./0x12th-playbooks/install.sh ~/.claude/skills
 ```
 
 If Claude Code does not auto-load a skill, reference its `SKILL.md` from `CLAUDE.md`, project instructions, or from the prompt.
@@ -112,13 +111,12 @@ Install into the skills directory used by your Codex setup. Example:
 
 ```bash
 git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
-mkdir -p ~/.codex/skills
-rsync -a 0x12th-playbooks/skills/ ~/.codex/skills/
+./0x12th-playbooks/install.sh ~/.codex/skills
 ```
 
 Project-local installation:
 
 ```bash
 mkdir -p .agents/skills
-rsync -a 0x12th-playbooks/skills/ .agents/skills/
+./0x12th-playbooks/install.sh .agents/skills
 ```

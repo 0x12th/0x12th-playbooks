@@ -21,34 +21,33 @@
   "installation": {
     "all_skills": [
       "git clone https://github.com/0x12th/0x12th-playbooks.git",
-      "mkdir -p ~/.agents/skills",
-      "rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/"
+      "./0x12th-playbooks/install.sh ~/.agents/skills"
     ],
     "all_skills_pinned": [
       "git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
-      "mkdir -p ~/.agents/skills",
-      "rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/"
+      "./0x12th-playbooks/install.sh ~/.agents/skills"
     ],
     "architecture_skill_pinned": [
       "git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
-      "rsync -a 0x12th-playbooks/skills/engineering-architecture ~/.agents/skills/"
+      "rsync -a --delete 0x12th-playbooks/skills/engineering-architecture/ ~/.agents/skills/engineering-architecture/"
     ],
     "product_evolution_skill_pinned": [
       "git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
-      "rsync -a 0x12th-playbooks/skills/product-evolution ~/.agents/skills/"
+      "rsync -a --delete 0x12th-playbooks/skills/product-evolution/ ~/.agents/skills/product-evolution/"
     ],
     "engineering_delivery_skill_pinned": [
       "git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
-      "rsync -a 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/"
+      "rsync -a --delete 0x12th-playbooks/skills/engineering-delivery/ ~/.agents/skills/engineering-delivery/"
     ],
     "notes": [
       "By default, install.sh installs into existing ~/.agents/skills, ~/.claude/skills, and ~/.codex/skills destinations and skips missing agent homes.",
       "If no agent homes exist, install.sh falls back to ~/.agents/skills for first-time setup.",
       "Pass a target directory as the first argument to install only into that directory.",
       "Replace ~/.agents/skills with the skills directory used by your agent setup.",
+      "Installed copies of this repository's three skill folders are authoritative; updates remove stale files inside them and preserve neighboring skills.",
       "Clone-based installation is recommended because skills include supporting references, templates, and examples.",
       "Raw SKILL.md URL imports may omit supporting files depending on the host agent.",
       "install.sh installs all skill folders and can run from a local clone or via curl.",
