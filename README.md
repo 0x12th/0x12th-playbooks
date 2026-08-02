@@ -18,11 +18,11 @@ The skills are designed to reduce context consumption, prioritize selected conte
 
 | Skill | Answers | Use when |
 |---|---|---|
-| `product-evolution` | What is the highest-value product investment? | Product investment decisions, customer requests, feature scope, MVPs, pilots, roadmap priorities, opportunity analysis, priority arbitration, and smallest useful next step decisions |
+| `product-evolution` | What is the highest-value product investment? | Current product assessment, product investment decisions, customer requests, feature scope, MVPs, pilots, roadmap priorities, opportunity analysis, priority arbitration, and smallest useful next step decisions |
 | `engineering-architecture` | How should the system evolve safely? | Architecture review, system design, architecture decisions, migration planning, service boundaries, domain/data ownership, architecture debt, reliability strategy, observability architecture, deployment architecture, production readiness, deployment readiness, release readiness, operational readiness, runtime resource review, VPS/server fit assessment, current/target architecture assessment, capacity and scaling review, technical evolution, design challenge, decision support |
 | `engineering-delivery` | What is the safest next delivery action? | Diagnosis, investigation, implementation, bug fixes, tests, CI failures, runtime failures, code review, diff review, patch review, commit review, PR review, local refactoring, validation, PR preparation, incremental improvements |
 
-Use `product-evolution` when the question is whether, why, when, for whom, or in what MVP scope to invest. Explicit invocation is supported but not required. It owns product decisions before architecture: should we do it, for whom, when, what MVP, how to validate, what should go first, what is the smallest useful solution, and what not to do.
+Use `product-evolution` when the question is whether, why, when, for whom, or in what MVP scope to invest, or explicitly asks about current product health, maturity, adoption, retention, or customer value. Explicit invocation is supported but not required. It owns product decisions before architecture: should we do it, for whom, when, what MVP, how to validate, what should go first, what is the smallest useful solution, and what not to do.
 
 Use `engineering-architecture` when the question is about technical design, tradeoffs, service boundaries, ownership, migrations, deployment architecture, production readiness, deployment readiness, release readiness, operational readiness, runtime resource review, VPS/server fit, current architecture, target architecture, capacity and scaling, technical evolution, or architecture risk.
 
@@ -34,9 +34,11 @@ Use the strict chain when multiple layers are needed: `product-evolution` -> `en
 
 ## Installation
 
-Install the full skill folders when possible, not only `SKILL.md`. The supporting `docs/`, `templates/`, and `examples/` are intentionally loaded on demand and improve behavior after the skill is selected.
+Install the full skill folders when possible, not only `SKILL.md`. The supporting `references/`, `templates/`, and `examples/` are intentionally loaded on demand and improve behavior after the skill is selected.
 
 By default, `install.sh` installs into existing agent homes: `~/.agents/skills`, `~/.claude/skills`, and `~/.codex/skills`. It skips missing agent homes so it does not create unused directories. If none exist, it falls back to `~/.agents/skills` for first-time setup.
+
+The installer treats this repository's three skill folders as managed copies. Updates remove stale files inside those folders while preserving every neighboring skill. Keep custom variants in a fork or a separate project-local skill.
 
 The manual commands below use `~/.agents/skills` as a common example. Replace it with the skills directory used by your agent setup.
 
@@ -51,7 +53,7 @@ curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/inst
 Pinned version:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.12.0/install.sh | sh -s -- ~/.agents/skills v0.12.0
+curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.13.0/install.sh | sh -s -- ~/.agents/skills v0.13.0
 ```
 
 Custom target directory:
@@ -60,22 +62,20 @@ Custom target directory:
 curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/install.sh | sh -s -- ~/.claude/skills
 ```
 
-### Install All Skills Manually
+### Install All Skills From A Clone
 
 Latest:
 
 ```bash
 git clone https://github.com/0x12th/0x12th-playbooks.git
-mkdir -p ~/.agents/skills
-rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
+./0x12th-playbooks/install.sh ~/.agents/skills
 ```
 
 Pinned version:
 
 ```bash
-git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
-mkdir -p ~/.agents/skills
-rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
+git clone --branch v0.13.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+./0x12th-playbooks/install.sh ~/.agents/skills
 ```
 
 ### Install One Skill
@@ -83,25 +83,25 @@ rsync -a 0x12th-playbooks/skills/ ~/.agents/skills/
 Architecture review:
 
 ```bash
-git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.13.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-rsync -a 0x12th-playbooks/skills/engineering-architecture ~/.agents/skills/
+rsync -a --delete 0x12th-playbooks/skills/engineering-architecture/ ~/.agents/skills/engineering-architecture/
 ```
 
 Product evolution:
 
 ```bash
-git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.13.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-rsync -a 0x12th-playbooks/skills/product-evolution ~/.agents/skills/
+rsync -a --delete 0x12th-playbooks/skills/product-evolution/ ~/.agents/skills/product-evolution/
 ```
 
 Engineering delivery:
 
 ```bash
-git clone --branch v0.12.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.13.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
-rsync -a 0x12th-playbooks/skills/engineering-delivery ~/.agents/skills/
+rsync -a --delete 0x12th-playbooks/skills/engineering-delivery/ ~/.agents/skills/engineering-delivery/
 ```
 
 ### Agent Paths
@@ -113,7 +113,7 @@ Common destinations:
 - Codex: `~/.codex/skills`
 - Project-local skills: `.agents/skills`
 
-Raw `SKILL.md` URLs are useful for agents that support URL imports, but they do not include supporting `docs/`, `templates/`, or `examples/`:
+Raw `SKILL.md` URLs are useful for agents that support URL imports, but they do not include supporting `references/`, `templates/`, or `examples/`:
 
 ```text
 https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture/SKILL.md
@@ -125,9 +125,9 @@ See `docs/installation.md` for more installation details.
 
 ## Automatic Selection
 
-Most AI coding agents select skills primarily from the skill `name` and frontmatter `description` in each `SKILL.md`. The descriptions in this repository expose common trigger phrases such as product investment, customer requests, MVP, roadmap priority, architecture review, migration planning, service boundaries, production readiness, deployment readiness, VPS/server fit, runtime resource review, diagnosis, investigation, implementation, bug fixes, tests, CI failures, runtime failures, code review, diff review, and PR review.
+Most AI coding agents select skills primarily from the skill `name` and frontmatter `description` in each `SKILL.md`. The descriptions in this repository expose common trigger phrases such as current product health, maturity, adoption, retention, product investment, customer requests, MVP, roadmap priority, architecture review, migration planning, service boundaries, production readiness, deployment readiness, VPS/server fit, runtime resource review, diagnosis, investigation, implementation, bug fixes, tests, CI failures, runtime failures, code review, diff review, and PR review.
 
-`product-evolution` supports soft automatic selection for product value, scope, MVP, roadmap, priority, customer request, feature scope, and "should we build this?" prompts. It should not be selected for implementation, debugging, architecture, migration, CI, tests, production readiness, deployment readiness, server/VPS fit, or runtime resource review.
+`product-evolution` supports soft automatic selection for explicit product health, maturity, adoption, retention, customer value, product scope, MVP, roadmap, priority, customer request, feature scope, and "should we build this?" prompts. Generic project or repository review remains an `engineering-architecture` task. `product-evolution` should not be selected for implementation, debugging, architecture, migration, CI, tests, production readiness, deployment readiness, server/VPS fit, or runtime resource review.
 
 `manifests/skills.json` is an index and documentation aid. Some agents may use it, but it is not an official cross-agent standard and should not be required for skill loading.
 
@@ -173,6 +173,7 @@ You may explicitly invoke it with `Use product-evolution`, but product-value pro
 Modes:
 
 - `Quick Assessment`
+- `Current Product Assessment`
 - `Opportunity Analysis`
 - `Pilot Evaluation`
 - `Priority Arbitration`
@@ -180,6 +181,10 @@ Modes:
 
 ```text
 Quick Assessment: should this customer request become roadmap work?
+```
+
+```text
+Current Product Assessment: assess the current product health and recommend the highest-value next investment.
 ```
 
 ```text
@@ -287,7 +292,7 @@ See:
 
 ## Development And Contribution
 
-Keep skill entrypoints short, move detailed behavior into directly linked docs, and avoid adding new files unless they improve agent behavior. See `docs/authoring-guidelines.md`.
+Keep skill entrypoints short, move detailed behavior into directly linked references, and avoid adding new files unless they improve agent behavior. See `docs/authoring-guidelines.md`.
 
 Run consistency checks before release:
 
@@ -295,5 +300,5 @@ Run consistency checks before release:
 python3 .github/scripts/check_skills.py
 ```
 
-Behavioral skill changes should also be checked against the stable Codex and
-Claude scenarios in `docs/behavior-evaluation.md`.
+Behavioral skill changes should also be checked on the active maintainer
+runtimes defined in `docs/behavior-evaluation.md`.

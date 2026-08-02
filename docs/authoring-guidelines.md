@@ -30,11 +30,11 @@ These guidelines keep skills useful for AI coding agents without increasing cont
 
 Do not put the full playbook in `SKILL.md`.
 
-## Supporting Docs
+## Supporting References
 
-Docs should be directly linked from `SKILL.md`. Avoid deep reference chains.
+References should be directly linked from `SKILL.md`. Avoid deep reference chains.
 
-Use docs for:
+Use `references/` for:
 
 - Mode-specific behavior
 - Communication rules
@@ -73,7 +73,7 @@ Prefer:
 - Local improvement over redesign.
 - Evidence over architectural fashion.
 
-Do not create new skills, manifests, templates, or docs unless they support a real agent behavior.
+Do not create new skills, manifests, templates, or references unless they support a real agent behavior.
 
 ## Repository Scope
 

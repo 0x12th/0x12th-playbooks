@@ -14,7 +14,10 @@ engineering-delivery
 
 ## Product Evolution
 
-Use `product-evolution` when the user's primary question is product value, scope, priority, MVP, customer request evaluation, roadmap sequencing, or whether something should be built. Explicit invocation is allowed but not required.
+Use `product-evolution` when the user's primary question is product value,
+current product health or maturity, scope, priority, MVP, customer request
+evaluation, roadmap sequencing, or whether something should be built. Explicit
+invocation is allowed but not required.
 
 Use it when the user asks:
 
@@ -25,6 +28,7 @@ What is the highest-value product investment?
 Use for:
 
 - Product investment decisions
+- Current product health and maturity assessment
 - Customer request evaluation
 - MVP boundaries
 - Pilot evaluation
@@ -110,6 +114,7 @@ Do not use for product or architecture decisions. If implementation requires one
 | `What is the smallest useful solution?` | `product-evolution` |
 | `What should come first?` | `product-evolution` |
 | `A customer asked for X. Should we do it?` | `product-evolution` |
+| `Assess the current product health and recommend the next investment.` | `product-evolution` |
 | `Should we merge two tightly coupled modules?` | `engineering-architecture` |
 | `How should we start the merge step by step?` | `engineering-architecture` |
 | `Implement the first merge step.` | `engineering-delivery` |
@@ -127,7 +132,9 @@ Do not use for product or architecture decisions. If implementation requires one
 
 Generic project-level technical prompts should normally use `engineering-architecture`, not `engineering-delivery`, unless the user explicitly asks to implement, test, fix, validate a selected change, review a diff, review a PR, or diagnose a specific failure.
 
-Product-value prompts use `product-evolution`.
+Explicit product-value, health, maturity, adoption, retention, or customer-value
+prompts use `product-evolution`. Generic project or repository review remains an
+`engineering-architecture` task.
 
 Examples:
 
@@ -142,6 +149,7 @@ Examples:
 | `Is it ready for an update?` | `engineering-architecture` | Deployment Readiness Review |
 | `What is the current architecture?` | `engineering-architecture` | Full Review + Architecture Quality |
 | `What should the target architecture be?` | `engineering-architecture` | Full Review + Technical Evolution |
+| `Assess the current product health.` | `product-evolution` | Current Product Assessment |
 | `What should this product become?` | `product-evolution` | Opportunity Analysis |
 | `Create a future roadmap.` | `product-evolution` | Roadmap Planning |
 | `Review this PR.` | `engineering-delivery` | Review |

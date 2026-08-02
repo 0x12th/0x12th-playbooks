@@ -11,6 +11,7 @@ FILES_WITH_INSTALL_EXAMPLES = [README, ROOT / "docs" / "installation.md", MANIFE
 FORBIDDEN_INSTALL = "cp" + " -R"
 RAW_URL_RE = re.compile(r"https://raw\.githubusercontent\.com/0x12th/0x12th-playbooks/[^)\s\"']+")
 MODE_RE = re.compile(r"- \*\*(.+?)\*\*:")
+RESOURCE_RE = re.compile(r"`((?:references|templates|examples|scripts)/[^`]+)`")
 
 def norm(value: object) -> str:
     return re.sub(r"\s+", " ", str(value).strip().lower()).strip(" .")
@@ -70,6 +71,13 @@ def main() -> int:
         expected = skill_modes(path)
         if actual != expected:
             errors.append(f"{name}: modes mismatch; manifest={actual}, skill={expected}")
+        legacy_docs = path.parent / "docs"
+        if legacy_docs.exists():
+            errors.append(f"{name}: legacy skill docs directory must be migrated: {rel(legacy_docs)}")
+        for resource in sorted(set(RESOURCE_RE.findall(path.read_text(encoding="utf-8")))):
+            matches = list(path.parent.glob(resource))
+            if not matches:
+                errors.append(f"{name}: missing bundled resource referenced by SKILL.md: {resource}")
     actual_paths = {str(path.relative_to(ROOT)) for path in (ROOT / "skills").glob("*/SKILL.md")}
     for path in sorted(actual_paths - manifest_paths):
         errors.append(f"manifest: missing skill entry for {path}")

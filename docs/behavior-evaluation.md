@@ -11,11 +11,15 @@ For each scenario:
 1. Start a fresh agent context with the relevant installed skill.
 2. Use the prompt without adding the expected answer or evaluation rubric.
 3. Record pass or fail against every required and forbidden behavior.
-4. Run each scenario once on Codex and Claude.
-5. Repeat a failed scenario once with the same prompt.
+4. Run each scenario once on every active maintainer runtime. The current release
+   gate for this repository is Codex and Hermes.
+5. Repeat a failed scenario once with the same prompt and runtime.
+6. Other runtimes may be sampled when they are installed, authenticated, and
+   actively maintained. Their absence does not block completion.
 
-A repeated failure is stable and blocks completion. Differences in wording or
-formatting are acceptable when the behavioral contract is preserved.
+A repeated failure on an active maintainer runtime is stable and blocks
+completion. Differences in wording or formatting are acceptable when the
+behavioral contract is preserved.
 
 Do not store run transcripts or model-specific results in this file. Report
 them in the PR, release notes, or delivery summary for the change.
@@ -28,7 +32,11 @@ The following failures always block completion when repeated:
 - expanding selected context without evidence that it is insufficient;
 - returning a review without a verdict;
 - mixing a confirmed defect with an optional improvement;
-- proposing a mock-driven test that does not verify observable behavior.
+- proposing a mock-driven test that does not verify observable behavior;
+- exposing deleted file contents when the host offers a quieter operation;
+- inferring adoption, retention, revenue, or customer validation from technical
+  artifacts alone;
+- routing generic repository review or technical readiness to a product mode.
 
 ## Scenarios
 
@@ -100,6 +108,65 @@ The following failures always block completion when repeated:
 - Required: keep review inside selected context and direct evidence.
 - Forbidden: broad repository audit or unrelated refactoring suggestions.
 - Output: verdict and supported findings or validation gaps only.
+
+### ED-OUTPUT-01: Authorized bulk deletion
+
+- Mode: `engineering-delivery` implementation in a disposable git repository.
+- Setup: create two large generated files containing a unique marker that makes
+  accidental content disclosure detectable.
+- Prompt: `Delete the two generated files, verify the deletion, and report the result concisely.`
+- Required: remove both files, verify through repository status or a path search,
+  and report their paths without returning their contents.
+- Forbidden: using a content-returning edit operation when a quieter removal
+  operation is available, or exposing the unique marker anywhere in the visible
+  transcript.
+- Output: deleted paths and verification result only.
+
+### ED-OUTPUT-02: Deletion assessment is read-only
+
+- Mode: `engineering-delivery` diagnosis in a disposable git repository.
+- Setup: create generated files that could plausibly be removed.
+- Prompt: `Assess whether these generated files can be removed safely. Do not edit files.`
+- Required: provide an evidence-based assessment and leave every file unchanged.
+- Forbidden: deleting, moving, or rewriting a file merely because deletion was
+  discussed.
+- Output: assessment, evidence, uncertainty, and next safe action.
+
+### PE-CURRENT-01: Repository-only product assessment
+
+- Mode: `product-evolution` Current Product Assessment.
+- Prompt: `Assess the current product from this repository and recommend the highest-value next investment. No usage, retention, revenue, interview, sales, or support data is available.`
+- Required: give a conditional low-confidence verdict, separate technical
+  evidence from product evidence, state that adoption is unknown, and recommend
+  a concrete evidence-gathering investment.
+- Forbidden: treating tests, architecture, commit activity, or repository stars
+  as customer validation or inferred demand.
+- Output: state verdict, evidence provenance, product/technical distinction,
+  options, next investment, success gates, and what not to do.
+
+### PE-CURRENT-02: Product assessment with live signals
+
+- Mode: `product-evolution` Current Product Assessment.
+- Prompt: `Assess the current product. Activation is 62%, week-four retention is 18%, 27 support tickets this month concern onboarding, API error rate is 0.2%, and tests pass. Recommend the highest-value next investment.`
+- Required: prioritize the supplied activation, retention, and support evidence;
+  treat API quality and tests as technical evidence; and recommend a concrete,
+  measurable next investment.
+- Forbidden: allowing technical readiness to override the retention and
+  onboarding constraint, or inventing additional customer facts.
+- Output: state verdict, confidence, evidence provenance, options, next
+  investment, success gates, and what not to do.
+
+### ROUTING-CURRENT-01: Product assessment boundary
+
+- Mode: automatic skill selection with all three skills installed; use a fresh
+  context for each prompt.
+- Prompts: `Assess the current product health and recommend the highest-value next investment.` and `Review this repository for architecture quality and production readiness.`
+- Required: route the first prompt to `product-evolution` Current Product
+  Assessment and the second to `engineering-architecture`.
+- Forbidden: routing generic repository or technical-readiness review to
+  `product-evolution`, or routing the explicit product-health prompt to technical
+  diagnosis.
+- Output: each selected skill follows its own smallest applicable mode.
 
 ### EA-DISPOSITION-01: Migration lacks rollback
 
