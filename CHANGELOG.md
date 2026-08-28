@@ -4,6 +4,14 @@ All notable changes to this repository are documented in this file.
 
 ## Unreleased
 
+## 0.13.1 - 2026-08-28
+
+### Changed
+
+- Improved delivery deletion guidance so exact targeting and recoverability take precedence over transcript noise.
+- Expanded cross-runtime deletion evaluation to preserve unselected adjacent files and reject destructive output-control shortcuts.
+- Updated installation metadata and pinned examples for `v0.13.1`.
+
 ## 0.13.0 - 2026-08-02
 
 ### Added
