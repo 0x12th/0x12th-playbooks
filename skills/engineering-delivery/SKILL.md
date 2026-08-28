@@ -205,10 +205,24 @@ Remaining risk: other external skills may still print tool traces unless they ha
 
 Do not paste raw git diffs, patches, or large changed-code blocks by default.
 
-When the host permits a choice, delete files with an operation that does not
-return their contents. Verify deletion through repository status or a path
-search. If the host requires a noisy edit primitive, do not repeat its payload
-in progress updates or the final response.
+For large-file or bulk deletion, resolve the exact targets first. When deletion
+is explicit and the targets are already resolved, do not read file contents
+merely to remove them; inspect existence, metadata, and version-control status
+without returning contents. When the host permits a choice, use a dedicated
+deletion operation or narrow shell removal
+that reports only affected paths or status and does not return file contents.
+Tracked files remain recoverable through version control after shell removal.
+Do not use a patch or edit primitive that echoes removed contents when a quieter
+deletion operation is available.
+
+For untracked files, prefer a recoverable non-content-returning operation. If
+none is available but removal is explicitly in scope, use the narrowest
+non-content-returning operation and verify the result through repository status
+or a path search. Never choose irreversible deletion merely to reduce transcript
+noise.
+
+If the host requires a content-returning edit primitive, use it once, do not
+repeat its payload, and report only the deleted paths and reason.
 
 When reviewing or reporting changes:
 
