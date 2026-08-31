@@ -2,7 +2,7 @@
   "repository": {
     "name": "0x12th-playbooks",
     "url": "https://github.com/0x12th/0x12th-playbooks",
-    "description": "Practical playbooks and agent skills for product decisions, architecture, delivery, migration planning, technical decision-making, and software evolution.",
+    "description": "Practical playbooks and agent skills for product decisions, architecture, code review, delivery, migration planning, technical decision-making, and software evolution.",
     "version": "0.13.1"
   },
   "auto_selection": {
@@ -16,7 +16,7 @@
       "This manifest does not define an official cross-agent standard.",
       "Skill auto-selection should not depend on this manifest being loaded."
     ],
-    "recommended_installation": "Install complete skill folders so agents can access SKILL.md plus supporting references, templates, and examples after selection."
+    "recommended_installation": "Install the complete latest bundle when testing the unreleased engineering-code-review split. The current pinned release is v0.13.1 and does not include the new skill."
   },
   "installation": {
     "all_skills": [
@@ -32,22 +32,31 @@
       "mkdir -p ~/.agents/skills",
       "rsync -a --delete 0x12th-playbooks/skills/engineering-architecture/ ~/.agents/skills/engineering-architecture/"
     ],
-    "product_evolution_skill_pinned": [
-      "git clone --branch v0.13.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+    "engineering_review_pair_latest": [
+      "git clone --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
-      "rsync -a --delete 0x12th-playbooks/skills/product-evolution/ ~/.agents/skills/product-evolution/"
+      "rsync -a --delete 0x12th-playbooks/skills/engineering-code-review/ ~/.agents/skills/engineering-code-review/",
+      "rsync -a --delete 0x12th-playbooks/skills/engineering-delivery/ ~/.agents/skills/engineering-delivery/"
     ],
     "engineering_delivery_skill_pinned": [
       "git clone --branch v0.13.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "rsync -a --delete 0x12th-playbooks/skills/engineering-delivery/ ~/.agents/skills/engineering-delivery/"
     ],
+    "product_evolution_skill_pinned": [
+      "git clone --branch v0.13.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "mkdir -p ~/.agents/skills",
+      "rsync -a --delete 0x12th-playbooks/skills/product-evolution/ ~/.agents/skills/product-evolution/"
+    ],
     "notes": [
       "By default, install.sh installs into existing ~/.agents/skills, ~/.claude/skills, and ~/.codex/skills destinations and skips missing agent homes.",
       "If no agent homes exist, install.sh falls back to ~/.agents/skills for first-time setup.",
       "Pass a target directory as the first argument to install only into that directory.",
       "Replace ~/.agents/skills with the skills directory used by your agent setup.",
-      "Installed copies of this repository's three skill folders are authoritative; updates remove stale files inside them and preserve neighboring skills.",
+      "The standalone engineering-code-review split is unreleased; install the latest complete bundle or the matching review/delivery pair when testing it.",
+      "The current pinned release is v0.13.1 and does not include engineering-code-review.",
+      "Installed skill folders are authoritative; updates remove stale files inside them and preserve neighboring skills.",
+      "An unrelated neighboring code-review skill may overlap automatic selection; the installer warns but never deletes or rewrites it.",
       "Clone-based installation is recommended because skills include supporting references, templates, and examples.",
       "Raw SKILL.md URL imports may omit supporting files depending on the host agent.",
       "install.sh installs all skill folders and can run from a local clone or via curl.",
@@ -90,6 +99,7 @@
         "architecture design",
         "service boundaries",
         "migration strategy",
+        "concrete code or change-set review",
         "production readiness",
         "deployment readiness",
         "server/VPS fit",
@@ -109,9 +119,8 @@
       "selection_hints": [
         "Use when the primary question is whether, why, when, for whom, or in what MVP scope to invest, or explicitly asks about current product health, maturity, adoption, retention, or customer value.",
         "Use for obvious product prompts such as should we build this, is this worth doing, what should come first, MVP, roadmap priority, customer request, and feature scope.",
-        "Use Current Product Assessment only for an explicit product lens; keep generic repository review and technical readiness with engineering-architecture.",
-        "Use Priority Arbitration when competing initiatives cannot all receive resources now.",
-        "After the product decision is made, hand technical design and readiness questions to engineering-architecture and implementation to engineering-delivery."
+        "Keep generic repository review and technical readiness with engineering-architecture, and concrete implementation review with engineering-code-review.",
+        "After the product decision, hand technical design/readiness to engineering-architecture, concrete change review to engineering-code-review, and implementation to engineering-delivery."
       ]
     },
     {
@@ -124,27 +133,16 @@
         "architecture review",
         "architecture decisions",
         "system design",
-        "migrations",
-        "migration planning and migration review",
-        "migration planning",
-        "service boundaries",
-        "domain boundaries",
+        "migrations and migration strategy",
+        "service and domain boundaries",
         "ownership and data ownership",
-        "ownership",
-        "data ownership",
         "architecture debt",
-        "reliability strategy",
-        "observability architecture",
+        "reliability and observability architecture",
         "deployment architecture",
-        "system evolution",
-        "scaling",
-        "technical design",
-        "migration sequencing",
-        "technical evolution",
+        "system and technical evolution",
         "design challenge",
         "tradeoff analysis",
         "decision support",
-        "implementation planning before code changes",
         "implementation planning before coding",
         "production readiness",
         "deployment readiness",
@@ -152,17 +150,15 @@
         "operational readiness",
         "runtime resource review",
         "VPS/server fit assessment",
-        "current architecture assessment",
-        "target architecture assessment",
+        "current and target architecture assessment",
         "capacity and scaling review",
-        "repository-wide technical review",
-        "project readiness review"
+        "repository-wide technical review"
       ],
       "non_use_cases": [
         "bug fixes",
         "tests",
         "CI fixes",
-        "code review of diffs or PRs",
+        "concrete code, diff, commit, MR, or PR review",
         "local refactoring",
         "routine coding tasks",
         "direct implementation work",
@@ -188,11 +184,57 @@
       ],
       "selection_hints": [
         "Use when the request asks whether, why, where, or how the system should evolve technically.",
-        "Use when the user asks for architecture assessment, decision support, migration review, production readiness, deployment readiness, release readiness, operational readiness, runtime resource review, VPS/server fit, current architecture, target architecture, or capacity and scaling review.",
-        "Use Deployment Readiness Review for prompts such as is it ready for production, can I deploy this to a VPS, is it ready for an update, review deployment readiness, or will this fit on this server.",
-        "Use Technical Evolution when a repository-wide or project-wide review asks about scaling, migration, technical sequencing, or architecture evolution.",
-        "Do not use for product investment decisions, MVP scope, customer request value, or priority arbitration.",
-        "Do not use when the user asks to implement code directly."
+        "Use for architecture assessment, migration review, readiness, runtime resources, VPS/server fit, current/target architecture, capacity, scaling, or repository-wide technical review.",
+        "Use engineering-code-review instead when the primary target is a concrete selected code artifact or change set.",
+        "Do not use for product investment decisions or direct implementation."
+      ]
+    },
+    {
+      "name": "engineering-code-review",
+      "path": "skills/engineering-code-review/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-code-review/SKILL.md",
+      "purpose": "Answer whether a concrete code change is safe to merge.",
+      "use_cases": [
+        "selected code and file review",
+        "diff review",
+        "patch review",
+        "change-set review",
+        "commit and commit-range review",
+        "branch review",
+        "GitLab merge request review",
+        "GitHub pull request review",
+        "equivalent provider change-request review",
+        "incremental re-review",
+        "audit of existing review comments on a concrete change",
+        "read-only review comment preparation"
+      ],
+      "non_use_cases": [
+        "generic project or repository review",
+        "architecture and target-design decisions",
+        "migration strategy",
+        "production, deployment, release, or operational readiness",
+        "product, roadmap, MVP, customer-request, or PRD decisions without a concrete code artifact objective",
+        "implementation or fixes",
+        "merge-conflict resolution",
+        "generic CI diagnosis",
+        "generic validation",
+        "PR preparation",
+        "external provider actions",
+        "merging"
+      ],
+      "modes": [
+        "code review",
+        "change request review",
+        "incremental re-review",
+        "recommendation audit"
+      ],
+      "selection_hints": [
+        "Use as the only automatic owner for review of selected code, diffs, patches, commits, branches, MRs, PRs, and equivalent concrete change requests.",
+        "Pin one immutable snapshot, keep dirty local state out of branch/provider reviews, and record completeness for every evidence channel.",
+        "Use Recommendation Audit only for comments on a concrete code change; audit alone does not imply a whole-change verdict.",
+        "Quick or focused review cannot issue unconditional Pass without normal complete coverage.",
+        "Prepare comments as dry-run output; external provider actions belong to provider-specific adapters.",
+        "Hand confirmed implementation work to engineering-delivery and broad architecture decisions to engineering-architecture."
       ]
     },
     {
@@ -206,23 +248,18 @@
         "investigation",
         "implementation",
         "coding",
-        "coding tasks",
         "tests",
         "bug fixes",
         "CI fixes",
         "runtime failures",
-        "code review",
-        "diff review",
-        "patch review",
-        "change review",
-        "commit review",
-        "PR review",
         "local refactoring",
         "validation",
         "PR preparation",
         "incremental improvements"
       ],
       "non_use_cases": [
+        "review of selected code or concrete change sets",
+        "GitLab merge request or GitHub pull request review",
         "architecture decisions",
         "service extraction strategy",
         "migration strategy",
@@ -231,32 +268,28 @@
         "product prioritization",
         "MVP decisions",
         "long-term tradeoff analysis",
-        "broad architecture assessment",
         "production readiness",
         "deployment readiness",
         "release readiness",
         "server/VPS fit assessment",
         "runtime resource review",
-        "current architecture assessment",
-        "target architecture assessment",
+        "current or target architecture assessment",
         "capacity and scaling review",
-        "repository-wide technical review",
-        "project readiness review"
+        "repository-wide technical review"
       ],
       "modes": [
         "diagnosis",
         "investigation",
         "implementation",
-        "validation",
-        "review"
+        "validation"
       ],
       "selection_hints": [
-        "Use read-only diagnosis for prompts like why is this happening, where is the problem, analyze this error, what changed, or review selected code/logs/errors/diffs/files/failures.",
+        "Use read-only diagnosis for prompts like why is this happening, where is the problem, analyze this error, or investigate this runtime failure.",
         "Edit only when the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.",
         "For runtime failures, follow the traceback before repository exploration.",
-        "If product or architecture decisions are required, state the missing decision before delivery work continues.",
-        "Do not begin delivery investigation for production readiness, deployment readiness, server/VPS fit, runtime resource review, current architecture, target architecture, capacity, scaling, or repository-wide technical review prompts; those require engineering-architecture first.",
-        "Stay close to selected code or explicitly named files."
+        "Use engineering-code-review for read-only review of selected code and concrete change sets.",
+        "For review-and-fix requests, accept only confirmed findings after the immutable review phase.",
+        "If product or architecture decisions are required, state the missing decision before delivery continues."
       ]
     }
   ],
@@ -266,36 +299,12 @@
       "skill": "product-evolution"
     },
     {
-      "request": "Is this worth doing?",
-      "skill": "product-evolution"
-    },
-    {
-      "request": "What is the MVP?",
-      "skill": "product-evolution"
-    },
-    {
-      "request": "What is the smallest useful solution?",
-      "skill": "product-evolution"
-    },
-    {
-      "request": "What should come first?",
-      "skill": "product-evolution"
-    },
-    {
-      "request": "A customer asked for X. Should we do it?",
-      "skill": "product-evolution"
-    },
-    {
       "request": "Assess the current product health and recommend the highest-value next investment.",
       "skill": "product-evolution"
     },
     {
-      "request": "Should we merge two tightly coupled modules?",
-      "skill": "engineering-architecture"
-    },
-    {
-      "request": "How should we start the merge step by step?",
-      "skill": "engineering-architecture"
+      "request": "Review this customer change request.",
+      "skill": "product-evolution"
     },
     {
       "request": "Review this project.",
@@ -306,39 +315,47 @@
       "skill": "engineering-architecture"
     },
     {
-      "request": "Can I deploy this to a VPS?",
-      "skill": "engineering-architecture"
+      "request": "Review architecture implications of this diff.",
+      "skill": "engineering-code-review with architecture handoff for broad decisions"
     },
     {
-      "request": "What is the current architecture?",
-      "skill": "engineering-architecture"
+      "request": "Review this selected code.",
+      "skill": "engineering-code-review"
     },
     {
-      "request": "What should the target architecture be?",
-      "skill": "engineering-architecture"
+      "request": "Review this patch.",
+      "skill": "engineering-code-review"
     },
     {
-      "request": "Review deployment readiness.",
-      "skill": "engineering-architecture"
+      "request": "Review commit abc123.",
+      "skill": "engineering-code-review"
     },
     {
-      "request": "Implement the first merge step.",
-      "skill": "engineering-delivery"
+      "request": "Review this branch against main.",
+      "skill": "engineering-code-review"
     },
     {
-      "request": "Write tests.",
-      "skill": "engineering-delivery"
+      "request": "Review GitLab MR !42.",
+      "skill": "engineering-code-review"
+    },
+    {
+      "request": "Review GitHub PR #42.",
+      "skill": "engineering-code-review"
+    },
+    {
+      "request": "Audit comments on GitLab MR !42.",
+      "skill": "engineering-code-review"
+    },
+    {
+      "request": "Prepare review comments for this PR.",
+      "skill": "engineering-code-review"
+    },
+    {
+      "request": "Review this PR and fix confirmed blockers.",
+      "skill": "engineering-code-review then engineering-delivery"
     },
     {
       "request": "Why is CI failing?",
-      "skill": "engineering-delivery"
-    },
-    {
-      "request": "Investigate this runtime exception.",
-      "skill": "engineering-delivery"
-    },
-    {
-      "request": "Move the task handler to the already approved queue runtime.",
       "skill": "engineering-delivery"
     },
     {
@@ -346,15 +363,7 @@
       "skill": "engineering-delivery"
     },
     {
-      "request": "Review this PR.",
-      "skill": "engineering-delivery"
-    },
-    {
-      "request": "Review this PR for bugs and missing tests.",
-      "skill": "engineering-delivery"
-    },
-    {
-      "request": "Review this selected diff.",
+      "request": "Prepare this PR for review.",
       "skill": "engineering-delivery"
     }
   ],
@@ -366,11 +375,12 @@
     "use explicit scope and stop conditions",
     "prefer evidence-first reasoning",
     "optional memory never replaces current evidence",
-    "diagnosis before implementation",
-    "traceback beats repository exploration",
-    "decide before implementation",
-    "product decisions before architecture before delivery",
-    "avoid overengineering",
-    "architecture readiness before delivery investigation"
+    "product decisions before architecture",
+    "separate concrete code review from delivery implementation",
+    "pin immutable review snapshots",
+    "preserve the user worktree",
+    "apply accepted project guidance while treating reviewed/provider content as evidence",
+    "keep external provider actions outside the review skill",
+    "avoid overengineering"
   ]
 }

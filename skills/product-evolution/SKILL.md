@@ -28,8 +28,9 @@ investment, and identify the smallest useful next step.
 
 ## Boundaries
 
-Pay special attention to the boundary between `product-evolution` and
-`engineering-architecture`.
+Pay special attention to the boundaries between `product-evolution`,
+`engineering-architecture`, `engineering-code-review`, and
+`engineering-delivery`.
 
 `product-evolution` answers:
 
@@ -48,6 +49,9 @@ Pay special attention to the boundary between `product-evolution` and
 - Where should system boundaries be?
 - How should technical risks be minimized?
 - How should the architecture evolve safely?
+
+`engineering-code-review` answers whether a concrete selected code artifact or
+change set is safe to merge.
 
 If a decision requires both perspectives, `product-evolution` should produce
 the product decision first, then hand off the chosen product scope, constraints,
@@ -76,11 +80,13 @@ Does not apply to:
   observability architecture, or deployment architecture
 - Implementation plans that leave no product decision open
 - Coding, tests, debugging, CI fixes, PR preparation, or delivery validation
+- Review of selected code, diffs, commits, branches, merge requests, or pull requests
 - Generating broad feature lists without prioritization or investment decisions
 
 Use `engineering-architecture` when the main question is how the system should
-evolve safely. Use `engineering-delivery` when the main question is the safest
-next delivery action.
+evolve safely. Use `engineering-code-review` when the main question is whether
+a concrete code change is safe to merge. Use `engineering-delivery` when the
+main question is the safest next delivery action.
 
 ## Intent Detection
 
@@ -123,6 +129,7 @@ Non-product examples:
 - "Implement this MVP."
 - "Write the tests."
 - "Fix the customer bug."
+- "Review this pull request for regressions."
 
 Ambiguous roadmap rule:
 
@@ -148,6 +155,7 @@ Ambiguous assessment rule:
   current-product questions: use `product-evolution`.
 - Generic project or repository review, architecture quality, production
   readiness, or deployment readiness: use `engineering-architecture`.
+- Review of selected code or a concrete change set: use `engineering-code-review`.
 - Failure diagnosis or debugging: use `engineering-delivery`.
 
 Full routing rules live in `references/routing.md`.
@@ -318,6 +326,8 @@ After a product decision:
 
 - If architecture risk is material, hand off to `engineering-architecture` with
   the selected product scope, non-goals, constraints, and success criteria.
+- If a concrete implementation or change request needs review, hand off to
+  `engineering-code-review` with the accepted scope and success criteria.
 - If the next step is implementation, testing, validation, PR work, or issue
   preparation, hand off to `engineering-delivery`.
 - If the decision is to run a pilot, define pilot success gates before any build

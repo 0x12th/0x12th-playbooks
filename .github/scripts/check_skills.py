@@ -1,20 +1,38 @@
 #!/usr/bin/env python3
-"""Repository consistency checks for skill metadata."""
+"""Repository consistency checks for skill metadata and ownership boundaries."""
+
+from __future__ import annotations
+
 import json
 import re
 import sys
+from collections import Counter
 from pathlib import Path
+from typing import cast
+
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / "manifests" / "skills.json"
 README = ROOT / "README.md"
 FILES_WITH_INSTALL_EXAMPLES = [README, ROOT / "docs" / "installation.md", MANIFEST]
 FORBIDDEN_INSTALL = "cp" + " -R"
-RAW_URL_RE = re.compile(r"https://raw\.githubusercontent\.com/0x12th/0x12th-playbooks/[^)\s\"']+")
-MODE_RE = re.compile(r"- \*\*(.+?)\*\*:")
-RESOURCE_RE = re.compile(r"`((?:references|templates|examples|scripts)/[^`]+)`")
+RAW_URL_RE: re.Pattern[str] = re.compile(
+    r"https://raw\.githubusercontent\.com/0x12th/0x12th-playbooks/[^)\s\"']+"
+)
+MODE_RE: re.Pattern[str] = re.compile(r"- \*\*(.+?)\*\*:")
+RESOURCE_RE: re.Pattern[str] = re.compile(r"`((?:references|templates|examples|scripts)/[^`]+)`")
+FRONTMATTER_KEY_RE: re.Pattern[str] = re.compile(r"^([A-Za-z0-9_-]+):(?:\s*(.*))?$")
+SKILL_NAME_RE: re.Pattern[str] = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+REQUIRED_SKILLS = {
+    "engineering-architecture",
+    "engineering-code-review",
+    "engineering-delivery",
+    "product-evolution",
+}
+
 
 def norm(value: object) -> str:
     return re.sub(r"\s+", " ", str(value).strip().lower()).strip(" .")
+
 
 def rel(path: Path) -> str:
     try:
@@ -22,8 +40,69 @@ def rel(path: Path) -> str:
     except ValueError:
         return str(path)
 
+
+def unquote(value: str) -> str:
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
+        return value[1:-1]
+    return value
+
+
+def parse_frontmatter(path: Path) -> tuple[dict[str, str], list[str]]:
+    lines = path.read_text(encoding="utf-8").splitlines()
+    errors: list[str] = []
+    values: dict[str, str] = {}
+
+    if not lines or lines[0].strip() != "---":
+        return values, [f"{rel(path)}: missing opening YAML frontmatter delimiter"]
+
+    try:
+        end = next(index for index in range(1, len(lines)) if lines[index].strip() == "---")
+    except StopIteration:
+        return values, [f"{rel(path)}: missing closing YAML frontmatter delimiter"]
+
+    index = 1
+    while index < end:
+        line = lines[index]
+        if not line.strip():
+            index += 1
+            continue
+        if line[:1].isspace():
+            errors.append(f"{rel(path)}:{index + 1}: unexpected indented frontmatter line")
+            index += 1
+            continue
+
+        match = FRONTMATTER_KEY_RE.match(line)
+        if not match:
+            errors.append(f"{rel(path)}:{index + 1}: malformed frontmatter field")
+            index += 1
+            continue
+
+        key = match.group(1)
+        raw_value = (match.group(2) or "").strip()
+        index += 1
+
+        if raw_value in {">", ">-", ">+", "|", "|-", "|+"}:
+            block: list[str] = []
+            while index < end and (not lines[index].strip() or lines[index][:1].isspace()):
+                block.append(lines[index].strip())
+                index += 1
+            if raw_value.startswith(">"):
+                value = " ".join(part for part in block if part)
+            else:
+                value = "\n".join(block).strip("\n")
+        else:
+            value = unquote(raw_value)
+
+        if key in values:
+            errors.append(f"{rel(path)}: duplicate frontmatter field `{key}`")
+        values[key] = value
+
+    return values, errors
+
+
 def skill_modes(path: Path) -> list[str]:
-    modes, in_modes = [], False
+    modes: list[str] = []
+    in_modes = False
     for line in path.read_text(encoding="utf-8").splitlines():
         stripped = line.strip()
         if stripped in {"## Mode Selection", "## Work Modes"}:
@@ -35,6 +114,7 @@ def skill_modes(path: Path) -> list[str]:
             modes.append(norm(match.group(1)))
     return modes
 
+
 def local_raw_path(url: str) -> Path | None:
     prefix = "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/"
     if not url.startswith(prefix):
@@ -42,53 +122,135 @@ def local_raw_path(url: str) -> Path | None:
     parts = url.removeprefix(prefix).split("/", 1)
     return ROOT / parts[1] if len(parts) == 2 else None
 
+
 def main() -> int:
-    errors = []
+    errors: list[str] = []
+
     try:
-        manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        parsed_manifest = cast(object, json.loads(MANIFEST.read_text(encoding="utf-8")))
     except Exception as exc:
         print(f"ERROR: cannot read manifest: {exc}", file=sys.stderr)
         return 1
-    skills = manifest.get("skills")
-    if not isinstance(skills, list):
-        errors.append("manifest: `skills` must be a list")
-        skills = []
-    names, manifest_paths = set(), set()
-    for skill in skills:
-        if not isinstance(skill, dict):
-            errors.append("manifest: every skill must be an object")
-            continue
-        name, manifest_path = str(skill.get("name", "<missing>")), str(skill.get("path", ""))
-        path = ROOT / manifest_path
-        manifest_paths.add(manifest_path)
-        if name in names:
-            errors.append(f"manifest: duplicate skill name {name}")
-        names.add(name)
-        if not path.exists():
-            errors.append(f"{name}: missing skill file {rel(path)}")
-            continue
-        actual = [norm(mode) for mode in skill.get("modes", [])]
-        expected = skill_modes(path)
-        if actual != expected:
-            errors.append(f"{name}: modes mismatch; manifest={actual}, skill={expected}")
+    if not isinstance(parsed_manifest, dict):
+        print("ERROR: manifest root must be an object", file=sys.stderr)
+        return 1
+    manifest = cast(dict[str, object], parsed_manifest)
+
+    actual_skill_paths = sorted((ROOT / "skills").glob("*/SKILL.md"))
+    actual_rel_paths = {rel(path) for path in actual_skill_paths}
+    actual_names = {path.parent.name for path in actual_skill_paths}
+    frontmatters: dict[str, dict[str, str]] = {}
+
+    missing_required = REQUIRED_SKILLS - actual_names
+    if missing_required:
+        errors.append(f"skills: missing required skill directories: {sorted(missing_required)}")
+
+    for path in actual_skill_paths:
+        frontmatter, frontmatter_errors = parse_frontmatter(path)
+        errors.extend(frontmatter_errors)
+        relative_path = rel(path)
+        frontmatters[relative_path] = frontmatter
+
+        name = frontmatter.get("name", "")
+        description = frontmatter.get("description", "")
+        directory_name = path.parent.name
+
+        if not name:
+            errors.append(f"{relative_path}: frontmatter `name` is required")
+        elif not SKILL_NAME_RE.fullmatch(name):
+            errors.append(f"{relative_path}: invalid skill name `{name}`")
+        if name and name != directory_name:
+            errors.append(
+                f"{relative_path}: directory `{directory_name}` does not match frontmatter name `{name}`"
+            )
+        if not description:
+            errors.append(f"{relative_path}: frontmatter `description` is required")
+        elif not 1 <= len(description) <= 1024:
+            errors.append(
+                f"{relative_path}: description length must be 1-1024 characters; got {len(description)}"
+            )
+
         legacy_docs = path.parent / "docs"
         if legacy_docs.exists():
-            errors.append(f"{name}: legacy skill docs directory must be migrated: {rel(legacy_docs)}")
-        for resource in sorted(set(RESOURCE_RE.findall(path.read_text(encoding="utf-8")))):
-            matches = list(path.parent.glob(resource))
-            if not matches:
-                errors.append(f"{name}: missing bundled resource referenced by SKILL.md: {resource}")
-    actual_paths = {str(path.relative_to(ROOT)) for path in (ROOT / "skills").glob("*/SKILL.md")}
-    for path in sorted(actual_paths - manifest_paths):
-        errors.append(f"manifest: missing skill entry for {path}")
+            errors.append(f"{directory_name}: legacy skill docs directory must be migrated: {rel(legacy_docs)}")
+
+        text = path.read_text(encoding="utf-8")
+        resources = cast(list[str], RESOURCE_RE.findall(text))
+        for resource in sorted(set(resources)):
+            if not list(path.parent.glob(resource)):
+                errors.append(f"{directory_name}: missing bundled resource referenced by SKILL.md: {resource}")
+
+    skills_value = manifest.get("skills")
+    if not isinstance(skills_value, list):
+        errors.append("manifest: `skills` must be a list")
+        skills: list[object] = []
+    else:
+        skills = cast(list[object], skills_value)
+
+    manifest_names: list[str] = []
+    manifest_paths: list[str] = []
+    for skill_value in skills:
+        if not isinstance(skill_value, dict):
+            errors.append("manifest: every skill must be an object")
+            continue
+        skill = cast(dict[str, object], skill_value)
+
+        name = str(skill.get("name", ""))
+        manifest_path = str(skill.get("path", ""))
+        manifest_names.append(name)
+        manifest_paths.append(manifest_path)
+        path = ROOT / manifest_path
+
+        if not name:
+            errors.append("manifest: every skill requires a name")
+        elif not SKILL_NAME_RE.fullmatch(name):
+            errors.append(f"manifest: invalid skill name `{name}`")
+        if not path.exists():
+            errors.append(f"{name or '<missing>'}: missing skill file {rel(path)}")
+            continue
+
+        frontmatter = frontmatters.get(manifest_path, {})
+        if frontmatter.get("name") != name:
+            errors.append(
+                f"manifest: `{name}` does not match frontmatter name `{frontmatter.get('name', '<missing>')}` for {manifest_path}"
+            )
+
+        manifest_modes_value = skill.get("modes", [])
+        if not isinstance(manifest_modes_value, list):
+            errors.append(f"{name}: manifest `modes` must be a list")
+            manifest_modes: list[object] = []
+        else:
+            manifest_modes = cast(list[object], manifest_modes_value)
+        actual_modes = [norm(mode) for mode in manifest_modes]
+        expected_modes = skill_modes(path)
+        if actual_modes != expected_modes:
+            errors.append(f"{name}: modes mismatch; manifest={actual_modes}, skill={expected_modes}")
+
+    for name, count in Counter(manifest_names).items():
+        if count != 1:
+            errors.append(f"manifest: skill name `{name}` appears {count} times")
+    for path, count in Counter(manifest_paths).items():
+        if count != 1:
+            errors.append(f"manifest: skill path `{path}` appears {count} times")
+
+    path_counts = Counter(manifest_paths)
+    for path in sorted(actual_rel_paths):
+        if path_counts[path] != 1:
+            errors.append(f"manifest: repository skill `{path}` must appear exactly once; got {path_counts[path]}")
+    for path in sorted(set(manifest_paths) - actual_rel_paths):
+        errors.append(f"manifest: entry does not identify a repository skill: {path}")
+
     for path in FILES_WITH_INSTALL_EXAMPLES:
         if FORBIDDEN_INSTALL in path.read_text(encoding="utf-8"):
             errors.append(f"{rel(path)}: installation examples must not use {FORBIDDEN_INSTALL}")
+
     readme_text = README.read_text(encoding="utf-8")
-    for name in sorted(names):
+    for name in sorted(actual_names):
         if name not in readme_text:
             errors.append(f"README.md: missing {name}")
-    raw_urls = sorted(set(RAW_URL_RE.findall(readme_text + "\n" + json.dumps(manifest))))
+
+    raw_url_matches = cast(list[str], RAW_URL_RE.findall(readme_text + "\n" + json.dumps(manifest)))
+    raw_urls = sorted(set(raw_url_matches))
     if not raw_urls:
         errors.append("No raw.githubusercontent.com skill URLs found")
     for url in raw_urls:
@@ -97,12 +259,41 @@ def main() -> int:
             errors.append(f"Malformed raw URL: {url}")
         elif not local_path.exists():
             errors.append(f"Raw URL points at missing local file: {url}")
+
+    delivery_path = ROOT / "skills" / "engineering-delivery" / "SKILL.md"
+    if delivery_path.exists():
+        delivery_text = delivery_path.read_text(encoding="utf-8")
+        delivery_frontmatter = frontmatters.get("skills/engineering-delivery/SKILL.md", {})
+        delivery_description = delivery_frontmatter.get("description", "")
+        review_artifact = (
+            r"(?:code|diff|patch|commit|branch|mr|pr|merge request|pull request)"
+        )
+        trigger_re = re.compile(
+            rf"\b{review_artifact}\s+review\b|\breview\s+(?:this\s+)?{review_artifact}\b",
+            re.IGNORECASE,
+        )
+        if trigger_re.search(delivery_description):
+            errors.append("engineering-delivery: frontmatter still contains a concrete review trigger")
+        if "review" in skill_modes(delivery_path):
+            errors.append("engineering-delivery: Review must not remain a work mode")
+        if "engineering-code-review" not in delivery_text:
+            errors.append("engineering-delivery: missing handoff to engineering-code-review")
+
+    for old_path in [
+        ROOT / "skills" / "engineering-delivery" / "references" / "code-review-rules.md",
+        ROOT / "skills" / "engineering-delivery" / "examples" / "code-review.md",
+    ]:
+        if old_path.exists():
+            errors.append(f"engineering-delivery: migrated review artifact still exists: {rel(old_path)}")
+
     if errors:
         for error in errors:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
+
     print("Skill checks passed.")
     return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

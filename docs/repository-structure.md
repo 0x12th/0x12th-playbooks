@@ -9,11 +9,17 @@ The repository is organized as a multi-skill library.
 ├── CHANGELOG.md
 ├── .github/
 │   ├── scripts/
+│   │   ├── check_install.sh
 │   │   └── check_skills.py
 │   └── workflows/
 │       └── check-skills.yml
 ├── skills/
 │   ├── engineering-architecture/
+│   │   ├── SKILL.md
+│   │   ├── references/
+│   │   ├── templates/
+│   │   └── examples/
+│   ├── engineering-code-review/
 │   │   ├── SKILL.md
 │   │   ├── references/
 │   │   ├── templates/
@@ -57,5 +63,6 @@ Platform-specific manifests are intentionally not included because Zed, Claude C
 
 ## Validation
 
-- `.github/scripts/check_skills.py`: validates skill modes, bundled-resource references, installation snippets, README skill references, and raw skill URL targets.
-- `.github/workflows/check-skills.yml`: runs the same check in GitHub Actions.
+- `.github/scripts/check_skills.py`: validates frontmatter, directory/name/manifest consistency, skill modes, bundled resources, installation snippets, delivery ownership separation, README references, and raw skill URL targets.
+- `.github/scripts/check_install.sh`: validates authoritative installation of every discovered skill folder, stale-file cleanup, preservation of neighboring skills, overlap warnings, default/fallback targets, and the tar fallback.
+- `.github/workflows/check-skills.yml`: runs both checks in GitHub Actions.

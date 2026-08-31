@@ -4,6 +4,21 @@ All notable changes to this repository are documented in this file.
 
 ## Unreleased
 
+### Added
+
+- Added the standalone `engineering-code-review` skill for selected code, diffs, patches, commits, branches, GitLab merge requests, GitHub pull requests, incremental re-review, recommendation audit, and read-only comment preparation.
+- Added immutable snapshot, evidence completeness, trust-boundary, coverage, finding, verdict, discussion, and large-change contracts.
+- Added a Russian `concise-peer` review-comment baseline, report/comment templates, read-side provider references, representative examples, and anti-examples.
+- Added behavior scenarios for four-skill routing, verdicts, attribution, unknown contracts, local-state safety, provider fallback, hostile content, discussions, re-review, large changes, and comment style.
+
+### Changed
+
+- Moved concrete code-review ownership out of `engineering-delivery` and added explicit review-to-delivery and architecture handoffs.
+- Updated README, selection/bootstrap/installation/structure guidance, and manifest metadata for the unreleased four-skill bundle while keeping pinned commands on the current release.
+- Strengthened structural checks for frontmatter, names, descriptions, manifest registration, synchronized modes, bundled resources, and delivery ownership separation without locking exact prose.
+- Made installer checks discover all managed skills dynamically and documented the warning-only migration path for an unrelated neighboring `code-review` skill.
+- Kept provider reads and comment preparation in the first version; external provider actions belong to provider-specific adapters.
+
 ## 0.13.1 - 2026-08-28
 
 ### Changed

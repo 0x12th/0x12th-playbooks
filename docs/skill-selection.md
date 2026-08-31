@@ -1,84 +1,87 @@
 # Skill Selection
 
-Select the skill from the user's intent, not from broad repository context.
+Select the skill from the user's primary requested decision, not from broad repository context or one attached artifact.
 
-Use the strict decision chain when multiple layers are needed:
+Use this decision graph when multiple layers are needed:
 
 ```text
 product-evolution
-↓
+        |
 engineering-architecture
-↓
-engineering-delivery
+        |
++-------------------------+
+| engineering-code-review |
+| engineering-delivery    |
++-------------------------+
+
+engineering-code-review -> engineering-delivery
 ```
 
 ## Product Evolution
 
-Use `product-evolution` when the user's primary question is product value,
-current product health or maturity, scope, priority, MVP, customer request
-evaluation, roadmap sequencing, or whether something should be built. Explicit
-invocation is allowed but not required.
-
-Use it when the user asks:
-
-```text
-What is the highest-value product investment?
-```
+Use `product-evolution` for product value, current product health or maturity, scope, priority, MVP, customer-request evaluation, roadmap sequencing, or whether something should be built.
 
 Use for:
 
-- Product investment decisions
-- Current product health and maturity assessment
-- Customer request evaluation
-- MVP boundaries
-- Pilot evaluation
-- Opportunity analysis
-- Roadmap priority decisions
-- Priority arbitration
-- What not to do
+- product investment decisions;
+- current product health and maturity assessment;
+- customer request evaluation;
+- MVP boundaries;
+- pilot evaluation;
+- opportunity analysis;
+- roadmap priority and arbitration;
+- what not to do.
 
-Do not use for implementation, debugging, architecture design, migration strategy, CI, tests, coding tasks, production readiness, deployment readiness, server/VPS fit, or runtime resource review.
+Do not use for implementation, debugging, architecture design, migration strategy, CI, tests, code review, production readiness, deployment readiness, server/VPS fit, or runtime resource review.
 
 ## Engineering Architecture
 
-Use `engineering-architecture` when the user asks:
+Use `engineering-architecture` when the primary question is:
 
 ```text
-How should the system be designed?
+How should the system evolve safely?
 ```
 
 Use for:
 
-- Architecture decisions
-- Migrations and migration review
-- Service boundaries
-- Domain boundaries
-- Ownership and data ownership
-- Architecture debt
-- Reliability strategy
-- Observability architecture
-- Deployment architecture
-- Production readiness
-- Deployment readiness
-- Release readiness
-- Operational readiness
-- Runtime resource review
-- VPS/server fit assessment
-- Current architecture assessment
-- Target architecture assessment
-- Capacity and scaling review
-- Repository-wide technical review
-- System evolution
-- Technical evolution
-- Design challenge
-- Decision support
-- Implementation planning before coding
+- architecture decisions and repository-wide architecture review;
+- migrations and migration strategy;
+- service/domain boundaries and ownership;
+- reliability and observability architecture;
+- deployment architecture;
+- production, deployment, release, and operational readiness;
+- runtime resources, VPS/server fit, capacity, and scaling;
+- current and target architecture;
+- system evolution, design challenge, and decision support.
 
-Do not use for product investment decisions or direct code changes.
+Do not use for product investment decisions, direct implementation, or concrete code/change-set review. A diff can supply evidence for an architecture question without changing the primary architecture decision.
+
+## Engineering Code Review
+
+Use `engineering-code-review` when the primary question is:
+
+```text
+Is this concrete code change safe to merge?
+```
+
+Use for:
+
+- selected code or file review;
+- diff, patch, and change-set review;
+- commit, range, and branch review;
+- GitLab merge request and GitHub pull request review;
+- equivalent provider change requests;
+- incremental re-review;
+- audit of comments on a concrete code change;
+- read-only preparation of review comments.
+
+It is read-only. `prepare comments` is always dry-run; external provider actions belong to provider-specific adapters.
+
+Do not use for generic project review, architecture/readiness decisions, product/PRD review, implementation or fixes, merge-conflict resolution, generic CI diagnosis, generic validation, PR preparation, or merging.
 
 ## Engineering Delivery
 
-Use `engineering-delivery` when the user asks:
+Use `engineering-delivery` when the primary question is:
 
 ```text
 What is the safest next delivery action?
@@ -86,81 +89,72 @@ What is the safest next delivery action?
 
 Use for:
 
-- Diagnosis
-- Investigation
-- Implementation
-- Bug fixes
-- Tests
-- CI fixes
-- Local refactoring
-- Validation
-- PR preparation
-- Incremental improvements
+- diagnosis and investigation;
+- implementation and bug fixes;
+- tests and CI fixes;
+- local refactoring;
+- generic validation;
+- PR preparation;
+- incremental improvements.
 
-Default to read-only diagnosis for prompts such as `why is this happening`, `where is the problem`, `analyze this error`, `what changed`, `check this`, or `review this`.
+Default to read-only diagnosis. Edit only when the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.
 
-Edit only when the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.
-
-Do not use for product or architecture decisions. If implementation requires one of those decisions, state the missing decision before delivery work continues.
+Do not use for concrete code/change-set review, product decisions, or architecture/readiness decisions.
 
 ## Examples
 
 | User request | Skill |
 |---|---|
 | `Should we build this feature?` | `product-evolution` |
-| `Is this worth doing?` | `product-evolution` |
-| `Do we need this feature?` | `product-evolution` |
-| `What is the MVP?` | `product-evolution` |
-| `What is the smallest useful solution?` | `product-evolution` |
-| `What should come first?` | `product-evolution` |
-| `A customer asked for X. Should we do it?` | `product-evolution` |
-| `Assess the current product health and recommend the next investment.` | `product-evolution` |
+| `Assess current product health and recommend the next investment.` | `product-evolution` |
+| `Review this customer change request.` | `product-evolution` unless a concrete implementation is the target |
 | `Should we merge two tightly coupled modules?` | `engineering-architecture` |
-| `How should we start the merge step by step?` | `engineering-architecture` |
-| `Implement the first merge step.` | `engineering-delivery` |
-| `Review the service architecture.` | `engineering-architecture` |
-| `Write tests.` | `engineering-delivery` |
-| `Why is CI failing?` | `engineering-delivery` in read-only diagnosis mode |
-| `Investigate this runtime exception.` | `engineering-delivery` in read-only diagnosis mode |
-| `Should background jobs move to a different queue runtime?` | `engineering-architecture` |
-| `Move the task handler to the already approved queue runtime.` | `engineering-delivery` |
-| `Fix the failing CI test.` | `engineering-delivery` |
-| `Review this PR.` | `engineering-delivery` in read-only review mode |
-| `Review this PR for bugs and missing tests.` | `engineering-delivery` in read-only review mode |
+| `Review this repository for production readiness.` | `engineering-architecture` |
+| `Review architecture implications of this diff.` | `engineering-code-review` for concrete change risk, then `engineering-architecture` for broad decisions |
+| `Review this selected function.` | `engineering-code-review` in Code Review mode |
+| `Review this patch.` | `engineering-code-review` in Code Review mode |
+| `Review commit abc123.` | `engineering-code-review` in Code Review mode |
+| `Review this branch against main.` | `engineering-code-review` in Code Review mode |
+| `Review GitLab MR !42.` | `engineering-code-review` in Change Request Review mode |
+| `Review GitHub PR #42.` | `engineering-code-review` in Change Request Review mode |
+| `Check the updated PR again.` | `engineering-code-review` in Incremental Re-review mode when prior state exists |
+| `Audit comments on GitLab MR !42.` | `engineering-code-review` in Recommendation Audit mode |
+| `Prepare review comments for this PR.` | `engineering-code-review`; dry-run |
+| `Prepare this PR for review.` | `engineering-delivery` |
+| `Why is CI failing?` | `engineering-delivery` in Diagnosis mode |
+| `Fix the failing CI test.` | `engineering-delivery` in Implementation mode |
+| `Resolve these merge conflicts.` | merge-conflict skill/workflow, not these review modes |
+
+## Mixed Intents
+
+- `Review this PR and fix confirmed blockers`: review the pinned snapshot with `engineering-code-review`, then hand confirmed findings to `engineering-delivery` as a separate implementation phase.
+- `Quick-review PR #42`: use `engineering-code-review`, but quick/partial coverage cannot produce an unconditional `Pass`.
+- `Is this deployment design acceptable?`: use `engineering-architecture`; an attached change does not replace the architecture decision.
+- `Prepare this PR`: `engineering-delivery` unless the user specifically requests review-comment preparation.
+- `Audit these recommendations`: use `engineering-code-review` only when the recommendations concern a concrete code change.
 
 ## Generic Project Prompts
 
-Generic project-level technical prompts should normally use `engineering-architecture`, not `engineering-delivery`, unless the user explicitly asks to implement, test, fix, validate a selected change, review a diff, review a PR, or diagnose a specific failure.
-
-Explicit product-value, health, maturity, adoption, retention, or customer-value
-prompts use `product-evolution`. Generic project or repository review remains an
-`engineering-architecture` task.
-
-Examples:
+Generic project-level technical prompts normally use `engineering-architecture`, not `engineering-code-review` or `engineering-delivery`.
 
 | User request | Skill | Mode |
 |---|---|---|
 | `Look at this project.` | `engineering-architecture` | Quick Scan + Architecture Quality |
 | `Review this project.` | `engineering-architecture` | Quick Scan or Full Review + Architecture Quality |
 | `What would you improve?` | `engineering-architecture` | Quick Scan + Architecture Quality |
-| `Critique the architecture.` | `engineering-architecture` | Quick Scan or Focused Review + Architecture Quality |
 | `Is it ready for production?` | `engineering-architecture` | Deployment Readiness Review |
-| `Can I deploy this to a VPS?` | `engineering-architecture` | Deployment Readiness Review |
-| `Is it ready for an update?` | `engineering-architecture` | Deployment Readiness Review |
 | `What is the current architecture?` | `engineering-architecture` | Full Review + Architecture Quality |
-| `What should the target architecture be?` | `engineering-architecture` | Full Review + Technical Evolution |
 | `Assess the current product health.` | `product-evolution` | Current Product Assessment |
-| `What should this product become?` | `product-evolution` | Opportunity Analysis |
-| `Create a future roadmap.` | `product-evolution` | Roadmap Planning |
-| `Review this PR.` | `engineering-delivery` | Review |
+| `Review this PR.` | `engineering-code-review` | Change Request Review |
 | `Why is CI failing?` | `engineering-delivery` | Diagnosis |
 
 ## Selected Context
 
-Selected code, selected files, pasted snippets, or explicitly named files take precedence over repository-wide exploration.
+Selected code, files, pasted snippets, or explicitly named artifacts take precedence over repository-wide exploration, but the requested decision still controls routing.
 
-If the user selected a local code path and asks for a fix, choose `engineering-delivery`.
-
-If the user selected a local design or migration plan and asks whether it is a good idea, choose `engineering-architecture`.
+- Selected implementation plus a review request: `engineering-code-review`.
+- Selected implementation plus a fix request: `engineering-delivery`.
+- Selected design/migration plan plus a decision request: `engineering-architecture`.
+- Selected customer request plus an investment/scope decision: `product-evolution`.
 
 Do not broaden a local request into a full repository review unless the user asks for one.

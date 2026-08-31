@@ -4,7 +4,7 @@ Use this workflow for bounded delivery work. Treat implementation ideas as hypot
 
 Implementation is not the default mode. Start read-only unless the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.
 
-1. Classify the requested mode: diagnosis, investigation, implementation, validation, or review.
+1. Classify the requested mode: diagnosis, investigation, implementation, or validation.
 2. Confirm the selected scope and question being answered.
 3. Inspect the strongest local evidence first.
 4. For bugs, CI failures, and runtime failures, identify a concrete observable failure signal before patching when practical.
@@ -29,7 +29,6 @@ Implementation is not the default mode. Start read-only unless the user explicit
 - **Investigation:** expand only when selected evidence is insufficient; stop when the answer is supported.
 - **Implementation:** define acceptance criteria, make the narrow change, validate the new behavior.
 - **Validation:** find the repository-supported command, run the narrowest meaningful check, classify failures as change-related, pre-existing, or inconclusive.
-- **Review:** evaluate selected code or changes for bugs, regressions, missing tests, and delivery risk.
 
 ## Traceback-First Debugging
 

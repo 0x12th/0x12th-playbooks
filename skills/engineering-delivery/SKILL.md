@@ -3,16 +3,17 @@ name: engineering-delivery
 description: >-
   Use for safe engineering delivery work: diagnosis, investigation,
   implementation, coding, bug fixes, tests, CI failures, runtime failures,
-  validation, code review, diff review, patch review, review this change,
-  review this commit, review this PR, local refactoring, PR preparation, and
-  incremental improvements. Default to read-only diagnosis unless the user
-  explicitly asks to implement, fix, patch, modify, update, refactor, or apply
-  changes. Do not use for architecture decisions, service extraction strategy,
-  migration strategy, platform evolution, production readiness, deployment
-  readiness, release readiness, server/VPS fit, runtime resource review, current
-  architecture assessment, target architecture assessment, capacity and scaling
-  review, repository-wide technical review, product investment decisions,
-  product prioritization, MVP decisions, or long-term tradeoff analysis.
+  validation, local refactoring, PR preparation, and incremental improvements.
+  Default to read-only diagnosis unless the user explicitly asks to implement,
+  fix, patch, modify, update, refactor, or apply changes. Do not use for
+  assessment of concrete code artifacts or provider change requests,
+  architecture decisions, service extraction strategy, migration strategy,
+  platform evolution, production readiness, deployment readiness, release
+  readiness, server/VPS fit, runtime resource assessment, current architecture
+  assessment, target architecture assessment, capacity and scaling assessment,
+  repository-wide technical assessment, product investment decisions, product
+  prioritization, MVP
+  decisions, or long-term tradeoff analysis.
 ---
 
 # Engineering Delivery
@@ -23,7 +24,7 @@ Answer:
 What is the safest next delivery action?
 ```
 
-This is a delivery playbook for diagnosing, investigating, reviewing, validating, and only when explicitly requested, making bounded code changes while preserving user work and minimizing regression risk.
+This is a delivery playbook for diagnosing, investigating, validating, and only when explicitly requested, making bounded code changes while preserving user work and minimizing regression risk.
 
 ## Boundaries
 
@@ -36,7 +37,6 @@ Applies to:
 - Bug fixes
 - Tests
 - CI fixes
-- Code review
 - Local refactoring
 - Validation
 - PR preparation
@@ -63,6 +63,7 @@ Does not apply to:
 - Project readiness review
 - Long-term tradeoff analysis
 - Broad architecture assessment
+- Read-only review of selected code or concrete change sets; use `engineering-code-review`
 
 When a product or architecture decision is required before delivery work can continue, stop and state the decision that is missing. Do not route, announce, or explain skill selection unless the user asks or the host runtime requires disclosure.
 
@@ -70,18 +71,15 @@ When a product or architecture decision is required before delivery work can con
 
 Default to read-only diagnosis unless the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.
 
-Read-only diagnosis, investigation, validation, or review examples:
+Read-only diagnosis, investigation, or validation examples:
 
 - "Why is CI failing?"
 - "Analyze this error."
-- "Look at this selected code/log/error."
-- "Check this selected diff, file, failure, or validation result."
+- "Look at this selected log or error."
+- "Check this failure or validation result."
 - "Where is the problem?"
 - "Is this related?"
-- "What changed?"
 - "Investigate this runtime exception."
-- "Review this PR."
-- "Review this PR for bugs and missing tests."
 - "Validate this change."
 
 Implementation examples:
@@ -123,6 +121,12 @@ Product examples that require a decision before delivery work:
 - "Which priority should come first?"
 - "Should this customer request become roadmap work?"
 
+## Code Review Handoff
+
+Use `engineering-code-review` for read-only review of selected code, files, diffs, patches, commits, branches, merge requests, pull requests, and existing comments on a concrete change.
+
+For a mixed request to review and fix, complete the review against its immutable snapshot first. Return only confirmed implementation work to this skill as a separate bounded phase; do not edit while the review target is still being established.
+
 ## Work Modes
 
 Choose the smallest useful mode:
@@ -131,13 +135,12 @@ Choose the smallest useful mode:
 - **Investigation**: gather only the evidence needed to answer when selected context is insufficient.
 - **Implementation**: make a bounded code or config change only after an explicit edit request.
 - **Validation**: run checks, explain pass/fail results, and classify failures.
-- **Review**: assess selected code, diffs, commits, or PRs for bugs, regressions, missing tests, and delivery risk. Begin with `Pass`, `Changes required`, or `Blocked by missing evidence`.
 
 ## Execution Discipline
 
 Use the smallest safe execution loop:
 
-1. Classify the mode: diagnosis, investigation, implementation, validation, or review.
+1. Classify the mode: diagnosis, investigation, implementation, or validation.
 2. Start from the strongest local evidence: selected context, stack traces, logs, failing tests, provided files, provided diffs, then named repository files.
 3. For runtime failures, follow the traceback before exploring the repository. Traceback beats repository exploration.
 4. In read-only modes, answer the question and stop when the evidence is sufficient.
@@ -224,7 +227,7 @@ noise.
 If the host requires a content-returning edit primitive, use it once, do not
 repeat its payload, and report only the deleted paths and reason.
 
-When reviewing or reporting changes:
+When reporting changes:
 
 - summarize behavioral impact;
 - list changed files only when useful;
@@ -276,7 +279,6 @@ Load supporting references only when the current task needs more detail:
 - `references/implementation-workflow.md`, `references/code-change-rules.md`, and `references/validation-rules.md`: load for medium- or high-risk implementation, shared contracts, public APIs, migrations, deployment configuration, CI pipelines, dependency versions, generated files, or when this core is insufficient to choose the safe change or validation path.
 - `references/testing-rules.md`: load for test or regression work.
 - `references/python-testing-rules.md`: load with `references/testing-rules.md` for Python test or regression work.
-- `references/code-review-rules.md`: load for selected code, diff, commit, or PR review.
 
 Supporting templates:
 
@@ -287,7 +289,6 @@ Examples:
 
 - `examples/implementation.md`
 - `examples/bug-fix.md`
-- `examples/code-review.md`
 - `examples/tests.md`
 - `examples/ci-fix.md`
 
