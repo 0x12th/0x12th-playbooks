@@ -44,7 +44,7 @@ By default, `install.sh` installs into existing agent homes: `~/.agents/skills`,
 
 The installer treats this repository's four skill folders as managed copies. Updates remove stale files inside those folders while preserving every neighboring skill. Keep custom variants in a fork or a separate project-local skill.
 
-The standalone `engineering-code-review` skill is currently unreleased. Install the latest complete bundle so it and the review-free `engineering-delivery` come from the same revision. Pinned `v0.13.1` remains the current released three-skill bundle. If an unrelated neighboring `code-review` skill is installed, the installer warns but never edits it.
+The standalone `engineering-code-review` skill is included in `v0.14.0`. Install the complete bundle so it and the review-free `engineering-delivery` come from the same revision. If an unrelated neighboring `code-review` skill is installed, the installer warns but never edits it.
 
 The manual commands below use `~/.agents/skills` as a common example. Replace it with the skills directory used by your agent setup.
 
@@ -59,7 +59,7 @@ curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/inst
 Pinned version:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.13.1/install.sh | sh -s -- ~/.agents/skills v0.13.1
+curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.14.0/install.sh | sh -s -- ~/.agents/skills v0.14.0
 ```
 
 Custom target directory:
@@ -80,22 +80,22 @@ git clone https://github.com/0x12th/0x12th-playbooks.git
 Pinned version:
 
 ```bash
-git clone --branch v0.13.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 ./0x12th-playbooks/install.sh ~/.agents/skills
 ```
 
 ### Install Selected Skills
 
-The unreleased review ownership split requires `engineering-code-review` and `engineering-delivery` from the same revision. Install them as a pair:
+The review ownership split requires `engineering-code-review` and `engineering-delivery` from the same revision. Install the pinned pair:
 
 ```bash
-git clone --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a --delete 0x12th-playbooks/skills/engineering-code-review/ ~/.agents/skills/engineering-code-review/
 rsync -a --delete 0x12th-playbooks/skills/engineering-delivery/ ~/.agents/skills/engineering-delivery/
 ```
 
-`engineering-architecture` and `product-evolution` remain independently installable from either latest or the current pinned release.
+`engineering-architecture` and `product-evolution` remain independently installable from either latest or `v0.14.0`.
 
 ### Agent Paths
 
