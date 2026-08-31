@@ -25,7 +25,7 @@ For implementation work:
 - Do not narrate routine file searches or every file opened.
 - Report only decisions, meaningful blockers, validation results, and changed behavior.
 
-For diagnosis, investigation, validation, and review:
+For diagnosis, investigation, and validation:
 
 - Do not imply files were or will be edited unless the user asked for edits.
 - Do not paste raw git diffs unless explicitly requested.

@@ -16,19 +16,22 @@ These guidelines keep skills useful for AI coding agents without increasing cont
 - Avoid process narration in final outputs.
 - Start review contracts with a mode-appropriate verdict.
 - Omit optional output sections when they would be empty.
-- Validate behavior changes with representative agent scenarios.
+- validate behavior changes with representative agent scenarios;
+- avoid overlapping automatic triggers between skills with exclusive ownership.
 
 ## Skill Entry Points
 
 `SKILL.md` should contain:
 
-- Purpose
-- Boundaries
-- Intent detection
-- Mode or work selection
-- References to supporting documents
+- valid frontmatter whose directory and `name` match;
+- a non-empty description no longer than 1024 characters;
+- purpose;
+- boundaries;
+- intent detection;
+- mode or work selection;
+- references to supporting documents.
 
-Do not put the full playbook in `SKILL.md`.
+Keep detailed playbooks in references, but preserve safety-critical behavior in `SKILL.md` when raw-file installation must remain safe without bundled resources.
 
 ## Supporting References
 

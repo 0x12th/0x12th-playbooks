@@ -58,7 +58,7 @@ Does not apply to:
 - Bug fixes
 - Writing tests
 - CI fixes
-- Code review of diffs or PRs
+- Concrete code, diff, patch, commit, MR, or PR review; use `engineering-code-review`
 - Local refactoring
 - Routine coding tasks
 - PR preparation
@@ -66,12 +66,14 @@ Does not apply to:
 
 When the user asks to implement, fix, test, validate, refactor locally, or prepare a PR, do not proceed with architecture review unless an architecture decision is required first. State the missing decision instead of explaining skill routing, unless the user asks or the host runtime requires disclosure.
 
+When the user asks to review a concrete code change, use `engineering-code-review` for change-level risk. Keep broad service boundaries, migration strategy, target architecture, and readiness decisions here.
+
 ## Intent Detection
 Choose architecture review when the request is about whether, why, where, or how the system should evolve technically.
 Generic project review prompts such as "look at this project", "review this project", "what would you improve?", and "critique the architecture" should use quick scan unless the user asks for a full review, implementation, product investment decision, or deployment readiness review.
 Do not handle product investment decisions with this skill. `product-evolution` owns questions about what to build, whether to build it, MVP scope, product priority, customer request value, pilot value, and which direction has the best value/effort tradeoff.
 When a repository-wide or project-wide review also asks about scaling, migration, technical sequencing, or architecture evolution, select **Full Review + Technical Evolution** by default, unless the user explicitly asks for a fast scan or names a bounded subsystem as the whole scope. Do not answer this scenario as Quick Scan or Focused Review.
-Repository-wide technical review prompts route here, not to `engineering-delivery`, even when phrased generally.
+Repository-wide technical review prompts route here, not to `engineering-code-review` or `engineering-delivery`, even when phrased generally.
 
 Architecture-review examples:
 - "Review this project."
@@ -112,6 +114,7 @@ Non-architecture examples:
 - "Why is CI failing?"
 - "Move this job to the approved queue runtime."
 - "Fix this bug."
+- "Review this PR for bugs and missing tests."
 
 ## Loading Policy
 Start with `SKILL.md` only.

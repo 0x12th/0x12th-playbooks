@@ -2,20 +2,20 @@
 
 Selected code, selected files, pasted snippets, or explicitly named files take precedence over repository-wide exploration.
 
-A dirty worktree is not selected context. Only selected code, named files, pasted snippets, or explicit diff, PR, or commit review requests should trigger code review mode.
+A dirty worktree is not selected context. Review of selected code, diffs, patches, commits, branches, merge requests, or pull requests belongs to `engineering-code-review`; this reference governs selected evidence for delivery diagnosis, investigation, implementation, and validation.
 
 Evidence priority:
 
 1. Selected context and explicit user instructions.
 2. Stack traces, runtime exceptions, logs, and failing test output.
-3. Provided files, provided diffs, named files, commits, or PRs.
+3. Provided files, patches, named files, commits, or change-request context needed for the delivery task.
 4. Direct callers, callees, tests, schemas, configuration, or CI definitions.
 5. Broader repository exploration only when the earlier evidence is insufficient.
 
 When selected context is provided:
 
 1. Start with the selected context.
-2. Keep diagnosis, review, or change local to the selected scope.
+2. Keep diagnosis, investigation, validation, or implementation local to the selected scope.
 3. Expand only into direct dependencies required to answer the question or validate the change.
 4. Stop exploring when sufficient evidence already exists.
 5. Do not refactor unrelated code.

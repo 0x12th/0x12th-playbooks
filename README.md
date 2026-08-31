@@ -1,16 +1,17 @@
 # 0x12th-playbooks
 
-`0x12th-playbooks` is a collection of practical playbooks and agent skills for product decisions, architecture, delivery, migration planning, technical decision-making, and software evolution.
+`0x12th-playbooks` is a collection of practical playbooks and agent skills for product decisions, architecture, code review, delivery, migration planning, technical decision-making, and software evolution.
 
 It is not a prompt collection. It is a structured library of reusable skills for AI coding agents that need to review real systems, make technical decisions, implement changes safely, and avoid unnecessary architecture work.
 
 AI coding agents are useful when they stay inside the right scope. They become risky when every local change turns into a broad architecture audit, or every architecture question turns into premature implementation.
 
-This repository separates three common intents:
+This repository separates four common intents:
 
 - **Product evolution:** deciding whether, why, when, and in what scope to invest.
 - **Architecture review:** deciding how the system should be designed, migrated, or evolved technically.
-- **Engineering delivery:** diagnosing, reviewing, validating, and explicitly requested implementation.
+- **Engineering code review:** deciding whether a concrete code change is safe to merge.
+- **Engineering delivery:** diagnosing, validating, and performing explicitly requested implementation.
 
 The skills are designed to reduce context consumption, prioritize selected context, apply clear stop conditions, and avoid over-engineered recommendations.
 
@@ -20,17 +21,20 @@ The skills are designed to reduce context consumption, prioritize selected conte
 |---|---|---|
 | `product-evolution` | What is the highest-value product investment? | Current product assessment, product investment decisions, customer requests, feature scope, MVPs, pilots, roadmap priorities, opportunity analysis, priority arbitration, and smallest useful next step decisions |
 | `engineering-architecture` | How should the system evolve safely? | Architecture review, system design, architecture decisions, migration planning, service boundaries, domain/data ownership, architecture debt, reliability strategy, observability architecture, deployment architecture, production readiness, deployment readiness, release readiness, operational readiness, runtime resource review, VPS/server fit assessment, current/target architecture assessment, capacity and scaling review, technical evolution, design challenge, decision support |
-| `engineering-delivery` | What is the safest next delivery action? | Diagnosis, investigation, implementation, bug fixes, tests, CI failures, runtime failures, code review, diff review, patch review, commit review, PR review, local refactoring, validation, PR preparation, incremental improvements |
+| `engineering-code-review` | Is this concrete code change safe to merge? | Selected code/file review, diff/patch/change-set review, commit/range/branch review, GitLab MR and GitHub PR review, incremental re-review, recommendation audit, and provider-ready comment preparation |
+| `engineering-delivery` | What is the safest next delivery action? | Diagnosis, investigation, implementation, bug fixes, tests, CI failures, runtime failures, local refactoring, validation, PR preparation, incremental improvements |
 
 Use `product-evolution` when the question is whether, why, when, for whom, or in what MVP scope to invest, or explicitly asks about current product health, maturity, adoption, retention, or customer value. Explicit invocation is supported but not required. It owns product decisions before architecture: should we do it, for whom, when, what MVP, how to validate, what should go first, what is the smallest useful solution, and what not to do.
 
 Use `engineering-architecture` when the question is about technical design, tradeoffs, service boundaries, ownership, migrations, deployment architecture, production readiness, deployment readiness, release readiness, operational readiness, runtime resource review, VPS/server fit, current architecture, target architecture, capacity and scaling, technical evolution, or architecture risk.
 
-Use `engineering-delivery` when the request is to diagnose an error, investigate a failure, implement, fix, test, validate, review code, review a diff, review a patch, review a commit, review a PR, refactor locally, prepare a PR, or make the next approved incremental change.
+Use `engineering-code-review` when the request is to review selected code, a file, diff, patch, commit, range, branch, GitLab merge request, GitHub pull request, or equivalent concrete change; re-review an updated change; audit existing comments; or prepare review comments.
 
-Engineering delivery defaults to read-only diagnosis unless the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.
+Use `engineering-delivery` when the request is to diagnose an error, investigate a failure, implement, fix, test, validate, refactor locally, prepare a PR, or make the next approved incremental change.
 
-Use the strict chain when multiple layers are needed: `product-evolution` -> `engineering-architecture` -> `engineering-delivery`.
+Engineering delivery defaults to read-only diagnosis unless the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes. Code review is read-only by default and hands confirmed fixes to delivery as a separate phase.
+
+When multiple layers are needed, use `product-evolution` before `engineering-architecture`, then select `engineering-code-review` for a concrete implementation assessment or `engineering-delivery` for execution. Review-to-fix work flows from `engineering-code-review` to `engineering-delivery`.
 
 ## Installation
 
@@ -38,7 +42,9 @@ Install the full skill folders when possible, not only `SKILL.md`. The supportin
 
 By default, `install.sh` installs into existing agent homes: `~/.agents/skills`, `~/.claude/skills`, and `~/.codex/skills`. It skips missing agent homes so it does not create unused directories. If none exist, it falls back to `~/.agents/skills` for first-time setup.
 
-The installer treats this repository's three skill folders as managed copies. Updates remove stale files inside those folders while preserving every neighboring skill. Keep custom variants in a fork or a separate project-local skill.
+The installer treats this repository's four skill folders as managed copies. Updates remove stale files inside those folders while preserving every neighboring skill. Keep custom variants in a fork or a separate project-local skill.
+
+`v0.14.0` moves concrete code-review ownership from `engineering-delivery` into `engineering-code-review`; upgrade the complete bundle so those two skills come from the same release. If an unrelated neighboring `code-review` skill is installed, it may overlap automatic selection. The installer warns but never edits it; after verifying its origin, remove it or make it manual-only where supported.
 
 The manual commands below use `~/.agents/skills` as a common example. Replace it with the skills directory used by your agent setup.
 
@@ -53,7 +59,7 @@ curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/inst
 Pinned version:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.13.1/install.sh | sh -s -- ~/.agents/skills v0.13.1
+curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.14.0/install.sh | sh -s -- ~/.agents/skills v0.14.0
 ```
 
 Custom target directory:
@@ -74,16 +80,18 @@ git clone https://github.com/0x12th/0x12th-playbooks.git
 Pinned version:
 
 ```bash
-git clone --branch v0.13.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 ./0x12th-playbooks/install.sh ~/.agents/skills
 ```
 
 ### Install One Skill
 
+The complete `v0.14.0` bundle is recommended. If installing one skill manually, keep `engineering-code-review` and the review-free `engineering-delivery` on the same release; mixed versions have overlapping or missing ownership.
+
 Architecture review:
 
 ```bash
-git clone --branch v0.13.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a --delete 0x12th-playbooks/skills/engineering-architecture/ ~/.agents/skills/engineering-architecture/
 ```
@@ -91,15 +99,23 @@ rsync -a --delete 0x12th-playbooks/skills/engineering-architecture/ ~/.agents/sk
 Product evolution:
 
 ```bash
-git clone --branch v0.13.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a --delete 0x12th-playbooks/skills/product-evolution/ ~/.agents/skills/product-evolution/
+```
+
+Engineering code review:
+
+```bash
+git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+mkdir -p ~/.agents/skills
+rsync -a --delete 0x12th-playbooks/skills/engineering-code-review/ ~/.agents/skills/engineering-code-review/
 ```
 
 Engineering delivery:
 
 ```bash
-git clone --branch v0.13.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a --delete 0x12th-playbooks/skills/engineering-delivery/ ~/.agents/skills/engineering-delivery/
 ```
@@ -117,6 +133,7 @@ Raw `SKILL.md` URLs are useful for agents that support URL imports, but they do 
 
 ```text
 https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture/SKILL.md
+https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-code-review/SKILL.md
 https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-delivery/SKILL.md
 https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/product-evolution/SKILL.md
 ```
@@ -125,7 +142,7 @@ See `docs/installation.md` for more installation details.
 
 ## Automatic Selection
 
-Most AI coding agents select skills primarily from the skill `name` and frontmatter `description` in each `SKILL.md`. The descriptions in this repository expose common trigger phrases such as current product health, maturity, adoption, retention, product investment, customer requests, MVP, roadmap priority, architecture review, migration planning, service boundaries, production readiness, deployment readiness, VPS/server fit, runtime resource review, diagnosis, investigation, implementation, bug fixes, tests, CI failures, runtime failures, code review, diff review, and PR review.
+Most AI coding agents select skills primarily from the skill `name` and frontmatter `description` in each `SKILL.md`. The descriptions expose product, architecture/readiness, concrete code/change-set review, and delivery signals while keeping their negative boundaries explicit. `engineering-code-review` is the only auto-invoked owner for selected code, diffs, patches, commits, branches, MRs, and PRs.
 
 `product-evolution` supports soft automatic selection for explicit product health, maturity, adoption, retention, customer value, product scope, MVP, roadmap, priority, customer request, feature scope, and "should we build this?" prompts. Generic project or repository review remains an `engineering-architecture` task. `product-evolution` should not be selected for implementation, debugging, architecture, migration, CI, tests, production readiness, deployment readiness, server/VPS fit, or runtime resource review.
 
@@ -203,6 +220,16 @@ Priority Arbitration: which should come first, mobile app or watch notifications
 Roadmap Planning: prioritize mobile app, watch notifications, onboarding, and API access.
 ```
 
+Engineering code review:
+
+```text
+Review GitLab MR !42 for confirmed bugs and merge risk. Prepare concise comments, but do not post them.
+```
+
+```text
+Re-review this updated PR and classify previous findings as resolved, still open, new, or unverifiable.
+```
+
 Engineering delivery:
 
 ```text
@@ -223,14 +250,6 @@ Implement the first approved migration step without changing public behavior.
 
 ```text
 Write tests for the selected code.
-```
-
-```text
-Review this PR.
-```
-
-```text
-Review this PR for bugs, regressions, and missing tests.
 ```
 
 ## Optional Memory Backends
@@ -282,6 +301,7 @@ See:
 0x12th-playbooks/
 ├── skills/
 │   ├── engineering-architecture/
+│   ├── engineering-code-review/
 │   ├── engineering-delivery/
 │   └── product-evolution/
 ├── docs/
@@ -298,6 +318,7 @@ Run consistency checks before release:
 
 ```bash
 python3 .github/scripts/check_skills.py
+sh .github/scripts/check_install.sh
 ```
 
 Behavioral skill changes should also be checked on the active maintainer

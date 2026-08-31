@@ -12,10 +12,18 @@ need() {
   fi
 }
 
+warn_review_overlap() {
+  target=$1
+  if [ -d "$target/code-review" ]; then
+    echo "warning: existing $target/code-review may overlap automatic selection with engineering-code-review; it was left unchanged" >&2
+  fi
+}
+
 copy_skills() {
   src="$1"
   dst="$2"
   mkdir -p "$dst"
+  warn_review_overlap "$dst"
 
   found=0
   for skill_src in "$src"/*; do
