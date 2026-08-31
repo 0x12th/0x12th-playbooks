@@ -63,6 +63,6 @@ Platform-specific manifests are intentionally not included because Zed, Claude C
 
 ## Validation
 
-- `.github/scripts/check_skills.py`: validates frontmatter, directory/name/manifest consistency, skill modes, bundled resources, installation snippets, raw-import review safety, delivery ownership separation, README references, and raw skill URL targets.
+- `.github/scripts/check_skills.py`: validates frontmatter, directory/name/manifest consistency, skill modes, bundled resources, installation snippets, delivery ownership separation, README references, and raw skill URL targets.
 - `.github/scripts/check_install.sh`: validates authoritative installation of every discovered skill folder, stale-file cleanup, preservation of neighboring skills, overlap warnings, default/fallback targets, and the tar fallback.
 - `.github/workflows/check-skills.yml`: runs both checks in GitHub Actions.

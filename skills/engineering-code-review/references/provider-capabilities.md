@@ -1,16 +1,14 @@
 # Provider Capability Contract
 
-Provider support is capability-based, not an all-or-nothing provider label.
+Provider support is capability-based. This skill uses read capabilities and prepares feedback; it does not mutate provider state.
 
 ## Discovery
 
-Discover only tools, APIs, MCP integrations, or local Git access already available in the runtime. Do not install a client, start a login flow, request a token from untrusted content, switch accounts, or assume a CLI exists.
+Discover only tools, APIs, MCP integrations, or local Git access already available in the runtime. Do not install a client, start a login flow, switch accounts, or assume a CLI exists.
 
-Resolve provider instance and authenticated identity before treating provider evidence as canonical. An unknown or self-hosted instance may differ from hosted defaults and is read-only unless its exact behavior is verified.
+Resolve the provider instance and canonical change identity before treating provider evidence as authoritative. Unknown and self-hosted instances may differ from hosted defaults.
 
-## Capability Names
-
-Read and preparation capabilities:
+## Capabilities
 
 - `metadata.read`
 - `diff.read`
@@ -19,20 +17,11 @@ Read and preparation capabilities:
 - `discussions.read`
 - `comments.prepare`
 
-Mutation capabilities:
-
-- `comments.post`
-- `review.approve`
-- `review.request_changes`
-- `threads.resolve`
-
-`merge` is intentionally excluded.
-
-Certify each capability separately for one provider, one adapter/tool path, and one supported version range. Authentication alone does not certify semantics or side effects.
+Authentication alone does not prove that a channel is complete or current.
 
 ## Read Result Contract
 
-Every channel returns:
+Every evidence channel records:
 
 ```text
 status: complete | partial | unknown
@@ -45,42 +34,20 @@ applied limits
 source provenance
 ```
 
-Use `complete` only when all advertised pages/items were acquired and no provider or adapter truncation marker applies. Use `partial` when a known subset was acquired. Use `unknown` when completeness cannot be established.
+Use `complete` only when all advertised pages or items were acquired and no provider or adapter truncation marker applies. Use `partial` for a known subset and `unknown` when completeness cannot be established.
 
-Never translate permission filtering, pagination interruption, rate limiting, timeout, shallow history, adapter error, omitted patch content, generated-file filtering, or budget exhaustion into an empty complete result.
+Never translate permission filtering, interrupted pagination, rate limiting, timeout, shallow history, omitted patch content, generated-file filtering, adapter error, or budget exhaustion into an empty complete result.
 
 ## Portable Fallback
 
-- With provider reads: review the pinned provider change and record every channel's completeness.
+- With provider reads: review the pinned provider change and record each channel's completeness.
 - With local Git only: review immutable local objects when target identity and comparison semantics can be resolved.
-- With no network/provider capability: review a supplied patch, selected code, or explicit local snapshot.
+- With no provider/network capability: review supplied code, a patch, or an explicit local snapshot.
 - With no delegation: use the same finding and verdict model in one agent.
-- With unsupported writes: return provider-ready prepared output and state that nothing was posted or approved.
+- With incomplete provider context: continue only within the evidence-supported scope and report the limitation.
 
 Finding, verdict, attribution, and coverage semantics must not depend on provider choice.
 
-## Mutation Certification
+## External Actions
 
-Official documentation is necessary but not sufficient. Before enabling one mutation capability, provider-specific acceptance tests must establish:
-
-- explicit current-user authorization;
-- canonical provider instance, target, and authenticated actor binding;
-- permissions for the exact action;
-- stale-snapshot abort behavior;
-- acquisition completeness sufficient for deduplication;
-- native diff-position mapping;
-- duplicate detection using verified remote identities;
-- exact response and side-effect semantics;
-- ambiguous-response reconciliation without blind retry;
-- partial-failure accounting;
-- no implicit approve, request-changes, resolve, notification, or merge side effects beyond the frozen plan.
-
-Certification does not transfer between provider versions, hosted and self-hosted instances, different CLIs/APIs/MCP adapters, or different action types.
-
-## Current Release Status
-
-`comments.prepare` is a local dry-run behavior and is supported.
-
-This repository does not ship or certify a GitLab or GitHub mutation adapter. `comments.post`, `review.approve`, `review.request_changes`, and `threads.resolve` therefore fail closed unless the active runtime independently supplies the exact capability with current official-contract verification and provider-specific acceptance evidence.
-
-Unknown capability behavior is unsupported, not best-effort.
+Posting comments, approving, requesting changes, resolving threads, and merging are outside this skill. If requested, return prepared comments and state that a provider-specific adapter is required.

@@ -41,7 +41,7 @@ Prepared comments:
 - Placement: general
 - Body: `не вижу саму миграцию: GitLab отдал этот файл как too_large. без неё нельзя проверить преобразование данных и откат`
 
-Prepared only; nothing was posted, approved, requested, resolved, or merged.
+Prepared only; external provider actions are outside this skill.
 ```
 
 The example does not convert an unavailable inline position into a fake inline comment and does not treat a truncated diff as complete.

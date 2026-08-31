@@ -67,6 +67,11 @@ Before changing a behavioral rule:
 Use `behavior-evaluation.md` for the maintainer evaluation method and stable
 cross-agent scenarios. Do not store model run transcripts in the repository.
 
+Static checks should validate structure, ownership, and resolvable resources. Do
+not freeze skill prose with full-string equality, required sentence fragments,
+or content hashes; validate those behaviors with representative fresh-context
+scenarios instead.
+
 ## Avoid Overengineering
 
 Prefer:

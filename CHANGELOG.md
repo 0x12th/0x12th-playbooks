@@ -4,25 +4,20 @@ All notable changes to this repository are documented in this file.
 
 ## Unreleased
 
-## 0.14.0 - 2026-08-30
-
 ### Added
 
-- Added the standalone `engineering-code-review` skill for selected code, diffs, patches, commits, branches, GitLab merge requests, GitHub pull requests, incremental re-review, recommendation audit, and provider-ready comment preparation.
-- Added immutable snapshot, evidence completeness, trust-boundary, coverage, finding, verdict, discussion, and large-change contracts that remain safety-complete in raw `SKILL.md` installations.
-- Added the exact Russian `concise-peer` review-comment profile, report/comment templates, provider references, and representative review examples.
-- Added behavior scenarios for four-skill routing, verdicts, attribution, local-state safety, provider fallback, hostile content, discussions, re-review, large changes, comment style, and fail-closed provider actions.
+- Added the standalone `engineering-code-review` skill for selected code, diffs, patches, commits, branches, GitLab merge requests, GitHub pull requests, incremental re-review, recommendation audit, and read-only comment preparation.
+- Added immutable snapshot, evidence completeness, trust-boundary, coverage, finding, verdict, discussion, and large-change contracts.
+- Added a Russian `concise-peer` review-comment baseline, report/comment templates, read-side provider references, representative examples, and anti-examples.
+- Added behavior scenarios for four-skill routing, verdicts, attribution, unknown contracts, local-state safety, provider fallback, hostile content, discussions, re-review, large changes, and comment style.
 
 ### Changed
 
-- Moved all normative concrete code-review ownership out of `engineering-delivery` and added explicit review-to-delivery and architecture handoffs.
-- Updated README, selection/bootstrap/installation/structure guidance, manifest metadata, and pinned examples for the coordinated `v0.14.0` four-skill bundle.
-- Strengthened metadata checks for frontmatter, names, descriptions, exact manifest registration, synchronized modes, raw-import review safety, and delivery ownership separation.
+- Moved concrete code-review ownership out of `engineering-delivery` and added explicit review-to-delivery and architecture handoffs.
+- Updated README, selection/bootstrap/installation/structure guidance, and manifest metadata for the unreleased four-skill bundle while keeping pinned commands on the current release.
+- Strengthened structural checks for frontmatter, names, descriptions, manifest registration, synchronized modes, bundled resources, and delivery ownership separation without locking exact prose.
 - Made installer checks discover all managed skills dynamically and documented the warning-only migration path for an unrelated neighboring `code-review` skill.
-
-### Security
-
-- Kept provider review mutations disabled unless an exact capability is explicitly authorized, verified against current provider behavior, and covered by provider-specific acceptance tests; unsupported actions return prepared output only.
+- Kept provider reads and comment preparation in the first version; external provider actions belong to provider-specific adapters.
 
 ## 0.13.1 - 2026-08-28
 

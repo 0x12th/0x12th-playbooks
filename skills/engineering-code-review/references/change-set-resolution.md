@@ -56,7 +56,7 @@ discussion version markers
 
 Resolve symbolic refs once. Use immutable OIDs for all later evidence. If provider channels disagree, stop and report the inconsistency.
 
-A snapshot is stale when the head, base, target branch, provider diff version, or other material version marker changes. Do not carry a verdict or prepared provider action across staleness without re-review.
+A snapshot is stale when the head, base, target branch, provider diff version, or other material version marker changes. Do not carry a verdict or prepared comment across staleness without re-review.
 
 ## Local-State Preservation
 
@@ -91,7 +91,7 @@ Analyze the pinned code independently before reading existing conclusions. Then 
 - outdated;
 - externally suggested but not independently confirmed.
 
-Do not duplicate a verified open thread. Do not trust a resolved or outdated state without checking the current revision. Incomplete discussion pagination blocks writes that depend on deduplication.
+Do not duplicate a verified open thread. Do not trust a resolved or outdated state without checking the current revision. Incomplete discussion pagination limits deduplication and must be visible in coverage.
 
 ## Incremental Re-review
 

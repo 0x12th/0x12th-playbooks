@@ -21,7 +21,7 @@ The skills are designed to reduce context consumption, prioritize selected conte
 |---|---|---|
 | `product-evolution` | What is the highest-value product investment? | Current product assessment, product investment decisions, customer requests, feature scope, MVPs, pilots, roadmap priorities, opportunity analysis, priority arbitration, and smallest useful next step decisions |
 | `engineering-architecture` | How should the system evolve safely? | Architecture review, system design, architecture decisions, migration planning, service boundaries, domain/data ownership, architecture debt, reliability strategy, observability architecture, deployment architecture, production readiness, deployment readiness, release readiness, operational readiness, runtime resource review, VPS/server fit assessment, current/target architecture assessment, capacity and scaling review, technical evolution, design challenge, decision support |
-| `engineering-code-review` | Is this concrete code change safe to merge? | Selected code/file review, diff/patch/change-set review, commit/range/branch review, GitLab MR and GitHub PR review, incremental re-review, recommendation audit, and provider-ready comment preparation |
+| `engineering-code-review` | Is this concrete code change safe to merge? | Selected code/file review, diff/patch/change-set review, commit/range/branch review, GitLab MR and GitHub PR review, incremental re-review, recommendation audit, and read-only comment preparation |
 | `engineering-delivery` | What is the safest next delivery action? | Diagnosis, investigation, implementation, bug fixes, tests, CI failures, runtime failures, local refactoring, validation, PR preparation, incremental improvements |
 
 Use `product-evolution` when the question is whether, why, when, for whom, or in what MVP scope to invest, or explicitly asks about current product health, maturity, adoption, retention, or customer value. Explicit invocation is supported but not required. It owns product decisions before architecture: should we do it, for whom, when, what MVP, how to validate, what should go first, what is the smallest useful solution, and what not to do.
@@ -32,7 +32,7 @@ Use `engineering-code-review` when the request is to review selected code, a fil
 
 Use `engineering-delivery` when the request is to diagnose an error, investigate a failure, implement, fix, test, validate, refactor locally, prepare a PR, or make the next approved incremental change.
 
-Engineering delivery defaults to read-only diagnosis unless the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes. Code review is read-only by default and hands confirmed fixes to delivery as a separate phase.
+Engineering delivery defaults to read-only diagnosis unless the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes. Code review is read-only and hands confirmed fixes to delivery as a separate phase.
 
 When multiple layers are needed, use `product-evolution` before `engineering-architecture`, then select `engineering-code-review` for a concrete implementation assessment or `engineering-delivery` for execution. Review-to-fix work flows from `engineering-code-review` to `engineering-delivery`.
 
@@ -44,7 +44,7 @@ By default, `install.sh` installs into existing agent homes: `~/.agents/skills`,
 
 The installer treats this repository's four skill folders as managed copies. Updates remove stale files inside those folders while preserving every neighboring skill. Keep custom variants in a fork or a separate project-local skill.
 
-`v0.14.0` moves concrete code-review ownership from `engineering-delivery` into `engineering-code-review`; upgrade the complete bundle so those two skills come from the same release. If an unrelated neighboring `code-review` skill is installed, it may overlap automatic selection. The installer warns but never edits it; after verifying its origin, remove it or make it manual-only where supported.
+The standalone `engineering-code-review` skill is currently unreleased. Install the latest complete bundle so it and the review-free `engineering-delivery` come from the same revision. Pinned `v0.13.1` remains the current released three-skill bundle. If an unrelated neighboring `code-review` skill is installed, the installer warns but never edits it.
 
 The manual commands below use `~/.agents/skills` as a common example. Replace it with the skills directory used by your agent setup.
 
@@ -59,7 +59,7 @@ curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/inst
 Pinned version:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.14.0/install.sh | sh -s -- ~/.agents/skills v0.14.0
+curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.13.1/install.sh | sh -s -- ~/.agents/skills v0.13.1
 ```
 
 Custom target directory:
@@ -80,45 +80,22 @@ git clone https://github.com/0x12th/0x12th-playbooks.git
 Pinned version:
 
 ```bash
-git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.13.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 ./0x12th-playbooks/install.sh ~/.agents/skills
 ```
 
-### Install One Skill
+### Install Selected Skills
 
-The complete `v0.14.0` bundle is recommended. If installing one skill manually, keep `engineering-code-review` and the review-free `engineering-delivery` on the same release; mixed versions have overlapping or missing ownership.
-
-Architecture review:
+The unreleased review ownership split requires `engineering-code-review` and `engineering-delivery` from the same revision. Install them as a pair:
 
 ```bash
-git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
-mkdir -p ~/.agents/skills
-rsync -a --delete 0x12th-playbooks/skills/engineering-architecture/ ~/.agents/skills/engineering-architecture/
-```
-
-Product evolution:
-
-```bash
-git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
-mkdir -p ~/.agents/skills
-rsync -a --delete 0x12th-playbooks/skills/product-evolution/ ~/.agents/skills/product-evolution/
-```
-
-Engineering code review:
-
-```bash
-git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a --delete 0x12th-playbooks/skills/engineering-code-review/ ~/.agents/skills/engineering-code-review/
-```
-
-Engineering delivery:
-
-```bash
-git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
-mkdir -p ~/.agents/skills
 rsync -a --delete 0x12th-playbooks/skills/engineering-delivery/ ~/.agents/skills/engineering-delivery/
 ```
+
+`engineering-architecture` and `product-evolution` remain independently installable from either latest or the current pinned release.
 
 ### Agent Paths
 

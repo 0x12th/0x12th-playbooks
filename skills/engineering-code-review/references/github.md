@@ -7,7 +7,7 @@ These read-side semantics were checked against the official GitHub REST API docu
 - [Pull request reviews](https://docs.github.com/en/rest/pulls/reviews)
 - [REST API pagination](https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api)
 
-This reference intentionally contains no executable provider commands. It does not certify any GitHub mutation capability.
+This reference covers read-side review evidence only and contains no executable provider commands.
 
 ## Canonical Identity
 
@@ -24,7 +24,7 @@ Do not identify a PR by number without its target repository and instance.
 
 ## Snapshot
 
-Pin the full base/head repository identities and SHAs returned for the PR. Re-read them before any external action.
+Pin the full base/head repository identities and SHAs returned for the PR. If they change during review, mark the snapshot stale and stop.
 
 Before merge, `merge_commit_sha` can refer to a provider-generated test merge commit and may change; it is not the reviewed head SHA. Mergeability can be computed asynchronously and may temporarily be unknown. Neither value is a stable replacement for the pinned base/head vector.
 
@@ -52,10 +52,6 @@ Review comments carry path, diff-hunk, current/original commit, line/side or leg
 
 Verify old, dismissed, or outdated comments against the pinned revision. Do not infer that a lack of inline comments means there are no general review comments or reviews.
 
-## Writes
+## External Actions
 
-Current GitHub documentation distinguishes general comments, inline review comments, pending/submitted reviews, approval, and request-changes events. Inline location semantics use native line/side/range data; the legacy `position` parameter is being retired. Review creation can trigger notifications and secondary rate limiting.
-
-This repository has no isolated GitHub acceptance project or certified adapter. Therefore comment posting, review submission, approval, and request changes are unsupported by this release. Prepare comments only. Do not synthesize a CLI/API command, silently convert an inline comment into a general comment, blind-retry an ambiguous response, or claim a write occurred.
-
-GitHub Enterprise Server or another instance remains read-only until its version and exact adapter behavior are verified.
+Posting comments, submitting reviews, approving, requesting changes, resolving threads, and merging are outside this skill. A GitHub-specific adapter must own authentication, native positions, retries, and partial outcomes. Prepare comments only and never claim that an external action occurred.

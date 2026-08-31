@@ -6,7 +6,7 @@ These read-side semantics were checked against the official GitLab REST API docu
 - [Discussions API](https://docs.gitlab.com/api/discussions/)
 - [REST API pagination](https://docs.gitlab.com/api/rest/#pagination)
 
-This reference intentionally contains no executable provider commands. It does not certify any GitLab mutation capability.
+This reference covers read-side review evidence only and contains no executable provider commands.
 
 ## Canonical Identity
 
@@ -50,14 +50,10 @@ Mergeability fields may be computed asynchronously and can be stale or transitio
 
 MR discussions are paginated and contain nested notes. Individual notes, threads, system notes, and diff notes are distinct. Diff notes include position and version information; resolution state can change independently of code.
 
-Acquire all relevant pages before claiming there are no existing comments or before deduplication-dependent actions. Preserve discussion and note identities, author identity, timestamps, resolution fields, and native position data.
+Acquire all relevant pages before claiming there are no existing comments or that deduplication is complete. Preserve discussion and note identities, author identity, timestamps, resolution fields, and source-location evidence.
 
 Verify resolved and outdated discussions against the pinned code. Never infer that a missing discussion page means no comments exist.
 
-## Writes
+## External Actions
 
-GitLab inline discussions depend on provider-native position data including the correct base, head, and start SHAs plus paths and line semantics. Documentation also describes permission, notification, resolution, and approval side effects, but this repository has no isolated GitLab acceptance project or certified adapter.
-
-Therefore `comments.post`, approval, request-changes equivalents, and thread resolution are unsupported by this release. Prepare comments only. Do not synthesize a CLI/API command, silently downgrade inline feedback to a general note, or claim a write occurred.
-
-Self-hosted GitLab instances remain read-only until their version and exact adapter behavior are verified.
+Posting comments, approving, requesting changes, resolving threads, and merging are outside this skill. A GitLab-specific adapter must own authentication, diff positions, retries, and partial outcomes. Prepare comments only and never claim that an external action occurred.

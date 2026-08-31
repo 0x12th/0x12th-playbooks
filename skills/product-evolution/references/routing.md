@@ -70,8 +70,7 @@ engineering-code-review -> engineering-delivery
 - GitLab merge request and GitHub pull request review.
 - Incremental re-review.
 - Audit of comments on a concrete code change.
-- Preparation of provider-ready review comments.
-- Explicit provider review actions only through a verified exact capability.
+- Read-only preparation of review comments; external provider actions belong to provider-specific adapters.
 
 ## Engineering Delivery Owns
 

@@ -73,10 +73,9 @@ Use for:
 - equivalent provider change requests;
 - incremental re-review;
 - audit of comments on a concrete code change;
-- preparation of provider-ready review comments;
-- explicit provider review actions only after exact capability verification.
+- read-only preparation of review comments.
 
-It is read-only by default. `prepare comments` is always dry-run. Unverified posting, approval, request-changes, and thread-resolution actions fail closed.
+It is read-only. `prepare comments` is always dry-run; external provider actions belong to provider-specific adapters.
 
 Do not use for generic project review, architecture/readiness decisions, product/PRD review, implementation or fixes, merge-conflict resolution, generic CI diagnosis, generic validation, PR preparation, or merging.
 
@@ -129,8 +128,8 @@ Do not use for concrete code/change-set review, product decisions, or architectu
 ## Mixed Intents
 
 - `Review this PR and fix confirmed blockers`: review the pinned snapshot with `engineering-code-review`, then hand confirmed findings to `engineering-delivery` as a separate implementation phase.
-- `Quick-review and approve PR #42 if it looks fine`: use `engineering-code-review`, but quick/partial coverage cannot approve; any unverified action returns prepared output only.
-- `Would you approve this deployment design?`: `engineering-architecture`; approval wording does not make a design/readiness decision a provider review action.
+- `Quick-review PR #42`: use `engineering-code-review`, but quick/partial coverage cannot produce an unconditional `Pass`.
+- `Is this deployment design acceptable?`: use `engineering-architecture`; an attached change does not replace the architecture decision.
 - `Prepare this PR`: `engineering-delivery` unless the user specifically requests review-comment preparation.
 - `Audit these recommendations`: use `engineering-code-review` only when the recommendations concern a concrete code change.
 

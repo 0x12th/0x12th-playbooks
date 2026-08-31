@@ -12,7 +12,7 @@ explicit user style
 
 ## concise-peer
 
-The built-in `concise-peer` profile is the default. For Russian comments, preserve these requirements exactly:
+The built-in `concise-peer` profile is a default baseline, not a claim to imitate one person's identity exactly. For Russian comments, use these requirements:
 
 - Коротко и по делу. Обычно 1–3 предложения.
 - Разговорный технический русский без канцелярита.
@@ -58,6 +58,36 @@ Examples:
 
 For other languages preserve the same concise peer-to-peer characteristics rather than translating Russian constructions mechanically.
 
+A true personal style profile requires 15–30 real review comments supplied or explicitly selected by that user. Do not fabricate a personal corpus or infer it from a few examples.
+
+## Anti-examples
+
+Too formal:
+
+> Рекомендуется рассмотреть возможность вынесения данной логики в отдельный метод для улучшения читаемости и поддерживаемости
+
+Too long for the point:
+
+> Тут потенциально может возникнуть проблема, потому что в случае определённого набора входных данных код, вероятно, поведёт себя не так, как ожидается, поэтому я бы предложил дополнительно подумать над обработкой этого сценария
+
+Unsupported certainty:
+
+> это точно упадёт в проде, надо переделать
+
+Code restatement without a reason:
+
+> здесь вызывается `save()`, а потом возвращается результат
+
+Artificial contrast used as a rhetorical template:
+
+> это не просто проверка, а нарушение контракта
+
+Mechanical conversational markers:
+
+> кажется, тут, может, я бы всё-таки, наверное, вынес это
+
+Do not mechanically alternate `тут`, `я бы`, `может`, and `кажется`. Use a conversational marker only when it matches the finding's confidence and makes the comment shorter.
+
 ## Language Selection
 
 Choose comment language in this order:
@@ -78,4 +108,4 @@ Chat reports follow the user's current language. Preserve identifiers, error mes
 - Do not restate code, add praise, use emoji, or add formal headings.
 - Remove every sentence that does not change the meaning.
 
-Provider-native suggestions remain subject to verified position mapping and the small, obvious, local-replacement rule.
+Prepared comments stay provider-neutral. Native suggestion syntax and position mapping belong to a provider-specific adapter.

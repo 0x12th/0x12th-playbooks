@@ -9,7 +9,7 @@ Use product-evolution when the primary question is whether to do something, why,
 
 Use engineering-architecture for architecture review and decisions, migrations, service/domain boundaries, ownership, system evolution, technical design and sequencing, production/deployment/release/operational readiness, runtime resources, VPS/server fit, current/target architecture, capacity/scaling review, design challenge, tradeoff analysis, and repository-wide technical review.
 
-Use engineering-code-review for read-only review of selected code or files, diffs, patches, commits, ranges, branches, GitLab merge requests, GitHub pull requests, and equivalent concrete change requests; incremental re-review; audit of review comments on a concrete change; and preparation of provider-ready review comments. Provider writes require an explicit current-user request and an exact verified capability; otherwise prepare output only and fail closed.
+Use engineering-code-review for read-only review of selected code or files, diffs, patches, commits, ranges, branches, GitLab merge requests, GitHub pull requests, and equivalent concrete change requests; incremental re-review; audit of review comments on a concrete change; and read-only preparation of review comments. External provider actions are outside the skill.
 
 Use engineering-delivery for diagnosis, investigation, implementation, tests, bug fixes, CI failures, runtime failures, generic validation, PR preparation, local refactoring, and incremental improvements. Do not use it for concrete code/change-set review.
 
