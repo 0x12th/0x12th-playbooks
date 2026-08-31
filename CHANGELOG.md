@@ -4,6 +4,8 @@ All notable changes to this repository are documented in this file.
 
 ## Unreleased
 
+## 0.14.0 - 2026-08-31
+
 ### Added
 
 - Added the standalone `engineering-code-review` skill for selected code, diffs, patches, commits, branches, GitLab merge requests, GitHub pull requests, incremental re-review, recommendation audit, and read-only comment preparation.
@@ -14,7 +16,7 @@ All notable changes to this repository are documented in this file.
 ### Changed
 
 - Moved concrete code-review ownership out of `engineering-delivery` and added explicit review-to-delivery and architecture handoffs.
-- Updated README, selection/bootstrap/installation/structure guidance, and manifest metadata for the unreleased four-skill bundle while keeping pinned commands on the current release.
+- Updated README, selection/bootstrap/installation/structure guidance, and manifest metadata for the `v0.14.0` four-skill bundle and pinned installation commands.
 - Strengthened structural checks for frontmatter, names, descriptions, manifest registration, synchronized modes, bundled resources, and delivery ownership separation without locking exact prose.
 - Made installer checks discover all managed skills dynamically and documented the warning-only migration path for an unrelated neighboring `code-review` skill.
 - Kept provider reads and comment preparation in the first version; external provider actions belong to provider-specific adapters.
