@@ -30,16 +30,17 @@ Challenge:
 
 ## Output
 
-Use this structure:
+Follow the `SKILL.md` result contract: verdict first, confidence and technical
+disposition for each significant recommendation, and only useful sections.
+Use this mode-specific structure:
 
-1. What is likely correct
-2. Assumptions that may be wrong
-3. Missing evidence
-4. Alternatives considered
-5. Cost comparison
-6. Risks
-7. Recommendation
-8. Confidence level
+1. Verdict: <decision on the proposal>
+2. What is likely correct
+3. Assumptions that may be wrong
+4. Missing evidence
+5. Alternatives considered
+6. Cost comparison
+7. Risks and next safe steps
 
 Alternatives must include:
 

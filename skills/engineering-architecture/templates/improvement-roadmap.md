@@ -2,6 +2,11 @@
 
 Use this template to turn architecture findings into an incremental plan. Favor Current State → Next Safe Step → Intermediate State → Next Safe Step → Target Architecture sequencing over target-first plans.
 
+Follow the `SKILL.md` result contract: lead with the verdict and give each
+significant recommendation confidence and a technical disposition. The phases
+below are candidates, not a required sequence; retain only justified steps and
+useful sections. Roadmap timing does not replace technical disposition.
+
 ## Roadmap Principles
 
 - Preserve behavior before restructuring.

@@ -98,9 +98,9 @@ For quick scan mode:
 - Do not describe what will be inspected.
 - Return a direct verdict followed by findings only.
 - Avoid long explanations.
-- Focus on highest-impact findings.
+- Focus on up to five supported highest-impact findings, fewer or none when warranted; do not fill a quota.
 
-Use this repeated format:
+Use this compact format only for supported findings; retain material missing evidence even when there are no findings:
 
 ```text
 Verdict: <direct decision>
@@ -111,6 +111,7 @@ Verdict: <direct decision>
    Evidence:
    Minimal fix:
    Confidence:
+   Technical disposition:
 ```
 
 Do not add an executive summary unless the user explicitly asks for one.

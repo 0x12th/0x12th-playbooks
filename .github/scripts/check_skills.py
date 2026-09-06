@@ -19,6 +19,7 @@ RAW_URL_RE: re.Pattern[str] = re.compile(
     r"https://raw\.githubusercontent\.com/0x12th/0x12th-playbooks/[^)\s\"']+"
 )
 MODE_RE: re.Pattern[str] = re.compile(r"- \*\*(.+?)\*\*:")
+TABLE_MODE_RE: re.Pattern[str] = re.compile(r"\|\s*\*\*(.+?)\*\*\s*\|")
 RESOURCE_RE: re.Pattern[str] = re.compile(r"`((?:references|templates|examples|scripts)/[^`]+)`")
 FRONTMATTER_KEY_RE: re.Pattern[str] = re.compile(r"^([A-Za-z0-9_-]+):(?:\s*(.*))?$")
 SKILL_NAME_RE: re.Pattern[str] = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
@@ -110,7 +111,7 @@ def skill_modes(path: Path) -> list[str]:
             continue
         if in_modes and stripped.startswith("## "):
             break
-        if in_modes and (match := MODE_RE.match(stripped)):
+        if in_modes and (match := MODE_RE.match(stripped) or TABLE_MODE_RE.match(stripped)):
             modes.append(norm(match.group(1)))
     return modes
 

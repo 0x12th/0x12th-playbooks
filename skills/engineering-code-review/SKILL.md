@@ -43,7 +43,7 @@ A concrete code artifact is a strong signal, but the primary requested decision 
 
 Mixed intents:
 
-- Review and fix: complete review against an immutable snapshot first, then hand confirmed findings to `engineering-delivery` as a separate bounded implementation phase.
+- Review and fix: complete the read-only evidence/findings phase against exact selected text or an immutable change snapshot first, then apply `engineering-delivery` rules in a bounded implementation phase for authorized confirmed fixes. No runtime switch or handoff API is required. If guidance is unavailable, preserve explicit authorization, minimal scope, user work and validation safeguards; disclose missing required guidance rather than invent a mechanism.
 - Review architecture implications of a diff: assess concrete change-level risks here; hand broad boundaries, migration strategy, or target-architecture decisions to `engineering-architecture`.
 - Prepare a PR: use `engineering-delivery` unless the user specifically asks to prepare review comments.
 - Audit recommendations: use Recommendation Audit only when they concern a concrete code change.
@@ -65,14 +65,30 @@ Recommendation Audit classifications are `Correct`, `Correct but optional`, `Inc
 
 A quick or narrowly focused review cannot produce an unconditional `Pass` unless normal complete-coverage criteria were still met.
 
-## Core Execution Loop
+## Execution Paths
 
-Use this sequence:
+### Selected Code
+
+For an isolated function, snippet or selected file (not a change-set comparison):
+
+1. Review the exact supplied text and stated contract; this is the review snapshot.
+2. Inspect direct dependencies only if a material conclusion needs them; otherwise stop locally.
+3. Report supported findings with location, trigger, impact, minimal fix direction and confidence. Do not invent missing input contracts.
+4. Lead with a verdict for that selected scope and state material validation limits. A short verdict plus findings/limits is enough; no empty report sections.
+
+No Git refs/OIDs, provider discovery, CI/discussion inventory or large-change ledger
+is required for standalone code. No tools is not itself missing code evidence.
+Use the shared trust, finding and verdict rules below; change attribution and
+provider discussion status apply only when a change or discussion is actually reviewed.
+
+### Change Set
+
+For diffs, patches, commits, branches, working-tree changes and MR/PRs, use this sequence:
 
 1. Classify intent, mode, scope, and requested comment preparation.
 2. Resolve one concrete review target.
 3. Pin an immutable review snapshot.
-4. Discover available capabilities without installing tools or starting login flows.
+4. Use already configured Git/provider tools relevant to the target; do not install tools or start login flows.
 5. Acquire the change set and evidence, recording completeness per channel.
 6. Gather requirements, repository standards, CI, and discussions when relevant and available.
 7. Inventory changed files and identify high-risk areas.
@@ -96,7 +112,8 @@ Resolve exactly what is being reviewed:
 - Commit: that commit relative to its parent.
 - Commit range: only the explicitly named immutable range.
 - Working tree/current changes: staged, unstaged, and untracked content only when explicitly requested; snapshot the exact selected scope.
-- Selected code/file: selected context is the initial boundary.
+- Supplied patch without Git history: preserve exact supplied content and scope; state missing base/head evidence if material.
+- Selected code/file without change comparison: use the Selected Code path above.
 
 Resolve symbolic refs once and use immutable OIDs afterwards. Record relevant CI and discussion version markers where available.
 
@@ -118,9 +135,9 @@ Never run `checkout`, `switch`, `reset`, or `stash` in the user's worktree for r
 
 First-class read sources are local Git, GitLab, and GitHub. Other providers may be used only through an already available capability that satisfies the same provider-neutral contract.
 
-Discover read and preparation capabilities individually: `metadata.read`, `diff.read`, `requirements.read`, `ci.read`, `discussions.read`, and `comments.prepare`. External provider actions are outside this skill.
+Acquire relevant evidence channels—change identity/metadata, diff content, requirements, CI results and discussions—through configured available Git, GitHub or GitLab tools. These are semantic evidence categories, not tool or API names to discover. Prepare comments locally when requested; external provider actions are outside this skill.
 
-Every read channel records:
+Every relevant change-set evidence channel records (unavailable evidence is `unknown`, not empty):
 
 ```text
 complete | partial | unknown
@@ -130,7 +147,7 @@ pagination/version markers
 applied limits
 ```
 
-Truncation, permission filtering, interrupted pagination, partial API errors, rate limits, shallow history, generated-file omission, or budget exhaustion are not empty successful results. Unknown, self-hosted, or unverified capabilities fail closed. Local review and prepared comments must still work when provider metadata is unavailable.
+Truncation, permission filtering, interrupted pagination, partial API errors, rate limits, shallow history, generated-file omission, or budget exhaustion are not empty successful results. Unverified provider semantics fail closed, including differences on self-hosted instances. Local review and prepared comments must still work when provider metadata is unavailable.
 
 Use only already configured provider access. Do not install clients, start interactive authentication, switch accounts, create credentials, or expose tokens. Do not invent provider commands.
 
@@ -200,9 +217,9 @@ One finding represents one root cause. Record:
 - `severity`: `critical | high | medium | low`;
 - `disposition`: `blocking | non-blocking`;
 - `confidence`: `high | medium | low`;
-- exact current location and immutable evidence provenance;
+- exact current location and evidence provenance (supplied text for Selected Code, immutable snapshot for a change set);
 - problem, trigger, observable impact, and minimal fix direction;
-- validation status, change attribution, and discussion status.
+- validation status; change attribution and discussion status when applicable.
 
 Severity reflects impact and reachability; it does not automatically determine disposition. Blocking findings normally require high confidence. Ask a concrete question for material medium-confidence uncertainty, suppress low-confidence speculation, and use `Blocked by missing evidence` rather than inflating an unverified defect.
 
@@ -224,7 +241,7 @@ Incremental Re-review requires the previous snapshot and finding/coverage state.
 
 ## Report Contract
 
-Put verdict and findings before summary. Print only non-empty sections:
+Put verdict and findings before summary. For Selected Code, use its short result contract above. For change sets, print only non-empty sections:
 
 ```text
 Verdict: Pass | Changes required | Blocked by missing evidence

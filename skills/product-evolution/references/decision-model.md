@@ -28,29 +28,17 @@ Use one of these outcomes:
 | `Do Not Do` | Problem is weak, segment is too small, usage is unlikely, cost exceeds value, or it distracts from stronger priorities. |
 | `Solve Differently` | The problem is valid, but a non-feature, manual, operational, partner, documentation, pricing, onboarding, or support change is better. |
 
-## Scoring Heuristic
+## Evidence-Based Ranking
 
-Use scores only as a thinking aid, not as false precision:
+Compare user pain, segment value, business impact, usage likelihood, confidence,
+implementation effort, ongoing support and maintenance load, strategic fit, and
+cost of delay. Rank initiatives by explaining the decisive tradeoff and the
+evidence that could reverse the order, not by a universal formula or point scale.
 
-| Dimension | 1 | 3 | 5 |
-|---|---|---|---|
-| User pain | Mild inconvenience | Repeated workflow friction | Blocks core outcome |
-| Segment value | Edge users | Meaningful segment | Strategic/high-value segment |
-| Business impact | Unclear | Adoption, retention, or support benefit | Revenue, retention, or expansion driver |
-| Usage likelihood | Speculative | Some evidence | Clear repeated demand or observed behavior |
-| Confidence | Mostly assumptions | Mixed evidence | Strong evidence |
-| Effort | Large/multi-quarter | Moderate | Small/reversible |
-| Support load | High ongoing load | Manageable | Low or reduces support |
-| Strategic fit | Distracting | Adjacent | Directly reinforces roadmap |
-
-For ranking, prefer:
-
-```text
-Priority = Value x Confidence x Strategic Fit / Effort and Support Load
-```
-
-Do not calculate fake numeric totals when the evidence is qualitative. Use
-relative ranking and explain the drivers.
+Calculate real costs and expected effects when data supports them; keep units,
+assumptions, and uncertainty explicit. If the team has an accepted scoring model,
+use its definitions and explain its limits rather than inventing a replacement.
+When evidence is qualitative, use relative comparisons without numeric totals.
 
 ## Priority Arbitration
 

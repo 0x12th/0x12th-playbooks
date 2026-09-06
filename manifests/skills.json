@@ -3,7 +3,7 @@
     "name": "0x12th-playbooks",
     "url": "https://github.com/0x12th/0x12th-playbooks",
     "description": "Practical playbooks and agent skills for product decisions, architecture, code review, delivery, migration planning, technical decision-making, and software evolution.",
-    "version": "0.14.0"
+    "version": "0.15.0"
   },
   "auto_selection": {
     "primary_signals": [
@@ -16,7 +16,7 @@
       "This manifest does not define an official cross-agent standard.",
       "Skill auto-selection should not depend on this manifest being loaded."
     ],
-    "recommended_installation": "Install the complete v0.14.0 bundle. Keep engineering-code-review and the review-free engineering-delivery on the same revision."
+    "recommended_installation": "Install the complete v0.15.0 bundle. Keep engineering-code-review and the review-free engineering-delivery on the same revision."
   },
   "installation": {
     "all_skills": [
@@ -24,33 +24,36 @@
       "./0x12th-playbooks/install.sh ~/.agents/skills"
     ],
     "all_skills_pinned": [
-      "git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.15.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "./0x12th-playbooks/install.sh ~/.agents/skills"
     ],
     "architecture_skill_pinned": [
-      "git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.15.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "rsync -a --delete 0x12th-playbooks/skills/engineering-architecture/ ~/.agents/skills/engineering-architecture/"
     ],
     "engineering_review_pair_pinned": [
-      "git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.15.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "rsync -a --delete 0x12th-playbooks/skills/engineering-code-review/ ~/.agents/skills/engineering-code-review/",
       "rsync -a --delete 0x12th-playbooks/skills/engineering-delivery/ ~/.agents/skills/engineering-delivery/"
     ],
 
     "product_evolution_skill_pinned": [
-      "git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.15.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "rsync -a --delete 0x12th-playbooks/skills/product-evolution/ ~/.agents/skills/product-evolution/"
     ],
     "notes": [
-      "By default, install.sh installs into existing ~/.agents/skills, ~/.claude/skills, and ~/.codex/skills destinations and skips missing agent homes.",
+      "The current master installer targets existing ~/.agents, ~/.claude, ~/.codex, and active Hermes homes (nonempty HERMES_HOME, otherwise ~/.hermes), installing into skills/ and skipping missing homes and other Hermes profiles.",
       "If no agent homes exist, install.sh falls back to ~/.agents/skills for first-time setup.",
       "Pass a target directory as the first argument to install only into that directory.",
       "Replace ~/.agents/skills with the skills directory used by your agent setup.",
       "v0.14.0 introduces standalone engineering-code-review and review-free engineering-delivery; keep the pair on the same revision.",
-      "The current pinned release is v0.14.0 and includes all four managed skills.",
+      "The current pinned release is v0.15.0 and includes all four managed skills, installer safeguards, and Hermes defaults.",
+      "Historical v0.14.0 installer commands do not include current master safeguards or Hermes defaults; use the master installer with v0.14.0 as its second argument for those safeguards with a pinned bundle.",
+      "Current master preflights all targets, stages full bundles, and rolls back all selected homes on publication failure; failed rollback retains recovery backups. Concurrent writers and crash-safe atomic switching are not supported.",
+      "Hermes profile-local skills override same-named external skills; prefer one authoritative source and migrate duplicates manually. The installer does not remove duplicates from other locations.",
       "Installed skill folders are authoritative; updates remove stale files inside them and preserve neighboring skills.",
       "An unrelated neighboring code-review skill may overlap automatic selection; the installer warns but never deletes or rewrites it.",
       "Clone-based installation is recommended because skills include supporting references, templates, and examples.",
@@ -62,7 +65,7 @@
       "curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/install.sh | sh"
     ],
     "quick_install_pinned": [
-      "curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.14.0/install.sh | sh -s -- ~/.agents/skills v0.14.0"
+      "curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.15.0/install.sh | sh -s -- ~/.agents/skills v0.15.0"
     ],
     "custom_target_example": [
       "curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/install.sh | sh -s -- ~/.claude/skills"
@@ -73,7 +76,7 @@
       "name": "product-evolution",
       "path": "skills/product-evolution/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/product-evolution/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.14.0/skills/product-evolution/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.15.0/skills/product-evolution/SKILL.md",
       "purpose": "Answer what the highest-value product investment is.",
       "use_cases": [
         "product investment decisions",
@@ -123,7 +126,7 @@
       "name": "engineering-architecture",
       "path": "skills/engineering-architecture/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.14.0/skills/engineering-architecture/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.15.0/skills/engineering-architecture/SKILL.md",
       "purpose": "Answer how the system should evolve safely.",
       "use_cases": [
         "architecture review",
@@ -189,7 +192,7 @@
       "name": "engineering-code-review",
       "path": "skills/engineering-code-review/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-code-review/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.14.0/skills/engineering-code-review/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.15.0/skills/engineering-code-review/SKILL.md",
       "purpose": "Answer whether a concrete code change is safe to merge.",
       "use_cases": [
         "selected code and file review",
@@ -227,18 +230,18 @@
       ],
       "selection_hints": [
         "Use as the only automatic owner for review of selected code, diffs, patches, commits, branches, MRs, PRs, and equivalent concrete change requests.",
-        "Pin one immutable snapshot, keep dirty local state out of branch/provider reviews, and record completeness for every evidence channel.",
+        "Selected Code uses exact supplied scope, necessary direct dependencies, supported findings, verdict and material validation limits without needless Git/provider inventory. Change sets pin immutable snapshots, exclude unrelated dirty state and record relevant evidence-channel completeness.",
         "Use Recommendation Audit only for comments on a concrete code change; audit alone does not imply a whole-change verdict.",
         "Quick or focused review cannot issue unconditional Pass without normal complete coverage.",
         "Prepare comments as dry-run output; external provider actions belong to provider-specific adapters.",
-        "Hand confirmed implementation work to engineering-delivery and broad architecture decisions to engineering-architecture."
+        "Review-and-fix completes read-only evidence/findings first, then applies engineering-delivery rules to authorized confirmed fixes without a required runtime handoff. Broad architecture decisions belong to engineering-architecture."
       ]
     },
     {
       "name": "engineering-delivery",
       "path": "skills/engineering-delivery/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-delivery/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.14.0/skills/engineering-delivery/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.15.0/skills/engineering-delivery/SKILL.md",
       "purpose": "Answer the safest next delivery action, defaulting to read-only diagnosis unless changes are explicitly requested.",
       "use_cases": [
         "diagnosis",
@@ -282,10 +285,10 @@
       ],
       "selection_hints": [
         "Use read-only diagnosis for prompts like why is this happening, where is the problem, analyze this error, or investigate this runtime failure.",
-        "Edit only when the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.",
+        "Explicit user intent for an outcome requiring project changes authorizes scoped edits when the target is clear, including доведи до рабочего состояния, сделай чтобы CI был зелёным and закончи задачу. Diagnostic questions and assessment-only requests stay read-only; release preparation does not authorize publication, push or destructive operations.",
         "For runtime failures, follow the traceback before repository exploration.",
         "Use engineering-code-review for read-only review of selected code and concrete change sets.",
-        "For review-and-fix requests, accept only confirmed findings after the immutable review phase.",
+        "For review-and-fix requests, finish read-only evidence/findings first, then apply delivery rules in a bounded authorized implementation phase; no runtime switch/handoff API is required.",
         "If product or architecture decisions are required, state the missing decision before delivery continues."
       ]
     }

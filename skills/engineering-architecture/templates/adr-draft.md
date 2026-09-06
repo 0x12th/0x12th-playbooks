@@ -1,5 +1,10 @@
 # ADR Draft Template
 
+Use this as a requested decision record, not a replacement review contract.
+Lead the response with the `SKILL.md` verdict and retain only useful sections.
+Give each significant recommendation confidence and a technical disposition;
+ADR lifecycle status is not a technical disposition.
+
 # ADR: <Decision title>
 
 **Status:** Proposed | Accepted | Superseded | Deprecated  
@@ -23,6 +28,10 @@ Describe the current situation, constraints, and forces. Include evidence rather
 ## Decision
 
 State the architecture decision clearly.
+
+**Confidence:** High | Medium | Low — evidence or limitation
+
+**Technical disposition:** Required before implementation | Next safe step | Defer pending evidence | Do not implement
 
 We will...
 

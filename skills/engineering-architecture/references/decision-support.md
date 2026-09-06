@@ -43,9 +43,11 @@ It is valid to recommend:
 
 ## Output
 
-Use a decision-oriented structure:
+Follow the `SKILL.md` result contract: verdict first, confidence and technical
+disposition for each significant recommendation, and only useful sections.
+Use this decision-oriented structure:
 
-1. Recommendation
+1. Verdict: <decision and recommendation>
 2. Why
 3. Options compared
 4. Cost and risk comparison

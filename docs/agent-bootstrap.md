@@ -1,21 +1,15 @@
 # Agent Bootstrap
 
-Use this short text in `AGENTS.md`, `CLAUDE.md`, or similar project instructions when an agent does not reliably discover installed skills automatically.
+Use this short text in `AGENTS.md`, `CLAUDE.md`, or similar project instructions when installed skills are not reliably discovered. Maintainer routing semantics and examples live in [Skill Selection](skill-selection.md); the copied text has no dependency on repository docs.
 
 ```text
-Use installed 0x12th-playbooks skills when relevant.
+Use relevant installed 0x12th-playbooks skills by the primary requested decision:
+- product-evolution: product value, investment, scope, priorities or explicit product health/adoption.
+- engineering-architecture: technical design/evolution, generic project/repository review and readiness.
+- engineering-code-review: read-only selected-code or concrete change-set review and dry-run review comments. Standalone code needs no Git/provider inventory.
+- engineering-delivery: diagnosis, validation and authorized implementation. Diagnostic questions and assessment-only requests remain read-only; explicit requested outcomes requiring changes authorize scoped edits when the target is clear (including “доведи до рабочего состояния”, “сделай чтобы CI был зелёным”, “закончи задачу”). Release preparation is not permission to publish/push or act destructively.
 
-Use product-evolution when the primary question is whether to do something, why, for whom, when, what MVP, how to validate, what has higher priority, whether a customer request should become product work, what the smallest useful solution is, or explicitly asks about current product health, maturity, adoption, retention, or customer value. Keep generic repository review and technical readiness with engineering-architecture.
+Follow each skill's own triggers, mode selection and safeguards. Review-and-fix means a read-only evidence/findings phase, then bounded authorized implementation under delivery rules, not a required runtime switch/handoff. Disclose missing required guidance; preserve safe scope and user work. Resolve product/architecture decisions first only when needed.
 
-Use engineering-architecture for architecture review and decisions, migrations, service/domain boundaries, ownership, system evolution, technical design and sequencing, production/deployment/release/operational readiness, runtime resources, VPS/server fit, current/target architecture, capacity/scaling review, design challenge, tradeoff analysis, and repository-wide technical review.
-
-Use engineering-code-review for read-only review of selected code or files, diffs, patches, commits, ranges, branches, GitLab merge requests, GitHub pull requests, and equivalent concrete change requests; incremental re-review; audit of review comments on a concrete change; and read-only preparation of review comments. External provider actions are outside the skill.
-
-Use engineering-delivery for diagnosis, investigation, implementation, tests, bug fixes, CI failures, runtime failures, generic validation, PR preparation, local refactoring, and incremental improvements. Do not use it for concrete code/change-set review.
-
-For delivery work, default to read-only diagnosis unless the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes. For review-and-fix requests, review an immutable snapshot first with engineering-code-review, then hand confirmed findings to engineering-delivery as a separate bounded phase.
-
-If multiple layers are needed, use product-evolution before engineering-architecture, then engineering-code-review for concrete implementation assessment or engineering-delivery for execution.
-
-Skills influence behavior silently unless the host runtime requires disclosure or the user explicitly asks. Otherwise, do not announce skill execution, recommend the current skill, or explain internal skill routing.
+Do not announce internal routing unless requested or required by the host.
 ```

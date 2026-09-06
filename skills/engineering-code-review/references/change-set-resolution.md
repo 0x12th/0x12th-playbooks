@@ -1,6 +1,6 @@
 # Change-Set Resolution
 
-Use this reference for non-trivial target resolution, snapshot control, incremental review, discussions, or large changes.
+Use this reference for non-trivial target resolution, snapshot control, incremental review, discussions, or large changes. Standalone selected code uses exact supplied text as its scope/snapshot and needs no Git OIDs, provider inventory or change-set ledger; use the short Selected Code path in SKILL.md.
 
 ## Resolve One Target
 

@@ -4,8 +4,8 @@ description: >-
   Use for safe engineering delivery work: diagnosis, investigation,
   implementation, coding, bug fixes, tests, CI failures, runtime failures,
   validation, local refactoring, PR preparation, and incremental improvements.
-  Default to read-only diagnosis unless the user explicitly asks to implement,
-  fix, patch, modify, update, refactor, or apply changes. Do not use for
+  Diagnostic questions and assessment-only requests stay read-only; an explicit requested outcome requiring
+  project changes authorizes scoped edits when the target is clear. Do not use for
   assessment of concrete code artifacts or provider change requests,
   architecture decisions, service extraction strategy, migration strategy,
   platform evolution, production readiness, deployment readiness, release
@@ -69,7 +69,7 @@ When a product or architecture decision is required before delivery work can con
 
 ## Intent Detection
 
-Default to read-only diagnosis unless the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.
+Default to read-only for diagnosis, diagnostic questions and assessment-only requests. Scoped edits are authorized when the user explicitly requests an outcome that requires project changes and the target is clear; permission depends on intent, not a closed verb list. Examples such as “доведи до рабочего состояния”, “сделай чтобы CI был зелёным” and “закончи задачу” can authorize necessary edits. Examples are not exhaustive. A polite request such as “Можешь исправить этот баг?” or “Can you fix this?” still authorizes scoped edits; grammatical question form is not a read-only gate. If the target or outcome is unclear, clarify before editing. Assessing whether files can be removed does not authorize deletion. Release preparation (“подготовь релиз”) is not permission to publish, push or perform destructive operations.
 
 Read-only diagnosis, investigation, or validation examples:
 
@@ -121,11 +121,11 @@ Product examples that require a decision before delivery work:
 - "Which priority should come first?"
 - "Should this customer request become roadmap work?"
 
-## Code Review Handoff
+## Review and Implementation Phases
 
 Use `engineering-code-review` for read-only review of selected code, files, diffs, patches, commits, branches, merge requests, pull requests, and existing comments on a concrete change.
 
-For a mixed request to review and fix, complete the review against its immutable snapshot first. Return only confirmed implementation work to this skill as a separate bounded phase; do not edit while the review target is still being established.
+For a mixed request to review and fix, complete the read-only evidence/findings phase against exact selected text or an immutable change snapshot first, then apply these delivery rules to authorized confirmed fixes in a bounded implementation phase. No runtime switch or handoff API is required. If required guidance is unavailable, disclose it and retain authorization, selected scope, user-work preservation and validation safeguards. Do not edit during review or treat optional suggestions as authorized fixes.
 
 ## Work Modes
 
@@ -133,7 +133,7 @@ Choose the smallest useful mode:
 
 - **Diagnosis**: explain the failure, likely cause, and next safe action without editing files.
 - **Investigation**: gather only the evidence needed to answer when selected context is insufficient.
-- **Implementation**: make a bounded code or config change only after an explicit edit request.
+- **Implementation**: make a bounded code or config change only when explicit user intent authorizes the required project changes.
 - **Validation**: run checks, explain pass/fail results, and classify failures.
 
 ## Execution Discipline
@@ -208,21 +208,26 @@ Remaining risk: other external skills may still print tool traces unless they ha
 
 Do not paste raw git diffs, patches, or large changed-code blocks by default.
 
-For large-file or bulk deletion, resolve the exact targets first. When deletion
-is explicit and the targets are already resolved, do not read file contents
-merely to remove them; inspect existence, metadata, and version-control status
-without returning contents. When the host permits a choice, use a dedicated
-deletion operation or narrow shell removal
-that reports only affected paths or status and does not return file contents.
-Tracked files remain recoverable through version control after shell removal.
-Do not use a patch or edit primitive that echoes removed contents when a quieter
-deletion operation is available.
+Before deletion, resolve exact authorized targets and inspect existence,
+metadata, and version-control status without exposing file contents. A tracked
+path is not a recovery guarantee: Git may retain an older version, not current
+staged or unstaged edits. For clean tracked files, verify that the current version
+is recoverable from Git. For modified tracked or untracked files, use an available
+appropriate recovery mechanism, such as trash, editor history, or a protected
+local copy, and verify that it preserves the exact current version. The mere
+presence of Git, history, or a backup is not verification.
 
-For untracked files, prefer a recoverable non-content-returning operation. If
-none is available but removal is explicitly in scope, use the narrowest
-non-content-returning operation and verify the result through repository status
-or a path search. Never choose irreversible deletion merely to reduce transcript
-noise.
+Do not prescribe a backup system or expose sensitive content while preserving
+it. Read bytes only as needed to preserve or verify recovery, without printing
+them. If safe recovery cannot be established, leave the file intact and ask for
+explicit consent to lose its current contents; a generic deletion request is not
+that consent. When recovery is verified, carry out the authorized deletion without
+an extra confirmation and report how to recover the file.
+
+When the host permits a choice, prefer a narrow non-content-returning deletion
+operation over a patch that echoes removed contents. Verify deletion through
+repository status or a path search. Never choose irreversible deletion merely
+to reduce transcript noise.
 
 If the host requires a content-returning edit primitive, use it once, do not
 repeat its payload, and report only the deleted paths and reason.
@@ -291,16 +296,3 @@ Examples:
 - `examples/bug-fix.md`
 - `examples/tests.md`
 - `examples/ci-fix.md`
-
-## Output / Final Response
-
-For implementation work, report:
-
-- what changed;
-- changed files;
-- validation result;
-- remaining risk.
-
-Do not include raw diffs unless explicitly requested.
-
-Even after editing files, the final answer is not a patch report. It is a change summary.

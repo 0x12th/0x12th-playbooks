@@ -74,13 +74,17 @@ Prefer fewer findings with stronger evidence over a larger speculative list.
 
 ## Output by Mode
 
+Follow the `SKILL.md` result contract in every mode: verdict first, confidence
+and technical disposition for each significant recommendation, and only useful
+sections. The mode-specific details below do not replace that contract.
+
 Quick scan:
 
 - Direct verdict first.
-- 3-5 findings only.
+- Up to five supported findings, fewer or none when evidence warrants; never explore or invent issues to fill a quota.
 - No executive summary.
 - No broad architecture model.
-- Use the format from `communication-rules.md`.
+- Keep findings concise with impact, evidence, minimal action, confidence and technical disposition; omit empty sections.
 
 Focused review:
 

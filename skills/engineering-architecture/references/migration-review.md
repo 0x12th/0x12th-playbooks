@@ -75,9 +75,11 @@ Use validation methods appropriate to the migration:
 
 ## Output
 
-Use this structure when the user asks for migration review:
+Follow the `SKILL.md` result contract: verdict first, confidence and technical
+disposition for each significant recommendation, and only useful sections.
+Use these migration-specific details:
 
-1. Recommendation
+1. Verdict: <migration decision and recommendation>
 2. Current state and current pain
 3. Next safe step
 4. Intermediate states

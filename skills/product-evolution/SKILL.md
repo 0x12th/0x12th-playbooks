@@ -158,7 +158,7 @@ Ambiguous assessment rule:
 - Review of selected code or a concrete change set: use `engineering-code-review`.
 - Failure diagnosis or debugging: use `engineering-delivery`.
 
-Full routing rules live in `references/routing.md`.
+Product-specific boundary examples are in `references/routing.md`; this entry point is independently usable.
 
 ## Loading Policy
 
@@ -226,7 +226,12 @@ feature".
 
 ## Core Workflow
 
-Apply this sequence in every mode:
+For **Quick Assessment**, use a short path: identify the problem and who gains
+value; compare today's workaround or a minimal alternative; recommend a next step
+with material cost/uncertainty and a criterion for revisiting the decision. Lead
+with the recommendation. Do not require the expanded workflow or a lens inventory.
+
+For deeper decisions in other modes, use the expanded sequence as relevant:
 
 1. Restate the product problem or assessment question before evaluating solutions.
 2. Identify who receives value and who pays the cost.
@@ -269,7 +274,7 @@ paid, and which alternatives are delayed.
 Roadmap context. If the existing roadmap is unknown, state that priority is
 conditional. Do not invent roadmap commitments.
 
-## Required Analysis Lenses
+## Relevant Analysis Lenses
 
 Cover only the lenses relevant to the selected mode, but do not omit a lens that
 would change the decision:
