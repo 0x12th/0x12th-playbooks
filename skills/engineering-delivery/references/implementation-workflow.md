@@ -2,7 +2,9 @@
 
 Use this workflow for bounded delivery work. Treat implementation ideas as hypotheses; repository behavior, tests, commands, logs, and diffs provide the evidence.
 
-Implementation is not the default mode. Start read-only unless the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes.
+Default to read-only for diagnosis, diagnostic questions and assessment-only requests. Scoped edits are authorized when the user explicitly requests an outcome that requires project changes and the target is clear; permission depends on intent, not a closed verb list. “Доведи до рабочего состояния”, “сделай чтобы CI был зелёным” and “закончи задачу” are non-exhaustive result-intent examples. Polite edit requests such as “Can you fix this?” or “Можешь исправить этот баг?” also authorize scoped changes; interrogative form does not override intent. Clarify an unclear target before editing. A removability assessment never authorizes deletion; release preparation does not authorize publication, push or destructive operations.
+
+For review-and-fix requests, finish read-only evidence/findings first, then apply this workflow to authorized confirmed fixes. No runtime switch or handoff API is needed; missing required guidance must be disclosed, not invented.
 
 1. Classify the requested mode: diagnosis, investigation, implementation, or validation.
 2. Confirm the selected scope and question being answered.

@@ -1,6 +1,20 @@
 # Architecture Review Report Template
 
-## 1. Scope and Assumptions
+This template adds report detail to the `SKILL.md` result contract; it does not
+override it. Retain only useful sections and fields. Every significant
+recommendation, including roadmap items, needs confidence and a technical
+disposition from the core contract.
+
+Verdict: <mode-appropriate decision>
+
+## 1. Decision Summary
+
+- Highest-risk issue:
+- Best near-term improvement:
+- Main uncertainty:
+- Change to avoid because cost exceeds benefit:
+
+## 2. Scope and Assumptions
 
 **Scope reviewed:**
 
@@ -25,7 +39,7 @@
 - Performance or capacity evidence:
 - Migration-related evidence:
 
-## 2. Concise Architecture Model
+## 3. Concise Architecture Model
 
 **System purpose:**
 
@@ -61,19 +75,15 @@
 **Migration context or likely evolution paths:**
 
 
-## 3. Executive Summary
-
-- Overall assessment:
-- Highest-risk issue:
-- Best near-term improvement:
-- Main uncertainty:
-- Change to avoid because cost exceeds benefit:
-
 ## 4. Findings
 
 ### Finding 1: <Title>
 
 **Severity:** Critical | High | Medium | Low  
+**Confidence:** High | Medium | Low — evidence or limitation
+
+**Technical disposition:** Required before implementation | Next safe step | Defer pending evidence | Do not implement
+
 **Evidence:** Files, modules, configs, tests, logs, or docs inspected
 
 **Problem:**

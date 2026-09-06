@@ -17,38 +17,36 @@ The skills are designed to reduce context consumption, prioritize selected conte
 
 ## Skills
 
-| Skill | Answers | Use when |
-|---|---|---|
-| `product-evolution` | What is the highest-value product investment? | Current product assessment, product investment decisions, customer requests, feature scope, MVPs, pilots, roadmap priorities, opportunity analysis, priority arbitration, and smallest useful next step decisions |
-| `engineering-architecture` | How should the system evolve safely? | Architecture review, system design, architecture decisions, migration planning, service boundaries, domain/data ownership, architecture debt, reliability strategy, observability architecture, deployment architecture, production readiness, deployment readiness, release readiness, operational readiness, runtime resource review, VPS/server fit assessment, current/target architecture assessment, capacity and scaling review, technical evolution, design challenge, decision support |
-| `engineering-code-review` | Is this concrete code change safe to merge? | Selected code/file review, diff/patch/change-set review, commit/range/branch review, GitLab MR and GitHub PR review, incremental re-review, recommendation audit, and read-only comment preparation |
-| `engineering-delivery` | What is the safest next delivery action? | Diagnosis, investigation, implementation, bug fixes, tests, CI failures, runtime failures, local refactoring, validation, PR preparation, incremental improvements |
+| Skill | Primary decision |
+|---|---|
+| `product-evolution` | Product value, investment, scope, priority and explicit product health |
+| `engineering-architecture` | Technical design/evolution and architecture/readiness decisions |
+| `engineering-code-review` | Read-only selected-code and concrete change-set assessment |
+| `engineering-delivery` | Diagnosis, validation and authorized scoped implementation |
 
-Use `product-evolution` when the question is whether, why, when, for whom, or in what MVP scope to invest, or explicitly asks about current product health, maturity, adoption, retention, or customer value. Explicit invocation is supported but not required. It owns product decisions before architecture: should we do it, for whom, when, what MVP, how to validate, what should go first, what is the smallest useful solution, and what not to do.
+See [Skill Selection](docs/skill-selection.md) for canonical routing, mode defaults and mixed-intent examples. Each installed skill selects its own mode.
 
-Use `engineering-architecture` when the question is about technical design, tradeoffs, service boundaries, ownership, migrations, deployment architecture, production readiness, deployment readiness, release readiness, operational readiness, runtime resource review, VPS/server fit, current architecture, target architecture, capacity and scaling, technical evolution, or architecture risk.
-
-Use `engineering-code-review` when the request is to review selected code, a file, diff, patch, commit, range, branch, GitLab merge request, GitHub pull request, or equivalent concrete change; re-review an updated change; audit existing comments; or prepare review comments.
-
-Use `engineering-delivery` when the request is to diagnose an error, investigate a failure, implement, fix, test, validate, refactor locally, prepare a PR, or make the next approved incremental change.
-
-Engineering delivery defaults to read-only diagnosis unless the user explicitly asks to implement, fix, patch, modify, update, refactor, or apply changes. Code review is read-only and hands confirmed fixes to delivery as a separate phase.
-
-When multiple layers are needed, use `product-evolution` before `engineering-architecture`, then select `engineering-code-review` for a concrete implementation assessment or `engineering-delivery` for execution. Review-to-fix work flows from `engineering-code-review` to `engineering-delivery`.
+Diagnostic questions and assessment-only delivery requests stay read-only. Explicit intent for a result requiring project changes authorizes scoped edits when the target is clear—not just a fixed list of verbs. Release preparation does not authorize publication, push or destructive actions. Review-and-fix completes read-only findings first, then applies delivery rules in a bounded implementation phase; no runtime handoff facility is required.
 
 ## Installation
 
 Install the full skill folders when possible, not only `SKILL.md`. The supporting `references/`, `templates/`, and `examples/` are intentionally loaded on demand and improve behavior after the skill is selected.
 
-By default, `install.sh` installs into existing agent homes: `~/.agents/skills`, `~/.claude/skills`, and `~/.codex/skills`. It skips missing agent homes so it does not create unused directories. If none exist, it falls back to `~/.agents/skills` for first-time setup.
+The current `master` installer targets existing `~/.agents`, `~/.claude`, `~/.codex`, and active Hermes homes, installing into each home's `skills/`. Hermes uses nonempty `$HERMES_HOME`, otherwise `~/.hermes`; other profiles are not scanned. Missing homes stay absent. If none exist, only `~/.agents/skills` is created for first-time setup.
 
 The installer treats this repository's four skill folders as managed copies. Updates remove stale files inside those folders while preserving every neighboring skill. Keep custom variants in a fork or a separate project-local skill.
+
+Current `master` checks all destinations before modifying them, rejects unsafe/symlink/self-install targets, stages the complete bundle, and rolls back all selected homes on publication failure. Failed rollback retains backups and reports their paths. Stop readers and other writers during updates: this is not a crash-safe or concurrent atomic switch. See [update safety](docs/installation.md#update-safety-current-master) for the exact boundary and recovery limitations.
+
+Hermes profile-local skills override same-named external skills; trusted project skills have higher priority still. Prefer one authoritative bundle source and migrate duplicates manually—the installer never removes duplicates from other locations. See [Hermes installation](docs/installation.md#hermes-agent).
 
 The standalone `engineering-code-review` skill is included in `v0.14.0`. Install the complete bundle so it and the review-free `engineering-delivery` come from the same revision. If an unrelated neighboring `code-review` skill is installed, the installer warns but never edits it.
 
 The manual commands below use `~/.agents/skills` as a common example. Replace it with the skills directory used by your agent setup.
 
 ### Quick Install
+
+The pinned `v0.14.0` commands below are historical: that installer does not include the newer safeguards or Hermes defaults. To combine a pinned bundle with current safeguards, use the `master/install.sh` URL with `v0.14.0` as the second argument.
 
 Latest:
 
@@ -86,7 +84,7 @@ git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.
 
 ### Install Selected Skills
 
-The review ownership split requires `engineering-code-review` and `engineering-delivery` from the same revision. Install the pinned pair:
+The review ownership split requires `engineering-code-review` and `engineering-delivery` from the same revision. The historical manual commands below are not transactional; inspect targets for symlinks, back up both folders, stop readers, and restore both if either command fails. Prefer the current full-bundle installer for automatic rollback.
 
 ```bash
 git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
@@ -104,6 +102,7 @@ Common destinations:
 - Zed: `~/.agents/skills`
 - Claude Code: `~/.claude/skills`
 - Codex: `~/.codex/skills`
+- Hermes Agent: `${HERMES_HOME:-$HOME/.hermes}/skills`
 - Project-local skills: `.agents/skills`
 
 Raw `SKILL.md` URLs are useful for agents that support URL imports, but they do not include supporting `references/`, `templates/`, or `examples/`:
@@ -119,9 +118,7 @@ See `docs/installation.md` for more installation details.
 
 ## Automatic Selection
 
-Most AI coding agents select skills primarily from the skill `name` and frontmatter `description` in each `SKILL.md`. The descriptions expose product, architecture/readiness, concrete code/change-set review, and delivery signals while keeping their negative boundaries explicit. `engineering-code-review` is the only auto-invoked owner for selected code, diffs, patches, commits, branches, MRs, and PRs.
-
-`product-evolution` supports soft automatic selection for explicit product health, maturity, adoption, retention, customer value, product scope, MVP, roadmap, priority, customer request, feature scope, and "should we build this?" prompts. Generic project or repository review remains an `engineering-architecture` task. `product-evolution` should not be selected for implementation, debugging, architecture, migration, CI, tests, production readiness, deployment readiness, server/VPS fit, or runtime resource review.
+Agents primarily select from each skill's `name` and frontmatter `description`; each entry point contains its own triggers and safety core. Selection does not require repository docs at runtime. See [Skill Selection](docs/skill-selection.md) for the cross-skill contract.
 
 `manifests/skills.json` is an index and documentation aid. Some agents may use it, but it is not an official cross-agent standard and should not be required for skill loading.
 

@@ -17,17 +17,12 @@ Use for a fast verdict on one idea, feature, request, or initiative.
 
 Output shape:
 
-1. Recommendation.
-2. Problem being solved.
-3. Who benefits.
-4. Why now or why not now.
-5. Smallest useful version.
-6. Main risks and unknowns.
-7. Success criteria.
-8. Roadmap placement.
-9. What not to do.
+1. Recommendation with material cost and uncertainty.
+2. Problem and who benefits.
+3. Current workaround or minimal alternative.
+4. Next step and evidence/criterion that would reopen the decision.
 
-Keep it short. Do not build a full business case.
+Keep it short. Do not build a full business case or require expanded workflow/lens sections. Add roadmap placement or rollout detail only if it changes the decision.
 
 ## Current Product Assessment
 

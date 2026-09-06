@@ -1,6 +1,6 @@
-# Provider Capability Contract
+# Provider Evidence Channels
 
-Provider support is capability-based. This skill uses read capabilities and prepares feedback; it does not mutate provider state.
+Use configured available Git, GitHub, GitLab or equivalent tools to gather evidence and prepare feedback; do not mutate provider state. The categories below describe evidence, not required tool methods or an API to discover.
 
 ## Discovery
 
@@ -8,14 +8,17 @@ Discover only tools, APIs, MCP integrations, or local Git access already availab
 
 Resolve the provider instance and canonical change identity before treating provider evidence as authoritative. Unknown and self-hosted instances may differ from hosted defaults.
 
-## Capabilities
+## Relevant Channels
 
-- `metadata.read`
-- `diff.read`
-- `requirements.read`
-- `ci.read`
-- `discussions.read`
-- `comments.prepare`
+- Change identity and metadata: canonical target, repositories and revision markers.
+- Diff content: exact changed files and comparison scope.
+- Requirements: user objective, accepted specifications and acceptance criteria.
+- CI evidence: results attributable to the pinned revision.
+- Discussions: existing claims and thread state, independently verified against code.
+
+Acquire only channels relevant to the task. Standalone selected code needs no
+provider inventory. Comment preparation is local dry-run rendering, not a read
+channel or an external action.
 
 Authentication alone does not prove that a channel is complete or current.
 

@@ -2,10 +2,18 @@
 
 Use this template to convert architecture findings into implementation-ready tasks.
 
+Follow the `SKILL.md` result contract: lead with the verdict and retain only
+useful sections and applicable acceptance criteria. A task breakdown is not
+implementation authorization; preserve each recommendation's disposition.
+
 ## Task: <Short actionable title>
 
 **Related finding:**  
 **Severity addressed:** Critical | High | Medium | Low  
+**Confidence:** High | Medium | Low — evidence or limitation
+
+**Technical disposition:** Required before implementation | Next safe step | Defer pending evidence | Do not implement
+
 **Goal:**
 
 
