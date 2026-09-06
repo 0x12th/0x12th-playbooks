@@ -3,7 +3,7 @@
     "name": "0x12th-playbooks",
     "url": "https://github.com/0x12th/0x12th-playbooks",
     "description": "Practical playbooks and agent skills for product decisions, architecture, code review, delivery, migration planning, technical decision-making, and software evolution.",
-    "version": "0.14.0"
+    "version": "0.15.0"
   },
   "auto_selection": {
     "primary_signals": [
@@ -16,7 +16,7 @@
       "This manifest does not define an official cross-agent standard.",
       "Skill auto-selection should not depend on this manifest being loaded."
     ],
-    "recommended_installation": "Install the complete v0.14.0 bundle. Keep engineering-code-review and the review-free engineering-delivery on the same revision."
+    "recommended_installation": "Install the complete v0.15.0 bundle. Keep engineering-code-review and the review-free engineering-delivery on the same revision."
   },
   "installation": {
     "all_skills": [
@@ -24,23 +24,23 @@
       "./0x12th-playbooks/install.sh ~/.agents/skills"
     ],
     "all_skills_pinned": [
-      "git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.15.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "./0x12th-playbooks/install.sh ~/.agents/skills"
     ],
     "architecture_skill_pinned": [
-      "git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.15.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "rsync -a --delete 0x12th-playbooks/skills/engineering-architecture/ ~/.agents/skills/engineering-architecture/"
     ],
     "engineering_review_pair_pinned": [
-      "git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.15.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "rsync -a --delete 0x12th-playbooks/skills/engineering-code-review/ ~/.agents/skills/engineering-code-review/",
       "rsync -a --delete 0x12th-playbooks/skills/engineering-delivery/ ~/.agents/skills/engineering-delivery/"
     ],
 
     "product_evolution_skill_pinned": [
-      "git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
+      "git clone --branch v0.15.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git",
       "mkdir -p ~/.agents/skills",
       "rsync -a --delete 0x12th-playbooks/skills/product-evolution/ ~/.agents/skills/product-evolution/"
     ],
@@ -50,7 +50,7 @@
       "Pass a target directory as the first argument to install only into that directory.",
       "Replace ~/.agents/skills with the skills directory used by your agent setup.",
       "v0.14.0 introduces standalone engineering-code-review and review-free engineering-delivery; keep the pair on the same revision.",
-      "The current pinned release is v0.14.0 and includes all four managed skills.",
+      "The current pinned release is v0.15.0 and includes all four managed skills, installer safeguards, and Hermes defaults.",
       "Historical v0.14.0 installer commands do not include current master safeguards or Hermes defaults; use the master installer with v0.14.0 as its second argument for those safeguards with a pinned bundle.",
       "Current master preflights all targets, stages full bundles, and rolls back all selected homes on publication failure; failed rollback retains recovery backups. Concurrent writers and crash-safe atomic switching are not supported.",
       "Hermes profile-local skills override same-named external skills; prefer one authoritative source and migrate duplicates manually. The installer does not remove duplicates from other locations.",
@@ -65,7 +65,7 @@
       "curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/install.sh | sh"
     ],
     "quick_install_pinned": [
-      "curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.14.0/install.sh | sh -s -- ~/.agents/skills v0.14.0"
+      "curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.15.0/install.sh | sh -s -- ~/.agents/skills v0.15.0"
     ],
     "custom_target_example": [
       "curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/install.sh | sh -s -- ~/.claude/skills"
@@ -76,7 +76,7 @@
       "name": "product-evolution",
       "path": "skills/product-evolution/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/product-evolution/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.14.0/skills/product-evolution/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.15.0/skills/product-evolution/SKILL.md",
       "purpose": "Answer what the highest-value product investment is.",
       "use_cases": [
         "product investment decisions",
@@ -126,7 +126,7 @@
       "name": "engineering-architecture",
       "path": "skills/engineering-architecture/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-architecture/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.14.0/skills/engineering-architecture/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.15.0/skills/engineering-architecture/SKILL.md",
       "purpose": "Answer how the system should evolve safely.",
       "use_cases": [
         "architecture review",
@@ -192,7 +192,7 @@
       "name": "engineering-code-review",
       "path": "skills/engineering-code-review/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-code-review/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.14.0/skills/engineering-code-review/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.15.0/skills/engineering-code-review/SKILL.md",
       "purpose": "Answer whether a concrete code change is safe to merge.",
       "use_cases": [
         "selected code and file review",
@@ -241,7 +241,7 @@
       "name": "engineering-delivery",
       "path": "skills/engineering-delivery/SKILL.md",
       "raw_url": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/engineering-delivery/SKILL.md",
-      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.14.0/skills/engineering-delivery/SKILL.md",
+      "pinned_raw_url_example": "https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.15.0/skills/engineering-delivery/SKILL.md",
       "purpose": "Answer the safest next delivery action, defaulting to read-only diagnosis unless changes are explicitly requested.",
       "use_cases": [
         "diagnosis",

@@ -16,7 +16,7 @@ The rollback boundary is the **entire invocation**, including all default homes.
 
 This is failure recovery, not an atomic multi-directory switch: readers can observe intermediate renames. Stop agents while updating, and do not run concurrent installers or other writers against these directories. Power loss, `SIGKILL`, filesystem failure, and concurrent path changes are not crash-safe or concurrency-safe. An unsuccessful first install can leave empty destination/parent directories. Staging and backups require additional disk space.
 
-These safeguards and Hermes defaults apply to the current `master` installer, **not** to the historical `v0.14.0` installer. The pinned commands below deliberately reproduce that release and do not gain newer safeguards. For a pinned bundle with current safeguards, fetch the `master/install.sh` script and pass `v0.14.0` as its second argument.
+These safeguards and Hermes defaults apply to `v0.15.0` and the current `master` installer, **not** to the historical `v0.14.0` installer. The pinned commands below install `v0.15.0` with its matching installer.
 
 ## Review Ownership Split
 
@@ -27,7 +27,7 @@ These mixed states are unsupported:
 1. New `engineering-code-review` with an older review-owning `engineering-delivery`.
 2. New review-free `engineering-delivery` without `engineering-code-review`.
 
-Install the complete `v0.14.0` bundle. If installing selected skills, keep those two folders on the same revision.
+Install the complete `v0.15.0` bundle. If installing selected skills, keep those two folders on the same revision.
 
 An unrelated neighboring skill named exactly `code-review` can overlap automatic selection. The installer warns about that folder but does not delete or rewrite it. After identifying its origin, remove it or make it manual-only where the runtime supports that option. The repository installer never modifies `~/.agents/skills/code-review` unless that exact directory is itself chosen as an explicit installation target, which is not a supported bundle target.
 
@@ -44,7 +44,7 @@ curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/inst
 Pinned version:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.14.0/install.sh | sh -s -- ~/.agents/skills v0.14.0
+curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.15.0/install.sh | sh -s -- ~/.agents/skills v0.15.0
 ```
 
 Custom target directory:
@@ -73,7 +73,7 @@ git clone https://github.com/0x12th/0x12th-playbooks.git
 Pinned version:
 
 ```bash
-git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.15.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 ./0x12th-playbooks/install.sh ~/.agents/skills
 ```
 
@@ -82,13 +82,13 @@ git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.
 The review ownership split requires `engineering-code-review` and `engineering-delivery` from the same revision. The following historical manual commands install the pinned pair, but are **not transactional**: inspect destinations for symlinks, back up the old pair, stop readers, and restore both if either command fails. Prefer the current full-bundle installer for automatic preflight and rollback.
 
 ```bash
-git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.15.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a --delete 0x12th-playbooks/skills/engineering-code-review/ ~/.agents/skills/engineering-code-review/
 rsync -a --delete 0x12th-playbooks/skills/engineering-delivery/ ~/.agents/skills/engineering-delivery/
 ```
 
-`engineering-architecture` and `product-evolution` remain independently installable from latest or `v0.14.0`.
+`engineering-architecture` and `product-evolution` remain independently installable from latest or `v0.15.0`.
 
 ## Hermes Agent
 
@@ -128,7 +128,7 @@ https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/skills/product-
 Install into the skills directory used by your Claude Code setup. Example:
 
 ```bash
-git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.15.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 ./0x12th-playbooks/install.sh ~/.claude/skills
 ```
 
@@ -139,7 +139,7 @@ If Claude Code does not auto-load a skill, reference its `SKILL.md` from `CLAUDE
 Install into the skills directory used by your Codex setup. Example:
 
 ```bash
-git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.15.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 ./0x12th-playbooks/install.sh ~/.codex/skills
 ```
 

@@ -2,13 +2,19 @@
 
 All notable changes to this repository are documented in this file.
 
-## Unreleased
+## 0.15.0 - 2026-09-06
+
+### Validation
+
+- Released with maintainer approval of an exception to the full Codex/Hermes/Zed behavioral gate. Targeted Hermes checks were completed; the full cross-runtime suite was not verified. The gate for future releases is unchanged.
 
 ### Fixed
 
 - Preflight every installer destination, reject unsafe/symlink/source-overlapping paths, and deduplicate physical destination aliases before publication.
 - Stage complete bundles before publishing; restore previous managed folders across all selected homes after publication failures or handled interrupts, retaining recovery backups if rollback fails.
 - Check tar archive creation separately from extraction so producer errors cannot silently install partial bundles.
+- Honor the requested master branch, reject unresolved parent traversal without recursion, require fresh copy destinations, and keep temporary archives outside the skill namespace.
+- Require verified recovery of current file contents before deletion; remove the universal product scoring formula in favor of evidence-based comparison.
 
 ### Changed
 
@@ -19,6 +25,7 @@ All notable changes to this repository are documented in this file.
 - Consolidate cross-skill routing documentation, default bare project review to Quick Scan, and make delivery edit permission intent-based rather than verb-gated.
 - Separate lightweight Selected Code review from change-set evidence acquisition; describe provider evidence semantically and review/fix as phases without a runtime handoff requirement.
 - Give Product Quick Assessment a bounded workflow and add required/forbidden behavioral scenarios; static checks remain structural, including mode-table parsing.
+- Remove the final repeated delivery output section after a bounded Hermes comparison; synchronize architecture references and templates with the decision-first core.
 
 ## 0.14.0 - 2026-08-31
 

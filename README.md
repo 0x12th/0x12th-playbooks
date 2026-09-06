@@ -46,7 +46,7 @@ The manual commands below use `~/.agents/skills` as a common example. Replace it
 
 ### Quick Install
 
-The pinned `v0.14.0` commands below are historical: that installer does not include the newer safeguards or Hermes defaults. To combine a pinned bundle with current safeguards, use the `master/install.sh` URL with `v0.14.0` as the second argument.
+The pinned `v0.15.0` commands below include these safeguards and Hermes defaults. The historical `v0.14.0` installer does not.
 
 Latest:
 
@@ -57,7 +57,7 @@ curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/inst
 Pinned version:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.14.0/install.sh | sh -s -- ~/.agents/skills v0.14.0
+curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.15.0/install.sh | sh -s -- ~/.agents/skills v0.15.0
 ```
 
 Custom target directory:
@@ -78,7 +78,7 @@ git clone https://github.com/0x12th/0x12th-playbooks.git
 Pinned version:
 
 ```bash
-git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.15.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 ./0x12th-playbooks/install.sh ~/.agents/skills
 ```
 
@@ -87,13 +87,13 @@ git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.
 The review ownership split requires `engineering-code-review` and `engineering-delivery` from the same revision. The historical manual commands below are not transactional; inspect targets for symlinks, back up both folders, stop readers, and restore both if either command fails. Prefer the current full-bundle installer for automatic rollback.
 
 ```bash
-git clone --branch v0.14.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.15.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a --delete 0x12th-playbooks/skills/engineering-code-review/ ~/.agents/skills/engineering-code-review/
 rsync -a --delete 0x12th-playbooks/skills/engineering-delivery/ ~/.agents/skills/engineering-delivery/
 ```
 
-`engineering-architecture` and `product-evolution` remain independently installable from either latest or `v0.14.0`.
+`engineering-architecture` and `product-evolution` remain independently installable from either latest or `v0.15.0`.
 
 ### Agent Paths
 
