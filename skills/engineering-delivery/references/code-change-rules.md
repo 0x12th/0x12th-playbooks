@@ -43,6 +43,24 @@ Prefer:
 
 Do not change behavior during refactoring unless the behavior change is explicit and tested.
 
+### Local Refactor or Bounded Rebuild
+
+A local refactor improves the existing structure while preserving its contract.
+A rebuild reconstructs the selected artifact from verified requirements and
+facts when the old organization prevents a clear, safe solution. For prose,
+preserve facts and intent rather than the old outline; for code, preserve
+supported behavior and compatibility rather than incidental helper structure.
+
+Both are implementation choices, not new work modes. Default to local edits;
+choose a rebuild only when the authorized outcome requires it and evidence
+shows why incremental edits are insufficient. Establish the facts/contracts,
+scope, preservation constraints, and independent validation before replacing
+the artifact. The smallest safe solution is not necessarily the smallest diff.
+
+A rebuild is not permission for repository-wide redesign. If it requires an
+undecided architecture, migration, ownership, or product choice, stop for that
+decision. Keep broad rewrites in the high-risk tier and preserve user work.
+
 ## Compatibility
 
 Before changing APIs, schemas, contracts, CLI behavior, or deployment configuration, verify that the requested task actually requires it.
