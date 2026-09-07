@@ -9,7 +9,7 @@ For each candidate comment:
 1. Confirm that the underlying finding is suitable for a concise review comment.
 2. Deduplicate by root cause and independently verified existing discussion.
 3. Select the narrowest current location supported by the pinned snapshot.
-4. Render the body using explicit user style, accepted repository conventions, or the `concise-peer` baseline.
+4. Render the body using the style priority and local sample calibration in `comment-style.md`.
 5. Mark it `inline candidate` when the finding has a current source path and line; otherwise mark it `general candidate`. Do not construct provider-native positions.
 6. Preserve any privacy or security restriction.
 7. Return the prepared payload and state that no external action was performed.

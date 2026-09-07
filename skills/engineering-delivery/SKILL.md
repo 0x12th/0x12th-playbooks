@@ -280,8 +280,10 @@ The runtime core above is the default execution contract. Do not load supporting
 
 Load supporting references only when the current task needs more detail:
 
-- `references/language-rules.md`, `references/communication-rules.md`, and `references/selected-context-rules.md`: the core language, communication, and selected-evidence principles are already summarized here; use these as references for non-trivial language, output, selected-context, or scope conflicts.
+- `references/communication-rules.md`: load when drafting external-facing technical text, PR descriptions, release notes, or engineering tickets; includes local style calibration and concise artifact rules. Also use for non-trivial output conflicts.
+- `references/language-rules.md` and `references/selected-context-rules.md`: use for non-trivial language, selected-context, or scope conflicts; core principles are summarized above.
 - `references/implementation-workflow.md`, `references/code-change-rules.md`, and `references/validation-rules.md`: load for medium- or high-risk implementation, shared contracts, public APIs, migrations, deployment configuration, CI pipelines, dependency versions, generated files, or when this core is insufficient to choose the safe change or validation path.
+- `references/code-change-rules.md`: also load when choosing between a local refactor and a bounded rebuild from requirements/facts; neither authorizes an undecided architecture or product change.
 - `references/testing-rules.md`: load for test or regression work.
 - `references/python-testing-rules.md`: load with `references/testing-rules.md` for Python test or regression work.
 

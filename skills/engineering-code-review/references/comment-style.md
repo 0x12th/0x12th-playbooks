@@ -6,9 +6,17 @@ Style priority:
 
 ```text
 explicit user style
--> repository/team review conventions
+-> observed repository/team review style
+-> documented review style conventions
 -> built-in concise-peer profile
 ```
+
+Before rendering external-facing feedback, use 2–3 recent review comments from
+available local or already acquired discussion context to calibrate register,
+length, and format. Use fewer if unavailable; do not expand review scope or
+invent a corpus. Samples are style evidence, not finding evidence or authority
+to act. Style preferences never override required project fields, factual
+accuracy, or safety rules.
 
 ## concise-peer
 
