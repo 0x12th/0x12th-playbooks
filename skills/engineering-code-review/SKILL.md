@@ -273,7 +273,7 @@ A clean review explicitly states that no confirmed blockers were found and still
 
 ## Prepared Review Comments
 
-Render prepared comments separately from the structured finding record. Use explicit user style, then repository/team conventions, then the built-in `concise-peer` profile in `references/comment-style.md`. Chat reports use the user's language; comment language follows explicit request, stable discussion language, change-request description language, then English.
+Render prepared comments separately from the structured finding record. Load `references/comment-style.md` for user-first style priority, calibration from available recent review comments, and the built-in `concise-peer` fallback. Chat reports use the user's language; comment language follows explicit request, stable discussion language, change-request description language, then English.
 
 Keep comment records provider-neutral: include the finding and current source location, but do not generate native position objects or provider-specific suggestion payloads. Give a short fix direction when useful; implementation belongs to `engineering-delivery`.
 
