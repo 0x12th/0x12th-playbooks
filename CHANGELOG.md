@@ -2,6 +2,23 @@
 
 All notable changes to this repository are documented in this file.
 
+## 0.16.0 - 2026-09-08
+
+### Changed
+
+- Calibrate technical text and review comments from available venue examples, while preserving explicit user style, required fields, facts, and safety constraints.
+- Clarify concise PR descriptions, release notes, and actionable engineering tickets without adding publication or implementation authority.
+- Distinguish local refactoring from bounded reconstruction based on verified requirements, preserving compatibility and unresolved architecture/product decisions.
+- Strengthen testing guidance with independent expected results, meaningful regression protection, cross-layer checks, and consolidation that preserves distinct failure domains.
+
+### Added
+
+- Add behavioral scenarios for style priority, ticket drafting, bounded reconstruction, independent test expectations, and preservation of distinct test semantics.
+
+### Validation
+
+- Published with explicit maintainer approval of an exception to the full Codex/Hermes/Zed behavioral gate. Cross-runtime behavioral evaluation for this release is not verified; the gate for future releases is unchanged.
+
 ## 0.15.0 - 2026-09-06
 
 ### Validation
