@@ -30,6 +30,14 @@ Choose validation by risk:
 4. For change-related failures, fix the cause and rerun the same proof when practical.
 5. Stop after repeated failures that no longer produce new evidence.
 
+## Regression Attribution
+
+When attribution is disputed, compare a trusted baseline and changed behavior with the same inputs and controlled dependency responses, noting where their paths diverge. An unchanged crashing line can contain an old failure-handling gap that the change newly triggers. Do not remove feature changes or disturb the user's checkout just to isolate the check; if a safe comparison is unavailable, say which part of the attribution remains unverified.
+
+## Runtime Effect Claims
+
+Separate declared configuration or fixture data, the component that executes the behavior, and the observable result. Trace the value through actual consumers and verify the effect at a safe, relevant boundary when possible. Static inspection can explain a possible path, but does not establish that the action ran or the result occurred. Label that inference and missing runtime evidence explicitly; do not require live services, secrets, or external requests solely to turn an inference into a validation claim.
+
 ## If Validation Fails
 
 When validation fails:

@@ -1,12 +1,14 @@
 ---
 name: engineering-code-review
 description: >-
-  Use for read-only review of selected code, diffs, patches, commits, branches,
-  GitLab merge requests, GitHub pull requests, and equivalent code change
-  requests; re-review updated changes; audit existing review comments; or
+  Use for read-only correctness or merge-safety review of selected code,
+  diffs, patches, commits, branches, GitLab merge requests, GitHub pull
+  requests, and equivalent code change requests; re-review updated changes;
+  audit existing review comments; or
   prepare review comments without posting them. Focus on confirmed
-  bugs, regressions, requirements, security, compatibility, tests, and merge
-  risk. Do not use for repository-wide architecture/readiness review, product or
+  bugs, regressions, accepted requirements, security, compatibility, tests,
+  and merge risk. Do not use to decide product scope/value, technical design,
+  or project architecture/readiness even if code or a PR is attached; nor for
   PRD review, implementation or fixes, merge-conflict resolution, generic
   validation, CI diagnosis, or PR preparation.
 ---
@@ -39,7 +41,7 @@ Do not use for:
 - product, roadmap, MVP, customer-request, or PRD decisions without a concrete code-review objective;
 - implementation, fixes, tests, merge-conflict resolution, generic CI diagnosis, generic validation, PR preparation, or merging.
 
-A concrete code artifact is a strong signal, but the primary requested decision wins. An attached patch does not turn a target-architecture decision into code review.
+A concrete code artifact is a strong signal, but the primary requested decision wins. An attached patch does not turn a target-architecture decision into code review. For "compare/assess" requests, use this skill only if the requested conclusion concerns the correctness of a concrete implementation or merge safety; product scope/value belongs to `product-evolution`, and deciding the merits of a proposed technical design to `engineering-architecture`. Clarify only when the requested conclusion is genuinely unclear.
 
 Mixed intents:
 
@@ -161,7 +163,7 @@ Requirements evidence, in order:
 4. commit messages and branch names as weak clues;
 5. tests and existing code as behavior evidence, not automatic product requirements.
 
-Missing formal requirements do not block ordinary correctness review. Mark requirements coverage unverified when necessary, and expose conflicts rather than guessing authority.
+Missing formal requirements do not block ordinary correctness review. Mark requirements coverage unverified when necessary, and expose conflicts rather than guessing authority. When an applicable primary requirement and a derived design are available, compare both with reachable code/test behavior separately: agreement between design, code, and tests alone does not establish compliance with the primary requirement.
 
 Repository standards, in order:
 

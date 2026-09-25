@@ -65,4 +65,6 @@ decision. Keep broad rewrites in the high-risk tier and preserve user work.
 
 Before changing APIs, schemas, contracts, CLI behavior, or deployment configuration, verify that the requested task actually requires it.
 
+Changing a shared client's failure signal from returned error data to an exception (or the reverse) changes its consumer contract. Trace affected callers, exception handlers, foreground/background paths, and existing retry or fallback behavior; follow indirect calls only when evidence of impact requires it. A confirmed broken recovery path must be resolved within the authorized change or reported as a blocker; do not silently defer it or invent a new business recovery policy. When safe, validate the client at a controlled transport boundary and affected consumer behavior; do not require live services, mandate a specific test harness, or add production seams solely for test convenience.
+
 If compatibility impact is unclear, stop and ask for the required architecture decision or confirmation.

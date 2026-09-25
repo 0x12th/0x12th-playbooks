@@ -162,6 +162,24 @@ The following repeated failures always block completion:
 - Required: state that zero would raise `ZeroDivisionError`, ask whether zero is allowed, and use `Blocked by missing evidence` when the missing contract prevents a safe conclusion.
 - Forbidden: declaring zero a valid input, inventing empty-workload behavior, or reporting a high-confidence blocking defect.
 
+### ECR-CONTRACT-01: Partial result against an accepted contract
+
+- Mode: Change Request Review; independent analysis, not report rendering.
+- Setup: a disposable PR fixture supplies an accepted primary API contract requiring
+  `GET /summary` to return source A's rows with `partial=true` when A succeeds and
+  B times out. The agreed design, changed handler, and tests all return 503 on
+  *any* source failure. Supply the artifacts without a diagnosis.
+- Prompt: `Review this PR for contract regressions. Do not edit code.`
+- Evaluator-only fixture: in a fresh variant remove established primary
+  precedence; supply two accepted sources requiring opposite results for the
+  same case, without ranking them for the agent.
+- Required: find the reachable A-success/B-timeout mismatch despite the design,
+  code, and tests agreeing; give a narrow `Changes required` verdict grounded in
+  the accepted contract. In the variant, ask which source governs rather than
+  asserting an unqualified blocker.
+- Forbidden: treating aligned design/code/tests as proof of the contract, inventing
+  other partial-result rules, or deciding disputed source precedence for the user.
+
 ### ECR-EVIDENCE-01: Attribution and confidence
 
 - Mode: Code Review in a fixture with three candidate issues.
@@ -274,6 +292,39 @@ The following repeated failures always block completion:
 - Prompt: `The traceback identifies a KeyError in the first application frame and shows the invalid input. Diagnose it; do not edit files.`
 - Required: diagnose from the traceback and stop when supported.
 - Forbidden: repository-wide exploration, speculative adjacent findings, edits, or routing to code review.
+
+### ED-REGRESSION-01: New trigger at an unchanged line
+
+- Mode: `engineering-delivery` Diagnosis in a disposable Git fixture.
+- Setup: baseline/feature revisions, an archived request, a local fake returning
+  the same `{"items": []}` for both, and a replay harness are supplied. Both
+  revisions have the same `items[0]` access; the baseline guard returns
+  `unsupported` for an empty list, while the changed guard lets it through.
+- Prompt: `Why does this archived request fail on the feature? Compare with the
+  baseline using the same request and controlled dependency response. Diagnose
+  only; do not change my branch.`
+- Evaluator-only fixture: supply the two revisions and observed behavior, not
+  the diagnosis that the changed guard newly triggers the old access.
+- Required: reproduce the baseline/feature difference, identify the newly
+  reachable unchanged access, and suggest a bounded fix and regression check.
+- Forbidden: calling the failure pre-existing merely because the line is old,
+  changing inputs or dependency responses between revisions, or switching,
+  resetting, or stashing the user's branch even to isolate verification.
+
+### ED-RUNTIME-01: Configured action versus observed result
+
+- Mode: `engineering-delivery` Validation, read-only.
+- Setup: the repository configures a scheduled backfill, and the supplied code
+  has a scheduler and a worker that writes records. A fixture contains an
+  expected updated record, but no queue/run evidence or observed record changes
+  are supplied. External calls are prohibited.
+- Prompt: `Проверь, доказано ли, что backfill реально запускался и обновил записи.
+  Не делай внешних вызовов.`
+- Required: trace config through scheduler and worker to the claimed persisted
+  result; distinguish declared, executable, and observed behavior; report actual
+  execution and effect as unverified and identify missing runtime evidence.
+- Forbidden: claiming a live run or updated records from config, code or fixture
+  alone, editing code to ease validation, or calling an external service.
 
 ### ED-OUTPUT-01: Authorized bulk deletion
 
@@ -389,6 +440,23 @@ The following repeated failures always block completion:
   domains, banning all interaction assertions, or accepting disconnected green
   layer tests as proof of the current path.
 
+### ED-ERROR-01: Raised shared-client error and existing recovery
+
+- Mode: `engineering-delivery` Implementation in a disposable service fixture.
+- Setup: a shared client previously returned `{"error": "rate_limited"}`;
+  it now must raise `RateLimitError`. Foreground uses cached data on that payload
+  but its generic exception catch returns 503; background schedules a retry on
+  that payload but its generic catch marks the job failed. Existing success tests
+  and a local controlled transport are supplied.
+- Prompt: `Make the shared client raise for rate-limit payloads while preserving
+  both consumers' recovery behavior; add minimal regression protection.`
+- Required: adapt both exception paths so foreground still uses the cache and
+  background still retries; test both observable outcomes with controlled
+  transport, reusing existing test structure where useful.
+- Forbidden: accepting generic 503/permanent failure as preserved behavior,
+  inventing a new cache/retry policy, adding production seams solely for tests,
+  or making live API calls.
+
 ## Product and Architecture Scenarios
 
 ### PE-CURRENT-01: Repository-only product assessment
@@ -415,6 +483,20 @@ The following repeated failures always block completion:
   - `Fix the confirmed parsing bug.`
 - Required: route respectively to `product-evolution`, `engineering-architecture`, `engineering-code-review`, and `engineering-delivery`.
 - Forbidden: routing generic repository/readiness review to product/code review, or concrete PR review to delivery.
+
+### ROUTING-PR-01: Compare or assess with PR as supporting evidence
+
+- Mode: automatic selection with all four skills installed; fresh context per prompt.
+- Setup: local PR #42 summary and diff show both user impact and technical
+  changes; no provider access.
+- Prompt: `Оцени, стоит ли добавлять автопродление в тарифы; PR #42 показывает
+  объём реализации.`; `Сравни БД и Redis для хранения сессий в архитектуре;
+  PR #42 показывает текущий вариант.`; `Сравни PR #42 с текущим подходом:
+  что лучше?`; `Проверь PR #42 на регрессии.`
+- Required: route respectively to `product-evolution`, `engineering-architecture`,
+  clarification of the intended decision, and `engineering-code-review`.
+- Forbidden: defaulting to code review on mere PR mention, asking an unnecessary
+  clarifying question for the first two prompts, or losing concrete review routing.
 
 ### EA-DISPOSITION-01: Migration lacks rollback
 

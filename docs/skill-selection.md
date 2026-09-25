@@ -110,7 +110,7 @@ Do not use for concrete code/change-set review, product decisions, or architectu
 | `Review this customer change request.` | `product-evolution` unless a concrete implementation is the target |
 | `Should we merge two tightly coupled modules?` | `engineering-architecture` |
 | `Review this repository for production readiness.` | `engineering-architecture` |
-| `Review architecture implications of this diff.` | `engineering-code-review` for concrete change risk, then `engineering-architecture` for broad decisions |
+| `Assess architecture risks introduced by this diff for merge safety.` | `engineering-code-review` for concrete change risk; `engineering-architecture` for broad decisions |
 | `Review this selected function.` | `engineering-code-review` in Code Review mode |
 | `Review this patch.` | `engineering-code-review` in Code Review mode |
 | `Review commit abc123.` | `engineering-code-review` in Code Review mode |
@@ -157,9 +157,9 @@ Broad repository/project review asking about scaling, migration, technical seque
 
 Selected code, files, pasted snippets, or explicitly named artifacts take precedence over repository-wide exploration, but the requested decision still controls routing.
 
-- Selected implementation plus a review request: `engineering-code-review`; standalone code uses exact supplied scope, only necessary direct dependencies, supported findings, verdict and material validation limits—not an unconditional Git/provider inventory.
+- Selected implementation plus a request to judge its correctness or merge safety: `engineering-code-review`; standalone code uses exact supplied scope, only necessary direct dependencies, supported findings, verdict and material validation limits—not an unconditional Git/provider inventory. For an ambiguous “compare/assess”, clarify the requested conclusion instead of defaulting to review because code is attached.
 - Selected implementation plus a fix request: `engineering-delivery`.
-- Selected design/migration plan plus a decision request: `engineering-architecture`.
+- Selected design/migration plan plus a decision request: `engineering-architecture`, even if a PR is attached only as a prototype or evidence.
 - Selected customer request plus an investment/scope decision: `product-evolution`.
 
 Do not broaden a local request into a full repository review unless the user asks for one.
