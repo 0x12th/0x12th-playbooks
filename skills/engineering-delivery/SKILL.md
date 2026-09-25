@@ -149,9 +149,13 @@ Use the smallest safe execution loop:
 
 Do not broaden the task unless current evidence shows the selected scope is insufficient.
 
+For a disputed regression, separate an old failure site from a new trigger. Compare baseline and changed behavior on the same inputs and controlled dependency responses when safe; do not alter the user's branch merely to isolate a check.
+
 Do not fix unrelated issues discovered during the task. Mention them as follow-ups only when they materially affect the requested change.
 
 Do not treat a change as complete without either validation or a clear explanation of why validation could not be run.
+
+A declared setting or fixture is not an observed runtime effect: trace the executing path to its observable result and distinguish static inference from what was actually verified.
 
 ## User-Visible Output Contract
 
@@ -258,7 +262,7 @@ Validation: `uv run pytest` passed.
 
 Prefer local, reversible changes.
 
-Before editing shared contracts, public APIs, migrations, deployment configuration, CI pipelines, dependency versions, or generated files, verify that the change is required for the requested task.
+Before editing shared contracts, public APIs, migrations, deployment configuration, CI pipelines, dependency versions, or generated files, verify that the change is required for the requested task. When a shared client changes how it reports errors, inspect affected callers, exception handlers, foreground/background paths, and existing fallbacks before claiming compatibility; do not invent a new recovery policy.
 
 For destructive, broad, or hard-to-revert changes, explain the risk and choose a smaller step when possible.
 
@@ -286,6 +290,7 @@ Load supporting references only when the current task needs more detail:
 - `references/code-change-rules.md`: also load when choosing between a local refactor and a bounded rebuild from requirements/facts; neither authorizes an undecided architecture or product change.
 - `references/testing-rules.md`: load for test or regression work.
 - `references/python-testing-rules.md`: load with `references/testing-rules.md` for Python test or regression work.
+- `references/validation-rules.md`: also load for disputed regression attribution or claims that a configured or fixture-driven runtime effect occurred.
 
 Supporting templates:
 

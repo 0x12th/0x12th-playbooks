@@ -14,6 +14,8 @@ Requirements evidence is contextual, in this order:
 
 Missing formal requirements do not block ordinary correctness review. Mark requirements coverage as unverified when needed. If sources conflict and authority is unclear, expose the conflict rather than choosing one silently.
 
+When an applicable primary criterion and a derived design or ADR are available, distinguish what the criterion requires, how the design interprets it, and what reachable code and tests actually do. Green design-derived tests cannot settle a conflict with an unambiguous accepted criterion. For example, rejecting every result in a batch contradicts an explicit requirement to retain valid items even if the design and tests expect all-or-nothing behavior. Report the narrow mismatch; ask about disputed source authority or unspecified cases rather than inventing policy.
+
 Repository standards, in this order:
 
 1. Repository instructions and documented contracts.
@@ -95,7 +97,7 @@ Exclude unrelated pre-existing defects. Include a pre-existing issue only when t
 - claims to fix it but does not; or
 - cannot safely merge without addressing it.
 
-State this attribution explicitly when it is not obvious.
+State this attribution explicitly when it is not obvious. An unchanged failure site can be newly reachable because a change supplies different inputs. When safe and useful, compare baseline and changed paths under the same inputs and controlled dependency responses, then explain both the old failure-handling gap and the new trigger.
 
 ## Test Findings
 
