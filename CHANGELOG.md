@@ -2,6 +2,25 @@
 
 All notable changes to this repository are documented in this file.
 
+## 0.17.0 - 2026-09-25
+
+### Changed
+
+- Separate primary requirements, their interpretation in design, and reachable code/test behavior in concrete code review; clarify ambiguous product, architecture, and merge-safety comparisons.
+- Attribute regressions by comparing baseline and changed paths under the same inputs and controlled dependency responses; distinguish configured or fixture-backed behavior from observed runtime effects.
+- Treat changes to shared-client error signaling as consumer-visible and check affected exception handlers and existing recovery paths without introducing new business policy.
+- Update pinned installation instructions and bundle metadata for `v0.17.0`.
+
+### Added
+
+- Add five behavioral scenarios for contract reconciliation, regression triggers, runtime effects, shared-client recovery, and PR routing.
+
+### Validation
+
+- Local structural and resource-link checks and `git diff --check` passed; the installer check was not run locally because it performs temporary installations and Git commits.
+- Seven paired exploratory Zed subagent probes compared `v0.16.0` with this revision: one changed the contract-review verdict, while the others did not demonstrate an improvement. These probes do not satisfy the cross-runtime release gate.
+- Maintainer explicitly approved an exception to the full Codex/Hermes/Zed behavioral gate for this release. Cross-runtime behavioral evaluation remains unverified; the gate for future releases is unchanged.
+
 ## 0.16.0 - 2026-09-08
 
 ### Changed
