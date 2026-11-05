@@ -44,6 +44,16 @@ Choose one mode and one perspective unless multiple outputs are requested.
 | **Migration Review** | Evaluate staged migration, coexistence or replacement safety | Safe intermediate states, validation and rollback; `references/migration-review.md` for complex migrations |
 | **Deployment Readiness Review** | Can the system safely deploy, update, run in production or fit a server? | Ready / Conditionally ready / Not ready, blockers, accepted risks and resource/operational evidence; `references/review-rules.md` |
 
+## Requirement Preservation and Decision Convergence
+
+For a bounded design question, first restate the concrete user goal and existing behavior in one sentence. Treat confirmed requirements, explicit constraints, and previously accepted decisions as invariants across follow-up turns. A user's dissatisfaction with an API shape is not permission to change domain semantics, resource identity, lifecycle, or supported operations.
+
+- Solve at the narrowest layer that can address the stated concern (for example, request schema before resource model, resource model before service boundaries). Escalate only with evidence that the narrower option cannot satisfy a confirmed requirement or carries material cost.
+- Label any new lifecycle restriction or behavior as a **proposal**, and state what user scenario motivates it. Never introduce restrictions merely to justify a preferred decomposition.
+- Once evidence is sufficient, give a recommendation and stop. Reopen it only for a new requirement, new material evidence, or an explicit user request to reconsider. Do not cycle between previously rejected options or repeatedly ask hypothetical domain questions.
+- If the user asks for alternatives, compare the current behavior and at most the materially distinct options that address their concern. Explain the practical difference, recommend one, and avoid inventing adjacent decisions.
+- If the user asks to collect backlog changes without implementation, record only confirmed changes as decisions; mark unsettled choices as open questions. Do not silently modify active contracts or expand the backlog with speculative redesigns.
+
 ## Review Perspectives
 
 - **Architecture Quality** (default): boundaries, maintainability, operability,
