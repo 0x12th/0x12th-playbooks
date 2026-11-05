@@ -327,6 +327,8 @@ when the missing information prevents a useful decision.
 
 ## Handoff Rules
 
+Product approval establishes a decision and its scope; it does not by itself authorize implementation or external publication. Carry accepted scope, non-goals, constraints, and success criteria into later phases without silently expanding or reopening them. Implement only when the user's request separately authorizes the concrete changes.
+
 After a product decision:
 
 - If architecture risk is material, hand off to `engineering-architecture` with
