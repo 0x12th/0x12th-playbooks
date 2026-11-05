@@ -10,7 +10,14 @@ User: "I don't like this hybrid API. Should we split tasks and schedules? Won't 
 
 ## Good response
 
-"Both job types are supported today and share almost all management operations. Splitting them into separate resources would duplicate much of the public API. I would keep one task resource and the shared execution machinery. If the concern is invalid combinations of schedule fields, make the input contract explicit with two validated schedule variants and document them in OpenAPI. That is a contract-level option, not a reason to change task lifecycle. Keep the resource split as an open alternative only if a concrete client requirement calls for different operations. No code changes yet; record the confirmed UUID decision and the unresolved request-schema choice in the backlog."
+**Verdict: Keep one task resource; consider a contract-level change before separate resources.**
+
+You want a clearer request shape while preserving one-off and recurring scheduling, shared delivery/history, and backlog-only scope.
+
+- **Next safe step — request-schema proposal; confidence: medium.** Compared with the current flat DTO, two validated schedule variants documented in OpenAPI could reject invalid field combinations without changing task identity or lifecycle. Check accepted one-off and recurring payloads and rejected mixed-field payloads. The main risk is client compatibility; the exact schema is still an open choice.
+- **Defer pending evidence — separate resources; confidence: high.** Shared delivery/history alone does not prove identical management lifecycles, but no requirement for different operations has been established either. A split adds public API surface and may duplicate management endpoints. Reconsider it if a concrete client scenario requires independent resource management; validate the split against that scenario before changing the contract. The main risk is migration cost without a confirmed benefit.
+
+Backlog: retain the agreed client-supplied UUID decision, keep the request-schema choice open, and defer the resource split. No implementation or active-contract changes.
 
 ## Bad response
 
@@ -20,8 +27,9 @@ Why bad: the lifecycle restriction was not requested or established by code. It 
 
 ## Expected checks
 
+- Lead with a verdict, then restate the goal and current behavior; include confidence and technical disposition for significant recommendations.
 - Preserve one-off and recurring scheduling capabilities.
 - Do not claim one-off means one execution for the entire lifetime of a task unless specified.
 - Compare contract-level fixes before new resources.
 - Distinguish confirmed backlog decisions from open design questions.
-- Converge once the evidence answers the user's question.
+- Converge once the evidence answers the user's question; reconsider when a new requirement or material evidence changes the tradeoff.

@@ -46,13 +46,13 @@ Choose one mode and one perspective unless multiple outputs are requested.
 
 ## Requirement Preservation and Decision Convergence
 
-For a bounded design question, first restate the concrete user goal and existing behavior in one sentence. Treat confirmed requirements, explicit constraints, and previously accepted decisions as invariants across follow-up turns. A user's dissatisfaction with an API shape is not permission to change domain semantics, resource identity, lifecycle, or supported operations.
+For a bounded design question, follow the verdict with one sentence stating the concrete user goal and existing behavior. Treat confirmed requirements, explicit constraints, and previously accepted decisions as invariants across follow-up turns. A user's dissatisfaction with an API shape is not permission to change domain semantics, resource identity, lifecycle, or supported operations.
 
 - Solve at the narrowest layer that can address the stated concern (for example, request schema before resource model, resource model before service boundaries). Escalate only with evidence that the narrower option cannot satisfy a confirmed requirement or carries material cost.
 - Label any new lifecycle restriction or behavior as a **proposal**, and state what user scenario motivates it. Never introduce restrictions merely to justify a preferred decomposition.
-- Once evidence is sufficient, give a recommendation and stop. Reopen it only for a new requirement, new material evidence, or an explicit user request to reconsider. Do not cycle between previously rejected options or repeatedly ask hypothetical domain questions.
-- If the user asks for alternatives, compare the current behavior and at most the materially distinct options that address their concern. Explain the practical difference, recommend one, and avoid inventing adjacent decisions.
-- If the user asks to collect backlog changes without implementation, record only confirmed changes as decisions; mark unsettled choices as open questions. Do not silently modify active contracts or expand the backlog with speculative redesigns.
+- Once evidence is sufficient, give a recommendation and stop. Reopen it only for a new requirement, new material evidence, or an explicit user request to reconsider. When revising the recommendation, identify the changed premise or correction to earlier reasoning. Do not cycle between previously rejected options or repeatedly ask hypothetical domain questions.
+- If the user asks for alternatives, compare the current behavior and the materially distinct options that address their concern. Explain the practical difference and retain the standing recommendation while its basis is unchanged. Distinguish repeated dissatisfaction with the existing API from rejection of a proposed alternative; do not infer a new constraint from the former.
+- If the user asks to collect backlog changes without implementation, record only user-confirmed changes as accepted decisions. Recommendations remain proposals until accepted, even when motivated by a confirmed new requirement; mark unsettled choices as open questions. Do not silently modify active contracts or expand the backlog with speculative redesigns.
 
 ## Review Perspectives
 
@@ -115,8 +115,9 @@ preserve identifiers, paths, commands and quoted source text. Report results,
 evidence and limitations, not hidden reasoning, traversal logs or routing narration
 (unless user/host requires disclosure). No raw patches unless requested.
 
-Use only useful sections: scope, evidence-backed ranked findings with impact,
-minimal action and confidence, dispositions, next safe steps and missing evidence.
+State confidence and a technical disposition for every significant recommendation.
+Use only useful sections: scope, evidence-backed ranked findings with impact and
+minimal action, next safe steps and missing evidence.
 Do not fill a finding quota or add empty sections. Full Review includes the current
 architecture model (responsibilities, dependencies, runtime/deployment and critical
 flows). Technical Evolution adds constraints, options and a short next-step plan
@@ -138,6 +139,7 @@ rather than invent it or install anything.
 | Scope conflicts / multi-root detail | `references/selected-context-rules.md` |
 | Exploration budgets and stop conditions | `references/exploration-budget.md` |
 | Structural change justification | `references/anti-overengineering.md` |
+| Bounded API design and follow-up convergence example | `examples/scheduler-api-convergence.md` |
 | Cost model and confidence gates | `references/economics.md` |
 | Language or output detail | `references/language-rules.md`, `references/communication-rules.md` |
 | Requested formal report/checklist | `templates/architecture-review-report.md`, `templates/checklists.md` |

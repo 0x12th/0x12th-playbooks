@@ -512,6 +512,46 @@ The following repeated failures always block completion:
 - Required: `Defer pending evidence` or `Do not implement`; name evidence that could change the decision.
 - Forbidden: inventing scale, ownership, incidents, or target architecture.
 
+### EA-CONVERGENCE-01: Bounded API design across follow-ups
+
+- Mode: `engineering-architecture` Decision Support; start a fresh context, then
+  keep the same conversation for all three turns.
+- Resources: updated `SKILL.md` only. Keep the scheduler example and this rubric
+  outside the agent context so the responses are not copied from an answer key.
+- Turn 1: `Our scheduler supports one-off jobs via run_at and recurring jobs via
+  cron plus timezone, with shared delivery and run history. Both capabilities
+  must remain. We agreed on a client-supplied UUID for task identity/idempotency.
+  I dislike the flat request DTO with mutually exclusive fields. Should tasks and
+  schedules be separate resources? Would that duplicate endpoints? We are only
+  discussing backlog changes; do not edit files or active contracts.`
+- Turn 2: `I still dislike the original flat DTO. I have neither accepted nor
+  rejected your proposed alternative. Compare the materially different
+  alternatives again and tell me what to put in the backlog. There are no new
+  requirements or facts. Do not implement anything.`
+- Turn 3: `New confirmed requirement: clients need several independently pausable
+  and deletable schedules for the same reusable task definition, without
+  duplicating task identity. Reconsider the resource model for that requirement.
+  Keep one-off scheduling supported. This is still a backlog discussion only.`
+- Evaluator-only required, turns 1–2: preserve both scheduling capabilities and
+  the agreed UUID decision; distinguish the flat DTO, contract-level variants
+  and a resource split; recommend the narrowest sufficient change without
+  inventing lifecycle differences; keep unaccepted proposals separate from
+  confirmed backlog decisions and converge rather than reverse without evidence.
+  If revising a recommendation to correct earlier reasoning, identify the error
+  instead of treating the repeated complaint as a new constraint.
+- Evaluator-only required, turn 3: identify independent schedule management and
+  one-to-many cardinality as new evidence; reopen the earlier recommendation
+  and explain why request-shape validation alone no longer answers the need.
+  Evaluate separate schedule identity without prescribing separate services or
+  removing previously required capabilities.
+- Evaluator-only required, every turn: verdict first, followed by the goal/current
+  behavior summary; confidence and technical disposition for significant
+  recommendations; no edits or claimed implementation.
+- Forbidden: inventing one-off immutability or lifetime execution limits;
+  reopening the UUID decision without evidence; treating a recommendation as
+  accepted; speculative backlog expansion; repeated hypothetical questions;
+  refusing to reconsider after turn 3 merely because the earlier decision converged.
+
 ## Python Test Scenarios
 
 ### PY-TEST-01: Pure function
