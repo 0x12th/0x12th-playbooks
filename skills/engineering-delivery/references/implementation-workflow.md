@@ -67,7 +67,7 @@ Do not start with repository-wide exploration when a stack trace, exception, fai
 Stop and ask or hand back a decision when:
 
 - The implementation requires an architecture decision not already made.
-- The requested change would change ownership, contracts, data migration strategy, or deployment architecture.
+- The implementation requires a material change to ownership, contracts, data migration strategy, or deployment architecture that was not already authorized or decided. An approved change to these areas calls for stronger impact analysis and validation, not another approval solely because of its category.
 - Validation cannot be run and risk is high.
 - The same validation failure repeats after two reasonable attempts without new evidence.
 - The only available next step is a broad rewrite, new dependency, destructive operation, or public contract change not requested by the user.
