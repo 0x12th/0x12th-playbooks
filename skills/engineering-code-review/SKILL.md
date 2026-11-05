@@ -137,7 +137,7 @@ Never run `checkout`, `switch`, `reset`, or `stash` in the user's worktree for r
 
 First-class read sources are local Git, GitLab, and GitHub. Other providers may be used only through an already available capability that satisfies the same provider-neutral contract.
 
-Acquire relevant evidence channels—change identity/metadata, diff content, requirements, CI results and discussions—through configured available Git, GitHub or GitLab tools. These are semantic evidence categories, not tool or API names to discover. Prepare comments locally when requested; external provider actions are outside this skill.
+Acquire relevant evidence channels—change identity/metadata, diff content, requirements, CI results and discussions—through configured available Git, GitHub or GitLab tools. These are semantic evidence categories, not tool or API names to discover. Prepare comments locally when requested. Publication is a separate phase requiring an explicit user request and an available provider write tool; review alone never authorizes publication.
 
 Every relevant change-set evidence channel records (unavailable evidence is `unknown`, not empty):
 
@@ -281,7 +281,7 @@ Keep comment records provider-neutral: include the finding and current source lo
 
 ## External Action Boundary
 
-`prepare comments` is always dry-run. Posting comments, submitting reviews, approving, requesting changes, resolving threads, and merging are outside this skill and belong to a provider-specific adapter. This skill prepares feedback but never claims that an external action occurred.
+`prepare comments` is always dry-run. Publish prepared comments only when the user explicitly requests publication, an appropriate provider write tool is already available, the canonical target and current revision are confirmed, and findings are rechecked for applicability. Handle provider-specific positions, permissions, partial failures, and duplicate-posting risks before claiming publication. If a safe publication tool is unavailable, return prepared feedback and disclose the limitation. Submitting reviews, approving, requesting changes, resolving threads, and merging are separate external actions requiring their own explicit authorization; none is implied by review or comment publication.
 
 ## Supporting References
 
