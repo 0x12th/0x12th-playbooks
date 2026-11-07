@@ -1,9 +1,9 @@
 ---
 name: engineering-delivery
 description: >-
-  Use for safe engineering delivery work: diagnosis, investigation,
-  implementation, coding, bug fixes, tests, CI failures, runtime failures,
-  validation, local refactoring, PR preparation, and incremental improvements.
+  Use for engineering delivery: diagnosis, investigation, implementation,
+  coding, bug fixes, tests, CI/runtime failures, validation, local refactoring,
+  commit messages, MR/PR descriptions, PR preparation, and incremental improvements.
   Diagnostic questions and assessment-only requests stay read-only; an explicit requested outcome requiring
   project changes authorizes scoped edits when the target is clear. Do not use for
   assessment of concrete code artifacts or provider change requests,
@@ -39,7 +39,7 @@ Applies to:
 - CI fixes
 - Local refactoring
 - Validation
-- PR preparation
+- PR preparation, commit messages and MR/PR descriptions
 - Incremental improvements
 
 Does not apply to:
@@ -92,6 +92,10 @@ Implementation examples:
 - "Patch this failure."
 - "Refactor this function."
 - "Prepare the PR summary."
+
+Drafting a commit message or MR/PR description is delivery text work, including
+during coding or after review. It does not require a prior review, authorize a
+commit/push/publication, or require code edits. Use the artifact rules below.
 
 Architecture examples that require a decision before delivery work:
 
@@ -156,6 +160,31 @@ Do not fix unrelated issues discovered during the task. Mention them as follow-u
 Do not treat a change as complete without either validation or a clear explanation of why validation could not be run.
 
 A declared setting or fixture is not an observed runtime effect: trace the executing path to its observable result and distinguish static inference from what was actually verified.
+
+## Commit Messages and MR/PR Descriptions
+
+Apply these rules whenever producing the artifact, not only in PR preparation.
+Chat uses the request language. Artifact language follows explicit artifact
+instructions, documented project rules, stable recent same-artifact history,
+then request language. Surface conflicts with mandatory project policy; do not
+silently bypass it. Historical casing or missing prefixes do not override the
+defaults below. Preserve identifiers, acronyms and required machine tokens.
+
+Default to `type(scope): description`, with optional scope and a type matching
+the change (`fix` for bugs, `feat` for new capabilities). Begin the description
+with a lowercase verb: Russian past-tense singular active without `я`, English
+imperative. For example, `fix(api): исправил повторное создание задачи` or
+`fix(api): prevent duplicate task creation`. Add a body only when it adds useful
+context. These language/casing defaults are playbook preferences, not mandatory
+Conventional Commits grammar.
+
+Use one language for the MR/PR title, ordinary headings and body. Explain why the
+change is needed, what changed and the important mechanism in plain language for
+a colleague without prior context. Describe final behavior, not commit history
+or an agent diary. State actual verification and material limits; omit empty
+optional sections. Preserve exact project-required fields/markers. Load
+`references/communication-rules.md` when available for calibration and details;
+this core remains usable without it. Drafting does not authorize external actions.
 
 ## User-Visible Output Contract
 
@@ -284,7 +313,7 @@ The runtime core above is the default execution contract. Do not load supporting
 
 Load supporting references only when the current task needs more detail:
 
-- `references/communication-rules.md`: load when drafting external-facing technical text, PR descriptions, release notes, or engineering tickets; includes local style calibration and concise artifact rules. Also use for non-trivial output conflicts.
+- `references/communication-rules.md`: load when drafting commit messages, MR/PR titles or descriptions, release notes, engineering tickets, or other external-facing technical text; includes local style calibration and concise artifact rules. Also use for non-trivial output conflicts.
 - `references/language-rules.md` and `references/selected-context-rules.md`: use for non-trivial language, selected-context, or scope conflicts; core principles are summarized above.
 - `references/implementation-workflow.md`, `references/code-change-rules.md`, and `references/validation-rules.md`: load for medium- or high-risk implementation, shared contracts, public APIs, migrations, deployment configuration, CI pipelines, dependency versions, generated files, or when this core is insufficient to choose the safe change or validation path.
 - `references/code-change-rules.md`: also load when choosing between a local refactor and a bounded rebuild from requirements/facts; neither authorizes an undecided architecture or product change.
