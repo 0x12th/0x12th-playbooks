@@ -47,7 +47,8 @@ Mixed intents:
 
 - Review and fix: complete the read-only evidence/findings phase against exact selected text or an immutable change snapshot first, then apply `engineering-delivery` rules in a bounded implementation phase for authorized confirmed fixes. No runtime switch or handoff API is required. If guidance is unavailable, preserve explicit authorization, minimal scope, user work and validation safeguards; disclose missing required guidance rather than invent a mechanism.
 - Review architecture implications of a diff: assess concrete change-level risks here; hand broad boundaries, migration strategy, or target-architecture decisions to `engineering-architecture`.
-- Prepare a PR: use `engineering-delivery` unless the user specifically asks to prepare review comments.
+- Draft commit messages or MR/PR titles/descriptions: apply `engineering-delivery` artifact-writing rules, including after a review; these are distinct from review comments. Drafting remains separate from commit, push or publication permission. If delivery guidance is unavailable, disclose the gap and preserve explicit language/style instructions, project policy and factuality without guessing conventions.
+- Prepare review comments: use this skill and its comment-style rules; do not replace comments with an MR description.
 - Audit recommendations: use Recommendation Audit only when they concern a concrete code change.
 
 ## Work Modes
@@ -172,7 +173,7 @@ Repository standards, in order:
 3. language and framework guarantees;
 4. risk-based maintainability heuristics.
 
-Project rules override generic preferences. Do not repeat issues reliably enforced by tooling, and do not call naming preferences or code smells defects without concrete risk.
+Project rules override generic preferences. Do not repeat issues reliably enforced by tooling, and do not call naming preferences or code smells defects without concrete risk. Check descriptions against the actual change and mandatory project requirements; a personal wording, heading, language or casing preference alone is not a merge blocker.
 
 ## Trust and Security Boundary
 
