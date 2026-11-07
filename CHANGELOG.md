@@ -2,6 +2,31 @@
 
 All notable changes to this repository are documented in this file.
 
+## 0.18.0 - 2026-11-07
+
+### Changed
+
+- Preserve confirmed requirements and accepted architecture decisions across follow-ups; solve bounded design questions at the narrowest sufficient layer and distinguish proposals from accepted backlog changes.
+- Align skill authorization and handoff boundaries so explicit scoped approval is preserved without repeated permission requests; keep review read-only until a separately authorized action is requested.
+- Make commit-message and MR/PR drafting an explicit delivery responsibility during development and after review, with consistent artifact language, conventional prefixes, lowercase opening verbs, and concise descriptions grounded in actual changes and checks.
+- Consolidate Product scope and intent guidance, moving prompt examples to an optional routing reference while preserving its workflow and safeguards.
+- Clarify that validation commands require attention to untrusted code, secrets, network access, and shared-state mutations without adding approval gates to routine local checks.
+- Update pinned installation instructions and bundle metadata for `v0.18.0`.
+
+### Fixed
+
+- Reconcile review core, comment-preparation, and GitHub/GitLab references: preparing comments remains dry-run, while explicitly requested publication requires an available write tool, a confirmed current target, and applicable findings; unavailable publication must not be reported as completed.
+- Separate chat language from commit and MR/PR artifact language, avoid treating personal description-style preferences as merge blockers, and replace fixed English PR sections with a concise guide.
+
+### Added
+
+- Add a bounded scheduler API design example, architecture decision-convergence scenarios, evaluator-only review-contract regressions, and commit/MR writing scenarios.
+
+### Validation
+
+- Local skill structure/resource checks, isolated installer regressions, and `git diff --check` passed for the prepared release. Skill and installer checks also passed in GitHub Actions on merged `master` commit `5206bc4`.
+- Maintainer explicitly approved an exception to the full Codex/Hermes/Zed behavioral gate for this release. Fresh cross-runtime behavioral evaluation remains unverified; the gate for future releases is unchanged.
+
 ## 0.17.0 - 2026-09-25
 
 ### Changed
