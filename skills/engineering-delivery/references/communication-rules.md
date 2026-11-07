@@ -9,24 +9,85 @@ position or name the missing evidence that prevents one.
 
 ## Professional Artifacts
 
-Before drafting an external-facing PR description, release note, ticket, or
-technical document, when useful, sample up to 2–3 recent artifacts of the same
-type from available local or already supplied context to calibrate register,
-length, and format. Simple, short artifacts need no mandatory sampling ritual.
-Use fewer if fewer exist; do not invent samples or expand access just to build
-a style corpus. Samples inform style, not facts or permission to publish.
+Apply these rules whenever drafting commit messages or MR/PR titles and bodies,
+including during ordinary implementation or after review. Preparing text does
+not authorize committing, amending history, pushing, or publishing/updating an
+MR/PR. Preserve the permissions of the surrounding task.
 
-Style priority: explicit user style -> observed repository/team style for that
-artifact type -> documented style conventions -> built-in fallback here.
-This is a rendering preference, not permission to override mandatory project
-requirements, facts, safety rules, or required tracker fields. A few samples
-calibrate a venue; they do not establish a personal imitation profile.
+Choose artifact language separately from chat language. Priority: explicit
+instruction for that artifact -> documented project/team artifact rules ->
+stable practice in recent artifacts of the same kind -> request language when
+no convention is established. Do not silently override mandatory policy, checks
+or required tracker fields; surface a conflict with the requested style. Chat
+continues in the user's language even when the artifact is in another language.
 
-Use conventional templates where useful, omit empty optional sections, and let
-each paragraph add information. Do not repeat headings in their opening
-sentences, recap the same result in multiple summaries, or append empty
-conclusions and generic offers of further help. Review comments remain owned
-by `engineering-code-review` and its comment-style rules, not this reference.
+When conventions are unclear, use a small available sample: recent meaningful
+human commit subjects from the target branch for commits, or up to 2–3 accepted
+MR/PR descriptions for descriptions. Ignore automated/merge boilerplate. Use
+fewer if fewer exist; supplied evidence needs no repeat lookup. Mixed history
+is not a stable language convention. README or code language is only a secondary
+clue. Do not expand access, install tools or invent samples for style discovery.
+Samples inform style, not facts or permission to publish.
+
+Use one language for the title, ordinary headings and body of an artifact.
+Preserve identifiers, quotations, exact errors, established terms and required
+machine tokens. Translate optional template labels; keep exact mandatory labels
+or automation markers when the project requires them. Omit empty optional
+sections. Each paragraph must add information, not repeat a heading or summary.
+Review comments remain owned by `engineering-code-review` and its comment-style
+rules, not this reference.
+
+### Commit Messages
+
+Unless explicit instructions or mandatory project policy require another
+format, use Conventional Commits: `type(scope): description`; scope is optional.
+Choose the type from the actual change: `fix` for a bug fix, `feat` for a new
+capability, or an appropriate project-supported type such as `refactor`, `docs`
+or `test`. Prefix tokens stay in English. Old subjects without prefixes do not
+cancel this default. Preserve required breaking-change markers and trailers.
+
+The description starts with a lowercase action verb in both languages:
+
+- Russian: past-tense singular active form without `я`: `исправил`, `добавил`,
+  `упростил`; avoid plural or impersonal forms such as `исправили` or `исправлено`.
+- English: imperative form: `fix`, `add`, `simplify`, `prevent`; do not capitalize
+  the opening verb merely because older subjects do.
+
+This casing preference does not lowercase the entire message. Keep `API`, `CSV`,
+product names and code identifiers intact, and keep `BREAKING CHANGE` uppercase.
+The subject names the concrete result. Add a body only for useful reasons,
+constraints or compatibility details; do not narrate the agent's work.
+
+```text
+fix(api): исправил повторное создание задачи
+feat(export): добавил выгрузку отчёта в CSV
+fix(api): prevent duplicate task creation
+feat(export): add CSV report export
+```
+
+Language, tense and lowercase defaults here are playbook preferences, not
+requirements imposed by the Conventional Commits specification.
+
+### MR/PR Descriptions
+
+Write for a colleague who did not participate in the task. Explain the problem
+and why the change is needed, what now happens, and the mechanism that matters.
+Use short sentences, concrete actions and ordinary words. Explain unfamiliar
+internal terms when needed; do not remove necessary technical context or add
+childish analogies. Avoid bureaucracy, generic praise and process narration.
+
+Describe the final change against its target branch, or the supplied change
+when no repository is available. Commit subjects are clues, not a body to paste:
+omit superseded approaches and intermediate repair history. Include actual
+verification and material limits; never invent successful checks or motivation.
+
+For a small change, a few paragraphs are enough. Add sections only when they help
+navigation or the project template requires them. Mention migrations, breaking
+changes or residual risks when material, without empty risk/follow-up sections.
+Do not list every changed file, repeat what/why/how under multiple headings, or
+append generic conclusions. An MR/PR title names the outcome; use a conventional
+prefix when project policy or its squash-commit workflow calls for one. A title
+used as a commit message follows the commit rules above.
 
 ### Engineering Tickets
 
