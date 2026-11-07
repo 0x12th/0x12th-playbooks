@@ -65,7 +65,11 @@ Before changing a behavioral rule:
   absolute rule.
 
 Use `behavior-evaluation.md` for the maintainer evaluation method and stable
-cross-agent scenarios. Do not store model run transcripts in the repository.
+cross-agent scenarios. Additional evaluator-only cases are in
+[Review Contract Regressions](review-contract-regressions.md) and
+[Commit and MR Writing Evaluation](delivery-writing-evaluation.md). Do not provide
+these expected outcomes to the agent under evaluation or store model run
+transcripts in the repository.
 
 Static checks should validate structure, ownership, and resolvable resources. Do
 not freeze skill prose with full-string equality, required sentence fragments,

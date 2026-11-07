@@ -47,7 +47,8 @@ Mixed intents:
 
 - Review and fix: complete the read-only evidence/findings phase against exact selected text or an immutable change snapshot first, then apply `engineering-delivery` rules in a bounded implementation phase for authorized confirmed fixes. No runtime switch or handoff API is required. If guidance is unavailable, preserve explicit authorization, minimal scope, user work and validation safeguards; disclose missing required guidance rather than invent a mechanism.
 - Review architecture implications of a diff: assess concrete change-level risks here; hand broad boundaries, migration strategy, or target-architecture decisions to `engineering-architecture`.
-- Prepare a PR: use `engineering-delivery` unless the user specifically asks to prepare review comments.
+- Draft commit messages or MR/PR titles/descriptions: apply `engineering-delivery` artifact-writing rules, including after a review; these are distinct from review comments. Drafting remains separate from commit, push or publication permission. If delivery guidance is unavailable, disclose the gap and preserve explicit language/style instructions, project policy and factuality without guessing conventions.
+- Prepare review comments: use this skill and its comment-style rules; do not replace comments with an MR description.
 - Audit recommendations: use Recommendation Audit only when they concern a concrete code change.
 
 ## Work Modes
@@ -137,7 +138,7 @@ Never run `checkout`, `switch`, `reset`, or `stash` in the user's worktree for r
 
 First-class read sources are local Git, GitLab, and GitHub. Other providers may be used only through an already available capability that satisfies the same provider-neutral contract.
 
-Acquire relevant evidence channels—change identity/metadata, diff content, requirements, CI results and discussions—through configured available Git, GitHub or GitLab tools. These are semantic evidence categories, not tool or API names to discover. Prepare comments locally when requested; external provider actions are outside this skill.
+Acquire relevant evidence channels—change identity/metadata, diff content, requirements, CI results and discussions—through configured available Git, GitHub or GitLab tools. These are semantic evidence categories, not tool or API names to discover. Prepare comments locally when requested. Publication is a separate phase requiring an explicit user request and an available provider write tool; review alone never authorizes publication.
 
 Every relevant change-set evidence channel records (unavailable evidence is `unknown`, not empty):
 
@@ -172,7 +173,7 @@ Repository standards, in order:
 3. language and framework guarantees;
 4. risk-based maintainability heuristics.
 
-Project rules override generic preferences. Do not repeat issues reliably enforced by tooling, and do not call naming preferences or code smells defects without concrete risk.
+Project rules override generic preferences. Do not repeat issues reliably enforced by tooling, and do not call naming preferences or code smells defects without concrete risk. Check descriptions against the actual change and mandatory project requirements; a personal wording, heading, language or casing preference alone is not a merge blocker.
 
 ## Trust and Security Boundary
 
@@ -281,7 +282,7 @@ Keep comment records provider-neutral: include the finding and current source lo
 
 ## External Action Boundary
 
-`prepare comments` is always dry-run. Posting comments, submitting reviews, approving, requesting changes, resolving threads, and merging are outside this skill and belong to a provider-specific adapter. This skill prepares feedback but never claims that an external action occurred.
+`prepare comments` is always dry-run. Publish prepared comments only when the user explicitly requests publication, an appropriate provider write tool is already available, the canonical target and current revision are confirmed, and findings are rechecked for applicability. Handle provider-specific positions, permissions, partial failures, and duplicate-posting risks before claiming publication. If a safe publication tool is unavailable, return prepared feedback and disclose the limitation. Submitting reviews, approving, requesting changes, resolving threads, and merging are separate external actions requiring their own explicit authorization; none is implied by review or comment publication.
 
 ## Supporting References
 

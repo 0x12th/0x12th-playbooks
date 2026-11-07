@@ -54,4 +54,4 @@ Verify old, dismissed, or outdated comments against the pinned revision. Do not 
 
 ## External Actions
 
-Posting comments, submitting reviews, approving, requesting changes, resolving threads, and merging are outside this skill. A GitHub-specific adapter must own authentication, native positions, retries, and partial outcomes. Prepare comments only and never claim that an external action occurred.
+Review and `prepare comments` are read-only. When the user separately and explicitly requests publication, an already available GitHub write tool may publish revalidated comments against the confirmed PR and revision. Verify native diff positions, permissions, duplicate-posting risks, and partial outcomes; do not start authentication or install tools. If publication is unavailable, return prepared comments and state the limitation. Submitting reviews, approving, requesting changes, resolving threads, and merging require separate explicit authorization. Never claim an external action occurred without confirmation.

@@ -28,137 +28,43 @@ investment, and identify the smallest useful next step.
 
 ## Boundaries
 
-Pay special attention to the boundaries between `product-evolution`,
-`engineering-architecture`, `engineering-code-review`, and
-`engineering-delivery`.
+Use for product investment and scope decisions: current product health and
+maturity, adoption, retention, customer value, opportunities, features and MVPs,
+customer or sales-driven requests, pilots, experiments, staged rollouts, roadmap
+priorities, and conflicts over limited product, technical, customer, or team
+capacity. Decide whether to build, shrink, defer, reject, or validate first.
 
-`product-evolution` answers:
-
-- Should we do this?
-- Why should we do this?
-- When should we do this?
-- Which option creates the most value?
-- How should priorities be set?
-- How should the hypothesis be validated?
-- How should the MVP be defined?
-- What is the current product state and the highest-value next investment?
-
-`engineering-architecture` answers:
-
-- How should this be built?
-- Where should system boundaries be?
-- How should technical risks be minimized?
-- How should the architecture evolve safely?
-
-`engineering-code-review` answers whether a concrete selected code artifact or
-change set is safe to merge.
-
-If a decision requires both perspectives, `product-evolution` should produce
-the product decision first, then hand off the chosen product scope, constraints,
-non-goals, and success criteria to `engineering-architecture`.
-
-Applies to:
-
-- Product initiatives
-- New features and feature scope
-- Customer requests and sales-driven requests
-- Pilots, experiments, and staged rollouts
-- Priority conflicts between competing product, technical, customer, and team
-  initiatives
-- Roadmap planning and prioritization
-- Opportunity assessment
-- Current product health and maturity assessment
-- MVP definition
-- Product strategy and product evolution
-- Tradeoffs between multiple product directions
-- Decisions to build, shrink, defer, reject, or validate first
-
-Does not apply to:
-
-- Detailed architecture design
-- Service boundaries, domain boundaries, migration plans, reliability strategy,
-  observability architecture, or deployment architecture
-- Implementation plans that leave no product decision open
-- Coding, tests, debugging, CI fixes, PR preparation, or delivery validation
-- Review of selected code, diffs, commits, branches, merge requests, or pull requests
-- Generating broad feature lists without prioritization or investment decisions
-
-Use `engineering-architecture` when the main question is how the system should
-evolve safely. Use `engineering-code-review` when the main question is whether
-a concrete code change is safe to merge. Use `engineering-delivery` when the
-main question is the safest next delivery action.
+Do not use for unprioritized feature lists, detailed system design, or execution
+that leaves no product decision open.
 
 ## Intent Detection
 
-Use this skill automatically when the user's primary question is whether, why,
-when, for whom, or in what scope a product investment should happen, or when the
-user explicitly asks about current product health, maturity, adoption, retention,
-or customer value.
+Route by the primary question:
 
-Product-evolution examples:
-
-- "Should we build this feature?"
-- "A customer asked for X. Is it worth doing?"
-- "Do we need this feature?"
-- "What is the MVP?"
-- "What is the smallest useful solution?"
-- "What is the smallest useful next step?"
-- "Which roadmap item should come first?"
-- "What should come first?"
-- "Which priority should win: mobile app or watch notifications?"
-- "Should we invest in autotests or new pilots first?"
-- "Should technical debt beat this customer request?"
-- "Should this customer request become roadmap work?"
-- "Is there a simpler way to solve this?"
-- "Evaluate this pilot."
-- "Help choose between these product directions."
-- "What should we do next to increase adoption?"
-- "Assess the current product and recommend the highest-value next investment."
-
-Do not use this skill when the primary question is technical execution,
-architecture, deployment, debugging, CI, tests, or implementation.
-
-Non-product examples:
-
-- "Design the service boundary for this feature."
-- "How should this migration work?"
-- "Is this ready for production?"
-- "Can I deploy this to a VPS?"
-- "Review runtime resource usage."
-- "Review this repository."
-- "Implement this MVP."
-- "Write the tests."
-- "Fix the customer bug."
-- "Review this pull request for regressions."
-
-Ambiguous roadmap rule:
-
-- Product roadmap, customer value, adoption, pricing, retention, sales,
-  support, MVP, or priority tradeoffs: use `product-evolution`.
-- Technical roadmap, architecture debt, platform migration, reliability, data
-  ownership, deployment readiness, production readiness, capacity, or service
-  evolution: use `engineering-architecture`.
-
-Ambiguous feature rule:
-
-- If the feature is not yet justified, or the user asks whether it is worth
-  building, what should come first, what the MVP is, or what the smallest useful
-  solution is, use `product-evolution`.
-- If the feature is justified and the system design is unclear, use
+- **Product decision:** whether, why, when, for whom, or in what scope to invest;
+  what should come first; the smallest useful solution; or explicit product
+  health, maturity, adoption, retention, and customer-value assessment. Use this
+  skill, including product-roadmap tradeoffs involving pricing, sales or support.
+- **Technical decision:** how to build or evolve a system; technical roadmaps,
+  architecture debt, service/data boundaries, migration, platform evolution,
+  reliability, observability, production/deployment/release readiness, capacity,
+  scaling, server fit, or generic repository technical review. Use
   `engineering-architecture`.
-- If the feature is justified and the user asks to build, fix, test, or ship it,
-  use `engineering-delivery`.
+- **Concrete implementation assessment:** correctness or merge safety of selected
+  code, diffs, patches, commits, branches, merge requests, or pull requests. Use
+  `engineering-code-review`.
+- **Execution:** implementation, diagnosis, debugging, tests, CI fixes, PR
+  preparation, or validation. Use `engineering-delivery`.
 
-Ambiguous assessment rule:
+For a feature, establish product justification here when it is still open. Once
+justified, unclear system design belongs to architecture; an explicit request to
+build, fix, test, or ship belongs to delivery. A customer request or an attached
+patch alone does not change a product investment question into code review.
 
-- Explicit product health, maturity, adoption, retention, customer value, or
-  current-product questions: use `product-evolution`.
-- Generic project or repository review, architecture quality, production
-  readiness, or deployment readiness: use `engineering-architecture`.
-- Review of selected code or a concrete change set: use `engineering-code-review`.
-- Failure diagnosis or debugging: use `engineering-delivery`.
-
-Product-specific boundary examples are in `references/routing.md`; this entry point is independently usable.
+When product and architecture decisions are both needed, establish the product
+decision first and carry its scope, non-goals, constraints, and success criteria
+into architecture. Product-specific examples are in `references/routing.md`;
+this entry point remains independently usable.
 
 ## Loading Policy
 
@@ -326,6 +232,8 @@ conditional rather than asking for broad discovery by default. Ask questions onl
 when the missing information prevents a useful decision.
 
 ## Handoff Rules
+
+Product approval establishes a decision and its scope; it does not by itself authorize implementation or external publication. Carry accepted scope, non-goals, constraints, and success criteria into later phases without silently expanding or reopening them. Implement only when the user's request separately authorizes the concrete changes.
 
 After a product decision:
 

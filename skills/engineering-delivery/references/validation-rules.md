@@ -10,6 +10,8 @@ Prefer:
 - CI-equivalent commands when practical.
 - Manual smoke checks only when automated checks are unavailable.
 
+Before running repository scripts, tests, builds, or CI-equivalent commands, consider whether they execute untrusted code, access secrets or the network, or mutate shared or production state. Routine local checks within the authorized workspace need no additional approval. Do not treat implementation authorization as permission for production migrations, secret access, or destructive/external actions. Use a safe isolated check or report the limitation when needed.
+
 ## Validation Selection
 
 Use existing repository tooling. Check scripts, package manager commands, Makefiles, task runners, CI config, or README instructions when needed.

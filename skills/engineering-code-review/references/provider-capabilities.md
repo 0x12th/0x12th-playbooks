@@ -53,4 +53,4 @@ Finding, verdict, attribution, and coverage semantics must not depend on provide
 
 ## External Actions
 
-Posting comments, approving, requesting changes, resolving threads, and merging are outside this skill. If requested, return prepared comments and state that a provider-specific adapter is required.
+Review and comment preparation remain read-only. An explicit request to publish comments may authorize a separate provider-action phase using already available tools, after confirming the canonical PR/MR, target revision, and that each finding is still applicable. Do not post comments merely because they were prepared. If no suitable write capability exists, return prepared comments and state the limitation; do not assume a separate adapter must be installed. Approval, requesting changes, resolving threads, and merging require their own explicit authorization and are not implied by review or comment publication.

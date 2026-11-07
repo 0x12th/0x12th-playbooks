@@ -25,3 +25,36 @@ only as needed. Review-and-fix has a read-only evidence/findings phase followed 
 bounded authorized implementation under delivery rules, without a required runtime
 switch/handoff API. If required guidance is absent, disclose it and preserve safe
 scope and user work. Product approval by itself is not implementation authorization.
+
+## Product Prompt Examples
+
+- "Should we build this feature?"
+- "A customer asked for X. Is it worth doing?"
+- "Do we need this feature?"
+- "What is the MVP?"
+- "What is the smallest useful solution?"
+- "What is the smallest useful next step?"
+- "Which roadmap item should come first?"
+- "What should come first?"
+- "Which priority should win: mobile app or watch notifications?"
+- "Should we invest in autotests or new pilots first?"
+- "Should technical debt beat this customer request?"
+- "Should this customer request become roadmap work?"
+- "Is there a simpler way to solve this?"
+- "Evaluate this pilot."
+- "Help choose between these product directions."
+- "What should we do next to increase adoption?"
+- "Assess the current product and recommend the highest-value next investment."
+
+## Non-Product Prompt Examples
+
+- "Design the service boundary for this feature."
+- "How should this migration work?"
+- "Is this ready for production?"
+- "Can I deploy this to a VPS?"
+- "Review runtime resource usage."
+- "Review this repository."
+- "Implement this MVP."
+- "Write the tests."
+- "Fix the customer bug."
+- "Review this pull request for regressions."
