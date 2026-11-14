@@ -15,10 +15,13 @@ audience: <expected destination audience>
 audience restriction: none | private evidence | security-sensitive
 ```
 
-After the records, state:
+After the records, when nothing was published, state in the response language:
 
 ```text
-Prepared only; external provider actions are outside this skill.
+Prepared only; nothing was published.
 ```
+
+An explicitly requested publication follows the core external-action boundary;
+report its confirmed outcome and any partial failures instead of this dry-run status.
 
 Do not add severity labels or formal headings to the comment body unless the user or repository convention explicitly requires them. Keep structured metadata outside the rendered body.

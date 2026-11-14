@@ -40,7 +40,24 @@ Follow provider pagination links until completion. Record file counts, page mark
 
 ## CI Evidence
 
-Statuses and checks must be acquired through an available read capability and bound to the exact pinned SHA and repository. Distinguish head checks from provider-generated merge-test or merge-queue commits. A passing check on another SHA is not evidence for the reviewed snapshot.
+Acquire statuses and checks through an available read capability. Record the
+repository, run/check identity, workflow event, and revision actually checked out
+or tested; a reported head SHA alone does not prove which code ran.
+
+- **Head checks:** evidence for the pinned head only when the tested revision and
+  repository match it.
+- **Merge-result checks:** evidence for the tested integration result when its
+  immutable SHA and verified composition bind it to the pinned base/head. For a
+  merge queue, include the other changes in that exact group; this does not prove
+  the head passed in isolation or a different queue composition passed.
+- **Unrelated, stale, or unverified checks:** not coverage of the reviewed snapshot.
+  Record the affected validation gap without discarding other valid evidence.
+
+For `pull_request`, GitHub Actions with the default checkout tests the PR merge
+branch. Its SHA can legitimately differ from the head. Verify what the workflow
+actually tested and keep merge-result evidence separate from head evidence; do
+not replace the pinned base/head identity with a mutable merge ref. See the
+[official workflow event semantics](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request).
 
 Permission filtering, rate limits, or missing check channels produce `partial` or `unknown` coverage, not an empty complete result.
 

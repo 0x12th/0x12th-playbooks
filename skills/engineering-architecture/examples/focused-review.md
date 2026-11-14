@@ -11,7 +11,7 @@ Example output:
 ```md
 ## Verdict
 
-Conditionally ready. The worker path can remain in its current architecture, but bounded retries are required before increasing load or concurrency.
+Keep the current worker architecture while checking its effective retry and capacity policies. Readiness for higher load is not established by the supplied code and documentation alone.
 
 ## Scope and evidence
 
@@ -23,41 +23,38 @@ Requests enqueue jobs through the API layer. Workers consume jobs in batches, ca
 
 ## Findings
 
-### 1. Retries are not clearly bounded
+### 1. Effective retry limits are unverified
 
 Severity: High
+Confidence: Low; queue and broker policy were not supplied.
 
-Problem: Failed jobs can be retried without a visible max-attempt policy or dead-letter handling.
+Evidence gap: The provided worker code does not establish the effective retry limit or failure routing. These may be configured by the queue or broker.
 
-Impact: A persistent dependency failure can create retry storms, queue growth, and delayed processing for healthy jobs.
+Conditional impact: If a retry path is unbounded, a persistent dependency failure can create retry storms, queue growth, and delayed processing for healthy jobs.
 
-Root cause: Retry behavior is embedded in worker control flow rather than defined as an explicit reliability policy.
+Minimal action: Inspect the effective worker and broker policies. Propose changes only for confirmed gaps, preserving the operation's accepted retry and failure contract.
 
-Proposed solution: Add max attempts, exponential backoff with jitter, dead-letter routing, and metrics for retry count and dead-letter volume.
+Validation signal: A controlled failure check demonstrates the configured attempt limit and terminal failure handling.
 
-Disposition: Required before implementation.
+Disposition: Defer pending evidence.
 
-Complexity: Medium
-Risk: Medium
-Expected benefit: Lower blast radius during dependency incidents and faster diagnosis.
-Evolution cost: Small operational increase for new metrics and alerts; lower long-term maintenance cost because failure behavior becomes explicit.
+Expected benefit: Establish whether a reliability change is needed before adding duplicate retry or dead-letter mechanisms.
 
 ### 2. Queue capacity limits are not documented
 
 Severity: Medium
+Confidence: Low; effective limits and workload have not been verified.
 
-Problem: Worker concurrency, queue depth limits, and dependency rate limits are not tied together.
+Evidence gap: The available documentation does not relate worker concurrency, queue depth limits, and dependency rate limits; their effective values remain unknown.
 
-Impact: Scaling workers may increase dependency failures or database contention instead of improving throughput.
+Conditional impact: If those limits are mismatched, scaling workers may increase dependency failures or database contention instead of improving throughput.
 
-Root cause: Capacity planning is implicit in configuration rather than modeled as part of the queue architecture.
+Minimal action: Compare effective limits with the expected workload and existing queue-age signals. Recommend a bounded load check only if this leaves a material uncertainty before increasing concurrency.
 
-Proposed solution: Document throughput assumptions, add queue-age metrics, and run a small load test before increasing concurrency.
+Validation signal: The planned concurrency fits verified dependency limits and the observed or safely tested queue-age target.
 
 Disposition: Next safe step.
 
-Complexity: Small
-Risk: Low
 Expected benefit: Safer scaling decisions and fewer performance regressions.
-Evolution cost: Low; mostly documentation, metrics, and validation.
+Evolution cost: Assess after confirming the gap; existing configuration or monitoring may already suffice.
 ```

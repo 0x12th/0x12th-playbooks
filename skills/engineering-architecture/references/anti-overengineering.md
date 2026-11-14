@@ -29,13 +29,17 @@ Do not recommend:
 
 Do not design services, brokers, adapters, layers, or platform components that the current problem does not require.
 
-Do not propose new services, brokers, adapters, or platform components when the current problem can be solved:
+First check whether the current problem can be solved at acceptable cost and risk:
 
 - Inside an existing service.
 - By changing module boundaries.
 - By consolidating responsibility.
 - By simplifying interactions.
 - By improving contracts, ownership, tests, observability, or deployment safety inside the current shape.
+
+A local solution may be technically possible yet materially more costly or risky.
+A new component can be justified when the comparison demonstrates that tradeoff;
+the narrowest layer remains the default.
 
 Any new service, broker, adapter, runtime, or platform component must be explicitly justified by material current pain and expected benefit that outweighs migration, operational, and cognitive cost.
 
