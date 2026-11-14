@@ -40,9 +40,10 @@ Large migrations or service extractions require material current pain, measurabl
 
 ## Confidence Gates
 
-Use confidence to control recommendation strength:
+Use confidence to express evidence strength and control recommendation strength.
+Set practical priority separately, using risk, expected benefit, and total cost:
 
-- **High confidence:** prioritize the finding; planning may proceed.
+- **High confidence:** the evidence supports the finding; planning may proceed if risk and cost/benefit justify it. High confidence alone does not imply high priority.
 - **Medium confidence:** finding is valid, but implementation needs more evidence or a narrower first step.
 - **Low confidence:** stop and request or list missing evidence.
 

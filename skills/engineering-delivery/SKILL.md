@@ -28,42 +28,13 @@ This is a delivery playbook for diagnosing, investigating, validating, and only 
 
 ## Boundaries
 
-Applies to:
+Use for diagnosis, investigation, authorized implementation, tests, CI fixes,
+local refactoring, validation, and commit/MR/PR text preparation.
 
-- Diagnosis
-- Investigation
-- Implementation
-- Coding tasks
-- Bug fixes
-- Tests
-- CI fixes
-- Local refactoring
-- Validation
-- PR preparation, commit messages and MR/PR descriptions
-- Incremental improvements
-
-Does not apply to:
-
-- Product investment decisions
-- Product prioritization
-- MVP decisions
-- Architecture decisions
-- Service extraction strategy
-- Migration strategy
-- Platform evolution
-- Production readiness
-- Deployment readiness
-- Release readiness
-- Server/VPS fit assessment
-- Runtime resource review
-- Current architecture assessment
-- Target architecture assessment
-- Capacity and scaling review
-- Repository-wide technical review
-- Project readiness review
-- Long-term tradeoff analysis
-- Broad architecture assessment
-- Read-only review of selected code or concrete change sets; use `engineering-code-review`
+Product investment and scope belong to `product-evolution`; technical design,
+migration strategy and architecture/readiness decisions belong to
+`engineering-architecture`. Review of selected code or concrete change sets
+belongs to `engineering-code-review`.
 
 When a product or architecture decision is required before delivery work can continue, stop and state the decision that is missing. Do not route, announce, or explain skill selection unless the user asks or the host runtime requires disclosure.
 
@@ -71,59 +42,9 @@ When a product or architecture decision is required before delivery work can con
 
 Default to read-only for diagnosis, diagnostic questions and assessment-only requests. Scoped edits are authorized when the user explicitly requests an outcome that requires project changes and the target is clear; permission depends on intent, not a closed verb list. Examples such as “доведи до рабочего состояния”, “сделай чтобы CI был зелёным” and “закончи задачу” can authorize necessary edits. Examples are not exhaustive. A polite request such as “Можешь исправить этот баг?” or “Can you fix this?” still authorizes scoped edits; grammatical question form is not a read-only gate. If the target or outcome is unclear, clarify before editing. Assessing whether files can be removed does not authorize deletion. Release preparation (“подготовь релиз”) is not permission to publish, push or perform destructive operations.
 
-Read-only diagnosis, investigation, or validation examples:
-
-- "Why is CI failing?"
-- "Analyze this error."
-- "Look at this selected log or error."
-- "Check this failure or validation result."
-- "Where is the problem?"
-- "Is this related?"
-- "Investigate this runtime exception."
-- "Validate this change."
-
-Implementation examples:
-
-- "Implement the first merge step."
-- "Write tests."
-- "Move this job to the approved queue runtime."
-- "Fix this bug."
-- "Fix the failing CI test."
-- "Patch this failure."
-- "Refactor this function."
-- "Prepare the PR summary."
-
 Drafting a commit message or MR/PR description is delivery text work, including
 during coding or after review. It does not require a prior review, authorize a
 commit/push/publication, or require code edits. Use the artifact rules below.
-
-Architecture examples that require a decision before delivery work:
-
-- "Review this project."
-- "What should I improve?"
-- "Is this ready for production?"
-- "Can I deploy this to a VPS?"
-- "Is this ready for an update?"
-- "What is the current architecture?"
-- "What should the target architecture be?"
-- "Review deployment readiness."
-- "Review runtime resources."
-- "Will this fit on this server?"
-- "What are the scaling risks?"
-- "Should we merge these services?"
-- "Should background jobs move to a different queue runtime?"
-- "What should the service boundary be?"
-- "Review this migration strategy."
-- "Challenge this design."
-
-For these prompts, do not begin delivery investigation. State the missing architecture/readiness decision first.
-
-Product examples that require a decision before delivery work:
-
-- "Should we build this feature?"
-- "What is the MVP?"
-- "Which priority should come first?"
-- "Should this customer request become roadmap work?"
 
 ## Review and Implementation Phases
 
@@ -207,63 +128,24 @@ Do not expose:
 - internal planning notes, routing notes, or comparison notes;
 - raw diffs, full files, or large code blocks unless the user explicitly asks for them.
 
-Progress updates are allowed only when the task is long-running. They must be one or two short sentences and must summarize useful state, not actions of the agent.
-
-Bad progress update:
-
-```text
-I will inspect the repository, read SKILL.md, then open the docs and run validation.
-```
-
-Good progress update:
-
-```text
-The likely issue is in the delivery skill: implementation tasks still allow noisy progress narration. I am tightening that contract and keeping the change local.
-```
-
-Bad final report:
-
-```text
-Tool Call: Read file...
-Status: Completed
-<thinking>...</thinking>
-```
-
-Good final report:
-
-```text
-Changed `skills/engineering-delivery/SKILL.md`.
-Validation: not run; markdown-only instruction change.
-Remaining risk: other external skills may still print tool traces unless they have the same output contract.
-```
+Use progress updates for long-running work or when required by the host or requested by the user. Keep them to one or two short sentences about useful state. Required host disclosures take precedence over these output preferences; do not add routine tool narration.
 
 ## Diff Output Policy
 
 Do not paste raw git diffs, patches, or large changed-code blocks by default.
 
-Before deletion, resolve exact authorized targets and inspect existence,
-metadata, and version-control status without exposing file contents. A tracked
-path is not a recovery guarantee: Git may retain an older version, not current
-staged or unstaged edits. For clean tracked files, verify that the current version
-is recoverable from Git. For modified tracked or untracked files, use an available
-appropriate recovery mechanism, such as trash, editor history, or a protected
-local copy, and verify that it preserves the exact current version. The mere
-presence of Git, history, or a backup is not verification.
+Before an authorized deletion, identify the exact targets and verify recovery
+of their current contents, including staged, unstaged, or untracked changes.
+Git tracking alone is not proof of recovery. If recovery cannot be established,
+leave the file intact and ask for explicit consent to lose its current contents;
+a generic deletion request is insufficient. Once recovery is verified, delete
+without another confirmation and report how to recover the file.
 
-Do not prescribe a backup system or expose sensitive content while preserving
-it. Read bytes only as needed to preserve or verify recovery, without printing
-them. If safe recovery cannot be established, leave the file intact and ask for
-explicit consent to lose its current contents; a generic deletion request is not
-that consent. When recovery is verified, carry out the authorized deletion without
-an extra confirmation and report how to recover the file.
-
-When the host permits a choice, prefer a narrow non-content-returning deletion
-operation over a patch that echoes removed contents. Verify deletion through
-repository status or a path search. Never choose irreversible deletion merely
-to reduce transcript noise.
-
-If the host requires a content-returning edit primitive, use it once, do not
-repeat its payload, and report only the deleted paths and reason.
+Preserve and verify recovery without exposing sensitive or deleted contents.
+Prefer a non-content-returning deletion operation when the host allows it, and
+verify the result. When the host requires a content-returning edit, use it once
+without repeating its payload. Load `references/code-change-rules.md` when
+available for the detailed procedure; these safeguards also apply without it.
 
 When reporting changes:
 
@@ -272,20 +154,6 @@ When reporting changes:
 - mention exact functions or paths when needed;
 - quote only small snippets that are necessary as evidence;
 - provide a patch or diff only when the user explicitly asks for raw diff, patch, or exact code changes.
-
-Bad:
-
-```diff
-- old code
-+ new code
-```
-
-Good:
-
-```text
-Changed `DownloadManager.try_acquire()` to release the global slot if the per-user slot is rejected.
-Validation: `uv run pytest` passed.
-```
 
 ## Risk Control
 
@@ -316,7 +184,7 @@ Load supporting references only when the current task needs more detail:
 - `references/communication-rules.md`: load when drafting commit messages, MR/PR titles or descriptions, release notes, engineering tickets, or other external-facing technical text; includes local style calibration and concise artifact rules. Also use for non-trivial output conflicts.
 - `references/language-rules.md` and `references/selected-context-rules.md`: use for non-trivial language, selected-context, or scope conflicts; core principles are summarized above.
 - `references/implementation-workflow.md`, `references/code-change-rules.md`, and `references/validation-rules.md`: load for medium- or high-risk implementation, shared contracts, public APIs, migrations, deployment configuration, CI pipelines, dependency versions, generated files, or when this core is insufficient to choose the safe change or validation path.
-- `references/code-change-rules.md`: also load when choosing between a local refactor and a bounded rebuild from requirements/facts; neither authorizes an undecided architecture or product change.
+- `references/code-change-rules.md`: also load before file deletion or when choosing between a local refactor and a bounded rebuild from requirements/facts; neither authorizes an undecided architecture or product change.
 - `references/testing-rules.md`: load for test or regression work.
 - `references/python-testing-rules.md`: load with `references/testing-rules.md` for Python test or regression work.
 - `references/validation-rules.md`: also load for disputed regression attribution or claims that a configured or fixture-driven runtime effect occurred.

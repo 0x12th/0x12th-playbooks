@@ -30,6 +30,32 @@ Use the lowest-risk action that can satisfy the request.
 - Do not hide failures by broadening catches, swallowing errors, skipping checks, or changing defaults without evidence.
 - Separate preparation from commit for risky actions: stage data, scripts, or config changes in reviewable form before applying irreversible effects.
 
+## Authorized File Deletion
+
+Before deletion, resolve exact authorized targets and inspect existence,
+metadata, and version-control status without exposing file contents. A tracked
+path is not a recovery guarantee: Git may retain an older version, not current
+staged or unstaged edits. For clean tracked files, verify that the current version
+is recoverable from Git. For modified tracked or untracked files, use an available
+appropriate recovery mechanism, such as trash, editor history, or a protected
+local copy, and verify that it preserves the exact current version. The mere
+presence of Git, history, or a backup is not verification.
+
+Do not prescribe a backup system or expose sensitive content while preserving
+it. Read bytes only as needed to preserve or verify recovery, without printing
+them. If safe recovery cannot be established, leave the file intact and ask for
+explicit consent to lose its current contents; a generic deletion request is not
+that consent. When recovery is verified, carry out the authorized deletion without
+an extra confirmation and report how to recover the file.
+
+When the host permits a choice, prefer a narrow non-content-returning deletion
+operation over a patch that echoes removed contents. Verify deletion through
+repository status or a path search. Never choose irreversible deletion merely
+to reduce transcript noise.
+
+If the host requires a content-returning edit primitive, use it once, do not
+repeat its payload, and report only the deleted paths and reason.
+
 ## Refactoring
 
 Refactor only when it directly supports the requested change or materially reduces risk.
