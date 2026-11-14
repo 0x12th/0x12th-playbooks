@@ -2,6 +2,29 @@
 
 All notable changes to this repository are documented in this file.
 
+## 0.18.1 - 2026-11-14
+
+### Fixed
+
+- Attribute GitHub CI evidence to the revision actually tested, accept verified merge-result and merge-queue coverage for their exact composition, and reject stale or unrelated results.
+- Align prepared review comment status with the existing explicit-publication boundary; report actual publication outcomes rather than an unconditional dry-run status.
+- Remove unsupported product assumptions and distinguish missing documentation from unverified runtime controls in architecture examples.
+
+### Changed
+
+- Shorten the `engineering-delivery` entry point and move the detailed deletion procedure to its existing reference, preserving standalone authorization and recovery safeguards for current tracked and untracked contents.
+- Separate architecture recommendation confidence from practical priority and compare local changes with new components using total cost and risk.
+- Update pinned installation instructions and bundle metadata for `v0.18.1`.
+
+### Added
+
+- Extend behavioral scenarios for CI provenance, publication status, standalone deletion recovery, conditional product ranking, and architecture evidence gaps and priorities.
+
+### Validation
+
+- Local skill structure/resource checks, isolated installer regressions, and `git diff --check` passed for the prepared release.
+- Maintainer explicitly approved a one-time exception to the full Codex/Hermes/Zed behavioral gate for this release. Fresh cross-runtime behavioral evaluation remains unverified; the gate for future releases is unchanged.
+
 ## 0.18.0 - 2026-11-07
 
 ### Changed
