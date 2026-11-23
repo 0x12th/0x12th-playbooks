@@ -52,6 +52,30 @@ Use `engineering-code-review` for read-only review of selected code, files, diff
 
 For a mixed request to review and fix, complete the read-only evidence/findings phase against exact selected text or an immutable change snapshot first, then apply these delivery rules to authorized confirmed fixes in a bounded implementation phase. No runtime switch or handoff API is required. If required guidance is unavailable, disclose it and retain authorization, selected scope, user-work preservation and validation safeguards. Do not edit during review or treat optional suggestions as authorized fixes.
 
+### Feature Completion Review
+
+After implementing a feature or behavior change, validate it, then invoke
+`engineering-code-review` before reporting completion. Use a fresh reviewer
+context without the authoring conversation; a role switch in the same session
+is self-review. Pass the original requirements, accepted constraints and
+decisions, the complete immutable feature snapshot, and actual validation.
+Include task-selected uncommitted and untracked changes when they are part of
+the result; exclude unrelated user work. Do not reduce review to the last commit.
+
+The first reviewer checks requirements, correctness, integration and simplicity.
+Add a second focused reviewer only for a concrete structural question, using
+the conditions in `references/post-implementation-review.md`. Reviewers stay
+read-only and do not dispatch more reviewers. Reconcile one evidence-backed
+report; verify findings before authorized fixes. Follow one full review with
+at most one targeted re-review. Remaining blockers or missing essential evidence
+stay explicit; reaching the limit never grants a pass.
+
+If fresh-context review is unavailable, perform a separate self-review and
+report independent review as unavailable. Do not invent a delegation mechanism
+or claim independent approval. An explicit project requirement for independent
+approval remains unmet. Diagnosis, validation-only and artifact-writing requests
+do not acquire an implementation review cycle. Explicit user scope wins.
+
 ## Work Modes
 
 Choose the smallest useful mode:
@@ -70,7 +94,8 @@ Use the smallest safe execution loop:
 3. For runtime failures, follow the traceback before exploring the repository. Traceback beats repository exploration.
 4. In read-only modes, answer the question and stop when the evidence is sufficient.
 5. In implementation mode, make the smallest behavior-preserving or behavior-targeted change and validate it.
-6. Report only findings, changed files when applicable, validation result, remaining risk, and next safe step.
+6. For completed features and behavior changes, apply Feature Completion Review.
+7. Report only findings, changed files when applicable, validation/review result, remaining risk, and next safe step.
 
 Do not broaden the task unless current evidence shows the selected scope is insufficient.
 
@@ -116,6 +141,7 @@ The user should see only:
 - current finding, conclusion, or decision;
 - changed files, when files were changed;
 - validation result;
+- completion-review outcome and material gaps, when applicable;
 - remaining risk;
 - next safe action.
 
@@ -186,6 +212,7 @@ Load supporting references only when the current task needs more detail:
 - `references/implementation-workflow.md`, `references/code-change-rules.md`, and `references/validation-rules.md`: load for medium- or high-risk implementation, shared contracts, public APIs, migrations, deployment configuration, CI pipelines, dependency versions, generated files, or when this core is insufficient to choose the safe change or validation path.
 - `references/code-change-rules.md`: also load before file deletion or when choosing between a local refactor and a bounded rebuild from requirements/facts; neither authorizes an undecided architecture or product change.
 - `references/testing-rules.md`: load for test or regression work.
+- `references/post-implementation-review.md`: load when completing a feature or behavior change, receiving completion-review findings, or learning from a confirmed missed finding.
 - `references/python-testing-rules.md`: load with `references/testing-rules.md` for Python test or regression work.
 - `references/validation-rules.md`: also load for disputed regression attribution or claims that a configured or fixture-driven runtime effect occurred.
 

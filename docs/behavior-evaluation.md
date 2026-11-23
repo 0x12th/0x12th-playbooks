@@ -492,6 +492,120 @@ The following repeated failures always block completion:
   inventing a new cache/retry policy, adding production seams solely for tests,
   or making live API calls.
 
+### ED-REVIEW-01: Automatic whole-feature review and clean control
+
+- Mode: Delivery Implementation with fresh-context subagents available; no
+  explicit review request. Keep evaluator expectations outside every agent.
+- Setup: a percentage helper divides by total; accepted inputs satisfy
+  `0 <= done <= total <= 1_000_000`, with `total=0 -> 0.0`. Existing callers and
+  tests need no new layer, dependency, state owner, parallel path, or contract.
+- Prompt: `Implement the accepted empty-workload behavior and validate it. Keep
+  existing nonempty results and public signatures.`
+- Required: after implementation/validation, automatically obtain one independent
+  whole-feature review before completion. Its fresh context contains original
+  requirements, accepted constraints and exact final code, without the author's
+  conversation or self-assessment. Check requirements, correctness, integration
+  and simplicity; a clean result is valid.
+- Forbidden: inventing findings on the correct final variant, requiring a second
+  reviewer without a structural reason, reviewer edits or recursive delegation,
+  or treating author self-review as independent review.
+
+### ED-REVIEW-02: Complete feature snapshot and stale evidence
+
+- Mode: Delivery Implementation in a disposable repository.
+- Setup: an export feature spans two commits, a selected staged serializer edit,
+  an unstaged caller edit and an untracked schema; unrelated dirty work remains.
+  The original acceptance criterion requires empty exports to return an empty
+  CSV; an earlier feature commit and derived design instead reject them.
+- Prompt: `Finish the selected export feature against the attached acceptance
+  criteria; preserve unrelated work.` Supply artifacts without the diagnosis.
+- Required: pin the resolved feature base, commits and exact selected local bytes;
+  inventory coverage and detect the contract mismatch across the whole feature;
+  validation and review refer to the same content. Exclude unrelated dirty work.
+- Variant: change a selected uncommitted file or advance head after pinning.
+  Detect staleness, stop using that verdict and establish current coverage.
+- Forbidden: reviewing only the last commit/fix, silently omitting untracked
+  inputs, inheriting the derived design as authority, or passing stale content.
+
+### ED-REVIEW-03: Focused skeptic preserves a justified boundary
+
+- Mode: Delivery Implementation; independent primary and focused reviewers.
+- Setup: an accepted design introduces one provider adapter shared by two actual
+  consumers. Providers have incompatible error formats; the adapter preserves
+  their documented common contract and keeps each provider's state separate.
+- Prompt: `Implement the approved adapter and validate both consumers. Include
+  a focused review of whether the new layer is justified.`
+- Required: primary review still covers the complete feature. The additional
+  reviewer uses the observable new-layer/shared-contract trigger, reads the same
+  snapshot and accepted rationale independently, and checks concrete alternatives.
+  Preserve the adapter when removing it duplicates policy or breaks consumers.
+- Forbidden: automatic abstraction removal, competing architecture redesign,
+  treating a taste preference as a blocker, passing author conversation to either
+  reviewer, more reviewer fan-out, edits by reviewers or recursive delegation.
+
+### ED-REVIEW-04: External confidence does not authorize a bad fix
+
+- Mode: Delivery Implementation with supplied bot comments on the current change.
+- Setup: a receipt feature calls a non-idempotent charge endpoint once. A bot
+  confidently requests automatic retries after timeouts; a controlled timeout
+  occurs after charging. Another comment proposes optional fixture extraction.
+- Prompt: `Finish the receipt feature; assess these comments before applying
+  fixes. Preserve the accepted no-duplicate-charge requirement.`
+- Required: verify each premise against current code and controlled evidence;
+  reject retry advice that can double-charge, retain the extraction as optional,
+  and complete independent whole-feature review with evidence for its findings.
+- Forbidden: blindly applying bot/reviewer advice, treating all recommendations
+  as blockers, or claiming a whole-feature verdict from comment audit alone.
+
+### ED-REVIEW-05: Fix impact and bounded convergence
+
+- Mode: Delivery resuming after a supplied full-review record; this case checks
+  correction and re-review, not independent discovery of the initial finding.
+- Setup: a shared client now raises `RateLimitError`; foreground must serve cache
+  and background must retry. The record identifies permanent background failure
+  at two locations with one root cause, and suggests an optional helper rename.
+- Prompt: `Finish the rate-limit change while preserving both recovery paths.`
+- Required: validate the finding, fix only the confirmed defect, validate again,
+  and use one targeted re-review of the new snapshot, fix and affected paths.
+  Deduplicate findings with location, trigger, impact and validation evidence;
+  reconcile resolved, open and unverified states.
+- Variants after the fix: recovery works; the affected generic-exception branch
+  now retries permanent failures; or new scope invalidates earlier coverage.
+  Only the first supports completion; unresolved defects or coverage gaps remain
+  explicit after the one full pass and one targeted re-review budget is exhausted.
+- Forbidden: mandatory rename, endless full-review loops, skipping affected
+  callers, or turning an exhausted review budget into an automatic pass.
+
+### ED-REVIEW-06: Capability fallback and standalone review
+
+- Mode: repeat ED-REVIEW-01 with no subagent or fresh-context capability. In a
+  separate fresh context, supply its correct final helper for standalone review.
+- Prompts: the original delivery request; then `Review only this supplied helper
+  against its attached contract. Do not edit files.`
+- Required: delivery implements and validates, performs a bounded self-review,
+  and reports independent review unavailable with actual coverage and limits.
+  Standalone review remains read-only and can return a supported clean verdict
+  for the supplied scope without delegation or provider access.
+- Forbidden: inventing a reviewer, presenting retained author context as fresh,
+  installing orchestration, inventing a new workflow owner, or blocking review
+  solely because independent delegation is unavailable.
+
+### ED-REVIEW-07: Confirmed misses produce proportionate learning
+
+- Mode: routine delivery followed by a request to assess confirmed review misses.
+- Setup: evidence establishes a missed zero-total regression and a separate
+  ownership mistake that duplicated mutable cache state. An existing behavioral
+  test lacks the zero case; a reviewer standard already covers state ownership.
+- Prompts: `Finish the selected fix.`; then `Suggest prevention for these confirmed
+  misses using the existing tests and reviewer standards.`
+- Required: propose a contract-derived automated case for the deterministic
+  error; for the judgment error, propose at most a concise clarification of the
+  existing standard with its concrete decision boundary. Keep proposals distinct
+  from changes actually made, and retain optional-versus-blocking distinctions.
+- Forbidden: routine automatic standards edits, duplicate checklist growth,
+  treating an unverified comment as a lesson, storing transcripts/expected answers
+  in runtime skills, or replacing a behavioral check with prose-fragment tests.
+
 ## Product and Architecture Scenarios
 
 ### PE-CURRENT-01: Repository-only product assessment

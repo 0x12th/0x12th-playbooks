@@ -40,7 +40,7 @@ Current `master` checks all destinations before modifying them, rejects unsafe/s
 
 Hermes profile-local skills override same-named external skills; trusted project skills have higher priority still. Prefer one authoritative bundle source and migrate duplicates manually—the installer never removes duplicates from other locations. See [Hermes installation](docs/installation.md#hermes-agent).
 
-The standalone `engineering-code-review` skill is included in `v0.14.0`. Install the complete bundle so it and the review-free `engineering-delivery` come from the same revision. If an unrelated neighboring `code-review` skill is installed, the installer warns but never edits it.
+The standalone `engineering-code-review` skill is included in `v0.14.0`. Install the complete bundle so it and `engineering-delivery` come from the same revision. If an unrelated neighboring `code-review` skill is installed, the installer warns but never edits it.
 
 The manual commands below use `~/.agents/skills` as a common example. Replace it with the skills directory used by your agent setup.
 
@@ -225,6 +225,19 @@ Implement the first approved migration step without changing public behavior.
 ```text
 Write tests for the selected code.
 ```
+
+## Feature Completion Review (Unreleased)
+
+Delivery now requests a fresh-context review of the complete feature after
+validation. The existing review skill checks requirements, correctness,
+integration and simplicity. A second reviewer is conditional on a named
+structural question; findings are verified before fixes and followed by one
+bounded re-review. Without fresh-context capability, the result explicitly
+reports self-review and the missing independent check.
+
+See [Review Workflow](docs/review-workflow.md) for adoption, learning from missed
+findings, optional Kodus configuration and the source approaches. These changes
+are not in the pinned `v0.18.1` release.
 
 ## Optional Memory Backends
 
