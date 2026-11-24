@@ -56,4 +56,7 @@ Zero findings is valid. Distinguish defects, optional improvements, and unknowns
 ## Return
 
 Use the existing review report: scoped verdict, findings, validation, and coverage.
+Record who performed the review, whether its context excluded the author's
+implementation conversation, and the exact snapshot and scope covered. Mark
+unverified origin as unknown so later delivery cannot mistake it for independent approval.
 Delivery reconciles independent results into one report and audits recommendations.

@@ -66,9 +66,13 @@ The first reviewer checks requirements, correctness, integration and simplicity.
 Add a second focused reviewer only for a concrete structural question, using
 the conditions in `references/post-implementation-review.md`. Reviewers stay
 read-only and do not dispatch more reviewers. Reconcile one evidence-backed
-report; verify findings before authorized fixes. Follow one full review with
-at most one targeted re-review. Remaining blockers or missing essential evidence
-stay explicit; reaching the limit never grants a pass.
+report; verify findings before authorized fixes. Reuse a prior full review only
+with verified independent origin and complete coverage of the same snapshot.
+Follow the full pass with at most one re-review by an independent reviewer;
+the original independent reviewer may return. Target fixes and affected paths,
+or restore invalid coverage with a full review within that remaining round.
+Remaining blockers or missing essential evidence stay explicit; reaching the
+limit never grants a pass.
 
 If fresh-context review is unavailable, perform a separate self-review and
 report independent review as unavailable. Do not invent a delegation mechanism

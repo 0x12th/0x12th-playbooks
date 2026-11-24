@@ -61,14 +61,22 @@ explicit independent-approval requirement satisfied.
 - Apply confirmed fixes within existing authorization and validate their affected
   behavior. Do not turn optional suggestions into mandatory rewrites. Escalate a
   genuine unresolved product/design decision with the evidence needed to decide.
-- Run at most one targeted Incremental Re-review after the full pass: check the
-  original findings, fixes and their impact cones. Carry forward existing coverage
-  and unresolved findings. Use code review's full-review fallback if lineage or
-  coverage is invalid; it does not reset the round budget. Report any material
-  defect found, but do not keep mining unchanged code for fresh cosmetic work.
 - For review-and-fix, an already completed review can serve as the full pass when
-  it covers the same complete feature snapshot. Do not restart the cycle merely
-  because delivery applied its fixes.
+  its independent origin and complete coverage of the same feature snapshot are
+  verified. Establish who reviewed it and that the review ran without the author's
+  implementation conversation. A self-review or review of unknown origin is supporting
+  evidence; it does not satisfy or consume the independent full pass. Obtain that
+  pass when available; otherwise apply the explicit capability fallback above.
+  Do not restart a qualifying independent cycle merely because delivery applied fixes.
+- Have a reviewer independent of the implementation context perform at most one
+  Incremental Re-review after the full pass. The original independent reviewer
+  may return, or another can use the prior snapshot, findings and coverage.
+  Check the new snapshot, fixes and their impact cones; carry forward valid
+  coverage and unresolved findings. If lineage or coverage is invalid, replace
+  the targeted re-review with a full review within that same remaining round.
+  Completion depends on sufficient restored coverage and no unresolved blockers;
+  the fallback does not reset the budget. Report any material defect found, but
+  do not keep mining unchanged code for fresh cosmetic work.
 - After the repeat, report unresolved blockers/questions and the next needed
   decision. Additional review requires a stated new reason or explicit request;
   never repeat until an empty report or claim readiness because the limit expired.

@@ -559,22 +559,36 @@ The following repeated failures always block completion:
 
 ### ED-REVIEW-05: Fix impact and bounded convergence
 
-- Mode: Delivery resuming after a supplied full-review record; this case checks
+- Mode: Delivery resuming after a supplied whole-feature review record; this case checks
   correction and re-review, not independent discovery of the initial finding.
-- Setup: a shared client now raises `RateLimitError`; foreground must serve cache
-  and background must retry. The record identifies permanent background failure
-  at two locations with one root cause, and suggests an optional helper rename.
+- Setup: the record covers a pinned snapshot and documents distinct implementation
+  and independent reviewer contexts, without the authoring conversation. A shared
+  client now raises `RateLimitError`; foreground must serve cache and background
+  must retry. The record identifies permanent background failure at two locations
+  with one root cause, and suggests an optional helper rename.
 - Prompt: `Finish the rate-limit change while preserving both recovery paths.`
-- Required: validate the finding, fix only the confirmed defect, validate again,
-  and use one targeted re-review of the new snapshot, fix and affected paths.
-  Deduplicate findings with location, trigger, impact and validation evidence;
-  reconcile resolved, open and unverified states.
+- Required: verify the record's snapshot, whole-feature coverage and independence;
+  validate the finding, fix only the confirmed defect, validate again, and use one
+  independent targeted re-review of the new snapshot, fix and affected paths by
+  the original independent reviewer or another. Deduplicate findings with
+  location, trigger, impact and validation evidence; reconcile resolved, open
+  and unverified states.
+- Provenance variants, fresh context each: keep the evidence and findings, but
+  record the reviewer as the implementer in the authoring conversation, or leave
+  reviewer provenance unknown. Neither satisfies the independent full-pass
+  requirement; obtain an actual independent whole-feature review when available.
+  Retain self-review as useful evidence only; it does not consume an independent
+  round. Do not reset an already started independent cycle.
 - Variants after the fix: recovery works; the affected generic-exception branch
   now retries permanent failures; or new scope invalidates earlier coverage.
-  Only the first supports completion; unresolved defects or coverage gaps remain
-  explicit after the one full pass and one targeted re-review budget is exhausted.
+  For lost coverage, replace targeted re-review with a full independent review
+  within the remaining round. Completion requires sufficient current coverage
+  and no confirmed blockers, including when lost coverage has been restored.
+  Unresolved defects or gaps remain explicit after the one full pass and one
+  re-review round budget is exhausted.
 - Forbidden: mandatory rename, endless full-review loops, skipping affected
-  callers, or turning an exhausted review budget into an automatic pass.
+  callers, resetting the round budget, or turning an exhausted budget into an
+  automatic pass.
 
 ### ED-REVIEW-06: Capability fallback and standalone review
 
