@@ -37,17 +37,19 @@ Install the full skill folders when possible, not only `SKILL.md`. The supportin
 Requires Node.js 22.20 or later. Install the complete bundle globally:
 
 ```bash
-npx skills add 0x12th/0x12th-playbooks -g -a codex zed hermes-agent --skill '*'
+npx skills add 0x12th/0x12th-playbooks -g
 ```
 
-Choose the default symlink installation when prompted. To inspect or update:
+Select all four skills and your agents; choose symlinks when prompted. To inspect or update:
 
 ```bash
 npx skills list -g
 npx skills check
-npx skills update -g engineering-architecture engineering-code-review engineering-delivery product-evolution
+npx skills update
 ```
 
+This updates all managed skills, including those from other repositories.
+For a bundle-only update, see the detailed installation guide.
 Update all four together and restart agent sessions. The CLI manages its own
 installation records; do not alternate it with the shell installer for the same
 destinations. See [migration and agent paths](docs/installation.md#agent-skills-cli)
