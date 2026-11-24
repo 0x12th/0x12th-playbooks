@@ -14,7 +14,7 @@ engineering-architecture
 | engineering-delivery    |
 +-------------------------+
 
-engineering-code-review -> engineering-delivery
+engineering-delivery -> engineering-code-review -> engineering-delivery (confirmed fixes)
 ```
 
 ## Product Evolution
@@ -101,6 +101,14 @@ Diagnostic questions and assessment-only requests stay read-only. Explicit inten
 
 Do not use for concrete code/change-set review, product decisions, or architecture/readiness decisions.
 
+Completing a feature or behavior change invokes `engineering-code-review` as a
+read-only phase before delivery reports completion. Delivery coordinates the
+snapshot, findings and bounded correction cycle; review retains assessment
+ownership. A named structural decision can use Architecture Design Challenge.
+This adds neither a Review work mode to Delivery nor a second automatic owner.
+See [Review Workflow](review-workflow.md); installed runtime instructions live
+in the skills themselves.
+
 ## Examples
 
 | User request | Skill |
@@ -128,6 +136,7 @@ Do not use for concrete code/change-set review, product decisions, or architectu
 ## Mixed Intents
 
 - `Review this PR and fix confirmed blockers`: finish read-only evidence/findings against the pinned change snapshot (or exact selected text), then apply `engineering-delivery` rules to authorized confirmed fixes in a bounded implementation phase. No runtime switch/handoff API is needed. If required guidance is missing, disclose it and preserve authorization, selected scope, user work and validation safeguards.
+- `Implement this feature`: delivery implements and validates, then coordinates independent completion review and authorized confirmed fixes. A qualifying existing full review counts as the first pass; fixes do not restart the cycle.
 - `Quick-review PR #42`: use `engineering-code-review`, but quick/partial coverage cannot produce an unconditional `Pass`.
 - `Is this deployment design acceptable?`: use `engineering-architecture`; an attached change does not replace the architecture decision.
 - `Prepare this PR`: `engineering-delivery` unless the user specifically requests review-comment preparation.

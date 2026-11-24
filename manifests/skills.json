@@ -16,7 +16,7 @@
       "This manifest does not define an official cross-agent standard.",
       "Skill auto-selection should not depend on this manifest being loaded."
     ],
-    "recommended_installation": "Install the complete v0.18.1 bundle. Keep engineering-code-review and the review-free engineering-delivery on the same revision."
+    "recommended_installation": "Keep engineering-code-review and engineering-delivery on the same revision. The pinned v0.18.1 bundle predates the unreleased feature-completion workflow."
   },
   "installation": {
     "all_skills": [
@@ -233,6 +233,7 @@
         "Selected Code uses exact supplied scope, necessary direct dependencies, supported findings, verdict and material validation limits without needless Git/provider inventory. Change sets pin immutable snapshots, exclude unrelated dirty state and record relevant evidence-channel completeness.",
         "Use Recommendation Audit only for comments on a concrete code change; audit alone does not imply a whole-change verdict.",
         "Quick or focused review cannot issue unconditional Pass without normal complete coverage.",
+        "Fresh completion reviewers use the complete captured feature, accepted requirements and constraints; assess integration and simplicity, remain read-only and do not recursively delegate.",
         "Prepare comments as dry-run output; external provider actions belong to provider-specific adapters.",
         "Review-and-fix completes read-only evidence/findings first, then applies engineering-delivery rules to authorized confirmed fixes without a required runtime handoff. Broad architecture decisions belong to engineering-architecture."
       ]
@@ -288,6 +289,7 @@
         "Explicit user intent for an outcome requiring project changes authorizes scoped edits when the target is clear, including доведи до рабочего состояния, сделай чтобы CI был зелёным and закончи задачу. Diagnostic questions and assessment-only requests stay read-only; release preparation does not authorize publication, push or destructive operations.",
         "For runtime failures, follow the traceback before repository exploration.",
         "Use engineering-code-review for read-only review of selected code and concrete change sets.",
+        "After feature or behavior-changing implementation, coordinate independent completion review, verified in-scope fixes and one bounded re-review; explicitly report unavailable independence.",
         "For review-and-fix requests, finish read-only evidence/findings first, then apply delivery rules in a bounded authorized implementation phase; no runtime switch/handoff API is required.",
         "If product or architecture decisions are required, state the missing decision before delivery continues."
       ]

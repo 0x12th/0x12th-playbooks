@@ -4,6 +4,16 @@ Use design challenge mode when the user asks to critique, challenge, validate, p
 
 The goal is not to improve the proposal by default. The goal is to decide whether the proposal should exist.
 
+When invoked during feature completion, answer only the named structural
+question. Keep the accepted behavior, ownership constraints and compatibility
+requirements visible; the implementation history and author's confidence are
+not evidence. Compare the implemented option with a viable smaller alternative.
+For any proposed deletion or consolidation, explain where its responsibilities
+go and which guarantees remain. A thin boundary can still justify its cost by
+isolating a dependency or enforcing a contract. Retain it when the evidence
+supports it. Return findings to the coordinating review without editing code
+or dispatching further reviewers; a clean result needs no invented objections.
+
 ## Rules
 
 - Stop after enough evidence exists to evaluate the proposal.

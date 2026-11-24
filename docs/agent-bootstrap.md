@@ -13,5 +13,7 @@ Whenever drafting commit messages or MR/PR descriptions, including during coding
 
 Follow each skill's own triggers, mode selection and safeguards. Review-and-fix means a read-only evidence/findings phase, then bounded authorized implementation under delivery rules, not a required runtime switch/handoff. Disclose missing required guidance; preserve safe scope and user work. Resolve product/architecture decisions first only when needed.
 
+After feature or behavior-changing implementation, delivery coordinates engineering-code-review against the complete captured result in a fresh context. Preserve requirements and accepted constraints; do not pass the authoring conversation. Apply the delivery completion-review rules for optional structural review, verified fixes and one bounded re-review. If fresh review is unavailable, label the self-review and independent-review gap honestly.
+
 Do not announce internal routing unless requested or required by the host.
 ```

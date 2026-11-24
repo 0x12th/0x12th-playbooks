@@ -38,9 +38,36 @@ Use only relevant lenses, but inspect them independently before deduplication:
 - Performance and resources: only when reachability and workload make the risk material.
 - Tests and CI: whether evidence executes the changed behavior and belongs to the pinned snapshot.
 - Repository standards: documented contracts and tool-backed requirements.
+- Integration and simplicity: existing extension points, state and responsibility ownership, parallel paths, dependencies, and avoidable maintenance cost in the changed behavior.
 - Maintainability: only concrete delivery impact, likely misuse, or costly local complexity.
 
 Aggregate findings into one report. A defect found through several lenses remains one root-cause finding.
+
+## Integration and Simplicity
+
+Trace changed behavior through its direct callers, dependencies, contracts, and state owners before judging structure. Compare the implementation with an existing extension point or a smaller local option only where the supplied evidence supports that comparison.
+
+Inspect relevant choices:
+
+- added layers or dependencies and the requirement they serve;
+- duplicate sources of truth, split state ownership, and synchronization obligations;
+- a parallel implementation path that must stay aligned with existing behavior;
+- special cases, wrappers, or generic mechanisms that obscure responsibilities or make later changes error-prone;
+- test seams and compatibility adapters, including the constraints that justify them.
+
+Accepted design rationale is evidence to check against requirements and reachable behavior. A seam with one current caller can still protect a required boundary. File count, abstraction count, unfamiliar style, and preference for another equivalent approach do not establish a defect.
+
+For each simplification finding, establish:
+
+1. The exact location and concrete complexity or maintenance consequence.
+2. A viable smaller option and how it fits the existing behavior or extension point.
+3. The accepted requirements, responsibility boundaries, and compatibility that option preserves.
+4. The expected benefit, change cost, and regression or migration risk; defer changes whose benefit does not justify that cost.
+5. Evidence-based severity and disposition: a useful optional improvement stays non-blocking; style preference never makes it blocking.
+
+Recommend the smallest remedy that addresses the demonstrated consequence. Do not invent requirements, remove justified seams, or reopen settled constraints merely to reduce code. Escalate a broader unresolved design decision under Architecture Concerns below only when it materially affects this change.
+
+No finding is required for any lens. A clean result with honest coverage is preferable to speculative defects or an unsupported simplification proposal.
 
 ## Finding Record
 

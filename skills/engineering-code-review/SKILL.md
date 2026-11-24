@@ -106,6 +106,22 @@ For diffs, patches, commits, branches, working-tree changes and MR/PRs, use this
 
 Stop when evidence is sufficient, further exploration is unlikely to change severity or disposition, or expansion would become a repository-wide audit.
 
+### Independent Delivery Review
+
+When `engineering-delivery` requests a fresh review of a completed feature, use Code Review with the factual packet in [Independent Review](templates/independent-review.md). Delivery owns reviewer selection and follow-up.
+
+- Review the whole feature since its resolved immutable base, including explicitly selected staged, unstaged, and untracked feature content when part of delivery. Exclude unrelated user work; the last commit alone may omit delivered behavior.
+- Require exact captured source, the complete feature diff, and access to relevant dependency evidence. Keep this snapshot fixed throughout review. Stop on snapshot drift; report missing material content as a coverage limit.
+- Receive the original task, accepted requirements, accepted design constraints and decisions with material rationale, and actual validation results tied to the snapshot.
+- Start without the author's implementation conversation, self-assessment, or other reviewers' findings. Accepted decisions and their rationale remain necessary task evidence.
+- As the general reviewer, check requirements, correctness, integration with existing behavior and contracts, and implementation simplicity; apply the usual validation and coverage rules.
+- If assigned a focused simplicity/integration review, examine the named structural decision and its impact cone. Report only that scope; a focused pass does not replace general coverage.
+- Stay read-only. A delegated reviewer does not spawn further reviewers or apply fixes.
+- Challenge choices through reachable behavior, concrete consequences, and a minimal viable remedy. Preserve accepted constraints, justified responsibility boundaries, and compatibility; zero findings is a valid result.
+- Return the existing finding/report contract for aggregation and Recommendation Audit. Keep defects, optional improvements, and missing evidence distinct.
+
+Standalone review still works without subagent support. Do not claim a fresh independent reviewer when the author performed the review in the same context.
+
 ## Target and Immutable Snapshot
 
 Resolve exactly what is being reviewed:
@@ -301,6 +317,7 @@ Templates:
 
 - `templates/review-report.md`
 - `templates/review-comment.md`
+- `templates/independent-review.md`: factual input packet for a fresh delivery reviewer.
 
 Examples:
 

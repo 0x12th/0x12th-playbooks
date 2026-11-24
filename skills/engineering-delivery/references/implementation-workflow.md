@@ -15,7 +15,10 @@ For review-and-fix requests, finish read-only evidence/findings first, then appl
 7. Add or update focused tests when risk justifies it.
 8. Run the most relevant validation available.
 9. If validation fails, use the result to refine the hypothesis and retry only while each attempt produces new evidence.
-10. Summarize findings, changed files when applicable, validation, and residual risk.
+10. For a completed feature or behavior change, apply the completion-review gate
+    in `SKILL.md` and `references/post-implementation-review.md`.
+11. Summarize findings, changed files when applicable, validation, review outcome,
+    and residual risk. Do not present an unavailable independent review as passed.
 
 ## Execution Discipline
 
