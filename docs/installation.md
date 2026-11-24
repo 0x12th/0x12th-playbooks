@@ -1,6 +1,43 @@
 # Installation
 
-Install skills by cloning the repository and syncing skill folders into the directory your agent reads.
+## Agent Skills CLI
+
+The recommended installation uses the external [skills CLI](https://github.com/vercel-labs/skills).
+Node.js 22.20 or later is required. No repository-specific npm package is needed.
+
+```bash
+npx skills add 0x12th/0x12th-playbooks --list
+npx skills add 0x12th/0x12th-playbooks -g -a codex zed hermes-agent --skill '*'
+npx skills list -g
+npx skills check
+npx skills update -g engineering-architecture engineering-code-review engineering-delivery product-evolution
+```
+
+Choose symlinks when prompted. Upstream documents Codex and Zed using
+`~/.agents/skills`, and Hermes Agent using `~/.hermes/skills`.
+For custom Hermes profiles, verify the actual loaded path; use the legacy
+installer with an explicit destination if the CLI does not support it.
+For other agents select their documented CLI identifiers.
+
+### Migrate from install.sh
+
+Stop agents. Inspect existing copies of the four named skills in
+`~/.agents/skills`, `~/.codex/skills`, `~/.claude/skills`, and the active
+Hermes skills directory. Back up existing copies and customizations outside
+all skill roots before moving only obsolete copies out of those roots.
+Do not move unrelated skills or other profiles. Install using the CLI,
+then verify all four are listed, supporting files are present, and each
+agent loads the intended copy in a fresh session. Check for stale project-local
+overrides. If installation fails, restore the backed-up copies after removing
+only the new conflicting installations.
+
+The CLI has its own update semantics; the legacy installer's multi-home
+rollback guarantees do not apply. Keep the review and delivery skills on
+the same revision; if an update fails, resolve the mismatch before use.
+Do not run both installers against the same destinations. Actual runtime
+discovery and update behavior must be checked in each agent.
+
+## Legacy Shell Installer
 
 The current `master` installer targets existing agent homes: `~/.agents/skills`, `~/.claude/skills`, `~/.codex/skills`, and the active Hermes home's `skills/`. Hermes home is `$HERMES_HOME` when nonempty, otherwise `~/.hermes`. Missing homes are skipped; if none exist, only `~/.agents/skills` is created for first-time setup. Other Hermes profiles are never scanned or updated.
 
@@ -33,7 +70,7 @@ An unrelated neighboring skill named exactly `code-review` can overlap automatic
 
 The manual commands below use `~/.agents/skills` as a common example. Replace it with the skills directory used by your agent setup.
 
-## Quick Install
+## Quick Install (legacy)
 
 Latest:
 

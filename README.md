@@ -32,6 +32,31 @@ Diagnostic questions and assessment-only delivery requests stay read-only. Expli
 
 Install the full skill folders when possible, not only `SKILL.md`. The supporting `references/`, `templates/`, and `examples/` are intentionally loaded on demand and improve behavior after the skill is selected.
 
+### Recommended: Agent Skills CLI
+
+Requires Node.js 22.20 or later. Install the complete bundle globally:
+
+```bash
+npx skills add 0x12th/0x12th-playbooks -g
+```
+
+Select all four skills and your agents; choose symlinks when prompted. To inspect or update:
+
+```bash
+npx skills list -g
+npx skills check
+npx skills update
+```
+
+This updates all managed skills, including those from other repositories.
+For a bundle-only update, see the detailed installation guide.
+Update all four together and restart agent sessions. The CLI manages its own
+installation records; do not alternate it with the shell installer for the same
+destinations. See [migration and agent paths](docs/installation.md#agent-skills-cli)
+and the [upstream CLI reference](https://github.com/vercel-labs/skills/blob/main/docs/commands.md).
+
+### Legacy shell installer
+
 The current `master` installer targets existing `~/.agents`, `~/.claude`, `~/.codex`, and active Hermes homes, installing into each home's `skills/`. Hermes uses nonempty `$HERMES_HOME`, otherwise `~/.hermes`; other profiles are not scanned. Missing homes stay absent. If none exist, only `~/.agents/skills` is created for first-time setup.
 
 The installer treats this repository's four skill folders as managed copies. Updates remove stale files inside those folders while preserving every neighboring skill. Keep custom variants in a fork or a separate project-local skill.
@@ -44,7 +69,7 @@ The standalone `engineering-code-review` skill is included in `v0.14.0`. Install
 
 The manual commands below use `~/.agents/skills` as a common example. Replace it with the skills directory used by your agent setup.
 
-### Quick Install
+### Quick Install (legacy)
 
 The pinned `v0.19.0` commands below include these safeguards and Hermes defaults. The historical `v0.14.0` installer does not.
 
