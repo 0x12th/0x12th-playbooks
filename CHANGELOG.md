@@ -2,14 +2,22 @@
 
 All notable changes to this repository are documented in this file.
 
-## Unreleased
+## 0.19.0 - 2026-11-24
 
 ### Added
 
 - Require a fresh-context completion review after feature or behavior-changing implementation, with a complete captured result and an explicit fallback when independent review is unavailable.
 - Add an independent review brief and a conditional simplicity/integration perspective for concrete structural questions.
 - Add a bounded findings-verification, correction and re-review cycle with verified independent review reuse, plus guidance for learning from confirmed missed findings.
-- Document adoption, optional Kodus configuration and source approaches; extend maintainer behavioral scenarios for the completion workflow.
+- Document adoption, optional Kodus configuration and source approaches; add seven maintainer behavioral scenarios for the completion workflow.
+
+### Changed
+
+- Update pinned installation instructions and bundle metadata for `v0.19.0`.
+
+### Validation
+
+- The maintainer approved a one-time exception to the full Codex/Hermes/Zed behavioral release gate for `v0.19.0`. Limited ChatGPT probes are not a substitute; full cross-runtime behavior remains unverified. The gate for future releases is unchanged.
 
 ## 0.18.1 - 2026-11-14
 

@@ -46,7 +46,7 @@ The manual commands below use `~/.agents/skills` as a common example. Replace it
 
 ### Quick Install
 
-The pinned `v0.18.1` commands below include these safeguards and Hermes defaults. The historical `v0.14.0` installer does not.
+The pinned `v0.19.0` commands below include these safeguards and Hermes defaults. The historical `v0.14.0` installer does not.
 
 Latest:
 
@@ -57,7 +57,7 @@ curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/master/inst
 Pinned version:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.18.1/install.sh | sh -s -- ~/.agents/skills v0.18.1
+curl -fsSL https://raw.githubusercontent.com/0x12th/0x12th-playbooks/v0.19.0/install.sh | sh -s -- ~/.agents/skills v0.19.0
 ```
 
 Custom target directory:
@@ -78,7 +78,7 @@ git clone https://github.com/0x12th/0x12th-playbooks.git
 Pinned version:
 
 ```bash
-git clone --branch v0.18.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.19.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 ./0x12th-playbooks/install.sh ~/.agents/skills
 ```
 
@@ -87,13 +87,13 @@ git clone --branch v0.18.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.
 The review ownership split requires `engineering-code-review` and `engineering-delivery` from the same revision. The historical manual commands below are not transactional; inspect targets for symlinks, back up both folders, stop readers, and restore both if either command fails. Prefer the current full-bundle installer for automatic rollback.
 
 ```bash
-git clone --branch v0.18.1 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
+git clone --branch v0.19.0 --depth 1 https://github.com/0x12th/0x12th-playbooks.git
 mkdir -p ~/.agents/skills
 rsync -a --delete 0x12th-playbooks/skills/engineering-code-review/ ~/.agents/skills/engineering-code-review/
 rsync -a --delete 0x12th-playbooks/skills/engineering-delivery/ ~/.agents/skills/engineering-delivery/
 ```
 
-`engineering-architecture` and `product-evolution` remain independently installable from either latest or `v0.18.1`.
+`engineering-architecture` and `product-evolution` remain independently installable from either latest or `v0.19.0`.
 
 ### Agent Paths
 
@@ -226,7 +226,7 @@ Implement the first approved migration step without changing public behavior.
 Write tests for the selected code.
 ```
 
-## Feature Completion Review (Unreleased)
+## Feature Completion Review
 
 Delivery now requests a fresh-context review of the complete feature after
 validation. The existing review skill checks requirements, correctness,
@@ -236,8 +236,7 @@ bounded re-review. Without fresh-context capability, the result explicitly
 reports self-review and the missing independent check.
 
 See [Review Workflow](docs/review-workflow.md) for adoption, learning from missed
-findings, optional Kodus configuration and the source approaches. These changes
-are not in the pinned `v0.18.1` release.
+findings, optional Kodus configuration and the source approaches.
 
 ## Optional Memory Backends
 

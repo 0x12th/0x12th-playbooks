@@ -1,7 +1,7 @@
 # Feature Review Workflow
 
-This unreleased workflow extends the four existing skills. Install the complete
-bundle from the same revision; `v0.18.1` predates it. No additional agent framework,
+The feature completion review workflow is available in `v0.19.0` and later.
+Install the complete bundle from the same revision. No additional agent framework,
 model provider or reviewer plugin is required.
 
 ## Adoption
